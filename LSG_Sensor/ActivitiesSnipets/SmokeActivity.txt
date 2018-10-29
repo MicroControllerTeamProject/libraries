@@ -1,0 +1,84 @@
+include <eRCaGuy_analogReadXXbit.h>
+#include <Wire.h>
+#include <LiquidCrystal_SR3W.h>
+#include <LiquidCrystal_SR2W.h>
+#include <LiquidCrystal_SR.h>
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <LCD.h>
+#include <I2CIO.h>
+#include <FastIO.h>
+#include <StringFunctions.h>
+#include <SoftwareClock.h>
+#include <PrintFunctions.h>
+#include <MySim900.h>
+#include <LCDRowShift.h>
+#include <SoftwareSerial.h>
+#include <TemperatureSensor.h>
+#include <SmokeSensor.h>
+#include <ReleSensor.h>
+#include <ISensor.h>
+#include <IRele.h>
+#include <FlameSensor.h>
+#include <CurrentSensor.h>
+#include <AnalogicSensor.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <VoltageSensor.h>
+
+
+
+SmokeSensor smokeSensor(A1, 700, 100, "Smoke.001");
+
+void setup()
+{
+	Serial.begin(115200);
+}
+
+
+void loop()
+{
+	SmokeSensorActivity(0, smokeSensor);
+}
+
+
+void SmokeSensorActivity(uint8_t lcdRowNumber,SmokeSensor smokeSensor)
+{
+	PrintSerialAndLCDFunctions printSerialAndLCDFunctions;
+	StringFunctions stringFunctions;
+	printSerialAndLCDFunctions.WriteComplexMessage(0, lcdRowNumber, smokeSensor.UID(), smokeSensor.GetSegnalValue(), false, 0);
+	//ALARM
+	if (smokeSensor.ThereIsSmoke())
+	{
+		if (true)
+		{
+			printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, smokeSensor.GetLastComunication(), true, 0);
+		}
+		else
+		{
+			if (smokeSensor.IsSentSMSAllarm() == false)
+			{
+				//SMS
+				smokeSensor.SetIsSentSMSAllarm(true);
+			}
+			//CALL
+		}
+	}
+	//ALARM
+	if (!smokeSensor.IsSensorWorking())
+	{
+		if (true)
+		{
+			printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, smokeSensor.GetLastComunication(), true, 0);
+		}
+		else
+		{
+			if (smokeSensor.IsSentSMSAllarm() == false)
+			{
+				smokeSensor.SetIsSentSMSAllarm(true);
+				//SMS
+			}
+			//CALL
+		}
+	}
+}

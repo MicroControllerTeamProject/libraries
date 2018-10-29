@@ -1,0 +1,140 @@
+#include <VirtualWire.h>
+#include <RFWirelessTransmitter.h>
+#include <eRCaGuy_analogReadXXbit.h>
+#include <Wire.h>
+#include <LiquidCrystal_SR3W.h>
+#include <LiquidCrystal_SR2W.h>
+#include <LiquidCrystal_SR.h>
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <LCD.h>
+#include <I2CIO.h>
+#include <FastIO.h>
+#include <StringFunctions.h>
+#include <SoftwareClock.h>
+#include <PrintFunctions.h>
+#include <MySim900.h>
+#include <LCDRowShift.h>
+#include <SoftwareSerial.h>
+#include <TemperatureSensor.h>
+#include <SmokeSensor.h>
+#include <ReleSensor.h>
+#include <ISensor.h>
+#include <IRele.h>
+#include <FlameSensor.h>
+#include <CurrentSensor.h>
+#include <AnalogicSensor.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <VoltageSensor.h>
+
+PrintSerialAndLCDFunctions printSerialAndLCDFunctions;
+StringFunctions stringFunctions;
+
+//Variabile che attiva o disattiva il relè in evento interrupt  
+bool isRele1InterruptClosed = false;
+//Tiene traccia se premuto il pulsante di interrupt per la variabile del charge
+bool StaterOneInterruptChanged = false;
+
+CurrentSensor currentSensor(A0, 850, 500, "Cur01");
+ReleSensor releSensorOne("ReleOne", 1, false);
+
+void setup()
+{
+	Serial.begin(115200);	
+	printSerialAndLCDFunctions.LCDBegin(20,4);
+	//Il 5 dell'interrupt corrisponde al pin 18
+	attachInterrupt(5, SystemOneStarterInterrupt, RISING);
+	releSensorOne.Open();
+}
+
+#pragma region Interrupt
+void SystemOneStarterInterrupt()
+{
+	isRele1InterruptClosed = !isRele1InterruptClosed;
+	StaterOneInterruptChanged = true;
+}
+
+void loop()
+{
+	CurrentSensorAndRelayInterruptControlledActivity(0, currentSensor, isRele1InterruptClosed, releSensorOne);
+}
+
+void CurrentSensorAndRelayInterruptControlledActivity(uint8_t lcdRowNumber,CurrentSensor currentSensor,bool& interruptVariable,ReleSensor releSensor)
+{
+	printSerialAndLCDFunctions.WriteComplexMessage(0, lcdRowNumber, currentSensor.UID(), currentSensor.GetSegnalValue(), false, 0);
+	//ALARM
+	if (currentSensor.IsAnalogicValueOutOfRange())
+	{
+		//isThereAnAllarm = true;
+		if (currentSensor.IsCurrentTooHigh())
+		{
+			if (true)
+			{
+				printSerialAndLCDFunctions.WriteComplexMessage(0, 0, currentSensor.GetLastComunication(), currentSensor.GetSegnalValue(), true, 2);
+			}
+			else
+			{
+				interruptVariable = false;
+				releSensor.Open();
+
+				if (currentSensor.IsSentSMSAllarm() == false)
+				{
+					//SendSMS
+					//RTCElapsed_Current001_CurrentTooHigh.ResetTimeElapsed();
+					currentSensor.SetIsSentSMSAllarm(true);
+					//Call();
+				}
+				//Call();
+			}
+		}
+		else if (currentSensor.IsCurrentTooLow())
+		{
+			if (true)
+			{
+				printSerialAndLCDFunctions.WriteComplexMessage(0, 0, currentSensor.GetLastComunication(), currentSensor.GetSegnalValue(), true, 0);
+			}
+			else
+			{
+				interruptVariable = false;
+				releSensor.Open();
+				if (currentSensor.IsSentSMSAllarm() == false)
+				{
+					//SendSMS
+					//RTCElapsed_Current001_CurrentTooLow.ResetTimeElapsed();
+					currentSensor.SetIsSentSMSAllarm(true);
+					//Call();
+				}
+				//Call();
+			}
+		}
+	}
+	else
+	{
+		//ALARM
+		if (currentSensor.GetSegnalValue() < 0.90)
+		{
+			//isThereAnAllarm = true;
+			if (true)
+			{
+				printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, "Batt.stopped to charge: ", true, 2);
+			}
+			else
+			{
+				interruptVariable = false;
+				releSensor.Open();
+				if (currentSensor.IsSentSMSAllarm() == false)
+				{
+					currentSensor.SetIsSentSMSAllarm(true);
+					//SendSMS
+					//Call();
+				}
+				//MakePhoneCall();
+			}
+		}
+	}
+}
+
+
+
+

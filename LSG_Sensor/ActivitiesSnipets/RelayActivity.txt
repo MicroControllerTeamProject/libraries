@@ -1,0 +1,111 @@
+#include <VirtualWire.h>
+#include <RFWirelessTransmitter.h>
+#include <eRCaGuy_analogReadXXbit.h>
+#include <Wire.h>
+#include <LiquidCrystal_SR3W.h>
+#include <LiquidCrystal_SR2W.h>
+#include <LiquidCrystal_SR.h>
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <LCD.h>
+#include <I2CIO.h>
+#include <FastIO.h>
+#include <StringFunctions.h>
+#include <SoftwareClock.h>
+#include <PrintFunctions.h>
+#include <MySim900.h>
+#include <LCDRowShift.h>
+#include <SoftwareSerial.h>
+#include <TemperatureSensor.h>
+#include <SmokeSensor.h>
+#include <ReleSensor.h>
+#include <ISensor.h>
+#include <IRele.h>
+#include <FlameSensor.h>
+#include <CurrentSensor.h>
+#include <AnalogicSensor.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <VoltageSensor.h>
+
+ReleSensor releSensorOne("ReleOne", 1,false);
+ReleSensor releSensorTwo("ReleTwo", 2,false);
+
+//Variabile che attiva o disattiva il relè in evento interrupt  
+bool isRele1InterruptClosed = false;
+//Tiene traccia se premuto il pulsante di interrupt per la variabile del charge
+bool StaterOneInterruptChanged = false;
+
+//Variabile che attiva o disattiva il relè in evento interrupt  
+bool isRele2InterruptClosed = false;
+//Tiene traccia se premuto il pulsante di interrupt per la variabile del charge
+bool SystemTwoInterruptChanged = false;
+
+PrintSerialAndLCDFunctions printSerialAndLCDFunctions;
+StringFunctions stringFunctions;
+
+
+void setup()
+{
+	Serial.begin(115200);	
+	printSerialAndLCDFunctions.LCDBegin(20,4);
+	//Il 5 dell'interrupt corrisponde al pin 18
+	attachInterrupt(5, SystemOneStarterInterrupt, RISING);
+	//Il 4 dell'interrupt corrisponde al pin 19
+	attachInterrupt(4, SystemTwoStarterInterrupt, RISING);
+	releSensorOne.Open();
+	releSensorTwo.Open();
+}
+
+void loop()
+{
+	ReleSensorActivity(0, releSensorOne, isRele1InterruptClosed, StaterOneInterruptChanged);
+	ReleSensorActivity(1, releSensorTwo, isRele2InterruptClosed, SystemTwoInterruptChanged);
+}
+
+#pragma region Interrupt
+void SystemOneStarterInterrupt()
+{
+	isRele1InterruptClosed = !isRele1InterruptClosed;
+	StaterOneInterruptChanged = true;
+}
+
+#pragma region Interrupt
+void SystemTwoStarterInterrupt()
+{
+	isRele2InterruptClosed = !isRele2InterruptClosed;
+	SystemTwoInterruptChanged = true;
+}
+
+
+void ReleSensorActivity(uint8_t lcdRowNumber, ReleSensor releSensor,bool interruptValue,bool& isInterruptChanged)
+{
+	if (isInterruptChanged)
+	{
+		if (interruptValue)
+		{
+			releSensor.Close();
+			isInterruptChanged = false;
+			//SmsSentAlarmTurnOFF();
+			/*isBatteryChargedAllarmsDisabled = false;*/
+			//isThereAnAllarm = false;
+			printSerialAndLCDFunctions.WriteSimpleMessage(stringFunctions.ConcatString(releSensor.UID(), " is ON"), true, 3);
+			//ATTENZIONE:IMPORTANTE RITARDO PER DAE TEMPO A CORRENTE DI RISALIRE
+			//delay(500);
+
+		}
+		else
+		{
+			releSensor.Open();
+			//releSensor002.Close();
+			isInterruptChanged = false;
+			//isBatteryChargedAllarmsDisabled = true;
+			printSerialAndLCDFunctions.WriteSimpleMessage(stringFunctions.ConcatString(releSensor.UID(), " is OFF"), true, 3);
+
+		}
+	}
+}
+
+
+
+

@@ -1,0 +1,80 @@
+This sample uses follow libraries from LSG libraries
+
+//#include <eRCaGuy_analogReadXXbit.h>
+#include <Wire.h>
+#include <LiquidCrystal_SR3W.h>
+#include <LiquidCrystal_SR2W.h>
+#include <LiquidCrystal_SR.h>
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <LCD.h>
+#include <I2CIO.h>
+//#include <FastIO.h>
+#include <StringFunctions.h>
+//#include <SoftwareClock.h>
+#include <PrintFunctions.h>
+//#include <MySim900.h>
+//#include <LCDRowShift.h>
+#include <SoftwareSerial.h>
+#include <TemperatureSensor.h>
+//#include <SmokeSensor.h>
+//#include <ReleSensor.h>
+//#include <ISensor.h>
+//#include <IRele.h>
+//#include <FlameSensor.h>
+//#include <CurrentSensor.h>
+//#include <AnalogicSensor.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+//#include <VoltageSensor.h>
+
+
+
+
+DeviceAddress temperatureProbCabinetAddress = { 0x28, 0xFF, 0x9B, 0x24, 0x02, 0x15, 0x02, 0x11 };
+DeviceAddress temperature2ProbCabinetAddress = { 0x28, 0xFF, 0x43, 0x2A, 0x02, 0x15, 0x02, 0x64 };
+
+TemperatureSensor temperatureSensor(8, 30, -127, "Temp.001");
+
+void setup()
+{
+	Serial.begin(115200);
+}
+
+void loop()
+{
+	TemperatureSensorStartActivity(0, temperatureProbCabinetAddress, "Temp.001");
+	TemperatureSensorStartActivity(1, temperature2ProbCabinetAddress, "Temp.02");
+}
+
+void TemperatureSensorStartActivity(uint8_t lcdRowNumber, DeviceAddress temperatureProbCabinetAddress,char* temperatureID)
+{
+	PrintSerialAndLCDFunctions printSerialAndLCDFunctions;
+	StringFunctions stringFunctions;
+	
+	printSerialAndLCDFunctions.WriteComplexMessage
+		(0, lcdRowNumber, temperatureID, temperatureSensor.GetSegnalValue(temperatureProbCabinetAddress, 10), false, 0);
+
+	if (temperatureSensor.GetSegnalValue(temperatureProbCabinetAddress, 10) > temperatureSensor.GetMaxValue())
+	{
+		if (true)
+		{
+			printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, stringFunctions.ConcatString(temperatureID, " : Temperature is too high"), true, 2);
+		}
+		else
+		{
+			if (temperatureSensor.IsSentSMSAllarm() == false)
+			{
+				//Send SMS
+				temperatureSensor.SetIsSentSMSAllarm(true);
+				//MAkeCall
+			}
+			if (true)
+			{
+				//MAkeCall
+			}
+		}
+	}
+	stringFunctions.~StringFunctions();
+	printSerialAndLCDFunctions.~PrintSerialAndLCDFunctions();
+}

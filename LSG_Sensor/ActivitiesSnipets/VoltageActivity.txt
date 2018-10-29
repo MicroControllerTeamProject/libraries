@@ -1,0 +1,72 @@
+#include <eRCaGuy_analogReadXXbit.h>
+#include <Wire.h>
+#include <LiquidCrystal_SR3W.h>
+#include <LiquidCrystal_SR2W.h>
+#include <LiquidCrystal_SR.h>
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <LCD.h>
+#include <I2CIO.h>
+#include <FastIO.h>
+#include <StringFunctions.h>
+#include <SoftwareClock.h>
+#include <PrintFunctions.h>
+#include <MySim900.h>
+#include <LCDRowShift.h>
+#include <SoftwareSerial.h>
+#include <TemperatureSensor.h>
+#include <SmokeSensor.h>
+#include <ReleSensor.h>
+#include <ISensor.h>
+#include <IRele.h>
+#include <FlameSensor.h>
+#include <CurrentSensor.h>
+#include <AnalogicSensor.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <VoltageSensor.h>
+
+
+VoltageSensor voltageSensor(A0, 3.00, 4.50,4.0,"Vl01");
+
+TemperatureSensor temperatureSensor(8, 30, -127, "Temp.001"); 
+
+void setup()
+{
+	Serial.begin(115200);
+}
+
+
+void loop()
+{
+	VoltageSensorStartActivity(0,voltageSensor);
+}
+
+void VoltageSensorStartActivity(uint8_t lcdRowNumber,VoltageSensor voltageSensor)
+{
+	PrintSerialAndLCDFunctions printSerialAndLCDFunctions;
+	StringFunctions stringFunctions;
+	printSerialAndLCDFunctions.WriteComplexMessage
+		(0, lcdRowNumber, voltageSensor.UID(), voltageSensor.GetSegnalValue(), false, 0);
+
+	if (voltageSensor.GetSegnalValue() < voltageSensor.GetMinValue())
+			{
+				if (true)
+				{
+					printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, stringFunctions.ConcatString(voltageSensor.UID(), " : Voltage is too low"), true, 2);
+				}
+				else
+				{
+					if (temperatureSensor.IsSentSMSAllarm() == false)
+					{
+						//Send SMS
+						temperatureSensor.SetIsSentSMSAllarm(true);
+						//MAkeCall
+					}
+					if (true)
+					{
+						//MAkeCall
+					}
+				}
+			}
+}

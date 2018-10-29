@@ -1,0 +1,94 @@
+#include <VirtualWire.h>
+#include <RFWirelessTransmitter.h>
+#include <eRCaGuy_analogReadXXbit.h>
+#include <Wire.h>
+#include <LiquidCrystal_SR3W.h>
+#include <LiquidCrystal_SR2W.h>
+#include <LiquidCrystal_SR.h>
+#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
+#include <LCD.h>
+#include <I2CIO.h>
+#include <FastIO.h>
+#include <StringFunctions.h>
+#include <SoftwareClock.h>
+#include <PrintFunctions.h>
+#include <MySim900.h>
+#include <LCDRowShift.h>
+#include <SoftwareSerial.h>
+#include <TemperatureSensor.h>
+#include <SmokeSensor.h>
+#include <ReleSensor.h>
+#include <ISensor.h>
+#include <IRele.h>
+#include <FlameSensor.h>
+#include <CurrentSensor.h>
+#include <AnalogicSensor.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#include <VoltageSensor.h>
+
+PrintSerialAndLCDFunctions printSerialAndLCDFunctions;
+StringFunctions stringFunctions;
+
+FlameSensor flameSensor(A0, 1, 1023, 500, "FL01");
+
+void setup()
+{
+	Serial.begin(115200);	
+	printSerialAndLCDFunctions.LCDBegin(20,4);
+
+}
+
+void loop()
+{
+	FlameSensorActivity(0, flameSensor);
+}
+
+void FlameSensorActivity(uint8_t lcdRowNumber, FlameSensor flameSensor)
+{
+	printSerialAndLCDFunctions.WriteComplexMessage(0, lcdRowNumber, flameSensor.UID(), flameSensor.GetSegnalValue(), false, 0);
+	
+	//ALARM
+	if (!flameSensor.IsSensorWorking())
+	{
+		//isThereAnAllarm = true;
+		if (true)
+		{
+			printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, flameSensor.GetLastComunication(), true, 0);
+		}
+		else
+		{
+			if (flameSensor.IsSentSMSAllarm() == false)
+			{
+				flameSensor.SetIsSentSMSAllarm(true);
+				//SendSMS
+			}
+			//CAll		
+		}
+
+	}
+	//ALARM
+	if (flameSensor.ThereAreFlames())
+	{
+		//isThereAnAllarm = true;
+		if (true)
+		{
+			printSerialAndLCDFunctions.WriteSimpleMessage(0, 0, flameSensor.GetLastComunication(), true, 0);
+		}
+		else
+		{
+			
+			if (flameSensor.IsSentSMSAllarm() == false)
+			{
+				flameSensor.SetIsSentSMSAllarm(true);
+				//SendSMS
+			}
+			//Call
+		}
+	}
+}
+
+
+
+
