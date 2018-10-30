@@ -1,4 +1,4 @@
-#include "LSG_EEpromRW.h"
+#include "LSGEEpromRW.h"
 #include <EEPROM.h>
 #include <Arduino.h>
 // Absolute min and max eeprom addresses. Actual values are hardware-dependent.
