@@ -1,5 +1,5 @@
 
-#include <arduino.h>
+#include <Arduino.h>
 #include <pins_arduino.h>
 #include "ActivityManager.h"
 
