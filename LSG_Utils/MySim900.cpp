@@ -1,7 +1,7 @@
 #include "MySim900.h"
 #include <SoftwareSerial.h>
 #include <Arduino.h>
-#include <StringFunctions.h>
+#include "StringFunctions.h"
 
 MySim900::MySim900(uint8_t rx, uint8_t tx, bool invers_logic)
 {
