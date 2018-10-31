@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\OneWire"
   ],
+  "SelectedNode": "\\OneWire\\OneWire.cpp",
   "PreviewInSolutionExplorer": false
 }
