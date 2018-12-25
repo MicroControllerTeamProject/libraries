@@ -102,12 +102,12 @@ bool ActivityManager::IsDelayTimeFinished(bool isEnableFirstTime)
 	if (_isFirstTime == true && isEnableFirstTime == true)
 	{
 		_isFirstTime = false;
+		_millisToEnd = millis() + _seconds;
 		return true;
 	}
 
 	if (this->accessMode == AccessMode::AccessAfterSetTime)
 	{
-
 		if (_millisToEnd == 0)
 		{
 			_millisToEnd = millis() + _seconds;
@@ -117,7 +117,8 @@ bool ActivityManager::IsDelayTimeFinished(bool isEnableFirstTime)
 		{
 			if (millis() >= _millisToEnd)
 			{
-				_millisToEnd = 0;
+				//_millisToEnd = 0;
+				_millisToEnd = millis() + _seconds;
 				return true;
 			}
 			else
