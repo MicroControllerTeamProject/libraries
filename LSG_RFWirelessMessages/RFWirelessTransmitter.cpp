@@ -23,9 +23,15 @@ void RFWirelessTransmitter::begin()
 	vw_setup(_vw_speed); // Bits per sec
 }
 
-void RFWirelessTransmitter::SendBufferData(char deviceID[2],
-	char sensorType[1],
+void RFWirelessTransmitter::sendBufferData(char message[3])
+{
+	vw_send((uint8_t *)message, strlen(message));
+	vw_wait_tx();
+}
+
+void RFWirelessTransmitter::sendBufferData(char deviceID[2],
 	char sensorId[2],
+	char sensorType[1],
 	float sensorValue,
 	char isAlarmOn[1],
 	char isBridgeTrasmition[1]
@@ -51,15 +57,15 @@ void RFWirelessTransmitter::SendBufferData(char deviceID[2],
 
 void RFWirelessTransmitter::startTrasmission(char deviceId[2], char sensorId[2], float numberOfMessages)
 {
-	RFWirelessTransmitter::deviceTrasmission(deviceId, sensorId, numberOfMessages);
+	RFWirelessTransmitter::initDeviceTrasmission(deviceId, sensorId, numberOfMessages);
 }
 
 void RFWirelessTransmitter::endTrasmission(char deviceId[2], char sensorId[2])
 {
-	RFWirelessTransmitter::deviceTrasmission(deviceId, sensorId, 0);
+	RFWirelessTransmitter::initDeviceTrasmission(deviceId, sensorId, 0);
 }
 
-void RFWirelessTransmitter::deviceTrasmission(char deviceId[2],char sensorId[2], float numberOfMessages)
+void RFWirelessTransmitter::initDeviceTrasmission(char deviceId[2],char sensorId[2], float numberOfMessages)
 {
 	char message[18];  
 	char stringFloat[8] = "0000.00";
@@ -74,11 +80,7 @@ void RFWirelessTransmitter::deviceTrasmission(char deviceId[2],char sensorId[2],
 	//Serial.println(message);
 }
 
-void RFWirelessTransmitter::SendBufferData(char message[3])
-{
-	vw_send((uint8_t *)message, strlen(message));
-	vw_wait_tx();
-}
+
 
 //void RFWirelessTransmitter::ResetTrasmissionData()
 //{

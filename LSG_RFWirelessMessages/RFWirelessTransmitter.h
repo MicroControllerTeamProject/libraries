@@ -23,17 +23,17 @@ private:
 	uint8_t _ptt_pin;
 	uint16_t _vw_speed;
 	char*	_deviceUID;
-	void deviceTrasmission(char deviceId[2], char sensorId[2], float numberOfMessages);
+	void initDeviceTrasmission(char deviceId[2], char sensorId[2], float numberOfMessages);
 public:
 	RFWirelessTransmitter(uint8_t tx_pin, uint8_t ptt_pin, uint16_t vw_speed);
 	~RFWirelessTransmitter();
-	void SendSensorData(SensorType sensorType, float data, SensorStatus sensorStatus);
-	void SendBufferData(char message[VW_MAX_MESSAGE_LEN]);
+	//void SendSensorData(SensorType sensorType, float data, SensorStatus sensorStatus);
+	void sendBufferData(char message[VW_MAX_MESSAGE_LEN]);
 
-	void SendBufferData(
+	void sendBufferData(
 		char deviceID[2], 
+		char sensorId[2],
 		char sensorType[1], 
-		char sensorId[2], 
 		float sensorValue, 
 		char isAlarmOn[1],
 		char isBridgeTrasmition[1]

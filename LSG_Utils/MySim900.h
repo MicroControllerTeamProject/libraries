@@ -26,16 +26,11 @@ public:
 	void Delete();
 	void IsSmsDisabled(bool isDisabled);
 	void IsCallDisabled(bool isDisabled);
-	//void TurnOnDeviceYesCkeckNetwork();
-	//void TurnOnDeviceNoCkeckNetwork(uint8_t powerPin,boolean force);
-	//void TurnOffDeviceNoCkeckNetwork(uint8_t powerPin, boolean force);
 	void SendTextMessageSimple(String message, String phoneNumber);
 	String GetSignalStrength();
 private:
 	bool _isSmsDisabled;
 	bool _isCallDisabled;
 	SoftwareSerial* SIM900;
-	char incoming_char;
-	
 };
 

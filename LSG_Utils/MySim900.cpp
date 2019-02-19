@@ -1,11 +1,9 @@
 #include "MySim900.h"
-#include <SoftwareSerial.h>
-#include <Arduino.h>
 #include "StringFunctions.h"
 
 MySim900::MySim900(uint8_t rx, uint8_t tx, bool invers_logic)
 {
-	incoming_char = 0;
+
 	SIM900 = new SoftwareSerial(rx, tx, invers_logic);
 }
 
@@ -37,10 +35,10 @@ void MySim900::ClearBuffer(unsigned long timeOut) {
 
 }
 
-//String MySim900::ReadIncomingChars3()
+//String MySim900::ReadIncomingChars2()
 //{
-//	String response = "";
-//	if (SIM900->available() >0)
+//	//String response = "";
+//	if (SIM900->available() > 0)
 //	{
 //		return SIM900->readString();
 //	}
@@ -52,7 +50,7 @@ String MySim900::ReadIncomingChars2()
 	if (SIM900->available() >0)
 	{
 
-		while (SIM900->available()) {
+		while (SIM900->available() > 0) {
 			response.concat((char)SIM900->read());
 		}
 		return response;
@@ -181,8 +179,12 @@ void MySim900::SendTextMessage(char* phoneNumber, char* message)
 
 void MySim900::SendTextMessageSimple(String message, String phoneNumber)
 {
-	SIM900->println(F("AT"));    //Because we want to send the SMS in text mode
-	delay(1000);
+	//*Serial.println(message);
+	//return;*/
+	//message = "google.com/maps/search/?api=1&query=45.511208,9.244042";
+	////ClearBuffer(1000);
+	////SIM900->println(F("AT"));    //Because we want to send the SMS in text mode
+	////delay(1000);
 	SIM900->println(F("AT+CMGF=1;"));    //Because we want to send the SMS in text mode
 	delay(100);
 	String atCommand = "AT+CMGS=\"" + phoneNumber + "\"";
@@ -193,7 +195,7 @@ void MySim900::SendTextMessageSimple(String message, String phoneNumber)
 	delay(100);
 	SIM900->println((char)26);//the ASCII code of the ctrl+z is 26
 	delay(1000);
-	SIM900->println();
+	//SIM900->println();
 }
 
 void MySim900::Flush()
@@ -241,7 +243,6 @@ void MySim900::IsCallDisabled(bool isDisabled)
 //		digitalWrite(powerPin, HIGH);
 //		//digitalWrite(powerPin, HIGH);
 //}
-
 ///Obsolete
 //void MySim900::TurnOnDeviceYesCkeckNetwork()
 //{

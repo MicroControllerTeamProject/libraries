@@ -1,7 +1,7 @@
 #pragma once
 #include <arduino.h>
 #include <pins_arduino.h>
-#include "VirtualWire.h"
+#include <VirtualWire.h>
 
 class RFWirelessReceiver
 {

@@ -303,6 +303,7 @@ void MyBlueTooth::ReceveMode()
 
 void MyBlueTooth::turnOnBlueTooth()
 {
+	digitalWrite(_baseTransistorPin, HIGH);
 	blueToothOff = false;
 	blueToothOn = true;
 }
