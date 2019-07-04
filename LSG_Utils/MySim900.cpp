@@ -112,7 +112,7 @@ void MySim900::DialVoiceCall(char* phoneNumber)
 
 	if (_isCallDisabled) return;
 
-	char result[200];   // array to hold the result.
+	char result[25];   // array to hold the result.
 	strcpy(result, "ATD + "); // copy string one into the result.
 	strcat(result, phoneNumber); // append string two to the result.
 	strcat(result, ";");
