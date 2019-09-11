@@ -34,7 +34,7 @@ void MySim900::ClearBuffer(unsigned long timeOut) {
 	SIM900->readString();
 
 }
-
+//
 //String MySim900::ReadIncomingChars2()
 //{
 //	//String response = "";

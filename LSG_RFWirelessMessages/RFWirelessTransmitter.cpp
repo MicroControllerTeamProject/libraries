@@ -1,5 +1,6 @@
 #include "RFWirelessTransmitter.h"
 
+
 //Trasmission for Sensors and probe devices 
 
 RFWirelessTransmitter::RFWirelessTransmitter(uint8_t tx_pin, uint8_t ptt_pin,uint16_t vw_speed)
@@ -23,7 +24,7 @@ void RFWirelessTransmitter::begin()
 	vw_setup(_vw_speed); // Bits per sec
 }
 
-void RFWirelessTransmitter::sendBufferData(char message[3])
+void RFWirelessTransmitter::sendBufferData(char message[30])
 {
 	vw_send((uint8_t *)message, strlen(message));
 	vw_wait_tx();
