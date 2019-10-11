@@ -14,7 +14,7 @@ void MySim900::Begin(long speed)
 
 MySim900::~MySim900()
 {
-	if (NULL != SIM900)
+	if (SIM900 != NULL)
 	{
 		delete SIM900;
 	}
