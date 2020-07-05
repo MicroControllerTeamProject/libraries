@@ -3,8 +3,9 @@
 
 MySim900::MySim900(uint8_t rx, uint8_t tx, bool invers_logic)
 {
-
 	SIM900 = new SoftwareSerial(rx, tx, invers_logic);
+	IsCallDisabled(false);
+	IsSmsDisabled(false);
 }
 
 void MySim900::Begin(long speed)
