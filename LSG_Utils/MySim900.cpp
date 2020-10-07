@@ -82,16 +82,16 @@ String MySim900::ReadIncomingChars2()
 //}
 
 //DA RICHIAMARE DAL SETUP PER ATTIVARE ATTESA SMS
-void MySim900::WaitSMSComing()
-{
-	SIM900->print(F("AT + IPREX = 19200\r"));
-	delay(100);
-	SIM900->print(F("AT+CMGF=1\r"));  // set SMS mode to text
-	delay(100);
-	SIM900->print(F("AT+CNMI=2,2,0,0,0\r"));
-	// blurt out contents of new SMS upon receipt to the GSM shield's serial out
-	delay(100);
-}
+//void MySim900::WaitSMSComing()
+//{
+//	SIM900->print(F("AT + IPREX = 19200\r"));
+//	delay(100);
+//	SIM900->print(F("AT+CMGF=1\r"));  // set SMS mode to text
+//	delay(100);
+//	SIM900->print(F("AT+CNMI=2,2,0,0,0\r"));
+//	// blurt out contents of new SMS upon receipt to the GSM shield's serial out
+//	delay(100);
+//}
 
 //void MySim900::SIM900power()
 //// software equivalent of pressing the GSM shield "power" button
