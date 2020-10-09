@@ -1,17 +1,17 @@
 #include "MyBlueTooth.h"
 #include <Arduino.h>
 
-MyBlueTooth::MyBlueTooth(uint8_t blueToothKeyPin, 
-							uint8_t baseTransistorPin, 
-							long baudRateProgramMode, 
-							long baudRateReceveMode, 
-							uint8_t rx, uint8_t tx)
+MyBlueTooth::MyBlueTooth(uint8_t blueToothKeyPin,
+	uint8_t baseTransistorPin,
+	long baudRateProgramMode,
+	long baudRateReceveMode,
+	uint8_t rx, uint8_t tx)
 {
 	_hardwareSerial = nullptr;
 	_blueToothKeyPin = blueToothKeyPin;
 	_baseTransistorPin = baseTransistorPin;
-	_softwareSerial = new SoftwareSerial(rx,tx);
-	
+	_softwareSerial = new SoftwareSerial(rx, tx);
+
 
 	_baudRateProgramMode = baudRateProgramMode;
 	_baudRateReceveMode = baudRateReceveMode;
@@ -22,12 +22,12 @@ MyBlueTooth::MyBlueTooth(uint8_t blueToothKeyPin,
 
 }
 
-MyBlueTooth::MyBlueTooth(HardwareSerial *hardwareSerial, 
-							uint8_t blueToothKeyPin, 
-							uint8_t baseTransistorPin,
-							long baudRateProgramMode,
-							long baudRateReceveMode)
-{			
+MyBlueTooth::MyBlueTooth(HardwareSerial* hardwareSerial,
+	uint8_t blueToothKeyPin,
+	uint8_t baseTransistorPin,
+	long baudRateProgramMode,
+	long baudRateReceveMode)
+{
 	_softwareSerial = nullptr;
 	_blueToothKeyPin = blueToothKeyPin;
 	_baseTransistorPin = baseTransistorPin;
@@ -69,9 +69,9 @@ void MyBlueTooth::Reset_To_Master_Mode()
 		_softwareSerial->println(F("AT+ROLE=1"));
 		_softwareSerial->readString();
 		delay(500);
-	/*	_softwareSerial->println("AT+RESET");
-		_softwareSerial->readString();
-		delay(3500);*/
+		/*	_softwareSerial->println("AT+RESET");
+			_softwareSerial->readString();
+			delay(3500);*/
 		_softwareSerial->println(F("AT+CMODE=0"));
 		_softwareSerial->readString();
 		// AT+INQM=p1,p2,p3
@@ -79,22 +79,22 @@ void MyBlueTooth::Reset_To_Master_Mode()
 		// p2 - maximum number of bluetooth devices response
 		// p3 - the maximum of limited inquiring time. 1~48 (1.28s ~ 61.44s)
 		// 15*1.28 = 19sec 
-		delay(3500);
-		/*_softwareSerial->println("AT+RMAAD");
-		_softwareSerial->readString();
-		delay(3500);*/
-		_softwareSerial->println(F("AT+INIT"));
-		_softwareSerial->readString();
-		delay(3500);
+		//delay(3500);
+		///*_softwareSerial->println("AT+RMAAD");
+		//_softwareSerial->readString();
+		//delay(3500);*/
+		//_softwareSerial->println(F("AT+INIT"));
+		//_softwareSerial->readString();
+		//delay(3500);
 	}
 	else
 	{
 		_hardwareSerial->println(F("AT+ROLE=1"));
 		_hardwareSerial->readString();
 		delay(500);
-	/*	_hardwareSerial->println("AT+RESET");
-		_hardwareSerial->readString();
-		delay(3500);*/
+		/*	_hardwareSerial->println("AT+RESET");
+			_hardwareSerial->readString();
+			delay(3500);*/
 		_hardwareSerial->println(F("AT+CMODE=0"));
 		_hardwareSerial->readString();
 		// AT+INQM=p1,p2,p3
@@ -102,13 +102,13 @@ void MyBlueTooth::Reset_To_Master_Mode()
 		// p2 - maximum number of bluetooth devices response
 		// p3 - the maximum of limited inquiring time. 1~48 (1.28s ~ 61.44s)
 		// 15*1.28 = 19sec 
-		delay(3500);
-		/*_softwareSerial->println("AT+RMAAD");
-		_softwareSerial->readString();
-		delay(3500);*/
-		_hardwareSerial->println(F("AT+INIT"));
-		_hardwareSerial->readString();
-		delay(3500);
+		//delay(3500);
+		///*_softwareSerial->println("AT+RMAAD");
+		//_softwareSerial->readString();
+		//delay(3500);*/
+		//_hardwareSerial->println(F("AT+INIT"));
+		//_hardwareSerial->readString();
+		//delay(3500);
 	}
 
 }
@@ -154,31 +154,31 @@ bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 			}
 		}
 	}
-	else{
+	else {
 		_hardwareSerial->readString();
-		_hardwareSerial->println(F("AT+INQM=0,5,65"));
-		delay(500);
-		_hardwareSerial->readString();
-		/*delay(500);
-		_hardwareSerial->println("AT+INQ");
-		delay(1000);*/
-		/*if (available() > 0)
-		{*/
-			//_hardwareSerial->readString();
-			/*String command = "AT+RNAME?" + deviceAddress + "\r\n";*/
-			_hardwareSerial->print("AT+RNAME?" + deviceAddress + "\r\n");
-			delay(1000);
-			String phoneName = _hardwareSerial->readString();
-			//delay(500);
-			String command = "+RNAME:" + deviceName;
-			if (phoneName.indexOf(command) > -1)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+		//_hardwareSerial->println(F("AT+INQM=0,5,65"));
+		//delay(500);
+		//_hardwareSerial->readString();
+		///*delay(500);
+		//_hardwareSerial->println("AT+INQ");
+		//delay(1000);*/
+		///*if (available() > 0)
+		//{*/
+		//	//_hardwareSerial->readString();
+		//	/*String command = "AT+RNAME?" + deviceAddress + "\r\n";*/
+		_hardwareSerial->print("AT+RNAME?" + deviceAddress + "\r\n");
+		delay(1000);
+		String phoneName = _hardwareSerial->readString();
+		//delay(500);
+		String command = "+RNAME:" + deviceName;
+		if (phoneName.indexOf(command) > -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 		//}
 	}
 	return false;
@@ -198,7 +198,7 @@ void  MyBlueTooth::Reset_To_Slave_Mode()
 		_softwareSerial->println(F("AT+ROLE=0"));
 		_softwareSerial->readString();
 		delay(1500);
-		_softwareSerial->println("AT+UART="+ String(_baudRateReceveMode) +",0,0");
+		_softwareSerial->println("AT+UART=" + String(_baudRateReceveMode) + ",0,0");
 		_softwareSerial->readString();
 
 		delay(1500);
@@ -216,9 +216,9 @@ void  MyBlueTooth::Reset_To_Slave_Mode()
 		_hardwareSerial->println(F("AT+ROLE=0"));
 		_hardwareSerial->readString();
 		delay(1500);
-		_hardwareSerial->println("AT+UART="+ String(_baudRateReceveMode) +",0,0");
+		_hardwareSerial->println("AT+UART=" + String(_baudRateReceveMode) + ",0,0");
 		_hardwareSerial->readString();
-		
+
 		delay(1500);
 		ReceveMode();
 		Clear2();
@@ -298,7 +298,7 @@ void MyBlueTooth::ReceveMode()
 	delay(300);
 	digitalWrite(_baseTransistorPin, HIGH);
 	delay(3000);
-	begin(_baudRateReceveMode);	
+	begin(_baudRateReceveMode);
 }
 
 void MyBlueTooth::turnOnBlueTooth()
@@ -328,8 +328,12 @@ bool MyBlueTooth::isBlueToothOn()
 void MyBlueTooth::SetPassword(String password)
 {
 	ProgramMode();
-	print("AT+PSWD=" + password +  "\r\n");
-	delay(2000);
+	println("AT+PSWD=" + password);
+	delay(1000);
+	print(readString());
+	println("AT+UART=38400,0,0");
+	delay(1000);
+	print(readString());
 	ReceveMode();
 }
 
@@ -338,6 +342,7 @@ void MyBlueTooth::SetBlueToothName(String name)
 	ProgramMode();
 	print("AT+NAME=" + name + "\r\n");
 	delay(2000);
+	readString();
 	ReceveMode();
 }
 
@@ -358,7 +363,7 @@ String MyBlueTooth::GetOldPassword()
 {
 	_oldPassword = "";
 
-	print("AT+PSWD\r\n");
+	print("AT+PSWD?\r\n");
 
 	delay(2000);
 
