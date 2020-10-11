@@ -50,7 +50,7 @@ public:
 
 	void  Reset_To_Master_Mode();
 
-	void SetBlueToothName(String password);
+	void SetBlueToothName(String name);
 
 	void Clear2();
 

@@ -3,8 +3,9 @@
 
 MySim900::MySim900(uint8_t rx, uint8_t tx, bool invers_logic)
 {
-
 	SIM900 = new SoftwareSerial(rx, tx, invers_logic);
+	IsCallDisabled(false);
+	IsSmsDisabled(false);
 }
 
 void MySim900::Begin(long speed)
@@ -14,7 +15,7 @@ void MySim900::Begin(long speed)
 
 MySim900::~MySim900()
 {
-	if (NULL != SIM900)
+	if (SIM900 != NULL)
 	{
 		delete SIM900;
 	}
@@ -34,7 +35,7 @@ void MySim900::ClearBuffer(unsigned long timeOut) {
 	SIM900->readString();
 
 }
-
+//
 //String MySim900::ReadIncomingChars2()
 //{
 //	//String response = "";
@@ -81,16 +82,16 @@ String MySim900::ReadIncomingChars2()
 //}
 
 //DA RICHIAMARE DAL SETUP PER ATTIVARE ATTESA SMS
-void MySim900::WaitSMSComing()
-{
-	SIM900->print(F("AT + IPREX = 19200\r"));
-	delay(100);
-	SIM900->print(F("AT+CMGF=1\r"));  // set SMS mode to text
-	delay(100);
-	SIM900->print(F("AT+CNMI=2,2,0,0,0\r"));
-	// blurt out contents of new SMS upon receipt to the GSM shield's serial out
-	delay(100);
-}
+//void MySim900::WaitSMSComing()
+//{
+//	SIM900->print(F("AT + IPREX = 19200\r"));
+//	delay(100);
+//	SIM900->print(F("AT+CMGF=1\r"));  // set SMS mode to text
+//	delay(100);
+//	SIM900->print(F("AT+CNMI=2,2,0,0,0\r"));
+//	// blurt out contents of new SMS upon receipt to the GSM shield's serial out
+//	delay(100);
+//}
 
 //void MySim900::SIM900power()
 //// software equivalent of pressing the GSM shield "power" button
@@ -112,7 +113,7 @@ void MySim900::DialVoiceCall(char* phoneNumber)
 
 	if (_isCallDisabled) return;
 
-	char result[200];   // array to hold the result.
+	char result[25];   // array to hold the result.
 	strcpy(result, "ATD + "); // copy string one into the result.
 	strcat(result, phoneNumber); // append string two to the result.
 	strcat(result, ";");
