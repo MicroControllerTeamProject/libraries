@@ -1,8 +1,8 @@
 #include "RFWirelessReceiver.h" 
 
-RFWirelessReceiver::RFWirelessReceiver(uint8_t tx_pin, uint8_t ptt_pin, uint16_t vw_speed)
+RFWirelessReceiver::RFWirelessReceiver(uint8_t rx_pin, uint8_t ptt_pin, uint16_t vw_speed)
 {
-	_tx_pin = tx_pin;
+	_rx_pin = rx_pin;
 	_ptt_pin = ptt_pin;
 	_vw_speed = vw_speed;
 }
@@ -15,19 +15,19 @@ void RFWirelessReceiver::begin()
 {
 	vw_set_ptt_pin(_ptt_pin);
 	vw_set_ptt_inverted(false);
-	vw_set_tx_pin(_tx_pin);
+	vw_set_rx_pin(_rx_pin);
 	vw_setup(_vw_speed); // Bits per sec
 	vw_rx_start();
 }
 
 String RFWirelessReceiver::GetStartProtocol()
 {
-	return _txStart;
+	return _rxStart;
 }
 
 String RFWirelessReceiver::GetEndProtocol()
 {
-	return _txEnd;
+	return _rxEnd;
 }
 
 String RFWirelessReceiver::GetDeviceId()
@@ -69,9 +69,9 @@ String RFWirelessReceiver::GetMessage(char deviceId[2], char sensorId[2])
 
 	String sensorIdString = sensorId;
 
-	String txStartString = "*#";
+	String rxStartString = "*#";
 
-	String txEndString = "#*";
+	String rxEndString = "#*";
 
 	byte message[19];
 
@@ -94,17 +94,17 @@ String RFWirelessReceiver::GetMessage(char deviceId[2], char sensorId[2])
 		Serial.println(sensorIdString);*/
 
 		if (messageString.length() == 15
-			&& messageString.substring(0, 2) == txStartString
+			&& messageString.substring(0, 2) == rxStartString
 			&& messageString.substring(2, 4) == deviceIdString
 			&& messageString.substring(4, 6) == sensorIdString
-			&& messageString.substring(13, 15) == txEndString
+			&& messageString.substring(13, 15) == rxEndString
 			&& messageString.substring(6, 13).toFloat() != 0
 			)
 		{
 			_deviceId = messageString.substring(2, 4);
 			_sensorId = messageString.substring(4, 6);
-			_trasmitedItems = 0;
-			_trasmitionItems = messageString.substring(6, 13).toFloat();
+			_receivedItems = 0;
+			_receivingItems = messageString.substring(6, 13).toFloat();
 			//Serial.println(_trasmitionItems);
 			//Serial.println("init device transmission");
 			return "init device transmission";
@@ -112,15 +112,15 @@ String RFWirelessReceiver::GetMessage(char deviceId[2], char sensorId[2])
 
 		
 		if (messageString.length() == 15
-			&& messageString.substring(0, 2) == txStartString
+			&& messageString.substring(0, 2) == rxStartString
 			&& messageString.substring(2, 4) == deviceIdString
 			&& messageString.substring(4, 6) == sensorIdString
-			&& messageString.substring(13, 15) == txEndString
+			&& messageString.substring(13, 15) == rxEndString
 			&& messageString.substring(6, 13).toFloat() == 0.00
 			)
 		{
 			//Serial.println("Fine trasmissione");
-			if (_trasmitedItems == _trasmitionItems)
+			if (_receivedItems == _receivingItems)
 			{
 				return "OK";
 
@@ -133,22 +133,22 @@ String RFWirelessReceiver::GetMessage(char deviceId[2], char sensorId[2])
 
 		if (messageString.length() == 18
 			&& messageString.substring(2, 4) == deviceIdString 
-			&& messageString.substring(0, 2) == txStartString
-			&& messageString.substring(16, 18) == txEndString 
+			&& messageString.substring(0, 2) == rxStartString
+			&& messageString.substring(16, 18) == rxEndString 
 			&& messageString.substring(5, 7) == sensorIdString
 			)
 		{
 			//Serial.println(messageString);
 
-			_txStart = messageString.substring(0, 2);
+			_rxStart = messageString.substring(0, 2);
 			_deviceId = messageString.substring(2, 4);	
 			_sensorType = messageString.substring(4, 5);		
 			_sensorId = messageString.substring(5, 7);	
 			_sensorValue = messageString.substring(7, 14);
 			_isAlarmOn = messageString.substring(14, 15); 
 			_isBridgeTrasmition = messageString.substring(15, 16);
-			_txEnd = messageString.substring(16, 18);
-			_trasmitedItems++;
+			_rxEnd = messageString.substring(16, 18);
+			_receivedItems++;
 			return messageString;
 		}
 		else
@@ -166,9 +166,9 @@ String RFWirelessReceiver::GetMessage()
 {
 	//Serial.println("chiamata");
 	
-	String txStartString = "*#";
+	String rxStartString = "*#";
 
-	String txEndString = "#*";
+	String rxEndString = "#*";
 
 	byte message[19];
 
@@ -189,32 +189,32 @@ String RFWirelessReceiver::GetMessage()
 
 
 		if (messageString.length() == 15
-			&& messageString.substring(0, 2) == txStartString
+			&& messageString.substring(0, 2) == rxStartString
 			/*&& messageString.substring(2, 4) == deviceIdString
 			&& messageString.substring(4, 6) == sensorIdString*/
-			&& messageString.substring(13, 15) == txEndString
+			&& messageString.substring(13, 15) == rxEndString
 			&& messageString.substring(6, 13).toFloat() != 0
 			)
 		{
 			_deviceId = messageString.substring(2, 4);
 			_sensorId = messageString.substring(4, 6);
-			_trasmitedItems = 0;
-			_trasmitionItems = messageString.substring(6, 13).toFloat();
+			_receivedItems = 0;
+			_receivingItems = messageString.substring(6, 13).toFloat();
 			//Serial.println(_trasmitionItems);
 			//Serial.println("init device transmission");
 			return "init device transmission";
 		}
 
 		if (messageString.length() == 15
-			&& messageString.substring(0, 2) == txStartString
+			&& messageString.substring(0, 2) == rxStartString
 			&& messageString.substring(2, 4) == _deviceId
 			&& messageString.substring(4, 6) == _sensorId
-			&& messageString.substring(13, 15) == txEndString
+			&& messageString.substring(13, 15) == rxEndString
 			&& messageString.substring(6, 13).toFloat() == 0.00
 			)
 		{
 			//Serial.println("Fine trasmissione");
-			if (_trasmitedItems == _trasmitionItems)
+			if (_receivedItems == _receivingItems)
 			{
 				return "OK";
 				ResetAllVariables();
@@ -228,22 +228,22 @@ String RFWirelessReceiver::GetMessage()
 
 		if (messageString.length() == 18
 			&& messageString.substring(2, 4) == _deviceId
-			&& messageString.substring(0, 2) == txStartString
-			&& messageString.substring(16, 18) == txEndString
+			&& messageString.substring(0, 2) == rxStartString
+			&& messageString.substring(16, 18) == rxEndString
 			&& messageString.substring(5, 7) == _sensorId
 			)
 		{
 			//Serial.println(messageString);
 
-			_txStart = messageString.substring(0, 2);
+			_rxStart = messageString.substring(0, 2);
 			/*_deviceID = messageString.substring(2, 4);*/
 			_sensorType = messageString.substring(4, 5);
 			/*_sensorId = messageString.substring(5, 7);*/
 			_sensorValue = messageString.substring(7, 14);
 			_isAlarmOn = messageString.substring(14, 15);
 			_isBridgeTrasmition = messageString.substring(15, 16);
-			_txEnd = messageString.substring(16, 18);
-			_trasmitedItems++;
+			_rxEnd = messageString.substring(16, 18);
+			_receivedItems++;
 			return messageString;
 		}
 		else
@@ -259,7 +259,7 @@ String RFWirelessReceiver::GetMessage()
 
 void RFWirelessReceiver::ResetAllVariables()
 {
-	_txStart = "";
+	_rxStart = "";
 	_deviceId = "";
 	_sensorType = "";
 	_sensorId = "";
@@ -267,7 +267,7 @@ void RFWirelessReceiver::ResetAllVariables()
 	_sensorValue = "";
 	_isAlarmOn = "";
 	_isBridgeTrasmition = "";
-	_txEnd  = "";
-	_trasmitedItems = 0;
-	_trasmitionItems = 0;
+	_rxEnd  = "";
+	_receivedItems = 0;
+	_receivingItems = 0;
 }

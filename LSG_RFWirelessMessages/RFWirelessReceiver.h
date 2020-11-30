@@ -7,12 +7,12 @@ class RFWirelessReceiver
 {
 
 private:
-	uint8_t _tx_pin;
+	uint8_t _rx_pin;
 	uint8_t _ptt_pin;
 	uint16_t _vw_speed;
-	uint8_t _trasmitionItems;
-	uint8_t _trasmitedItems;
-	String _txStart;
+	uint8_t _receivingItems;
+	uint8_t _receivedItems;
+	String _rxStart;
 	String _deviceId;
 	String _sensorType;
 	String _sensorId;
@@ -20,7 +20,7 @@ private:
 	String _sensorValue;
 	String _isAlarmOn;
 	String _isBridgeTrasmition;
-	String _txEnd;
+	String _rxEnd;
 
 public:
 	RFWirelessReceiver(uint8_t tx_pin, uint8_t ptt_pin, uint16_t vw_speed);
