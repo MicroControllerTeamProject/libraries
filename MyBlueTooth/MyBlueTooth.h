@@ -56,6 +56,8 @@ public:
 
 	void Flush();
 
+	String getVersion();
+
 
 	//Activate master mode before call this method
 	bool  IsDeviceDetected(String deviceAddress, String deviceName);

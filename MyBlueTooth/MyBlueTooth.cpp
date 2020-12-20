@@ -173,6 +173,7 @@ bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 		String command = "+RNAME:" + deviceName;
 		if (phoneName.indexOf(command) > -1)
 		{
+			//_hardwareSerial->println(F("found"));
 			return true;
 		}
 		else
@@ -396,6 +397,20 @@ String MyBlueTooth::SplitStringIndex(String data, char separator, int index)
 	}
 	return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
 }
+
+String MyBlueTooth::getVersion()
+{
+	ProgramMode();
+		this->println(F("AT+VERSION?"));
+		delay(1000);
+		if (this->available() > 0)
+		{
+			ReceveMode();
+			return this->readString();
+		}
+		ReceveMode();
+}
+
 
 
 
