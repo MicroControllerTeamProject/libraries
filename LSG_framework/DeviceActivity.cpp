@@ -72,38 +72,70 @@ bool DeviceActivity::isThereAnyCustomMisureOnAlarm(float minCustomValue,float ma
 /// <returns></returns>
 bool DeviceActivity::isThereAnyPortOnAlarm()
 {
+	//Serial.println("Entrato");
 	for (int i = 0; i < this->digitalPortsNumber; i++)
 	{
-		if (this->digitalPort[i]->alarmOn == DigitalPort::AlarmOn::low && digitalRead(this->digitalPort[i]->pin) == LOW)
+		if (this->digitalPort[i]->isEnable)
 		{
-			this->lastAlarmDescription = digitalPort[i]->uid + " level LOW";
-			return true;
-			
-		}
-		if (this->digitalPort[i]->alarmOn == DigitalPort::AlarmOn::high && digitalRead(this->digitalPort[i]->pin) == HIGH)
-		{
-			return true;
+
+			if (this->digitalPort[i]->alarmOn == DigitalPort::AlarmOn::low && digitalRead(this->digitalPort[i]->pin) == LOW)
+			{
+				this->lastAlarmDescription = digitalPort[i]->uid + " level LOW";
+				return true;
+
+			}
+			if (this->digitalPort[i]->alarmOn == DigitalPort::AlarmOn::high && digitalRead(this->digitalPort[i]->pin) == HIGH)
+			{
+				return true;
+			}
 		}
 	}
 
 	for (int i = 0; i < this->analogPortsNumber; i++)
 	{
-		if (this->analogPort[i]->maxVoltageAlarmValueIn > (this->vref /1023) * analogRead(this->analogPort[i]->pin))
+		
+		if (this->analogPort[i]->isEnable && this->analogPort[i]->maxVoltageAlarmValueIn != 0)
 		{
-			this->lastAlarmDescription = analogPort[i]->uid + " level too HIGH";
-			return true;
-		}
+			if (this->analogPort[i]->maxVoltageAlarmValueIn < (this->vref / 1023) * analogRead(this->analogPort[i]->getPin()))
+			{
+				this->lastAlarmDescription = analogPort[i]->getUid() + " level HIGH";
+				return true;
+			}
 
-		if (this->analogPort[i]->minVoltageAlarmValueIn < (this->vref / 1023) * analogRead(this->analogPort[i]->pin))
-		{
-			this->lastAlarmDescription = analogPort[i]->uid + " level too LOW";
-			return true;
+			if (this->analogPort[i]->minVoltageAlarmValueIn > (this->vref / 1023) * analogRead(this->analogPort[i]->getPin()))
+			{
+				this->lastAlarmDescription = analogPort[i]->getUid() + " level LOW";
+				return true;
+			}
 		}
 	}
+
+	for (int i = 0; i < this->analogPortsNumber; i++)
+	{
+		//Serial.print("------------------------"); Serial.println(this->analogPort[i]->maxAlarmValueIn);
+		if (this->analogPort[i]->isEnable && this->analogPort[i]->maxAlarmValueIn != 0)
+		{
+			//Serial.println("Entrato3");
+			//Serial.println("Entrato2");
+			
+			if (this->analogPort[i]->maxAlarmValueIn < (analogRead(this->analogPort[i]->getPin())))
+			{
+				this->lastAlarmDescription = analogPort[i]->getUid() + " level HIGH";
+				return true;
+			}
+
+			if (this->analogPort[i]->minAlarmValueIn > (analogRead(this->analogPort[i]->getPin())))
+			{
+				this->lastAlarmDescription = analogPort[i]->getUid() + " level LOW";
+					return true;
+			}
+		}
+	}
+
 	return false;
 }
 
-String DeviceActivity::getLastAlarmDescription()
+String DeviceActivity::getLastAlarmDescription(void)
 {
 	return this->lastAlarmDescription;
 }
@@ -117,9 +149,9 @@ float DeviceActivity::analogReadVoltageByName(String analogPortName)
 {
 	for (int i = 0; i < this->analogPortsNumber; i++)
 	{
-		if (this->analogPort[i]->uid == analogPortName)
+		if (this->analogPort[i]->getUid() == analogPortName)
 		{
-			return (this->vref /1023) * analogRead(this->analogPort[i]->pin);
+			return (this->vref /1023) * analogRead(this->analogPort[i]->getPin());
 			/*else
 			{
 				lastError = this->analogPort[i]->uid + String(" is not output mode");
@@ -133,9 +165,9 @@ int DeviceActivity::analogReadByName(String analogPortName)
 {
 	for (int i = 0; i < this->analogPortsNumber; i++)
 	{
-		if (this->analogPort[i]->uid == analogPortName)
+		if (this->analogPort[i]->getUid() == analogPortName)
 		{
-			return (this->vref / 1023) * analogRead(this->analogPort[i]->pin);
+			return analogRead(this->analogPort[i]->getPin());
 			/*else
 			{
 				lastError = this->analogPort[i]->uid + String(" is not output mode");
@@ -183,10 +215,10 @@ float DeviceActivity::getUnitOfMisureValue(String analogPortName)
 	float mathRelationship;
 	for (int i = 0; i < this->analogPortsNumber; i++)
 	{
-		if (this->analogPort[i]->uid == analogPortName)
+		if (this->analogPort[i]->getUid() == analogPortName)
 		{
 			mathRelationship = this->analogPort[i]->unitOfMisureFullScale / this->vref;
-			return ((this->vref / 1023) * analogRead(this->analogPort[i]->pin)) * mathRelationship;
+			return ((this->vref / 1023) * analogRead(this->analogPort[i]->getPin())) * mathRelationship;
 			/*else
 			{
 				lastError = this->analogPort[i]->uid + String(" is not output mode");

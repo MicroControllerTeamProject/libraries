@@ -2,6 +2,7 @@
 #include <OneWire.h>
 
 
+
 OneWire* oneWire;
 DallasTemperature* sensors;
 auto _temperatureSensorAddress = new uint8_t[0][8];
@@ -84,10 +85,10 @@ void TemperatureDallasActivity::discoverOneWireDevices() {
 //	}
 //}
 
-bool TemperatureDallasActivity::isThereAnyCustomMisureOnAlarm(float minCustomValue, float maxCustomValue, String measureDescription) {
-	float temperature = 0;
+bool TemperatureDallasActivity::isThereAnyCustomMisureOnAlarm(byte minCustomValue, byte maxCustomValue, String measureDescription) {
+	byte temperature = 0;
 	sensors->begin();
-	for (int i = 0; i < _numberOfTemperatureSensor; i++)
+	for (uint8_t i = 0; i < _numberOfTemperatureSensor; i++)
 	{
 		DeviceAddress probe = { _temperatureSensorAddress[i][0],
 								_temperatureSensorAddress[i][1],
@@ -98,10 +99,12 @@ bool TemperatureDallasActivity::isThereAnyCustomMisureOnAlarm(float minCustomVal
 								_temperatureSensorAddress[i][6],
 								_temperatureSensorAddress[i][7]
 		};
-		temperature = checkTemperatureFromAllProbe(probe);
-		Serial.print("temperatura probe "); Serial.print(i); Serial.print(" "); Serial.println(temperature);
+		temperature = getTemperatureFromProbe(probe);
+		//Serial.print("temperatura probe "); Serial.print(i); Serial.print(" "); Serial.println(temperature);
+
 		if ((temperature < minCustomValue) || (temperature > maxCustomValue))
 		{
+			//Serial.print(maxCustomValue);
 			return true;
 		}
 	}
@@ -110,7 +113,7 @@ bool TemperatureDallasActivity::isThereAnyCustomMisureOnAlarm(float minCustomVal
 }
 
 
-float TemperatureDallasActivity::checkTemperatureFromAllProbe(DeviceAddress probe)
+float TemperatureDallasActivity::getTemperatureFromProbe(DeviceAddress probe)
 {
 	sensors->begin();
 	/*for (int i = 0; i < _numberOfTemperatureSensor; i++)
