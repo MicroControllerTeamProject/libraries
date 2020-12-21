@@ -167,13 +167,13 @@ bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 		//	//_hardwareSerial->readString();
 		//	/*String command = "AT+RNAME?" + deviceAddress + "\r\n";*/
 		_hardwareSerial->print("AT+RNAME?" + deviceAddress + "\r\n");
-		delay(1000);
+		delay(5000);
 		String phoneName = _hardwareSerial->readString();
 		//delay(500);
 		String command = "+RNAME:" + deviceName;
 		if (phoneName.indexOf(command) > -1)
 		{
-			//_hardwareSerial->println(F("found"));
+			//_hardwareSerial->println(F("x"));
 			return true;
 		}
 		else
