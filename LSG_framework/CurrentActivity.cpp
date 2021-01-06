@@ -10,14 +10,14 @@ CurrentActivity::CurrentActivity(AnalogPort** analogPort,
 
 float CurrentActivity::ampereRead(String portName)
 {
-	for (int i = 0; i < this->analogPortsNumber; i++)
+	/*for (int i = 0; i < this->analogPortsNumber; i++)
 	{
 		if (this->analogPort[i]->getUid() == portName)
-		{
+		{*/
 			return getUnitOfMisureValue(portName);
 			//return (limitPortAmpere / 1023) * analogRead(this->analogPort[i]->pin);
-		}
-	}
+	/*	}
+	}*/
 }
 
 float CurrentActivity::ampereRead(AnalogPort* analogPort)

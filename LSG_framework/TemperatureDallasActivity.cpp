@@ -1,18 +1,14 @@
 #include "TemperatureDallasActivity.h"
 #include <OneWire.h>
 
-
-
-OneWire* oneWire;
-DallasTemperature* sensors;
 auto _temperatureSensorAddress = new uint8_t[0][8];
 
-TemperatureDallasActivity::TemperatureDallasActivity(uint8_t digitalPin) { //: DeviceActivity(digitalPort, digitalPortsNumber) {
-	oneWire = new OneWire(digitalPin);
+TemperatureDallasActivity::TemperatureDallasActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber) : DeviceActivity(digitalPort, digitalPortsNumber) {
+	oneWire = new OneWire(this->digitalPort[0]->getPin());
 	sensors = new DallasTemperature(oneWire);
-
+	
 	getOnlyDeviceNumber();
-	_temperatureSensorAddress = new uint8_t[_numberOfTemperatureSensor][8];
+	_temperatureSensorAddress = new uint8_t[numberOfTemperatureSensor][8];
 	discoverOneWireDevices();
 }
 
@@ -24,9 +20,9 @@ void TemperatureDallasActivity::getOnlyDeviceNumber() {
 	byte addr[8];
 	char probeAddressHexValue[5];
 	char value[5];
-	this->_numberOfTemperatureSensor = 0;
+	this->numberOfTemperatureSensor = 0;
 	while (oneWire->search(addr)) {
-		_numberOfTemperatureSensor++;
+		numberOfTemperatureSensor++;
 		if (OneWire::crc8(addr, 7) != addr[7]) {
 			Serial.print("CRC is not valid!\n");
 			return;
@@ -40,7 +36,7 @@ void TemperatureDallasActivity::discoverOneWireDevices() {
 	byte addr[8];
 	char probeAddressHexValue[5];
 	char value[5];
-	this->_numberOfTemperatureSensor = 0;
+	this->numberOfTemperatureSensor = 0;
 	while (oneWire->search(addr)) {
 		for (byte i = 0; i < 8; i++) {
 			strcpy(probeAddressHexValue, "0x");
@@ -49,14 +45,14 @@ void TemperatureDallasActivity::discoverOneWireDevices() {
 			}
 			String(addr[i], HEX).toCharArray(value, 5);
 			strcat(probeAddressHexValue, value);
-			_temperatureSensorAddress[_numberOfTemperatureSensor][i] = getHexFromString(probeAddressHexValue);
+			_temperatureSensorAddress[numberOfTemperatureSensor][i] = getHexFromString(probeAddressHexValue);
 			Serial.print(probeAddressHexValue);
 			if (i < 7) {
 				Serial.print(", ");
 			}
 			else
 			{
-				_numberOfTemperatureSensor++;
+				numberOfTemperatureSensor++;
 				Serial.println();
 			}
 		}
@@ -69,49 +65,52 @@ void TemperatureDallasActivity::discoverOneWireDevices() {
 	return;
 }
 
-///void TemperatureDallasActivity::printTemperature(DeviceAddress deviceAddress)
-//{
-//	float tempC = sensors->getTempC(deviceAddress);
-//	if (tempC == -127.00)
-//	{
-//		Serial.print("Error getting temperature  ");
-//	}
-//	else
-//	{
-//		Serial.print("C: ");
-//		Serial.print(tempC);
-//		/*Serial.print(" F: ");
-//		Serial.print(DallasTemperature::toFahrenheit(tempC));*/
-//	}
-//}
-
-bool TemperatureDallasActivity::isThereAnyCustomMisureOnAlarm(byte minCustomValue, byte maxCustomValue, String measureDescription) {
-	byte temperature = 0;
-	sensors->begin();
-	for (uint8_t i = 0; i < _numberOfTemperatureSensor; i++)
-	{
-		DeviceAddress probe = { _temperatureSensorAddress[i][0],
-								_temperatureSensorAddress[i][1],
-								_temperatureSensorAddress[i][2],
-								_temperatureSensorAddress[i][3],
-								_temperatureSensorAddress[i][4],
-								_temperatureSensorAddress[i][5],
-								_temperatureSensorAddress[i][6],
-								_temperatureSensorAddress[i][7]
-		};
-		temperature = getTemperatureFromProbe(probe);
-		//Serial.print("temperatura probe "); Serial.print(i); Serial.print(" "); Serial.println(temperature);
-
-		if ((temperature < minCustomValue) || (temperature > maxCustomValue))
-		{
-			//Serial.print(maxCustomValue);
-			return true;
-		}
-	}
-	return false;
-
+float TemperatureDallasActivity::getTemperatureFromPobeIndex(uint8_t deviceIndex)
+{
+	DeviceAddress probe = { _temperatureSensorAddress[deviceIndex][0],
+								_temperatureSensorAddress[deviceIndex][1],
+								_temperatureSensorAddress[deviceIndex][2],
+								_temperatureSensorAddress[deviceIndex][3],
+								_temperatureSensorAddress[deviceIndex][4],
+								_temperatureSensorAddress[deviceIndex][5],
+								_temperatureSensorAddress[deviceIndex][6],
+								_temperatureSensorAddress[deviceIndex][7]
+	};
+	return getTemperatureFromProbe(probe);
 }
 
+bool TemperatureDallasActivity::isThereAnyProbeOnAlarm()
+{
+	bool returnValue = false;
+	sensors->begin();
+	temperatureSensorAddressIndex = 0;
+	while (temperatureSensorAddressIndex < numberOfTemperatureSensor)
+	{
+		if (this->isThereAnyCustomMisureOnAlarm()) { 
+			returnValue = true; }
+		temperatureSensorAddressIndex++;
+	}
+	return returnValue;
+	/*for (_temperatureSensorAddressIndex; i < _numberOfTemperatureSensor; i++)
+	{
+		this->isThereAnyCustomMisureOnAlarm();
+	}*/
+}
+
+float TemperatureDallasActivity::getCustomMisureValue()
+{
+		DeviceAddress probe = { _temperatureSensorAddress[temperatureSensorAddressIndex][0],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][1],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][2],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][3],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][4],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][5],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][6],
+								_temperatureSensorAddress[temperatureSensorAddressIndex][7]
+		};
+		//Serial.print("temperatura probe "); Serial.print(_temperatureSensorAddressIndex); Serial.print(" "); Serial.println(getTemperatureFromProbe(probe));
+		return getTemperatureFromProbe(probe);
+}
 
 float TemperatureDallasActivity::getTemperatureFromProbe(DeviceAddress probe)
 {
@@ -135,4 +134,10 @@ float TemperatureDallasActivity::getTemperatureFromProbe(DeviceAddress probe)
 	//Serial.print("temperature is:   ");
 	//printTemperature(probe);
 	return sensors->getTempC(probe);
+
+}
+
+uint8_t TemperatureDallasActivity::getProbeNumbers()
+{
+	return this->numberOfTemperatureSensor;
 }

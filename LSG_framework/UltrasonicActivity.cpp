@@ -55,14 +55,14 @@ float UltrasonicActivity::getUnitOfMisureValue()
 
 	for (int i = 0; i < this->digitalPortsNumber; i++)
 	{
-		if (this->digitalPort[i]->uid == this->triggerPortName)
+		if (this->digitalPort[i]->getUid() == this->triggerPortName)
 		{
-			triggerPortPin = this->digitalPort[i]->pin;
+			triggerPortPin = this->digitalPort[i]->getPin();
 		}
 
-		if (this->digitalPort[i]->uid == this->echoPortName)
+		if (this->digitalPort[i]->getUid() == this->echoPortName)
 		{
-			echoPortPin = this->digitalPort[i]->pin;
+			echoPortPin = this->digitalPort[i]->getPin();
 		}
 	}
 	if (triggerPortPin != NULL && echoPortPin != NULL)

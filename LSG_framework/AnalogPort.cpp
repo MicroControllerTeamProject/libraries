@@ -2,8 +2,8 @@
 
 AnalogPort::AnalogPort(String uid, uint8_t pin)
 {
-	_uid = uid;
-	_pin = pin;
+	this->_uid = uid;
+	this->_pin = pin;
 }
 
 String AnalogPort::getUid()

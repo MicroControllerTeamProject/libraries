@@ -7,21 +7,20 @@
 class TemperatureDallasActivity : public DeviceActivity
 {
 public:
-	TemperatureDallasActivity::TemperatureDallasActivity(uint8_t digitalPin);
-
-	
+	TemperatureDallasActivity::TemperatureDallasActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber);
 	//void  printTemperature(DeviceAddress deviceAddress);
-	bool isThereAnyCustomMisureOnAlarm(byte minCustomValue, byte maxCustomValue, String measureDescription);
-	void getOnlyDeviceNumber();
+	bool isThereAnyProbeOnAlarm();
+	uint8_t getProbeNumbers();
+	float getTemperatureFromPobeIndex(uint8_t probeIndex);
 private:
-	uint8_t _numberOfTemperatureSensor = 0;
+	void getOnlyDeviceNumber();
+	uint8_t numberOfTemperatureSensor = 0;
 	int getHexFromString(String hexstr);
 	float getTemperatureFromProbe(DeviceAddress probe);
-	
 	void discoverOneWireDevices();
-
-	
-	
-	
+	float getCustomMisureValue();
+	OneWire* oneWire;
+	DallasTemperature* sensors;
+	uint8_t temperatureSensorAddressIndex = 0;
 };
 

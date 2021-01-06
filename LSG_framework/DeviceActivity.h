@@ -7,8 +7,7 @@ public:
 	DeviceActivity();
 	DeviceActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber);
 	DeviceActivity(AnalogPort** analogPort,float vref, uint8_t digitalPortsNumber);
-	virtual bool isThereAnyPortOnAlarm();
-	virtual bool isThereAnyCustomMisureOnAlarm(float maxValue, float minValue, String measureDescription);
+	//virtual bool isThereAnyPortOnAlarm();
 	virtual String getLastAlarmDescription();
 	bool digitalWriteByName(String portName, uint8_t pinLevel);
 	uint8_t digitalReadByName(String portName);
@@ -27,8 +26,11 @@ protected:
 	char lastErrorCode;
 	float vref = 5;
 	virtual float getUnitOfMisureValue(String portName);
-	virtual  float  getUnitOfMisureValue();
-private:
+	virtual  float  getCustomMisureValue();
+	bool isThereAnyCustomMisureOnAlarm();
+	bool isThereAnyDigitalPortOnAlarm();
+	bool isThereAnyAnalogPortOnAlarm();
+
 	
 	
 };

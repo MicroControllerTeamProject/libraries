@@ -3,16 +3,8 @@
 #include <pins_arduino.h>
 #include "Commons.h"
 
-
-//enum Direction
-//{
-//    input,
-//    output
-//};
-
 class DigitalPort
 {
-    
 public:
     enum AlarmOn
     {
@@ -20,14 +12,21 @@ public:
         high
     };
 
-    String uid;
+    DigitalPort(String uid, uint8_t pin);
     bool isEnable = true;
-    uint8_t pin;
     PortDirection direction = output;
+    /// <summary>
+    /// Set low for trigger alarm on low level or high.
+    /// </summary>
     AlarmOn alarmOn = low;
     bool isOnPullUp = false;
-    float unitOfMisureFullScale = 0;
-    float maxUnitOfMisureAlarmValue = 0;
-    float minUnitOfMisureAlarmValue = 0;
+    float minCustomMisureValue = 0.00f;
+    float maxCustomMisureValue = 0.00f;
+    String customMisureValueDescription = "";
+    String getUid();
+    uint8_t getPin();
+private:
+    String _uid;
+    uint8_t _pin;
 };
 
