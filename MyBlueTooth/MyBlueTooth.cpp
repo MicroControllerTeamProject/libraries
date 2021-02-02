@@ -1,5 +1,6 @@
-#include "MyBlueTooth.h"
+#include <MyBlueTooth.h>
 #include <Arduino.h>
+
 
 MyBlueTooth::MyBlueTooth(uint8_t blueToothKeyPin,
 	uint8_t baseTransistorPin,
@@ -12,14 +13,12 @@ MyBlueTooth::MyBlueTooth(uint8_t blueToothKeyPin,
 	_baseTransistorPin = baseTransistorPin;
 	_softwareSerial = new SoftwareSerial(rx, tx);
 
-
 	_baudRateProgramMode = baudRateProgramMode;
 	_baudRateReceveMode = baudRateReceveMode;
 
 	pinMode(_blueToothKeyPin, OUTPUT);
+
 	pinMode(_baseTransistorPin, OUTPUT);
-
-
 }
 
 MyBlueTooth::MyBlueTooth(HardwareSerial* hardwareSerial,
@@ -204,7 +203,7 @@ void  MyBlueTooth::Reset_To_Slave_Mode()
 
 		delay(1500);
 		ReceveMode();
-		Clear2();
+		//Clear2();
 	}
 	else
 	{
@@ -222,7 +221,7 @@ void  MyBlueTooth::Reset_To_Slave_Mode()
 
 		delay(1500);
 		ReceveMode();
-		Clear2();
+		//Clear2();
 	}
 
 }
@@ -248,7 +247,6 @@ void MyBlueTooth::begin(long baudrate)
 	}
 	else
 	{
-		//_hardwareSerial->begin(baudrate);
 		_hardwareSerial->begin(baudrate);
 	}
 }
@@ -257,6 +255,7 @@ int MyBlueTooth::available()
 {
 	if (_softwareSerial != NULL)
 	{
+		//Serial.println("Leggo");
 		return _softwareSerial->available();
 	}
 	else
@@ -279,6 +278,24 @@ String MyBlueTooth::readString()
 	}
 }
 
+void MyBlueTooth::clearBuffer()
+{
+	if (_softwareSerial != NULL)
+	{
+		for (int i = 0; i < 10000; i++)
+		{
+			_softwareSerial->read();
+		}
+	}
+	else
+	{
+		for (int i = 0; i < 10000; i++)
+		{
+			_hardwareSerial->read();
+		}
+	}
+}
+
 void  MyBlueTooth::ProgramMode()
 {
 	delay(100);
@@ -289,7 +306,7 @@ void  MyBlueTooth::ProgramMode()
 	digitalWrite(_baseTransistorPin, HIGH);
 	delay(2000);
 
-	begin(_baudRateProgramMode);
+	this->begin(_baudRateProgramMode);
 }
 
 void MyBlueTooth::ReceveMode()
@@ -299,7 +316,7 @@ void MyBlueTooth::ReceveMode()
 	delay(300);
 	digitalWrite(_baseTransistorPin, HIGH);
 	delay(3000);
-	begin(_baudRateReceveMode);
+	this->begin(_baudRateReceveMode);
 }
 
 void MyBlueTooth::turnOnBlueTooth()

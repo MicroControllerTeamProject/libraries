@@ -54,6 +54,8 @@ public:
 
 	void Clear2();
 
+	void clearBuffer();
+
 	void Flush();
 
 	String getVersion();
@@ -65,7 +67,7 @@ public:
 	
 
 	private:
-	SoftwareSerial* _softwareSerial;
+	SoftwareSerial *_softwareSerial;
 	HardwareSerial *_hardwareSerial;
 	uint8_t _blueToothKeyPin;
 	uint8_t _baseTransistorPin;
