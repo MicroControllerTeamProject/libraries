@@ -15,7 +15,6 @@ RFWirelessTransmitter::~RFWirelessTransmitter()
 
 }
 
-
 void RFWirelessTransmitter::begin()
 {
 	vw_set_ptt_pin(_ptt_pin);
@@ -24,9 +23,15 @@ void RFWirelessTransmitter::begin()
 	vw_setup(_vw_speed); // Bits per sec
 }
 
-void RFWirelessTransmitter::sendBufferData(char message[30])
+void RFWirelessTransmitter::sendBufferData(char message[VW_MAX_MESSAGE_LEN])
 {
 	vw_send((uint8_t *)message, strlen(message));
+	vw_wait_tx();
+}
+
+void RFWirelessTransmitter::sendSimpleMessage(char message[2])
+{
+	vw_send((uint8_t*)message, 3);
 	vw_wait_tx();
 }
 
@@ -55,6 +60,8 @@ void RFWirelessTransmitter::sendBufferData(char deviceID[2],
 	//Serial.println(message);
 	//delay(1000);
 }
+
+
 
 void RFWirelessTransmitter::startTrasmission(char deviceId[2], char sensorId[2], float numberOfMessages)
 {

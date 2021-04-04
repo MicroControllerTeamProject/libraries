@@ -28,7 +28,8 @@ public:
 	RFWirelessTransmitter(uint8_t tx_pin, uint8_t ptt_pin, uint16_t vw_speed);
 	~RFWirelessTransmitter();
 	//void SendSensorData(SensorType sensorType, float data, SensorStatus sensorStatus);
-	void sendBufferData(char message[VW_MAX_MESSAGE_LEN]);
+
+	void sendSimpleMessage(char message[2]);
 
 	void sendBufferData(
 		char deviceID[2], 
@@ -42,6 +43,7 @@ public:
 	//void SendTrasmissionStatus();
 	//void ResetTrasmissionData();
 	void begin();
+	void sendBufferData(char message[VW_MAX_MESSAGE_LEN]);
 	void startTrasmission(char deviceId[2], char sensorId[2], float numberOfMessages);
 	void endTrasmission(char deviceId[2], char sensorId[2]);
 };
