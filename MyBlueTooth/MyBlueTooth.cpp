@@ -59,7 +59,6 @@ void MyBlueTooth::println(String message)
 	}
 }
 
-
 void MyBlueTooth::Reset_To_Master_Mode()
 {
 	ProgramMode();
@@ -114,20 +113,38 @@ void MyBlueTooth::Reset_To_Master_Mode()
 
 void  MyBlueTooth::Clear2()
 {
-	_hardwareSerial->clearWriteError();
-	_hardwareSerial->flush();
-	_hardwareSerial->end();
+	if (_softwareSerial != NULL)
+	{
+		//_softwareSerial->clearWriteError();
+		//_hardwareSerial->flush();
+		//_softwareSerial->end();
+	}
+	else
+	{
+		//_hardwareSerial->clearWriteError();
+		//_hardwareSerial->flush();
+		//_hardwareSerial->end();
+	}
 }
 
 void  MyBlueTooth::Flush()
 {
-	_hardwareSerial->flush();
+	if (_softwareSerial != NULL)
+	{
+		_softwareSerial->flush();
+	}
+	else
+	{
+		_hardwareSerial->flush();
+	}
+	
 }
 
 bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 {
 	if (_softwareSerial != NULL)
 	{
+		return;
 		_softwareSerial->readString();
 		_softwareSerial->println(F("AT+INQM=0,5,65"));
 		_softwareSerial->readString();
@@ -154,32 +171,35 @@ bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 		}
 	}
 	else {
-		_hardwareSerial->readString();
-		//_hardwareSerial->println(F("AT+INQM=0,5,65"));
-		//delay(500);
+		clearBuffer();
+	/*	_hardwareSerial->println(F("AT+INQM=1,5,48"));
+		delay(500);*/
 		//_hardwareSerial->readString();
 		///*delay(500);
 		//_hardwareSerial->println("AT+INQ");
-		//delay(1000);*/
 		///*if (available() > 0)
 		//{*/
 		//	//_hardwareSerial->readString();
 		//	/*String command = "AT+RNAME?" + deviceAddress + "\r\n";*/
 		_hardwareSerial->print("AT+RNAME?" + deviceAddress + "\r\n");
-		delay(5000);
+		//todo:
+		//ATTENTION:Increase time with BT version 3 or 4 can find device also when it's turned off.don't know way
+		//I need to urderstand with BT version 2
+		delay(500);
 		String phoneName = _hardwareSerial->readString();
-		//delay(500);
+	
 		String command = "+RNAME:" + deviceName;
+		
 		if (phoneName.indexOf(command) > -1)
 		{
-			//_hardwareSerial->println(F("x"));
+			//Serial.println("trovato");
 			return true;
 		}
 		else
 		{
 			return false;
 		}
-		//}
+		
 	}
 	return false;
 }
@@ -282,16 +302,16 @@ void MyBlueTooth::clearBuffer()
 {
 	if (_softwareSerial != NULL)
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 2; i++)
 		{
-			_softwareSerial->read();
+			String c = _softwareSerial->readString();
 		}
 	}
 	else
 	{
-		for (int i = 0; i < 10000; i++)
+		for (int i = 0; i < 2; i++)
 		{
-			_hardwareSerial->read();
+			String c = _hardwareSerial->readString();
 		}
 	}
 }
@@ -373,22 +393,18 @@ String MyBlueTooth::GetPassword()
 		GetOldPassword();
 		ReceveMode();
 	}
-	//Clear2();
 	return _oldPassword;
 }
 
 String MyBlueTooth::GetOldPassword()
 {
 	_oldPassword = "";
-
+	clearBuffer();
 	print("AT+PSWD?\r\n");
-
 	delay(2000);
-
 	if (available())
 	{
 		String getData = readString();
-		//Serial.println(getData);
 		if (getData.startsWith(F("+PSWD:")))
 		{
 			_oldPassword = getData.substring(6);
