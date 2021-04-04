@@ -7,7 +7,8 @@
 class TemperatureDallasActivity : public DeviceActivity
 {
 public:
-	TemperatureDallasActivity::TemperatureDallasActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	TemperatureDallasActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	~TemperatureDallasActivity();
 	//void  printTemperature(DeviceAddress deviceAddress);
 	bool isThereAnyProbeOnAlarm();
 	uint8_t getProbeNumbers();

@@ -12,6 +12,12 @@ TemperatureDallasActivity::TemperatureDallasActivity(DigitalPort** digitalPort, 
 	discoverOneWireDevices();
 }
 
+TemperatureDallasActivity::~TemperatureDallasActivity()
+{
+	delete oneWire;
+	delete sensors;
+}
+
 int TemperatureDallasActivity::getHexFromString(String hexstr) {
 	return (int)strtol(hexstr.c_str(), 0, 16);
 }
