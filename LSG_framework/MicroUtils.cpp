@@ -3,15 +3,15 @@
 String MicroUtils::getBatteryGrafBarLevel(float batteryVoltageLevel)
 {
 	if (batteryVoltageLevel <= 3.25)
-		return F("[    ]+");
+		return F("[    ]o");
 	if (batteryVoltageLevel <= 3.30)
-		return F("[|   ]+");
+		return F("[|   ]o");
 	if (batteryVoltageLevel <= 3.60)
 	if (batteryVoltageLevel <= 3.40)
-		return F("[||  ]+");
-		return F("[||| ]+");
+		return F("[||  ]o");
+		return F("[||| ]o");
 	if (batteryVoltageLevel <= 5.50)
-		return F("[||||]+");
+		return F("[||||]o");
 }
 
 float MicroUtils::internalTemperature(unsigned int offset)
