@@ -1,4 +1,4 @@
-#include "RFWirelessReceiver.h" 
+#include "RFWirelessReceiver.h"
 
 RFWirelessReceiver::RFWirelessReceiver(uint8_t rx_pin, uint8_t ptt_pin, uint16_t vw_speed)
 {
@@ -174,18 +174,15 @@ String RFWirelessReceiver::GetMessage()
 
 	byte messageLength = 19; // the size of the message
 
-	vw_wait_rx_max(1000);
+	//vw_wait_rx_max(5000);
 
 	//vw_wait_rx();
 
 	if (vw_get_message(message, &messageLength)) // Non-blocking
 	{
-		//Serial.println("Received data: ");
 		String messageString = (const char *)message;
 		messageString.trim();
 
-		/*Serial.println(messageString);
-		Serial.println(messageString.length());*/
 
 
 		if (messageString.length() == 15
@@ -255,6 +252,29 @@ String RFWirelessReceiver::GetMessage()
 	{
 		return "";
 	}
+}
+
+String RFWirelessReceiver::GetSimpleMessage()
+{
+	//Serial.println("chiamata");
+
+	byte message[3];
+
+	byte messageLength = 3; // the size of the message
+
+	//vw_wait_rx_max(5000);
+
+	//vw_wait_rx();
+
+	if (vw_get_message(message, &messageLength)) // Non-blocking
+	{
+
+		String messageString = (const char*)message;
+		messageString.trim();
+
+		return messageString;
+	}
+	return "";
 }
 
 void RFWirelessReceiver::ResetAllVariables()

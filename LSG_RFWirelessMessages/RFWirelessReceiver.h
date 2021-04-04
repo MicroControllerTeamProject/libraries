@@ -37,6 +37,7 @@ public:
 	String GetSensorValue();
 	String GetIsOnAlarm();
 	String GetIsOnBridgeTrasmition();
+	String GetSimpleMessage();
 
 };
 
