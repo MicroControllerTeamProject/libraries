@@ -221,6 +221,20 @@ void MySim900::IsCallDisabled(bool isDisabled)
 	_isCallDisabled = isDisabled;
 }
 
+void MySim900::enableIncomingCall(uint8_t numberOfRings)
+{
+	_isCallDisabled = true;
+	SIM900->println("ATS0=" + String(numberOfRings));
+}
+
+void MySim900::disableIncomingCall()
+{
+	SIM900->println(F("ATS0=0"));
+	delay(100);
+	SIM900->println(F("ATH"));
+	_isCallDisabled = false;
+}
+
 //void MySim900::TurnOnDeviceNoCkeckNetwork(uint8_t powerPin, boolean force)
 //{
 //		pinMode(powerPin, OUTPUT);
