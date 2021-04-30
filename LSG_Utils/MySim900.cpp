@@ -1,5 +1,6 @@
 #include "MySim900.h"
 #include "StringFunctions.h"
+#include <TimeLib.h>
 
 MySim900::MySim900(uint8_t rx, uint8_t tx, bool invers_logic)
 {
@@ -233,6 +234,34 @@ void MySim900::disableIncomingCall()
 	delay(100);
 	SIM900->println(F("ATH"));
 	_isCallDisabled = false;
+}
+
+String MySim900::getCCLK()
+{
+	SIM900->println(F("AT+CLTS=1"));
+	delay(1000);
+	ReadIncomingChars2();
+	SIM900->println(F("AT&W"));
+	delay(1000);
+	ReadIncomingChars2();
+	SIM900->println(F("AT+CCLK?"));
+	delay(1000);
+	String stringCCLK;
+	if (IsAvailable())
+	{
+		stringCCLK = ReadIncomingChars2();
+
+		Serial.println(stringCCLK);
+
+		uint8_t position =  stringCCLK.indexOf("\"");
+
+		if(position != -1)
+		{
+			Serial.print("date: "); Serial.println(stringCCLK.substring(position + 1, position + 9));
+			Serial.print("hour: "); Serial.println(stringCCLK.substring(position + 10, position + 18));
+		}
+	}
+	return "";
 }
 
 //void MySim900::TurnOnDeviceNoCkeckNetwork(uint8_t powerPin, boolean force)

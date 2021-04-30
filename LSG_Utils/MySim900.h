@@ -30,6 +30,7 @@ public:
 	String GetSignalStrength();
 	void enableIncomingCall(uint8_t numberOfRings);
 	void disableIncomingCall();
+	String getCCLK();
 private:
 	bool _isSmsDisabled;
 	bool _isCallDisabled;
