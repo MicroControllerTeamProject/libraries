@@ -1,4 +1,7 @@
 #include "DeviceActivity.h"
+#include <stdint.h>
+#include <C:\Program Files (x86)\arduino-1.8.5\hardware\arduino\avr\cores\arduino\Arduino.h>
+
 
 DeviceActivity::DeviceActivity(){
 }
@@ -6,11 +9,13 @@ DeviceActivity::DeviceActivity(){
 DeviceActivity::DeviceActivity(DigitalPort** digitalPort,  uint8_t digitalPortsNumber)
 {
 	this->digitalPort = digitalPort;
+
 	this->digitalPortsNumber = digitalPortsNumber;
 
 	for (int i = 0; i < this->digitalPortsNumber; i++)
 	{
-		if (this->digitalPort[i]->direction == output)
+		pinMode(this->digitalPort[i]->getPin(), this->digitalPort[i]->mode);
+		/*if (this->digitalPort[i]->direction == output)
 		{
 			pinMode(this->digitalPort[i]->getPin(), OUTPUT);
 		}
@@ -23,15 +28,16 @@ DeviceActivity::DeviceActivity(DigitalPort** digitalPort,  uint8_t digitalPortsN
 			{
 				pinMode(this->digitalPort[i]->getPin(), INPUT);
 			}
-		}
+		}*/
 	}
 }
 
-DeviceActivity::DeviceActivity(AnalogPort** analogPort,float vref, uint8_t analogPortsNumber)
+DeviceActivity::DeviceActivity(AnalogPort** analogPort,float vref, uint8_t mode, uint8_t analogPortsNumber)
 {
 	this->analogPort = analogPort;
 	this->analogPortsNumber = analogPortsNumber;
 	this->vref = vref;
+	analogReference(mode);
 
 	//for (int i = 0; i < this->analogPortsNumer; i++)
 	//{
@@ -52,7 +58,6 @@ DeviceActivity::DeviceActivity(AnalogPort** analogPort,float vref, uint8_t analo
 	////	}
 	////}
 }
-
 
 bool DeviceActivity::isThereAnyCustomMisureOnAlarm()
 {
@@ -107,13 +112,13 @@ bool DeviceActivity::isThereAnyAnalogPortOnAlarm()
 
 		if (this->analogPort[i]->isEnable && this->analogPort[i]->maxVoltageAlarmValueIn != 0)
 		{
-			if (this->analogPort[i]->maxVoltageAlarmValueIn < (this->vref / 1023) * analogRead(this->analogPort[i]->getPin()))
+			if (this->analogPort[i]->maxVoltageAlarmValueIn < (this->vref / 1024) * analogRead(this->analogPort[i]->getPin()))
 			{
 				this->lastAlarmDescription = analogPort[i]->getUid() + " level HIGH";
 				return true;
 			}
 
-			if (this->analogPort[i]->minVoltageAlarmValueIn > (this->vref / 1023) * analogRead(this->analogPort[i]->getPin()))
+			if (this->analogPort[i]->minVoltageAlarmValueIn > (this->vref / 1024) * analogRead(this->analogPort[i]->getPin()))
 			{
 				this->lastAlarmDescription = analogPort[i]->getUid() + " level LOW";
 				return true;
@@ -226,7 +231,7 @@ float DeviceActivity::analogReadVoltageByName(String analogPortName)
 	{
 		if (this->analogPort[i]->getUid() == analogPortName)
 		{
-			return (this->vref /1023) * analogRead(this->analogPort[i]->getPin());
+			return (this->vref /1024) * analogRead(this->analogPort[i]->getPin());
 			/*else
 			{
 				lastError = this->analogPort[i]->uid + String(" is not output mode");
@@ -236,7 +241,7 @@ float DeviceActivity::analogReadVoltageByName(String analogPortName)
 	}
 }
 
-int DeviceActivity::analogReadByName(String analogPortName)
+uint16_t DeviceActivity::analogReadByName(String analogPortName)
 {
 	for (int i = 0; i < this->analogPortsNumber; i++)
 	{
@@ -259,14 +264,14 @@ bool DeviceActivity::digitalWriteByName(String digitalPortName,uint8_t pinLevel)
 	{
 		if (this->digitalPort[i]->getUid() == digitalPortName)
 		{
-			if (this->digitalPort[i]->direction == output)
+			if (this->digitalPort[i]->mode == OUTPUT)
 			{
 				digitalWrite(this->digitalPort[i]->getPin(), pinLevel);
 				return true;
 			}
 			else
 			{
-				lastErrorDescription = this->digitalPort[i]->getUid() + String(" is not output mode");
+				this->lastErrorDescription = F("No I/O");
 				return false;
 			}
 		}
@@ -278,30 +283,49 @@ uint8_t DeviceActivity::digitalReadByName(String digitalPortName)
 {
 	for (int i = 0; i < this->digitalPortsNumber; i++)
 	{
-		if (this->digitalPort[i]->getUid() == digitalPortName && this->digitalPort[i]->direction == input)
+		if (this->digitalPort[i]->getUid() == digitalPortName && (this->digitalPort[i]->mode == INPUT || this->digitalPort[i]->mode == INPUT_PULLUP))
 		{
 			return digitalRead(this->digitalPort[i]->getPin());
 		}
+		/*else
+		{
+			this->lastErrorDescription = F("NoSet I/0");
+		}*/
 	}
 }
 
 float DeviceActivity::getUnitOfMisureValue(String analogPortName)
 {
-	float mathRelationship;
+	uint16_t maxDigitalValue;
+	
 	for (int i = 0; i < this->analogPortsNumber; i++)
 	{
 		if (this->analogPort[i]->getUid() == analogPortName)
 		{
-			mathRelationship = this->analogPort[i]->unitOfMisureFullScale / this->vref;
-			return ((this->vref / 1023) * analogRead(this->analogPort[i]->getPin())) * mathRelationship;
-			/*else
-			{
-				lastError = this->analogPort[i]->uid + String(" is not output mode");
-				return false;
-			}*/
-		}
+			maxDigitalValue = this->analogPort[i]->unitOfMisureFullVoltage / (this->vref / 1024);
 
+			//digitalValue = (analogRead(this->analogPort[i]->getPin()) * maxDigitalValue) / this->analogPort[i]->unitOfMisureFullVoltage;
+
+			return analogRead(this->analogPort[i]->getPin() * this->analogPort[i]->unitOfMisureFullScale) / maxDigitalValue;
+		}
 	}
+	return 0;
+
+	//float mathRelationship;
+	//for (int i = 0; i < this->analogPortsNumber; i++)
+	//{
+	//	if (this->analogPort[i]->getUid() == analogPortName)
+	//	{
+	//		mathRelationship = this->analogPort[i]->unitOfMisureFullScale / this->vref;
+	//		return ((this->vref / 1024) * analogRead(this->analogPort[i]->getPin())) * mathRelationship;
+	//		/*else
+	//		{
+	//			lastError = this->analogPort[i]->uid + String(" is not output mode");
+	//			return false;
+	//		}*/
+	//	}
+
+	//}
 }
 
 float  DeviceActivity::getCustomMisureValue() {

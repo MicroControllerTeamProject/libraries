@@ -6,13 +6,13 @@ class DeviceActivity
 public:
 	DeviceActivity();
 	DeviceActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber);
-	DeviceActivity(AnalogPort** analogPort,float vref, uint8_t digitalPortsNumber);
+	DeviceActivity(AnalogPort** analogPort,float vref, uint8_t mode, uint8_t digitalPortsNumber);
 	//virtual bool isThereAnyPortOnAlarm();
 	virtual String getLastAlarmDescription();
 	bool digitalWriteByName(String portName, uint8_t pinLevel);
 	uint8_t digitalReadByName(String portName);
 	float analogReadVoltageByName(String portName);
-	int analogReadByName(String portName);
+	uint16_t analogReadByName(String portName);
 	String getLastErrorDescription();
 	
 protected:

@@ -1,7 +1,7 @@
 #pragma once
 
-enum PortDirection
-{
-    input,
-    output
-};
+//enum PortDirection
+//{
+//    input,
+//    output
+//};

@@ -5,6 +5,7 @@ class CurrentActivity : public DeviceActivity
 public:
 	CurrentActivity(AnalogPort** analogPort,
 		float vref, 
+		uint8_t mode,
 		uint8_t analogPortsNumber);
 	float ampereRead(String portName);
 	float ampereRead(AnalogPort* analogPort);

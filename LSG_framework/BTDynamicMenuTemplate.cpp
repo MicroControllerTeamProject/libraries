@@ -80,6 +80,16 @@ void BTDynamicMenuTemplate::waitingForPhoneRequests(TransfertObject& transfertOb
 	}
 }
 
+void BTDynamicMenuTemplate::println(String message)
+{
+	myBlueTooth->println(message);
+}
+
+void BTDynamicMenuTemplate::print(String message)
+{
+	myBlueTooth->print(message);
+}
+
 void BTDynamicMenuTemplate::menuCaller()
 {
 	if (_bluetoothData.indexOf(F("#0")) > -1)
@@ -138,13 +148,18 @@ void BTDynamicMenuTemplate::mainMenu()
 		myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Sys:Off", BlueToothCommandsUtil::Command, F("003")));
 	}
 
-	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Temp.:" + String(_transfertObject._internalTemperature), BlueToothCommandsUtil::Info));
+	if (!_transfertObject.isActiveDebug)
+	{
+		myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Deb:On", BlueToothCommandsUtil::Command, F("005")));
+	}
+
+	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Temp.:" + String(_transfertObject.internalTemperature), BlueToothCommandsUtil::Info));
 
 	///*myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Batt.value:" + String(_voltageValue), BlueToothCommandsUtil::Info));*/
 
-	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Batt.level:" + _transfertObject._batteryLevelGraf, BlueToothCommandsUtil::Info));
+	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Batt.level:" + _transfertObject.batteryLevelGraf, BlueToothCommandsUtil::Info));
 
-	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("WhatzUp:" + String(_transfertObject._whatIsHappened), BlueToothCommandsUtil::Info));
+	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("WhatzUp:" + String(_transfertObject.whatIsHappened), BlueToothCommandsUtil::Info));
 
 	///*myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Signal:" + _signalStrength, BlueToothCommandsUtil::Info));*/
 
@@ -172,6 +187,13 @@ void BTDynamicMenuTemplate::mainMenuCommands()
 		_transfertObject.isSystemActivated = false;
 		mainMenu();
 	}
+
+	if (_bluetoothData.indexOf(F("C005")) > -1)
+	{
+		/*_isAlarmOn = false;*/
+		_transfertObject.isActiveDebug = true;
+		mainMenu();
+	}
 }
 
 void BTDynamicMenuTemplate::mainMenuData() {}
@@ -186,7 +208,7 @@ void BTDynamicMenuTemplate::configurationMenu()
 
 	//myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("N.Phone:" + String(_phoneNumbers), BlueToothCommandsUtil::Data, F("098")));
 
-	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("TempMax:" + String(_transfertObject._internalTemperature), BlueToothCommandsUtil::Data, F("004")));
+	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("TempMax:" + String(_transfertObject.internalTemperatureMaxValue), BlueToothCommandsUtil::Data, F("004")));
 
 	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("OffSetTemp:" + String(_transfertObject.offSetTemp), BlueToothCommandsUtil::Data, F("095")));
 
@@ -212,7 +234,7 @@ void BTDynamicMenuTemplate::configurationMenu()
 
 	//myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("FindMode:" + String(_findOutPhonesMode), BlueToothCommandsUtil::Data, F("012")));
 
-	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Ext.Int:" + String(_transfertObject._isExternalInterruptOn), BlueToothCommandsUtil::Data, F("013")));
+	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Ext.Int:" + String(_transfertObject.isExternalInterruptOn), BlueToothCommandsUtil::Data, F("013")));
 
 	myBlueTooth->println(BlueToothCommandsUtil::CommandConstructor("Buzz.:" + String(_transfertObject.isBuzzerON), BlueToothCommandsUtil::Data, F("014")));
 
@@ -230,7 +252,7 @@ void BTDynamicMenuTemplate::configurationData() {
 		{
 			char data[5];
 			splitString.toCharArray(data, 6);
-			_transfertObject._internalTemperature = atof(&data[0]);
+			_transfertObject.internalTemperatureMaxValue = atof(&data[0]);
 			_transfertObject.isDataChanged = true;
 		}
 		configurationMenu();
@@ -243,7 +265,7 @@ void BTDynamicMenuTemplate::configurationData() {
 		{
 			char data[2];
 			splitString.toCharArray(data, 2);
-			_transfertObject._isExternalInterruptOn = atoi(&data[0]);;
+			_transfertObject.isExternalInterruptOn = atoi(&data[0]);;
 			_transfertObject.isDataChanged = true;
 		}
 		configurationMenu();

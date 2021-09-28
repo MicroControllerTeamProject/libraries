@@ -13,6 +13,7 @@ public:
 	void Begin(long speed);
 	//void SIM900power();
 	void DialVoiceCall(char* phoneNumber);
+	void DialVoiceCall(String phoneNumber);
 	void SendTextMessage(char* phoneNumber, char* message);
 	//bool IsWorking();
 	//char* ReadIncomingChars();

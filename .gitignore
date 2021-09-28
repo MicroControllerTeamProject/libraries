@@ -349,3 +349,29 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 >>>>>>> feature-BTOptimising
+ArduinoJson/out/build/x64-Debug/VSInheritEnvironments.txt
+ArduinoJson/out/build/x64-Debug/.cmake/api/v1/query/client-MicrosoftVS/query.json
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CMakeCCompiler.cmake
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CMakeCXXCompiler.cmake
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CMakeRCCompiler.cmake
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CMakeSystem.cmake
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CompilerIdC/CMakeCCompilerId.c
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CompilerIdC/CMakeCCompilerId.exe
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.cpp
+ArduinoJson/out/build/x64-Debug/CMakeFiles/3.19.20122902-MSVC_2/CompilerIdCXX/CMakeCXXCompilerId.exe
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/.ninja_deps
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/.ninja_log
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/build.ninja
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/cmake_install.cmake
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeCache.txt
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeLists.txt
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/cmTC_5cdd1.exe
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/cmake.check_cache
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/rules.ninja
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/TargetDirectories.txt
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_5cdd1.dir/embed.manifest
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_5cdd1.dir/intermediate.manifest
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_5cdd1.dir/manifest.rc
+ArduinoJson/out/build/x64-Debug/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_5cdd1.dir/manifest.res
+ArduinoJson/out/build/x64-Debug/CMakeFiles/ShowIncludes/foo.h
+ArduinoJson/out/build/x64-Debug/CMakeFiles/ShowIncludes/main.c

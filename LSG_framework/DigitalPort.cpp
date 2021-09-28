@@ -1,8 +1,9 @@
 #pragma once
 
 #include "DigitalPort.h"
+#include "stdint.h"
 
-DigitalPort::DigitalPort(String uid, uint8_t pin)
+DigitalPort::DigitalPort(String uid, uint8_t pin,uint8_t mode)
 {
 	this->_uid = uid;
 	this->_pin = pin;

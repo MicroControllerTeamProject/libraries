@@ -19,6 +19,11 @@ public:
 		long baudRateReceveMode,
 		uint8_t rx, uint8_t tx);
 	void waitingForPhoneRequests(TransfertObject &transfertObject);
+
+	void println(String message);
+
+	void print(String message);
+
 	~BTDynamicMenuTemplate();
 private:
 	String _bluetoothData = "";

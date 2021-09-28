@@ -1,8 +1,9 @@
 #include "CurrentActivity.h"
 CurrentActivity::CurrentActivity(AnalogPort** analogPort,
 	float vref, 
+	uint8_t mode,
 	uint8_t analogPortsNumber
-) : DeviceActivity(analogPort, vref, analogPortsNumber)
+) : DeviceActivity(analogPort, vref,mode, analogPortsNumber)
 {
 	this->maxAmpereAlarm = maxAmpereAlarm;
 	this->minAmpereAlarm = minAmpereAlarm;
@@ -10,14 +11,7 @@ CurrentActivity::CurrentActivity(AnalogPort** analogPort,
 
 float CurrentActivity::ampereRead(String portName)
 {
-	/*for (int i = 0; i < this->analogPortsNumber; i++)
-	{
-		if (this->analogPort[i]->getUid() == portName)
-		{*/
-			return getUnitOfMisureValue(portName);
-			//return (limitPortAmpere / 1023) * analogRead(this->analogPort[i]->pin);
-	/*	}
-	}*/
+	return getUnitOfMisureValue(portName);
 }
 
 float CurrentActivity::ampereRead(AnalogPort* analogPort)

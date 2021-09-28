@@ -4,7 +4,7 @@
 class SmokeActivity : public DeviceActivity
 {
 public:
-	SmokeActivity(AnalogPort** analogPort,float vref, uint8_t analogPortsNumber);
+	SmokeActivity(AnalogPort** analogPort,float vref, uint8_t mode, uint8_t analogPortsNumber);
 	bool isThereSmoke();
 };
 

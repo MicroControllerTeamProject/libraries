@@ -125,6 +125,26 @@ void MySim900::DialVoiceCall(char* phoneNumber)
 	SIM900->println();*/
 }
 
+void MySim900::DialVoiceCall(String phoneNumber)
+{
+
+	if (_isCallDisabled) return;
+
+	String phoneNumberString = F("ATD + ");
+	phoneNumberString.concat(phoneNumber);
+	phoneNumberString.concat(F(";"));
+
+	//char result[25];   // array to hold the result.
+	//strcpy(result, "ATD + "); // copy string one into the result.
+	//strcat(result, phoneNumber); // append string two to the result.
+	//strcat(result, ";");
+
+	//SIM900.println("ATD + +393397510192;");//dial the number 
+	SIM900->println(phoneNumberString);//dial the number 
+	/*delay(100);
+	SIM900->println();*/
+}
+
 void MySim900::SendTextMessageAndMeasure(char* phoneNumber, char* message, float measure)
 {
 	if (_isSmsDisabled) return;
