@@ -58,7 +58,7 @@ boolean  LSG_EEpromRW::eeprom_write_string(int addr, const char* string) {
 	int numBytes; // actual number of bytes to be written
 
 	//write the string contents plus the string terminator byte (0x00)
-	numBytes = strlen(string) + 1;
+	numBytes = strlen(string);
 
 	return eeprom_write_bytes(addr, (const byte*)string, numBytes);
 }
@@ -105,7 +105,7 @@ boolean LSG_EEpromRW::eeprom_read_string(int addr, char* buffer, int bufSize) {
 	// - the character just read is the string terminator one (0x00)
 	// - we have filled the user buffer
 	// - we have reached the last eeprom address
-	while ((ch != 0x00) && (bytesRead < bufSize) && ((addr + bytesRead) <= EEPROM_MAX_ADDR)) {
+	while ((bytesRead < (bufSize-1)) && ((addr + bytesRead) <= EEPROM_MAX_ADDR)) {
 		// if no stop condition is met, read the next byte from eeprom
 		ch = EEPROM.read(addr + bytesRead);
 		buffer[bytesRead] = ch; // store it into the user buffer
@@ -113,9 +113,9 @@ boolean LSG_EEpromRW::eeprom_read_string(int addr, char* buffer, int bufSize) {
 	}
 
 	// make sure the user buffer has a string terminator, (0x00) as its last byte
-	if ((ch != 0x00) && (bytesRead >= 1)) {
-		buffer[bytesRead - 1] = 0;
-	}
+	//if ((ch != 0x00) && (bytesRead >= 1)) {
+	//	buffer[bytesRead - 1] = 0;
+	//}
 
 	return true;
 }
