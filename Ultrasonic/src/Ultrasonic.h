@@ -35,7 +35,7 @@ class Ultrasonic {
   private:
     uint8_t trig;
     uint8_t echo;
-    boolean threePins = false;
+    bool threePins = false;
     unsigned long timeout;
     unsigned int timing();
 };
