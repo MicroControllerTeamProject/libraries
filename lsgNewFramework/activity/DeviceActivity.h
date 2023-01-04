@@ -11,8 +11,8 @@ class DeviceActivity
 
 public:
 	
-	DeviceActivity(AvrMicroRepository* avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber);
-	DeviceActivity(AvrMicroRepository* avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
+	DeviceActivity(AvrMicroRepository avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
 	//virtual bool isThereAnyPortOnAlarm();
 	//virtual String getLastAlarmDescription();
@@ -28,9 +28,10 @@ public:
 	DigitalPort** getAllDigitalPorts();
 	uint8_t getAnalogPortsNumber();
 	uint8_t getDigitalPortsNumber();
+	AvrMicroRepository _avrMicroRepository;
 	
 private:
-	AvrMicroRepository* _avrMicroRepository;
+	
 	/*DigitalPort** digitalPort;*/
 	/*AnalogPort** analogPort;*/
 	

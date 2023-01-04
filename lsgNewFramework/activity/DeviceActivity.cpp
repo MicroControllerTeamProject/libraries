@@ -3,7 +3,7 @@
 #include <string.h>
 
 
-DeviceActivity::DeviceActivity(AvrMicroRepository* avrMicroRepository,
+DeviceActivity::DeviceActivity(AvrMicroRepository avrMicroRepository,
 	DigitalPort** digitalPort,  uint8_t digitalPortsNumber)
 {
 	this->digitalPort = digitalPort;
@@ -14,22 +14,22 @@ DeviceActivity::DeviceActivity(AvrMicroRepository* avrMicroRepository,
 	{
 		if (this->digitalPort[i]->direction == DigitalPort::output)
 		{
-			this->_avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
+			_avrMicroRepository.pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
 		}
 		else
 		{
 			if (this->digitalPort[i]->isOnPullUp) {
-				this->_avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
+				_avrMicroRepository.pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
 			}
 			else
 			{
-				this->_avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
+				_avrMicroRepository.pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
 			}
 		}
 	}
 }
 
-DeviceActivity::DeviceActivity(AvrMicroRepository* avrMicroRepository,AnalogPort** analogPort,float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,AnalogPort** analogPort,float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber)
 {
 	this->analogPort = analogPort;
 	this->_analogPortsNumber = analogPortsNumber;
@@ -137,17 +137,17 @@ bool DeviceActivity::isThereAnyAnalogPortOnAlarm()
 	{
 		if (this->analogPort[i]->isEnable && this->analogPort[i]->maxVoltageAlarmValueIn != 0)
 		{
-			if (this->_avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(),this->getVref(),this->vrefMode) < this->analogPort[i]->maxVoltageAlarmValueIn)
+			if (_avrMicroRepository.analogVoltageRead_m(this->analogPort[i]->getPin(),this->getVref(),this->vrefMode) < this->analogPort[i]->maxVoltageAlarmValueIn)
 			{			
 				this->analogPort[i]->isOnError = true;
-				this->analogPort[i]->analogVrefValue = this->_avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode);
+				this->analogPort[i]->analogVrefValue = _avrMicroRepository.analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode);
 				return false;
 			}
 
-			if (this->_avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode) > this->analogPort[i]->minVoltageAlarmValueIn)
+			if (_avrMicroRepository.analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode) > this->analogPort[i]->minVoltageAlarmValueIn)
 			{
 				this->analogPort[i]->isOnError = true;
-				this->analogPort[i]->analogVrefValue = this->_avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode);
+				this->analogPort[i]->analogVrefValue = _avrMicroRepository.analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode);
 				return false;
 			} 
 		}
@@ -160,16 +160,16 @@ bool DeviceActivity::isThereAnyAnalogPortOnAlarm()
 			
 			//Serial.println("Entrato3");
 			//Serial.println("Entrato2");
-			if ((this->_avrMicroRepository->analogReadm(this->analogPort[i]->getPin())) > this->analogPort[i]->maxAlarmValueIn )
+			if ((_avrMicroRepository.analogReadm(this->analogPort[i]->getPin())) > this->analogPort[i]->maxAlarmValueIn )
 			{
 				this->analogPort[i]->isOnError = true;
-				this->analogPort[i]->digitalValue = (this->_avrMicroRepository->analogReadm(this->analogPort[i]->getPin()));
+				this->analogPort[i]->digitalValue = (_avrMicroRepository.analogReadm(this->analogPort[i]->getPin()));
 				return true;
 			}
-			if ((this->_avrMicroRepository->analogReadm(this->analogPort[i]->getPin())) < this->analogPort[i]->minAlarmValueIn )
+			if ((_avrMicroRepository.analogReadm(this->analogPort[i]->getPin())) < this->analogPort[i]->minAlarmValueIn )
 			{
 				this->analogPort[i]->isOnError = true;
-				this->analogPort[i]->digitalValue = (this->_avrMicroRepository->analogReadm(this->analogPort[i]->getPin()));
+				this->analogPort[i]->digitalValue = (_avrMicroRepository.analogReadm(this->analogPort[i]->getPin()));
 				return true;
 			}
 		}
@@ -185,13 +185,13 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 	{
 		if (this->digitalPort[i]->isEnable && (this->digitalPort[i]->direction == DigitalPort::input))
 		{
-			if (this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->_avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 1/*LOW*/)
+			if (this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && _avrMicroRepository.digitalReadm(this->digitalPort[i]->getPin()) == 1/*LOW*/)
 			{
 				/*this->lastAlarmDescription = digitalPort[i]->getUid() + " level LOW";*/
 				return false;
 
 			}
-			if (this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::high && this->_avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*HIGH*/)
+			if (this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::high && _avrMicroRepository.digitalReadm(this->digitalPort[i]->getPin()) == 0/*HIGH*/)
 			{
 				return false;
 			}
@@ -282,7 +282,7 @@ float DeviceActivity::analogReadVoltageByPin(uint8_t pin)
 	{
 		if (this->analogPort[i]->getPin() == pin)
 		{
-			return this->_avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(),this->_vref,this->vrefMode);
+			return _avrMicroRepository.analogVoltageRead_m(this->analogPort[i]->getPin(),this->_vref,this->vrefMode);
 			/*else
 			{
 				lastError = this->analogPort[i]->uid + String(" is not output mode");
