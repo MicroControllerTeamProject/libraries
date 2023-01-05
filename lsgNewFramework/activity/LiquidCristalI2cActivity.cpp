@@ -11,3 +11,8 @@ void LiquidCristalI2cActivity::print(char* message, uint8_t col, uint8_t row, bo
 {
 	this->liquidCristalI2CRepository->print(message, col, row, clearBefore);
 }
+
+void LiquidCristalI2cActivity::printScroll(char* message, uint8_t col, uint8_t row, bool clearBefore, unsigned long velocity)
+{
+	this->liquidCristalI2CRepository->printSlideMessage(message, col, row, clearBefore,velocity);
+}

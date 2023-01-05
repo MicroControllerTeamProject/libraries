@@ -10,6 +10,5 @@ public:
 	IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort, uint8_t portNumbers);
 	bool isObstacleDetected();
 private:
-	AvrMicroRepository _avrMicroRepository;
 };
 

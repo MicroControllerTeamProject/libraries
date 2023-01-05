@@ -97,7 +97,6 @@ int AvrMicroRepository::read() {
 //	return (int)charsBufferByReference;
 //}
 
-
 //return value need to free() memory.
 char* AvrMicroRepository::readString_m() {
 	String responseBufferString = Serial.readString();
@@ -124,16 +123,6 @@ void AvrMicroRepository::delaym(unsigned long delayTime)
 	delay(delayTime);
 }
 
-//char AvrMicroRepository::getLastErrorCode()
-//{
-//	return this->_lastErrorCode;
-//}
-//
-//void AvrMicroRepository::setLastErrorCode(char errorCode){
-//	this->_lastErrorCode = errorCode;
-//}
-
-
 int AvrMicroRepository::getFreeRam() {
 	int v;
 	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
@@ -144,6 +133,15 @@ void  AvrMicroRepository::free_m(void* _ptr)
 	free(_ptr);
 }
 
+void AvrMicroRepository::tone_m(unsigned int pin, unsigned int frequency, unsigned long duration)
+{
+	tone(pin, frequency, duration);
+}
+
+void AvrMicroRepository::notone_m(uint8_t pin)
+{
+	noTone(pin);
+}
 
 
 //void sensor::setLastComunication(char* lastComunication)

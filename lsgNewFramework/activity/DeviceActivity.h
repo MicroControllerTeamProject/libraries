@@ -11,7 +11,7 @@ class DeviceActivity
 
 public:
 	
-	DeviceActivity(AvrMicroRepository avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
 	//virtual bool isThereAnyPortOnAlarm();
@@ -29,9 +29,7 @@ public:
 	uint8_t getAnalogPortsNumber();
 	uint8_t getDigitalPortsNumber();
 	AvrMicroRepository _avrMicroRepository;
-	
-private:
-	
+
 	/*DigitalPort** digitalPort;*/
 	/*AnalogPort** analogPort;*/
 	
@@ -47,8 +45,6 @@ private:
 	//bool isThereAnyCustomMisureOnAlarm();
 	//bool isThereAnyDigitalPortOnAlarm();
 
-
-protected:
 	uint8_t _analogPortsNumber = 0;
 	uint8_t digitalPortsNumber = 0;
 	AnalogPort** analogPort;
@@ -60,7 +56,7 @@ protected:
 	commonsLayer::analogRefMode vrefMode = commonsLayer::analogRefMode::DEFAULT_m;
 	/*char getLastErrorCode();
 	void setLastErrorCode(char errorCode);*/
-private:
+
 	/*const char* deviceOnErrorUID = {};
 	char* deviceErrorValue = {};*/
 	/*char lastErrorCode = 'X';*/

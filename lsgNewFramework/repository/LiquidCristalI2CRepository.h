@@ -10,6 +10,7 @@ public:
         uint8_t backlighPin, uint8_t pol);
     void Init(uint8_t cols, uint8_t rows);
     void print(char* message, uint8_t col, uint8_t row, bool clear);
+    void printSlideMessage(char* message, uint8_t col, uint8_t row, bool clear,unsigned long velocity);
     LiquidCristalI2CRepository();
     ~LiquidCristalI2CRepository();
 private:

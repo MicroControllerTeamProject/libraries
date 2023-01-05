@@ -31,5 +31,24 @@ void LiquidCristalI2CRepository::print(char* message, uint8_t col, uint8_t row, 
     this->lcd->print(message);
 }
 
+void LiquidCristalI2CRepository::printSlideMessage(char* message, uint8_t col, uint8_t row, bool clear, unsigned long velocity)
+{
+    if(clear) this->lcd->clear();
+    this->lcd->setCursor(col, row); //First line
+    this->lcd->scrollDisplayLeft();
+    this->lcd->autoscroll();
+
+    for (int thisChar = 0; thisChar < strlen(message); thisChar++) {
+        this->lcd->print(message[thisChar]);
+        delay(velocity);
+    }
+
+    for (int thisChar = 0; thisChar < 16; thisChar++) {
+        this->lcd->print(" ");
+        delay(velocity);
+    }
+ 
+}
+
 
 
