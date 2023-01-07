@@ -4,7 +4,6 @@
 RFReceiverActivity::RFReceiverActivity(RFReceiverRepository& rfReceiverRepository)
 {
 	this->rfReceiverRepository = &rfReceiverRepository;
-	this->rfReceiverRepository->begin();
 }
 
 uint8_t* RFReceiverActivity::getMessage()
@@ -19,6 +18,16 @@ bool RFReceiverActivity::isGotMessage(char message[3])
 		return true;
 	}
 	return false;
+}
+
+void RFReceiverActivity::begin()
+{
+	this->rfReceiverRepository->begin();
+}
+
+void RFReceiverActivity::stop()
+{
+	this->rfReceiverRepository->stop();
 }
 
 

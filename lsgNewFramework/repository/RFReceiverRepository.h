@@ -12,5 +12,7 @@ private:
 	uint8_t _rx_pin;
 	uint8_t _ptt_pin;
 	uint16_t _vw_speed;
+
+	
 };
 
