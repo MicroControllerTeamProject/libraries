@@ -26,11 +26,12 @@ void LiquidCristalI2CRepository::Init(uint8_t cols, uint8_t rows)
 }
 
 
-void LiquidCristalI2CRepository::print(char* message, uint8_t col, uint8_t row, bool clear)
+void LiquidCristalI2CRepository::print(char* message, uint8_t col, uint8_t row, bool clearBefore,unsigned long delayDisplay)
 {
-    if (clear) _lcd->clear();
+    if (clearBefore) _lcd->clear();
     _lcd->setCursor(col, row); //First line
     _lcd->print(message);
+    delay(delayDisplay);
 }
 
 void LiquidCristalI2CRepository::printSlideMessage(char* message, uint8_t col, uint8_t row, bool clear, unsigned long velocity)

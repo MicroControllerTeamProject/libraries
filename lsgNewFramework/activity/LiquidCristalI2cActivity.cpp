@@ -7,9 +7,9 @@ LiquidCristalI2cActivity::LiquidCristalI2cActivity(LiquidCristalI2CRepository* l
 	this->liquidCristalI2CRepository->Init(cols,rows);
 }
 
-void LiquidCristalI2cActivity::print(char* message, uint8_t col, uint8_t row, bool clearBefore)
+void LiquidCristalI2cActivity::print(char* message, uint8_t col, uint8_t row, bool clearBefore,unsigned long delayDisplay)
 {
-	this->liquidCristalI2CRepository->print(message, col, row, clearBefore);
+	this->liquidCristalI2CRepository->print(message, col, row, clearBefore,delayDisplay);
 }
 
 void LiquidCristalI2cActivity::printScroll(char* message, uint8_t col, uint8_t row, bool clearBefore, unsigned long velocity)

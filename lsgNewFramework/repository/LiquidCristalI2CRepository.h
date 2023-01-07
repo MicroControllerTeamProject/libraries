@@ -1,5 +1,5 @@
 #pragma once
-#include "stdint.h"
+#include <stdint.h>
 class LiquidCristalI2CRepository
 {
 public:
@@ -9,7 +9,7 @@ public:
     LiquidCristalI2CRepository();
     ~LiquidCristalI2CRepository();
     virtual void Init(uint8_t cols, uint8_t rows);
-    virtual void print(char* message, uint8_t col, uint8_t row, bool clear);
+    virtual void print(char* message, uint8_t col, uint8_t row, bool clearBefore, unsigned long delayDisplay);
     virtual void printSlideMessage(char* message, uint8_t col, uint8_t row, bool clear,unsigned long velocity);
    
     
