@@ -5,13 +5,10 @@
 #include "..\repository\AvrMicroRepository.h"
 #include "..\commons\commonsLayer.h"
 
-
 class DeviceActivity
 {
-
 public:
-	
-	DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
 	//virtual bool isThereAnyPortOnAlarm();
@@ -20,16 +17,13 @@ public:
 	//uint8_t digitalReadByName(String portName);
 	/*float analogReadVoltageByName(String portName);
 	int analogReadByName(String portName);*/
-	//String getLastErrorDescription();
-	/*AvrMicroRepository& _mainRepository;*/
 
 	//const char* getDeviceOnErrorUID();
 	AnalogPort** getAllAnalogPorts();
 	DigitalPort** getAllDigitalPorts();
 	uint8_t getAnalogPortsNumber();
 	uint8_t getDigitalPortsNumber();
-	AvrMicroRepository _avrMicroRepository;
-
+	
 	/*DigitalPort** digitalPort;*/
 	/*AnalogPort** analogPort;*/
 	
@@ -44,23 +38,27 @@ public:
 	//virtual  float  getCustomMisureValue();
 	//bool isThereAnyCustomMisureOnAlarm();
 	//bool isThereAnyDigitalPortOnAlarm();
-
 	uint8_t _analogPortsNumber = 0;
 	uint8_t digitalPortsNumber = 0;
 	AnalogPort** analogPort;
 	DigitalPort** digitalPort;
-	bool isThereAnyAnalogPortOnAlarm();
-	bool isThereAnyDigitalPortOnAlarm();
-	float analogReadVoltageByPin(uint8_t pin);
+	/*float analogReadVoltageByPin(uint8_t pin);*/
 	float getVref();
 	commonsLayer::analogRefMode vrefMode = commonsLayer::analogRefMode::DEFAULT_m;
 	/*char getLastErrorCode();
 	void setLastErrorCode(char errorCode);*/
-
 	/*const char* deviceOnErrorUID = {};
 	char* deviceErrorValue = {};*/
 	/*char lastErrorCode = 'X';*/
 	/*uint8_t deviceErrorPin = {};*/
 	float _vref = 5;
+
+private:
+	
+protected:
+	AvrMicroRepository* avrMicroRepository = nullptr;
+	bool isThereAnyAnalogPortOnAlarm();
+	bool isDigitalPortOnAlarm(char* portName);
+	bool isThereAnyDigitalPortOnAlarm();
 };
 

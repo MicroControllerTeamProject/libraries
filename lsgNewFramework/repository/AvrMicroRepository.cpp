@@ -40,14 +40,14 @@ void AvrMicroRepository::print_m(const char* data,bool isNewLine = false)
 {
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-	delay(100);
+	/*delay(100);*/
 }
 
 void AvrMicroRepository::print_m(float data, bool isNewLine = false)
 {
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-	delay(100);
+	/*delay(100);*/
 }
 
 
@@ -55,7 +55,14 @@ void AvrMicroRepository::print_m(int data, bool isNewLine = false)
 {
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-	delay(100);
+	/*delay(100);*/
+}
+
+void AvrMicroRepository::print_m(uint8_t data, bool isNewLine)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+	/*delay(100);*/
 }
 
 //void AvrMicroRepository::println(const char* data)

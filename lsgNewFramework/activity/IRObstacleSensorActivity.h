@@ -8,7 +8,8 @@ class IRObstacleSensorActivity : public DeviceActivity
 {
 public:
 	IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort, uint8_t portNumbers);
-	bool isObstacleDetected();
+	bool isAnObstacleDetected();
+	bool isObstacleDetected(char* portName);
 private:
 };
 

@@ -21,6 +21,8 @@ public:
 
 	virtual void print_m(int data, bool isNewLine = false);
 
+	virtual void print_m(uint8_t data, bool isNewLine = false);
+
 	virtual bool serial_available();
 
 	virtual char* readString_m();

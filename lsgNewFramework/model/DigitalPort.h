@@ -16,6 +16,7 @@ public:
     };
     DigitalPort(char* uid, uint8_t pin);
     bool isEnable = true;
+    bool	isOnError = false;
     PortDirection direction = PortDirection::output;
     /// <summary>
     /// Set low for trigger alarm on low level or high.
