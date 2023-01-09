@@ -38,10 +38,7 @@ public:
 	//virtual  float  getCustomMisureValue();
 	//bool isThereAnyCustomMisureOnAlarm();
 	//bool isThereAnyDigitalPortOnAlarm();
-	uint8_t _analogPortsNumber = 0;
-	uint8_t digitalPortsNumber = 0;
-	AnalogPort** analogPort;
-	DigitalPort** digitalPort;
+
 	/*float analogReadVoltageByPin(uint8_t pin);*/
 	float getVref();
 	commonsLayer::analogRefMode vrefMode = commonsLayer::analogRefMode::DEFAULT_m;
@@ -61,5 +58,9 @@ protected:
 	bool isDigitalPortOnAlarm(char* portName);
 	bool isDigitalPortOnAlarm(uint8_t pinNumber);
 	bool isThereAnyDigitalPortOnAlarm();
+	AnalogPort** analogPort;
+	DigitalPort** digitalPort;
+	uint8_t _analogPortsNumber = 0;
+	uint8_t digitalPortsNumber = 0;
 };
 
