@@ -1,32 +1,43 @@
 #include "BuzzerActivity.h"
-BuzzerActivity::BuzzerActivity(DigitalPort** digitalPort, uint8_t digitalPortsNumber) :DeviceActivity(avrMicroRepository, digitalPort, digitalPortsNumber) {
+BuzzerActivity::BuzzerActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber) : DeviceActivity(avrMicroRepository, digitalPort, digitalPortsNumber) {
 }
-void BuzzerActivity::alarm1()
+void BuzzerActivity::alarm1(uint8_t numberOfCicle)
 {
-	for (int i = 500; i < 1500; i++)
+	for (int ii = 0; ii < numberOfCicle; ii++)
 	{
-		this->_avrMicroRepository.tone_m(8, i, 100);
+		for (int i = 500; i < 1500; i++)
+		{
+			this->avrMicroRepository->tone_m(8, i, 100);
+		}
 	}
 }
-void BuzzerActivity::alarm2()
+
+void BuzzerActivity::alarm2(uint8_t numberOfCicle)
 {
-	for (int i = 500; i < 1500; i++)
+	for (int ii = 0; ii < numberOfCicle; ii++)
 	{
-		this->_avrMicroRepository.tone_m(8, i, 10);
-		this->_avrMicroRepository.delaym(5);
-	}
-	for (int i = 1500; i > 500; i--)
-	{
-		this->_avrMicroRepository.tone_m(8, i, 10);
-		this->_avrMicroRepository.delaym(5);
+		for (int i = 500; i < 1500; i++)
+		{
+			this->avrMicroRepository->tone_m(8, i, 10);
+			this->avrMicroRepository->delaym(5);
+		}
+		for (int i = 1500; i > 500; i--)
+		{
+			this->avrMicroRepository->tone_m(8, i, 10);
+			this->avrMicroRepository->delaym(5);
+		}
 	}
 }
-void BuzzerActivity::alarm3()
+
+void BuzzerActivity::alarm3(uint8_t numberOfCicle)
 {
-	this->_avrMicroRepository.tone_m(8, 400, 500);
-	this->_avrMicroRepository.delaym(500);
-	this->_avrMicroRepository.tone_m(8, 800, 500);
-	this->_avrMicroRepository.delaym(500);
+	for (int ii = 0; ii < numberOfCicle; ii++)
+	{
+		this->avrMicroRepository->tone_m(8, 400, 500);
+		this->avrMicroRepository->delaym(500);
+		this->avrMicroRepository->tone_m(8, 800, 500);
+		this->avrMicroRepository->delaym(500);
+	}
 
 }
 

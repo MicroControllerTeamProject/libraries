@@ -59,6 +59,7 @@ protected:
 	AvrMicroRepository* avrMicroRepository = nullptr;
 	bool isThereAnyAnalogPortOnAlarm();
 	bool isDigitalPortOnAlarm(char* portName);
+	bool isDigitalPortOnAlarm(uint8_t pinNumber);
 	bool isThereAnyDigitalPortOnAlarm();
 };
 

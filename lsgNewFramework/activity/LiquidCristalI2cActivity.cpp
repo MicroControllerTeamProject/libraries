@@ -1,7 +1,7 @@
 #include "LiquidCristalI2cActivity.h"
 
 
-LiquidCristalI2cActivity::LiquidCristalI2cActivity(LiquidCristalI2CRepository* liquidCristalI2CRepository,uint8_t cols, uint8_t rows)// : DeviceActivity()
+LiquidCristalI2cActivity::LiquidCristalI2cActivity(LiquidCristalI2CRepository* liquidCristalI2CRepository,uint8_t cols, uint8_t rows)
 {
 	this->liquidCristalI2CRepository = liquidCristalI2CRepository;
 	this->liquidCristalI2CRepository->Init(cols,rows);

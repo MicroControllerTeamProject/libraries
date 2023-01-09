@@ -206,6 +206,26 @@ bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 	return false;
 }
 
+bool DeviceActivity::isDigitalPortOnAlarm(uint8_t pinNumber)
+{
+	for (int i = 0; i < this->digitalPortsNumber; i++)
+	{
+		this->digitalPort[i]->isOnError = false;
+		if (this->digitalPort[i]->isEnable && (this->digitalPort[i]->direction == DigitalPort::input))
+		{
+			if ((this->digitalPort[i]->getPin() == pinNumber) &&  this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*LOW*/)
+			{
+				return true;
+			}
+			if ((this->digitalPort[i]->getPin() == pinNumber) && this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::high && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 1/*HIGH*/)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 //bool DeviceActivity::isThereAnyPortOnAlarm()
 //{
 //	//Serial.println("Entrato");
