@@ -6,7 +6,7 @@
 class BuzzerActivity : public DeviceActivity
 {
 public:
-	BuzzerActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	BuzzerActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort);
 	void alarm1(uint8_t numberOfCicle);
 	void alarm2(uint8_t numberOfCicle);
 	void alarm3(uint8_t numberOfCicle);

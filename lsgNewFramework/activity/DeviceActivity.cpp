@@ -2,10 +2,10 @@
 #include <string.h>
 
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort,  uint8_t digitalPortsNumber)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort)
 {
 	this->digitalPort = digitalPort;
-	this->digitalPortsNumber = digitalPortsNumber;
+	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
 	this->avrMicroRepository = &avrMicroRepository;
 
 	for (int i = 0; i < this->digitalPortsNumber; i++)

@@ -1,5 +1,5 @@
 #include "BuzzerActivity.h"
-BuzzerActivity::BuzzerActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber) : DeviceActivity(avrMicroRepository, digitalPort, digitalPortsNumber) {
+BuzzerActivity::BuzzerActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort) : DeviceActivity(avrMicroRepository, digitalPort) {
 }
 void BuzzerActivity::alarm1(uint8_t numberOfCicle)
 {

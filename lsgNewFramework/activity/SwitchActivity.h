@@ -7,7 +7,7 @@ class SwitchActivity :
     public DeviceActivity
 {
 public:
-    SwitchActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+    SwitchActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort);
     bool isThereASwitchOn();
     bool isSwitchOn(char* portName);
     bool isSwitchOn(uint8_t pinNumber);

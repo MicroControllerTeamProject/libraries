@@ -1,6 +1,6 @@
 #include "SwitchActivity.h"
 
-SwitchActivity::SwitchActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber) :DeviceActivity(avrMicroRepository,digitalPort, digitalPortsNumber) {
+SwitchActivity::SwitchActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort) :DeviceActivity(avrMicroRepository,digitalPort) {
 }
 
 bool SwitchActivity::isThereASwitchOn()

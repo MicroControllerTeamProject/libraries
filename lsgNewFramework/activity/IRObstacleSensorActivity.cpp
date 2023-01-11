@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort,uint8_t portNumbers)  : DeviceActivity(avrMicroRepository,obstaclePort,portNumbers){
+IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort)  : DeviceActivity(avrMicroRepository,obstaclePort){
 }
 
 bool IRObstacleSensorActivity::isObstacleDetected(char* uid)

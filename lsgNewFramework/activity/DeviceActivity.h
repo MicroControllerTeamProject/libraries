@@ -8,7 +8,7 @@
 class DeviceActivity
 {
 public:
-	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
 	//virtual bool isThereAnyPortOnAlarm();
