@@ -3,15 +3,15 @@
 #include "..\repository\AvrMicroRepository.h"
 #include "..\model\DigitalPort.h"
 #include "..\commons\commonsLayer.h"
-#include "..\interfaces\IntrefaceObstacleSensor.h"
+#include "..\interfaces\InterfaceObstacleActivity.h"
 
-class IRObstacleSensorActivity : public DeviceActivity,public IntrefaceObstacleSensor
+class IRObstacleSensorActivity : public DeviceActivity,public InterfaceObstacleActivity
 {
 public:
 	IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort, uint8_t portNumbers);
-	//bool isAnObstacleDetected();
-	//bool isObstacleDetected(char* portName);
 	AvrMicroRepository* avrMicroRepository = nullptr;
+	virtual bool isObstacleDetected(char* uid);
+	virtual bool isSensorOnError();
 private:
 };
 
