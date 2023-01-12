@@ -2,12 +2,38 @@
 #include <string.h>
 
 
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor)
+{
+
+	this->digitalPort = digitalPortSensor->getAllDigitalPorts();
+	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
+	this->avrMicroRepository = &avrMicroRepository;
+
+	for (int i = 0; i < this->digitalPortsNumber; i++)
+	{
+		if (this->digitalPort[i]->direction == DigitalPort::output)
+		{
+			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
+		}
+		else
+		{
+			if (this->digitalPort[i]->isOnPullUp) {
+				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
+			}
+			else
+			{
+				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
+			}
+		}
+	}
+}
+
 DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort)
 {
 	this->digitalPort = digitalPort;
 	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
 	this->avrMicroRepository = &avrMicroRepository;
-
+	
 	for (int i = 0; i < this->digitalPortsNumber; i++)
 	{
 		if (this->digitalPort[i]->direction == DigitalPort::output)
@@ -187,7 +213,6 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 
 bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 {
-	
 	for (int i = 0; i < this->digitalPortsNumber; i++)
 	{
 		this->digitalPort[i]->isOnError = false;

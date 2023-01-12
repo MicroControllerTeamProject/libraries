@@ -2,12 +2,15 @@
 //#include "DigitalPort.h"
 #include "..\model\AnalogPort.h"
 #include "..\model\DigitalPort.h"
+#include "..\interfaces\IDigitalPorts.h"
 #include "..\repository\AvrMicroRepository.h"
 #include "..\commons\commonsLayer.h"
+
 
 class DeviceActivity
 {
 public:
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
@@ -49,11 +52,11 @@ public:
 	/*char lastErrorCode = 'X';*/
 	/*uint8_t deviceErrorPin = {};*/
 	float _vref = 5;
-
+	AvrMicroRepository* avrMicroRepository = nullptr;
 private:
 	
 protected:
-	AvrMicroRepository* avrMicroRepository = nullptr;
+	
 	bool isThereAnyAnalogPortOnAlarm();
 	bool isDigitalPortOnAlarm(char* portName);
 	bool isDigitalPortOnAlarm(uint8_t pinNumber);
