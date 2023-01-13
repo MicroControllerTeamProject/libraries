@@ -22,6 +22,7 @@ public:
 	int analogReadByName(String portName);*/
 
 	//const char* getDeviceOnErrorUID();
+	void initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor);
 	AnalogPort** getAllAnalogPorts();
 	DigitalPort** getAllDigitalPorts();
 	uint8_t getAnalogPortsNumber();

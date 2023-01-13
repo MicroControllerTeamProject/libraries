@@ -4,28 +4,7 @@
 
 DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor)
 {
-
-	this->digitalPort = digitalPortSensor->getAllDigitalPorts();
-	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
-	this->avrMicroRepository = &avrMicroRepository;
-
-	for (int i = 0; i < this->digitalPortsNumber; i++)
-	{
-		if (this->digitalPort[i]->direction == DigitalPort::output)
-		{
-			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
-		}
-		else
-		{
-			if (this->digitalPort[i]->isOnPullUp) {
-				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
-			}
-			else
-			{
-				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
-			}
-		}
-	}
+	initializeDigitalPorts(avrMicroRepository, digitalPortSensor);
 }
 
 DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort)
@@ -68,6 +47,32 @@ DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPor
 DeviceActivity::DeviceActivity(){
 }
 
+
+
+void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor)
+{
+	this->digitalPort = digitalPortSensor->getAllDigitalPorts();
+	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
+	this->avrMicroRepository = &avrMicroRepository;
+
+	for (int i = 0; i < this->digitalPortsNumber; i++)
+	{
+		if (this->digitalPort[i]->direction == DigitalPort::output)
+		{
+			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
+		}
+		else
+		{
+			if (this->digitalPort[i]->isOnPullUp) {
+				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
+			}
+			else
+			{
+				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
+			}
+		}
+	}
+}
 
 AnalogPort** DeviceActivity::getAllAnalogPorts()
 {
