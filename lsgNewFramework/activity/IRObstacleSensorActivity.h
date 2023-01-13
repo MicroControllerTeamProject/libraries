@@ -11,7 +11,7 @@ class IRObstacleSensorActivity : public DeviceActivity,public InterfaceObstacleA
 {
 public:
 	IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort);
-	IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts* obstacleDigitalSensor);
+	IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** obstacleDigitalSensor);
 	AvrMicroRepository* avrMicroRepository = nullptr;
 	virtual bool isObstacleDetected(char* uid);
 	virtual bool isSensorOnError();

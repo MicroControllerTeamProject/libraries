@@ -10,7 +10,7 @@
 class DeviceActivity
 {
 public:
-	DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensor);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort);
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
@@ -22,7 +22,7 @@ public:
 	int analogReadByName(String portName);*/
 
 	//const char* getDeviceOnErrorUID();
-	void initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor);
+	void initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensor);
 	AnalogPort** getAllAnalogPorts();
 	DigitalPort** getAllDigitalPorts();
 	uint8_t getAnalogPortsNumber();

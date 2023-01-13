@@ -2,7 +2,7 @@
 #include <string.h>
 
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensor)
 {
 	initializeDigitalPorts(avrMicroRepository, digitalPortSensor);
 }
@@ -47,11 +47,9 @@ DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPor
 DeviceActivity::DeviceActivity(){
 }
 
-
-
-void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts* digitalPortSensor)
+void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensor)
 {
-	this->digitalPort = digitalPortSensor->getAllDigitalPorts();
+	this->digitalPort = digitalPortSensor[0]->getAllDigitalPorts();
 	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
 	this->avrMicroRepository = &avrMicroRepository;
 
@@ -214,7 +212,6 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 	}
 	return returnValue;
 }
-
 
 bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 {
@@ -417,7 +414,6 @@ bool DeviceActivity::isDigitalPortOnAlarm(uint8_t pinNumber)
 //
 //float  DeviceActivity::getCustomMisureValue() {
 //}
-
 
 float  DeviceActivity::getVref()
 {
