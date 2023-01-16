@@ -18,3 +18,8 @@ bool IRObstacleSensorActivity::isSensorOnError(){
 	return false;
 }
 
+uint16_t IRObstacleSensorActivity::getDistance()
+{
+	return 0;
+}
+

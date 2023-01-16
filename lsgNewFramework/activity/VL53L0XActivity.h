@@ -8,5 +8,7 @@ public:
 	VL53L0XActivity(VL53L0XRepository& vl53L0XRepository);
 	virtual bool isObstacleDetected(char* uid);
 	virtual bool isSensorOnError();
+	virtual uint16_t getDistance();
+	VL53L0XRepository* _vl53L0XRepository = nullptr;
 };
 

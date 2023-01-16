@@ -14,6 +14,7 @@ public:
 	//AvrMicroRepository* avrMicroRepository = nullptr;
 	virtual bool isObstacleDetected(char* uid);
 	virtual bool isSensorOnError();
+	virtual uint16_t getDistance();
 private:
 };
 

@@ -1,15 +1,20 @@
 #include "VL53L0XActivity.h"
 
-VL53L0XRepository* _vl53L0XRepository = nullptr;
-VL53L0XActivity::VL53L0XActivity(VL53L0XRepository & vl53L0XRepository){
+
+VL53L0XActivity::VL53L0XActivity(VL53L0XRepository &vl53L0XRepository){
 }
 
-bool InterfaceObstacleSensor::isObstacleDetected(char* uid)
+bool VL53L0XActivity::isObstacleDetected(char* uid)
 {
 	return false;
 }
 
-bool  InterfaceObstacleSensor::isSensorOnError()
+bool  VL53L0XActivity::isSensorOnError()
 {
 	_vl53L0XRepository->isSensorOnError();
+}
+
+uint16_t VL53L0XActivity::getDistance()
+{
+	return 0;
 }
