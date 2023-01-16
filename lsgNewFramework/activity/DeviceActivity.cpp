@@ -1,19 +1,22 @@
 #include "DeviceActivity.h"
 #include <string.h>
 
+#ifdef _DEBUG
+#include <Arduino.h>
+#endif
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensor)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensors, uint8_t digitalPortSensorsNumber)
 {
-	initializeDigitalPorts(avrMicroRepository, digitalPortSensor);
+	initializeDigitalPorts(avrMicroRepository, digitalPortSensors, digitalPortSensorsNumber);
 }
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort)
 {
 	this->digitalPort = digitalPort;
-	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
+	this->_digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
 	this->avrMicroRepository = &avrMicroRepository;
-	
-	for (int i = 0; i < this->digitalPortsNumber; i++)
+
+	for (int i = 0; i < this->_digitalPortsNumber; i++)
 	{
 		if (this->digitalPort[i]->direction == DigitalPort::output)
 		{
@@ -35,7 +38,7 @@ DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository,DigitalPor
 
 }
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort, float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber)
 {
 	this->analogPort = analogPort;
 	this->_analogPortsNumber = analogPortsNumber;
@@ -44,16 +47,50 @@ DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPor
 	this->avrMicroRepository = &avrMicroRepository;
 }
 
-DeviceActivity::DeviceActivity(){
+DeviceActivity::DeviceActivity() {
 }
 
-void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensor)
+void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensors, uint8_t digitalPortSensorsNumber)
 {
-	this->digitalPort = digitalPortSensor[0]->getAllDigitalPorts();
-	this->digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
 	this->avrMicroRepository = &avrMicroRepository;
 
-	for (int i = 0; i < this->digitalPortsNumber; i++)
+	this->digitalPortSensors = digitalPortSensors;
+
+	//#ifdef _DEBUG
+	//	Serial.print("sens num. : "); Serial.println(this->digitalPortSensorNumber);
+	//#endif
+
+	this->digitalPort = this->digitalPortSensors[0]->getAllDigitalPorts();
+
+	this->_digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
+
+	//#ifdef _DEBUG
+	//	Serial.print("Dig.Port Numb : "); Serial.println(digitalPortSensorsNumber);
+	//#endif
+
+	for (int ii = 0; ii < digitalPortSensorsNumber; ii++) {
+		IDigitalPorts* digitalPortSensor = this->digitalPortSensors[ii];
+		if ((IDigitalPorts*)digitalPortSensor != nullptr)
+		{
+#ifdef _DEBUG
+			Serial.print("Sens:"); Serial.println(digitalPortSensor->getUid());
+#endif
+			for (int i = 0; i < digitalPortSensor->getDigitalPortsNumber(); i++)
+			{
+				DigitalPort* digitalPort = digitalPortSensor->getAllDigitalPorts()[i];
+				if ((DigitalPort*)digitalPortSensor != nullptr)
+				{
+#ifdef _DEBUG
+					Serial.print("Port:"); Serial.println(digitalPortSensor->getAllDigitalPorts()[i]->getUid());
+#endif
+				}
+
+			}
+		}
+
+	}
+
+	for (int i = 0; i < this->_digitalPortsNumber; i++)
 	{
 		if (this->digitalPort[i]->direction == DigitalPort::output)
 		{
@@ -89,7 +126,7 @@ uint8_t DeviceActivity::getAnalogPortsNumber()
 
 uint8_t DeviceActivity::getDigitalPortsNumber()
 {
-	return this->digitalPortsNumber;
+	return this->_digitalPortsNumber;
 }
 
 //const char* DeviceActivity::getDeviceOnErrorUID()
@@ -149,8 +186,8 @@ bool DeviceActivity::isThereAnyAnalogPortOnAlarm()
 	{
 		if (this->analogPort[i]->isEnable && this->analogPort[i]->maxVoltageAlarmValueIn != 0)
 		{
-			if (this->avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(),this->getVref(),this->vrefMode) < this->analogPort[i]->maxVoltageAlarmValueIn)
-			{			
+			if (this->avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode) < this->analogPort[i]->maxVoltageAlarmValueIn)
+			{
 				this->analogPort[i]->isOnError = true;
 				this->analogPort[i]->analogVrefValue = this->avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode);
 				return false;
@@ -161,24 +198,20 @@ bool DeviceActivity::isThereAnyAnalogPortOnAlarm()
 				this->analogPort[i]->isOnError = true;
 				this->analogPort[i]->analogVrefValue = this->avrMicroRepository->analogVoltageRead_m(this->analogPort[i]->getPin(), this->getVref(), this->vrefMode);
 				return false;
-			} 
+			}
 		}
 	}
 	for (int i = 0; i < this->_analogPortsNumber; i++)
 	{
-		//Serial.print_m("------------------------"); Serial.println(this->analogPort[i]->maxAlarmValueIn);
 		if (this->analogPort[i]->isEnable && this->analogPort[i]->maxAlarmValueIn != 0)
 		{
-			
-			//Serial.println("Entrato3");
-			//Serial.println("Entrato2");
-			if ((this->avrMicroRepository->analogReadm(this->analogPort[i]->getPin())) > this->analogPort[i]->maxAlarmValueIn )
+			if ((this->avrMicroRepository->analogReadm(this->analogPort[i]->getPin())) > this->analogPort[i]->maxAlarmValueIn)
 			{
 				this->analogPort[i]->isOnError = true;
 				this->analogPort[i]->digitalValue = (this->avrMicroRepository->analogReadm(this->analogPort[i]->getPin()));
 				return true;
 			}
-			if ((this->avrMicroRepository->analogReadm(this->analogPort[i]->getPin())) < this->analogPort[i]->minAlarmValueIn )
+			if ((this->avrMicroRepository->analogReadm(this->analogPort[i]->getPin())) < this->analogPort[i]->minAlarmValueIn)
 			{
 				this->analogPort[i]->isOnError = true;
 				this->analogPort[i]->digitalValue = (this->avrMicroRepository->analogReadm(this->analogPort[i]->getPin()));
@@ -193,7 +226,7 @@ bool DeviceActivity::isThereAnyAnalogPortOnAlarm()
 bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 {
 	bool returnValue = false;
-	for (int i = 0; i < this->digitalPortsNumber; i++)
+	for (int i = 0; i < this->_digitalPortsNumber; i++)
 	{
 		this->digitalPort[i]->isOnError = false;
 		if (this->digitalPort[i]->isEnable && (this->digitalPort[i]->direction == DigitalPort::input))
@@ -215,12 +248,12 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 
 bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 {
-	for (int i = 0; i < this->digitalPortsNumber; i++)
+	for (int i = 0; i < this->_digitalPortsNumber; i++)
 	{
 		this->digitalPort[i]->isOnError = false;
 		if (this->digitalPort[i]->isEnable && (this->digitalPort[i]->direction == DigitalPort::input))
 		{
-			if ((strcmp(portName, this->digitalPort[i]->getUid()) == 0) &&  this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*LOW*/)
+			if ((strcmp(portName, this->digitalPort[i]->getUid()) == 0) && this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*LOW*/)
 			{
 				return true;
 			}
@@ -235,12 +268,12 @@ bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 
 bool DeviceActivity::isDigitalPortOnAlarm(uint8_t pinNumber)
 {
-	for (int i = 0; i < this->digitalPortsNumber; i++)
+	for (int i = 0; i < this->_digitalPortsNumber; i++)
 	{
 		this->digitalPort[i]->isOnError = false;
 		if (this->digitalPort[i]->isEnable && (this->digitalPort[i]->direction == DigitalPort::input))
 		{
-			if ((this->digitalPort[i]->getPin() == pinNumber) &&  this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*LOW*/)
+			if ((this->digitalPort[i]->getPin() == pinNumber) && this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*LOW*/)
 			{
 				return true;
 			}

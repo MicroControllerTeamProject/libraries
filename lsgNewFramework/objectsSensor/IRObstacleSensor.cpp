@@ -1,23 +1,33 @@
 #include "IRObstacleSensor.h"
 
-IRObstacleSensor::IRObstacleSensor(DigitalPort** irObstaclePOrts)
+#ifdef _DEBUG
+#include <Arduino.h>
+#endif
+
+IRObstacleSensor::IRObstacleSensor(DigitalPort** irObstaclePorts,uint8_t irObstaclePortsNumbers)
 {
-	this->_irObstaclePOrts = irObstaclePOrts;
+	this->_irObstaclePorts = irObstaclePorts;
+	this->_irObstaclePortsNumbers = irObstaclePortsNumbers;
 }
 
 DigitalPort** IRObstacleSensor::getAllDigitalPorts()
 {
-	return this->_irObstaclePOrts;
+	return this->_irObstaclePorts;
+}
+
+uint8_t IRObstacleSensor::getDigitalPortsNumber()
+{
+	return this->_irObstaclePortsNumbers;
 }
 
 void IRObstacleSensor::setUid(char* uid)
 {
-
+	this->_uid = uid;
 }
 
 char* IRObstacleSensor::getUid()
 {
-	return nullptr;
+	return this->_uid;
 }
 
 void IRObstacleSensor::enable(bool isEnable)

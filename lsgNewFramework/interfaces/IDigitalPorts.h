@@ -6,6 +6,7 @@ class IDigitalPorts
 public:
 	virtual ~IDigitalPorts() {}
 	virtual DigitalPort** getAllDigitalPorts() = 0;
+	virtual uint8_t getDigitalPortsNumber() = 0;
 	virtual void setUid(char* uid) = 0;
 	virtual char* getUid()=0;
 	virtual void enable(bool isEnable)=0;
