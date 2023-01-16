@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef _DEBUG
+#include <Arduino.h>
+#endif
 
 IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort)  : DeviceActivity(avrMicroRepository,obstaclePort){
 }

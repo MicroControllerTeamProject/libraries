@@ -50,11 +50,13 @@ DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPor
 DeviceActivity::DeviceActivity() {
 }
 
-void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensors, uint8_t digitalPortSensorsNumber)
+void DeviceActivity::initializeDigitalPorts(AvrMicroRepository &avrMicroRepository, IDigitalPorts** digitalPortSensors, uint8_t digitalPortSensorsNumber)
 {
 	this->avrMicroRepository = &avrMicroRepository;
 
 	this->digitalPortSensors = digitalPortSensors;
+
+	this->_digitalPortSensorNumber = digitalPortSensorsNumber;
 
 	//#ifdef _DEBUG
 	//	Serial.print("sens num. : "); Serial.println(this->digitalPortSensorNumber);
@@ -62,13 +64,13 @@ void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroReposito
 
 	this->digitalPort = this->digitalPortSensors[0]->getAllDigitalPorts();
 
-	this->_digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
+	this->_digitalPortsNumber = sizeof(this->digitalPort) / sizeof(this->digitalPort[0]);
 
 	//#ifdef _DEBUG
 	//	Serial.print("Dig.Port Numb : "); Serial.println(digitalPortSensorsNumber);
 	//#endif
 
-	for (int ii = 0; ii < digitalPortSensorsNumber; ii++) {
+	for (int ii = 0; ii < this->_digitalPortSensorNumber; ii++) {
 		IDigitalPorts* digitalPortSensor = this->digitalPortSensors[ii];
 		if ((IDigitalPorts*)digitalPortSensor != nullptr)
 		{
@@ -83,6 +85,21 @@ void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroReposito
 #ifdef _DEBUG
 					Serial.print("Port:"); Serial.println(digitalPortSensor->getAllDigitalPorts()[i]->getUid());
 #endif
+					if (digitalPort->direction == DigitalPort::output)
+					{
+						this->avrMicroRepository->pinMode_m(digitalPort->getPin(), DigitalPort::output/*OUTPUT*/);
+					}
+					else
+					{
+						if (digitalPort->isOnPullUp) {
+							this->avrMicroRepository->pinMode_m(digitalPort->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
+						}
+						else
+						{
+							this->avrMicroRepository->pinMode_m(digitalPort->getPin(), (uint8_t)0/*INPUT*/);
+						}
+					}
+
 				}
 
 			}
@@ -90,23 +107,23 @@ void DeviceActivity::initializeDigitalPorts(AvrMicroRepository& avrMicroReposito
 
 	}
 
-	for (int i = 0; i < this->_digitalPortsNumber; i++)
-	{
-		if (this->digitalPort[i]->direction == DigitalPort::output)
-		{
-			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
-		}
-		else
-		{
-			if (this->digitalPort[i]->isOnPullUp) {
-				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
-			}
-			else
-			{
-				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
-			}
-		}
-	}
+	//for (int i = 0; i < this->_digitalPortsNumber; i++)
+	//{
+	//	if (this->digitalPort[i]->direction == DigitalPort::output)
+	//	{
+	//		this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
+	//	}
+	//	else
+	//	{
+	//		if (this->digitalPort[i]->isOnPullUp) {
+	//			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
+	//		}
+	//		else
+	//		{
+	//			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
+	//		}
+	//	}
+	//}
 }
 
 AnalogPort** DeviceActivity::getAllAnalogPorts()
@@ -248,6 +265,9 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 
 bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 {
+	/*IDigitalPorts** v = (IDigitalPorts**)this->digitalPortSensors;
+	Serial.println(v[0]->getUid());*/
+
 	for (int i = 0; i < this->_digitalPortsNumber; i++)
 	{
 		this->digitalPort[i]->isOnError = false;
