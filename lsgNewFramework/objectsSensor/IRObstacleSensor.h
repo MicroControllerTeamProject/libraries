@@ -1,7 +1,7 @@
 #pragma once
 #include "..\interfaces\IDigitalPorts.h"
 
-class IRObstacleSensor : public IDigitalPorts
+class IRObstacleSensor : public IDigitalPort
 {
 public:
 	IRObstacleSensor(DigitalPort** irObstaclePOrts, uint8_t irObstaclePortsNumbers);

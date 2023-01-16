@@ -5,38 +5,41 @@
 #include <Arduino.h>
 #endif
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** digitalPortSensors, uint8_t digitalPortSensorsNumber)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPort** digitalPortSensors, uint8_t digitalPortSensorsNumber)
 {
-	initializeDigitalPorts(avrMicroRepository, digitalPortSensors, digitalPortSensorsNumber);
-}
-
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort)
-{
-	this->digitalPort = digitalPort;
-	this->_digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
 	this->avrMicroRepository = &avrMicroRepository;
-
-	for (int i = 0; i < this->_digitalPortsNumber; i++)
-	{
-		if (this->digitalPort[i]->direction == DigitalPort::output)
-		{
-			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
-		}
-		else
-		{
-			if (this->digitalPort[i]->isOnPullUp) {
-				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
-			}
-			else
-			{
-				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
-			}
-		}
-	}
-
-
-
+	this->digitalPortSensors = digitalPortSensors;
+	this->_digitalPortSensorNumber = digitalPortSensorsNumber;
+	initializeDigitalPorts();
 }
+
+//DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort)
+//{
+//	this->digitalPort = digitalPort;
+//	this->_digitalPortsNumber = sizeof(digitalPort) / sizeof(digitalPort[0]);
+//	this->avrMicroRepository = &avrMicroRepository;
+//
+//	for (int i = 0; i < this->_digitalPortsNumber; i++)
+//	{
+//		if (this->digitalPort[i]->direction == DigitalPort::output)
+//		{
+//			this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), DigitalPort::output/*OUTPUT*/);
+//		}
+//		else
+//		{
+//			if (this->digitalPort[i]->isOnPullUp) {
+//				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)2/*INPUT_PULLUP*/);
+//			}
+//			else
+//			{
+//				this->avrMicroRepository->pinMode_m(this->digitalPort[i]->getPin(), (uint8_t)0/*INPUT*/);
+//			}
+//		}
+//	}
+//
+//
+//
+//}
 
 DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort, float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber)
 {
@@ -50,41 +53,17 @@ DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPor
 DeviceActivity::DeviceActivity() {
 }
 
-void DeviceActivity::initializeDigitalPorts(AvrMicroRepository &avrMicroRepository, IDigitalPorts** digitalPortSensors, uint8_t digitalPortSensorsNumber)
+void DeviceActivity::initializeDigitalPorts()
 {
-	this->avrMicroRepository = &avrMicroRepository;
-
-	this->digitalPortSensors = digitalPortSensors;
-
-	this->_digitalPortSensorNumber = digitalPortSensorsNumber;
-
-	//#ifdef _DEBUG
-	//	Serial.print("sens num. : "); Serial.println(this->digitalPortSensorNumber);
-	//#endif
-
-	this->digitalPort = this->digitalPortSensors[0]->getAllDigitalPorts();
-
-	this->_digitalPortsNumber = sizeof(this->digitalPort) / sizeof(this->digitalPort[0]);
-
-	//#ifdef _DEBUG
-	//	Serial.print("Dig.Port Numb : "); Serial.println(digitalPortSensorsNumber);
-	//#endif
-
 	for (int ii = 0; ii < this->_digitalPortSensorNumber; ii++) {
-		IDigitalPorts* digitalPortSensor = this->digitalPortSensors[ii];
-		if ((IDigitalPorts*)digitalPortSensor != nullptr)
+		IDigitalPort* digitalPortSensor = this->digitalPortSensors[ii];
+		if (digitalPortSensor != nullptr)
 		{
-#ifdef _DEBUG
-			Serial.print("Sens:"); Serial.println(digitalPortSensor->getUid());
-#endif
 			for (int i = 0; i < digitalPortSensor->getDigitalPortsNumber(); i++)
 			{
 				DigitalPort* digitalPort = digitalPortSensor->getAllDigitalPorts()[i];
-				if ((DigitalPort*)digitalPortSensor != nullptr)
+				if (digitalPort != nullptr)
 				{
-#ifdef _DEBUG
-					Serial.print("Port:"); Serial.println(digitalPortSensor->getAllDigitalPorts()[i]->getUid());
-#endif
 					if (digitalPort->direction == DigitalPort::output)
 					{
 						this->avrMicroRepository->pinMode_m(digitalPort->getPin(), DigitalPort::output/*OUTPUT*/);
@@ -265,21 +244,28 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 
 bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 {
-	/*IDigitalPorts** v = (IDigitalPorts**)this->digitalPortSensors;
-	Serial.println(v[0]->getUid());*/
-
-	for (int i = 0; i < this->_digitalPortsNumber; i++)
-	{
-		this->digitalPort[i]->isOnError = false;
-		if (this->digitalPort[i]->isEnable && (this->digitalPort[i]->direction == DigitalPort::input))
+	for (int ii = 0; ii < this->_digitalPortSensorNumber; ii++) {
+		IDigitalPort* digitalPortSensor = this->digitalPortSensors[ii];
+		if (digitalPortSensor != nullptr)
 		{
-			if ((strcmp(portName, this->digitalPort[i]->getUid()) == 0) && this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 0/*LOW*/)
+			for (int i = 0; i < digitalPortSensor->getDigitalPortsNumber(); i++)
 			{
-				return true;
-			}
-			if ((strcmp(portName, this->digitalPort[i]->getUid()) == 0) && this->digitalPort[i]->alarmTriggerOn == DigitalPort::AlarmOn::high && this->avrMicroRepository->digitalReadm(this->digitalPort[i]->getPin()) == 1/*HIGH*/)
-			{
-				return true;
+				DigitalPort* digitalPort = digitalPortSensor->getAllDigitalPorts()[i];
+				if (digitalPort != nullptr)
+				{
+					digitalPort->isOnError = false;
+					if (digitalPort->isEnable && (digitalPort->direction == DigitalPort::input))
+					{
+						if ((strcmp(portName, digitalPort->getUid()) == 0) && digitalPort->alarmTriggerOn == DigitalPort::AlarmOn::low && this->avrMicroRepository->digitalReadm(digitalPort->getPin()) == 0/*LOW*/)
+						{
+							return true;
+						}
+						if ((strcmp(portName, digitalPort->getUid()) == 0) && digitalPort->alarmTriggerOn == DigitalPort::AlarmOn::high && this->avrMicroRepository->digitalReadm(digitalPort->getPin()) == 1/*HIGH*/)
+						{
+							return true;
+						}
+					}
+				}
 			}
 		}
 	}

@@ -1,10 +1,10 @@
 #pragma once
 #include "..\model\DigitalPort.h"
 
-class IDigitalPorts
+class IDigitalPort
 {
 public:
-	virtual ~IDigitalPorts() {}
+	virtual ~IDigitalPort() {}
 	virtual DigitalPort** getAllDigitalPorts() = 0;
 	virtual uint8_t getDigitalPortsNumber() = 0;
 	virtual void setUid(char* uid) = 0;

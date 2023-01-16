@@ -6,13 +6,11 @@
 #include <Arduino.h>
 #endif
 
-IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** obstaclePort)  : DeviceActivity(avrMicroRepository,obstaclePort){
-}
-
-IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, IDigitalPorts** obstacleDigitalSensor,uint8_t obstacleDigitalSensorsNumber) : DeviceActivity(avrMicroRepository, obstacleDigitalSensor, obstacleDigitalSensorsNumber){
+IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroRepository, IDigitalPort** obstacleDigitalSensor,uint8_t obstacleDigitalSensorsNumber) : DeviceActivity(avrMicroRepository, obstacleDigitalSensor, obstacleDigitalSensorsNumber){
 }
 
 bool IRObstacleSensorActivity::isObstacleDetected(char* uid){
+	this->avrMicroRepository->delaym(500);
 	return this->isDigitalPortOnAlarm(uid);
 }
 
