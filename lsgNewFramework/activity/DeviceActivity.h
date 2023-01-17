@@ -2,15 +2,15 @@
 //#include "DigitalPort.h"
 #include "..\model\AnalogPort.h"
 #include "..\model\DigitalPort.h"
-#include "..\interfaces\IDigitalPorts.h"
 #include "..\repository\AvrMicroRepository.h"
 #include "..\commons\commonsLayer.h"
+#include "..\objectsSensor\DigitalPortSensor.h"
 
 
 class DeviceActivity
 {
 public:
-	DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPort** digitalPortSensors,uint8_t digitalPortSensorsNumber);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor** digitalPortSensors,uint8_t digitalPortSensorsNumber);
 	/*DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort);*/
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
 	DeviceActivity();
@@ -64,7 +64,7 @@ protected:
 	bool isThereAnyDigitalPortOnAlarm();
 	AnalogPort** analogPort;
 	DigitalPort** digitalPort;
-	IDigitalPort** digitalPortSensors;
+	DigitalPortSensor** digitalPortSensors;
 	uint8_t _analogPortsNumber = 0;
 	uint8_t _digitalPortsNumber = 0;
 	uint8_t _digitalPortSensorNumber = 0;

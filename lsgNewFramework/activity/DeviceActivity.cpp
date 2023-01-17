@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #endif
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, IDigitalPort** digitalPortSensors, uint8_t digitalPortSensorsNumber)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor** digitalPortSensors, uint8_t digitalPortSensorsNumber)
 {
 	this->avrMicroRepository = &avrMicroRepository;
 	this->digitalPortSensors = digitalPortSensors;
@@ -56,7 +56,7 @@ DeviceActivity::DeviceActivity() {
 void DeviceActivity::initializeDigitalPorts()
 {
 	for (int ii = 0; ii < this->_digitalPortSensorNumber; ii++) {
-		IDigitalPort* digitalPortSensor = this->digitalPortSensors[ii];
+		DigitalPortSensor* digitalPortSensor = this->digitalPortSensors[ii];
 		if (digitalPortSensor != nullptr)
 		{
 			for (int i = 0; i < digitalPortSensor->getDigitalPortsNumber(); i++)
@@ -245,7 +245,7 @@ bool DeviceActivity::isThereAnyDigitalPortOnAlarm()
 bool DeviceActivity::isDigitalPortOnAlarm(char* portName)
 {
 	for (int ii = 0; ii < this->_digitalPortSensorNumber; ii++) {
-		IDigitalPort* digitalPortSensor = this->digitalPortSensors[ii];
+		DigitalPortSensor* digitalPortSensor = this->digitalPortSensors[ii];
 		if (digitalPortSensor != nullptr)
 		{
 			for (int i = 0; i < digitalPortSensor->getDigitalPortsNumber(); i++)
