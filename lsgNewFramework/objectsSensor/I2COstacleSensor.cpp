@@ -2,7 +2,6 @@
 
 
 I2COstacleSensor::I2COstacleSensor(uint8_t address,char* uid){
-
 }
 
 
