@@ -4,7 +4,7 @@
 class I2COstacleSensor
 {
 public:
-	I2COstacleSensor(uint8_t address, char* uid, uint16_t minDistanceToObstacle);
+	I2COstacleSensor(uint8_t address,uint16_t minDistanceToObstacle, uint16_t maxDistanceToObstacle);
 	char* getUid();
 	uint16_t getAddress();
 	void enable(bool isEnable);

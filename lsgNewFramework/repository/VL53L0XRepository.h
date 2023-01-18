@@ -10,6 +10,7 @@ public:
 	void init(uint8_t address);
 	uint16_t getMillimetersDistance();
 	uint8_t getAddress();
+	void setAddress(uint8_t address);
 	bool isSensorOnError();
 	
 	

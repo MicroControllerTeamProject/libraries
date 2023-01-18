@@ -12,8 +12,9 @@ IRObstacleSensorActivity::IRObstacleSensorActivity(AvrMicroRepository& avrMicroR
 bool IRObstacleSensorActivity::isObstacleDetected(char* uid){
 	
 	bool returnValue =  this->isDigitalPortOnAlarm(uid);
-	this->avrMicroRepository->delaym(100);
-	if (this->isDigitalPortOnAlarm(uid) && returnValue) return false;
+	//this->avrMicroRepository->delaym(100);
+	while (this->isDigitalPortOnAlarm(uid) && returnValue) { this->avrMicroRepository->delaym(50); }
+	//if (this->isDigitalPortOnAlarm(uid) && returnValue) return false;
 	return returnValue;
 }
 

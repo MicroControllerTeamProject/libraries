@@ -9,19 +9,26 @@ VL53L0XActivity::VL53L0XActivity(VL53L0XRepository& vl53L0XRepository, I2COstacl
 	this->_listOfi2COstacleSensor = listOfi2COstacleSensor;
 	this->_i2COstacleSensorsNumber = i2COstacleSensorsNumber;
 	this->_vl53L0XRepository = &vl53L0XRepository;
-}
-
-bool VL53L0XActivity::isObstacleDetected(char* uid)
-{
-
 	for (int i = 0; i < this->_i2COstacleSensorsNumber; i++)
 	{
-
-		if (strcmp(this->_listOfi2COstacleSensor[i]->getUid(),uid) == 0)
+		this->_vl53L0XRepository->init(this->_listOfi2COstacleSensor[i]->getAddress());
+	}
+}
+bool VL53L0XActivity::isObstacleDetected(char* uid)
+{
+	uint8_t deviceAddress = atoi(uid);
+	for (int i = 0; i < this->_i2COstacleSensorsNumber; i++)
+	{
+		if (this->_listOfi2COstacleSensor[i]->getAddress(), deviceAddress)
 		{
-			if (this->_vl53L0XRepository->getMillimetersDistance() < 70)//this->_listOfi2COstacleSensor[i]->_minDistanceToObstacle)
+			this->_vl53L0XRepository->setAddress(this->_listOfi2COstacleSensor[i]->getAddress());
+			
+			if (this->_vl53L0XRepository->getMillimetersDistance() < _listOfi2COstacleSensor[i]->_minDistanceToObstacle)
 			{
-				this->_vl53L0XRepository->delaym(500);
+				while (this->_vl53L0XRepository->getMillimetersDistance() < _listOfi2COstacleSensor[i]->_minDistanceToObstacle){
+
+				}
+
 				return true;
 			}
 		}
