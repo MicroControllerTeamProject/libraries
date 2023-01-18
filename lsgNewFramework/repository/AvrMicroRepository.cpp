@@ -151,7 +151,7 @@ void AvrMicroRepository::notone_m(uint8_t pin)
 }
 
 
-//void sensor::setLastComunication(char* lastComunication)
+//void _sensor::setLastComunication(char* lastComunication)
 //{
 //	char message[100];   // array to hold the result.
 //	/*char* message2;*/
@@ -164,24 +164,24 @@ void AvrMicroRepository::notone_m(uint8_t pin)
 //
 //}
 //
-//char* sensor::getLastComunication()
+//char* _sensor::getLastComunication()
 //{
 //	return _lastComunication;
 //}
 
-//float sensor::getSegnalValue()
+//float _sensor::getSegnalValue()
 //{
 //	_sensorValue = analogicRead();
 //	return _sensorValue;
 //}
 
-//float sensor::analogicRead()
+//float _sensor::analogicRead()
 //{
 //	_sensorValue = (_vref / 1024) * analogRead(_analSignalPin);
 //	return _sensorValue;
 //}
 
-//bool sensor::isAnalogicValueOutOfRange()
+//bool _sensor::isAnalogicValueOutOfRange()
 //{
 //	if (analogicRead() >= _maxValue || analogicRead() <= _analogicAllarmMinValue)
 //	{

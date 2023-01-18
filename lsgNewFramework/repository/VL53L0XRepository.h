@@ -1,12 +1,18 @@
 #pragma once
-#include <VL53L0X.h>
 #include <stdint.h>
-class VL53L0XRepository
+#include "..\repository\AvrMicroRepository.h"
+
+
+class VL53L0XRepository : public AvrMicroRepository
 {
 public:
 	VL53L0XRepository();
+	void init(uint8_t address);
 	uint16_t getMillimetersDistance();
+	uint8_t getAddress();
 	bool isSensorOnError();
+	
+	
 protected:
 private:
 	bool _isSensorOnError;
