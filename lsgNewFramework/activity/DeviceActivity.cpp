@@ -224,7 +224,7 @@ bool DeviceActivity::isAnalogPortOnAlarm(char* portName)
 				AnalogPort* analogPort = analogPortSensor->getAllAnalogPorts()[i];
 				if (analogPort != nullptr)
 				{
-					if (analogPort->isEnable && analogPort->maxVoltageAlarmValueIn != 0)
+					if (analogPort->isEnable && analogPort->maxVoltageAlarmValueIn != 0 && (strcmp(portName, analogPort->getUid()) == 0))
 					{
 						if (this->avrMicroRepository->analogVoltageRead_m(analogPort->getPin(), this->getVref(), this->vrefMode) < analogPort->maxVoltageAlarmValueIn)
 						{
@@ -241,7 +241,7 @@ bool DeviceActivity::isAnalogPortOnAlarm(char* portName)
 						}
 					}
 
-					if (analogPort->isEnable && analogPort->maxAlarmValueIn != 0)
+					if (analogPort->isEnable && analogPort->maxAlarmValueIn != 0 && (strcmp(portName, analogPort->getUid()) == 0))
 					{
 						if ((this->avrMicroRepository->analogReadm(analogPort->getPin())) > analogPort->maxAlarmValueIn)
 						{
@@ -261,6 +261,27 @@ bool DeviceActivity::isAnalogPortOnAlarm(char* portName)
 		}
 	}
 	return false;
+}
+
+float DeviceActivity::getAnalogPortVrefVoltage(char* portName) {
+	for (int ii = 0; ii < this->_analogPortsSensorNumber; ii++) {
+		AnalogPortSensor* analogPortSensor = this->analogPortSensors[ii];
+		if (analogPortSensor != nullptr)
+		{
+			for (int i = 0; i < analogPortSensor->getAnalogPortsNumber(); i++)
+			{
+				AnalogPort* analogPort = analogPortSensor->getAllAnalogPorts()[i];
+				if (analogPort != nullptr)
+				{
+					if (analogPort->isEnable && (strcmp(portName, analogPort->getUid()) == 0))
+					{
+						return this->avrMicroRepository->analogVoltageRead_m(analogPort->getPin(), this->getVref(), this->vrefMode);
+					}
+				}
+			}
+		}
+	}
+	return 0;
 }
 
 //bool DeviceActivity::isThereAnyPortOnAlarm()

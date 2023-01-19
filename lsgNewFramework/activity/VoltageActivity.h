@@ -5,9 +5,9 @@
 class VoltageActivity : public DeviceActivity
 {
 public:
-	VoltageActivity(AnalogPort** analogPort, float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
-	bool isVoltageOutOfRange(AvrMicroRepository& mainRepository);
-	char* getLipoBatteryGrafBarLevel(AvrMicroRepository& mainRepository, uint8_t analogPortPin);
-	float  getAnalogPortVrefVoltage(AvrMicroRepository& mainRepository, uint8_t analogPin);
+	VoltageActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor** _listOfAnalogPortSensor, float vref, commonsLayer::analogRefMode mode, uint8_t analogPortSensorsNumber);
+	bool isVoltageOutOfRange(char* portName);
+	char* getLipoBatteryGrafBarLevel(char* portName);
+	float  getVoltage(char* portName);
 };
 

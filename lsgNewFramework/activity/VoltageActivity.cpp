@@ -1,27 +1,22 @@
 #include "VoltageActivity.h"
 #include "..\repository\AvrMicroRepository.h"
 
-VoltageActivity::VoltageActivity(AnalogPort** analogPort, float vref, commonsLayer::analogRefMode mode, uint8_t analogPortsNumber) : DeviceActivity(analogPort, vref,mode, analogPortsNumber) {
+VoltageActivity::VoltageActivity(AvrMicroRepository& avrMicroRepository,AnalogPortSensor** _listOfAnalogPortSensor, float vref, commonsLayer::analogRefMode mode, uint8_t analogPortSensorsNumber) : DeviceActivity(avrMicroRepository, _listOfAnalogPortSensor, vref,mode, analogPortSensorsNumber) {
 }
 
-
-bool VoltageActivity::isVoltageOutOfRange(AvrMicroRepository& mainRepository) {
-	if (!(this->isThereAnyAnalogPortOnAlarm(mainRepository))) return false;
+bool VoltageActivity::isVoltageOutOfRange(char* portName) {
+	if (!(this->isAnalogPortOnAlarm(portName))) return false;
 	return true;
 }
 
-float  VoltageActivity::getAnalogPortVrefVoltage(AvrMicroRepository& mainRepository, uint8_t analogPin)
+float  VoltageActivity::getVoltage(char* portName)
 {
-	return (this->getVref() / 1024) * mainRepository.analogReadm(analogPin);
+	return this->getAnalogPortVrefVoltage(portName);
 }
 
-char* VoltageActivity::getLipoBatteryGrafBarLevel(AvrMicroRepository& mainRepository, uint8_t analogPortPin)
+char* VoltageActivity::getLipoBatteryGrafBarLevel(char* portName)
 {
-	for (int i = 0; i < this->_analogPortsNumber; i++)
-	{
-		if (this->analogPort[i]->getPin() == analogPortPin)
-		{
-			float batteryVoltageLevel = getAnalogPortVrefVoltage(mainRepository, analogPortPin);
+			float batteryVoltageLevel = this->getAnalogPortVrefVoltage(portName);
 			if (batteryVoltageLevel <= 3.25f)
 				return "[    ]o";
 			if (batteryVoltageLevel <= 3.30f)
@@ -32,7 +27,6 @@ char* VoltageActivity::getLipoBatteryGrafBarLevel(AvrMicroRepository& mainReposi
 				return "[||| ]o";
 			if (batteryVoltageLevel <= 5.50f)
 				return "[||||]o";
-		}
-	}
+
 	return "";
 }

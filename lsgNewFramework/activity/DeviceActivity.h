@@ -42,7 +42,6 @@ public:
 	//virtual  float  getCustomMisureValue();
 	//bool isThereAnyCustomMisureOnAlarm();
 	//bool isThereAnyDigitalPortOnAlarm();
-
 	/*float analogReadVoltageByPin(uint8_t pin);*/
 	float getVref();
 	commonsLayer::analogRefMode vrefMode = commonsLayer::analogRefMode::DEFAULT_m;
@@ -50,21 +49,16 @@ public:
 	void setLastErrorCode(char errorCode);*/
 	/*const char* deviceOnErrorUID = {};
 	char* deviceErrorValue = {};*/
-	/*char lastErrorCode = 'X';*/
-	/*uint8_t deviceErrorPin = {};*/
+
 	float _vref = 5;
 	AvrMicroRepository* avrMicroRepository = nullptr;
+	float getAnalogPortVrefVoltage(char* portName);
 private:
 	
 protected:
-	
 	/*bool isThereAnyAnalogPortOnAlarm();*/
 	bool isDigitalPortOnAlarm(char* portName);
 	bool isAnalogPortOnAlarm(char* portName);
-	/*bool isDigitalPortOnAlarm(uint8_t pinNumber);
-	bool isThereAnyDigitalPortOnAlarm();*/
-	//AnalogPort** analogPort;
-	//DigitalPort** digitalPort;
 	DigitalPortSensor** digitalPortSensors;
 	AnalogPortSensor** analogPortSensors;
 	uint8_t _analogPortsSensorNumber = 0;

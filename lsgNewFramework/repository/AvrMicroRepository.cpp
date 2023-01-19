@@ -29,7 +29,7 @@ uint16_t AvrMicroRepository::analogReadm(uint8_t analogPin) {
 
 float AvrMicroRepository::analogVoltageRead_m(uint8_t analogPin, float _vref, uint8_t mode) {
 	analogReference(mode);
-	return (_vref / 1023.0f) * analogRead(analogPin);
+	return (_vref / 1024.0f) * analogRead(analogPin);
 }
 
 uint8_t AvrMicroRepository::digitalReadm(uint8_t analogPin) {
