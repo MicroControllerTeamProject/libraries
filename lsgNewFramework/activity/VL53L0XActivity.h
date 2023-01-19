@@ -3,6 +3,7 @@
 #include "..\repository\VL53L0XRepository.h"
 #include "..\objectsSensor\I2COstacleSensor.h"
 #include <string.h>
+#include <stdlib.h>
 
 class VL53L0XActivity :  public InterfaceObstacleActivity
 {

@@ -15,7 +15,10 @@ void VL53L0XRepository::init(uint8_t address)
 	vl53L0X.setAddress(address);
 	if (!vl53L0X.init())
 	{
-		Serial.println("this->_isSensorOnError = true");
+#ifdef _DEBUG
+		Serial.print("Vl53L0X.error:"); Serial.println(address);
+#endif
+		this->_isSensorOnError = true;
 		while (1) {}
 	}
 	
@@ -27,7 +30,9 @@ uint16_t VL53L0XRepository::getMillimetersDistance()
 {
 		uint16_t distance = vl53L0X.readRangeContinuousMillimeters();
 		if (vl53L0X.timeoutOccurred()) {
-			Serial.println("this->_isSensorOnError = true");
+#ifdef _DEBUG
+			Serial.print("Vl53L0X.error:"); Serial.println(vl53L0X.getAddress());
+#endif
 			this->_isSensorOnError = true; }
 		return distance;
 }

@@ -4,20 +4,20 @@
 #include <Arduino.h>
 #endif
 
-DigitalPortSensor::DigitalPortSensor(DigitalPort** irObstaclePorts,uint8_t irObstaclePortsNumbers)
+DigitalPortSensor::DigitalPortSensor(DigitalPort** listOfDigitalPorts,uint8_t digitalPortsNumbers)
 {
-	this->_irObstaclePorts = irObstaclePorts;
-	this->_irObstaclePortsNumbers = irObstaclePortsNumbers;
+	this->_listOfDigitalPorts = listOfDigitalPorts;
+	this->_digitalPortsNumbers = digitalPortsNumbers;
 }
 
 DigitalPort** DigitalPortSensor::getAllDigitalPorts()
 {
-	return this->_irObstaclePorts;
+	return this->_listOfDigitalPorts;
 }
 
 uint8_t DigitalPortSensor::getDigitalPortsNumber()
 {
-	return this->_irObstaclePortsNumbers;
+	return this->_digitalPortsNumbers;
 }
 
 void DigitalPortSensor::setUid(char* uid)

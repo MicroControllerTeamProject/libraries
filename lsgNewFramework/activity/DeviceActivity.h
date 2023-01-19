@@ -5,6 +5,7 @@
 #include "..\repository\AvrMicroRepository.h"
 #include "..\commons\commonsLayer.h"
 #include "..\objectsSensor\DigitalPortSensor.h"
+#include "..\objectsSensor\AnalogPortSensor.h"
 
 
 class DeviceActivity
@@ -12,7 +13,7 @@ class DeviceActivity
 public:
 	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor** digitalPortSensors,uint8_t digitalPortSensorsNumber);
 	/*DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort);*/
-	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPort** analogPort,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortsNumber);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor** analogPortSensor,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortSensorsNumber);
 	DeviceActivity();
 	//virtual bool isThereAnyPortOnAlarm();
 	//virtual String getLastAlarmDescription();
@@ -23,10 +24,9 @@ public:
 
 	//const char* getDeviceOnErrorUID();
 	void initializeDigitalPorts();
-	AnalogPort** getAllAnalogPorts();
-	DigitalPort** getAllDigitalPorts();
-	uint8_t getAnalogPortsNumber();
-	uint8_t getDigitalPortsNumber();
+	/*AnalogPort** getAllAnalogPorts();*/
+	//DigitalPort** getAllDigitalPorts();
+	
 	
 	/*DigitalPort** digitalPort;*/
 	/*AnalogPort** analogPort;*/
@@ -58,14 +58,16 @@ private:
 	
 protected:
 	
-	bool isThereAnyAnalogPortOnAlarm();
+	/*bool isThereAnyAnalogPortOnAlarm();*/
 	bool isDigitalPortOnAlarm(char* portName);
-	bool isDigitalPortOnAlarm(uint8_t pinNumber);
-	bool isThereAnyDigitalPortOnAlarm();
-	AnalogPort** analogPort;
-	DigitalPort** digitalPort;
+	bool isAnalogPortOnAlarm(char* portName);
+	/*bool isDigitalPortOnAlarm(uint8_t pinNumber);
+	bool isThereAnyDigitalPortOnAlarm();*/
+	//AnalogPort** analogPort;
+	//DigitalPort** digitalPort;
 	DigitalPortSensor** digitalPortSensors;
-	uint8_t _analogPortsNumber = 0;
+	AnalogPortSensor** analogPortSensors;
+	uint8_t _analogPortsSensorNumber = 0;
 	uint8_t _digitalPortsNumber = 0;
 	uint8_t _digitalPortSensorNumber = 0;
 };
