@@ -4,10 +4,11 @@
 #include <Arduino.h>
 #endif
 
-AnalogPortSensor::AnalogPortSensor(AnalogPort** listOfAnalogPorts, uint8_t analogPortsNumbers)
+AnalogPortSensor::AnalogPortSensor(char* uid,AnalogPort** listOfAnalogPorts, uint8_t analogPortsNumbers)
 {
 	this->_listOfAnalogPorts = listOfAnalogPorts;
 	this->_analogPortsNumbers = analogPortsNumbers;
+	this->_uid = uid;
 }
 
 AnalogPort** AnalogPortSensor::getAllAnalogPorts()

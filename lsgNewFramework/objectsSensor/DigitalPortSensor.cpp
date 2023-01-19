@@ -4,10 +4,11 @@
 #include <Arduino.h>
 #endif
 
-DigitalPortSensor::DigitalPortSensor(DigitalPort** listOfDigitalPorts,uint8_t digitalPortsNumbers)
+DigitalPortSensor::DigitalPortSensor(char* uid,DigitalPort** listOfDigitalPorts,uint8_t digitalPortsNumbers)
 {
 	this->_listOfDigitalPorts = listOfDigitalPorts;
 	this->_digitalPortsNumbers = digitalPortsNumbers;
+	this->_uid = uid;
 }
 
 DigitalPort** DigitalPortSensor::getAllDigitalPorts()

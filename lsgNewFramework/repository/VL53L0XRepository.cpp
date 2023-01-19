@@ -42,7 +42,6 @@ void VL53L0XRepository::setAddress(uint8_t address)
 	vl53L0X.setAddress(address);
 }
 
-
 uint8_t VL53L0XRepository::getAddress()
 {
 	/*	return _sensor->getAddress();*/
