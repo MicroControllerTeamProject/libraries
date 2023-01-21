@@ -33,9 +33,10 @@ char* DigitalPortSensor::getUid()
 
 void DigitalPortSensor::enable(bool isEnable)
 {
+	this->_isEnable = isEnable;
 }
 
 bool DigitalPortSensor::isEnable()
 {
-	return false;
+	return this->_isEnable;
 }

@@ -5,21 +5,26 @@ VoltageActivity::VoltageActivity(AvrMicroRepository& avrMicroRepository,AnalogPo
 	: DeviceActivity(avrMicroRepository, _listOfAnalogPortSensor, vref,mode, analogPortSensorsNumber) {
 }
 
-bool VoltageActivity::isVoltageOutOfRange(char* portName) {
-	if (!(this->isAnalogPortOnAlarm(portName))) return false;
+bool VoltageActivity::isVoltageOutOfRange(char* sensorUid) {
+	if (!(this->isAnalogPortOnAlarm(sensorUid))) return false;
 	return true;
 }
 
-float  VoltageActivity::getVoltage(char* portName)
+float  VoltageActivity::getVoltage(char* sensorUid)
 {
-	return this->getAnalogPortVrefVoltage(portName);
+	return this->getAnalogPortVrefVoltage(sensorUid);
 }
 
-char* VoltageActivity::getGrafBarLevel(char* portName,float minValue,float maxValue)
+char* VoltageActivity::getGrafBarLevel(char* sensorUid,float minValue,float maxValue,float chargeVoltageValue)
 {
-			uint8_t numbersOfLevels = 7;
-			float deltaValue = (maxValue - minValue) / (float)(numbersOfLevels - 2);
-			float batteryVoltageLevel = this->getAnalogPortVrefVoltage(portName);
+			uint8_t numbersOfLevels = 6;
+			float deltaValue = 0;
+			float batteryVoltageLevel = this->getAnalogPortVrefVoltage(sensorUid);
+			if (batteryVoltageLevel > maxValue)
+			{
+				maxValue = chargeVoltageValue;
+			}
+			deltaValue = (maxValue - minValue) / (float)(numbersOfLevels);
 			if (batteryVoltageLevel <= minValue)
 				return "[      ]o";
 			if (batteryVoltageLevel <= minValue + deltaValue)
@@ -32,7 +37,7 @@ char* VoltageActivity::getGrafBarLevel(char* portName,float minValue,float maxVa
 				return "[||||  ]o";
 			if (batteryVoltageLevel <= minValue + (deltaValue * 5))
 				return "[||||| ]o";
-			if (batteryVoltageLevel <= maxValue)
+			if (batteryVoltageLevel <= maxValue + deltaValue)
 				return "[||||||]o";
-	return "";
+	return "[OVER-V]o";
 }

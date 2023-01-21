@@ -5,6 +5,7 @@ class VL53L0XRepository
 {
 public:
 	VL53L0XRepository();
+	virtual void initContinuos(uint8_t address);
 	virtual void init(uint8_t address);
 	virtual uint16_t getMillimetersDistance();
 	virtual uint8_t getAddress();

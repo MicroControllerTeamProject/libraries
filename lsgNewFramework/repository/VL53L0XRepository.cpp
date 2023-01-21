@@ -7,7 +7,7 @@ VL53L0X vl53L0X;
 VL53L0XRepository::VL53L0XRepository() {
 	Wire.begin();
 }
-void VL53L0XRepository::init(uint8_t address)
+void VL53L0XRepository::initContinuos(uint8_t address)
 {
 //#ifdef _DEBUG
 //	Serial.println(vl53L0X.getAddress());
@@ -24,6 +24,24 @@ void VL53L0XRepository::init(uint8_t address)
 	
 	vl53L0X.setMeasurementTimingBudget(20000);
 	vl53L0X.startContinuous();
+}
+
+void VL53L0XRepository::init(uint8_t address)
+{
+	//#ifdef _DEBUG
+	//	Serial.println(vl53L0X.getAddress());
+	//#endif
+	vl53L0X.setAddress(address);
+	if (!vl53L0X.init())
+	{
+#ifdef _DEBUG
+		Serial.print("Vl53L0X.error:"); Serial.println(address);
+#endif
+		this->_isSensorOnError = true;
+		while (1) {}
+	}
+	/*vl53L0X.setMeasurementTimingBudget(20000);
+	vl53L0X.startContinuous();*/
 }
 
 uint16_t VL53L0XRepository::getMillimetersDistance()

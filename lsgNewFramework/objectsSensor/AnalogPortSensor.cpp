@@ -33,9 +33,10 @@ char* AnalogPortSensor::getUid()
 
 void AnalogPortSensor::enable(bool isEnable)
 {
+	this->_isEnable = isEnable;
 }
 
 bool AnalogPortSensor::isEnable()
 {
-	return false;
+	return this->_isEnable;
 }

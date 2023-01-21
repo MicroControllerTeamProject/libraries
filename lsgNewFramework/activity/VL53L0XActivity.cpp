@@ -9,17 +9,18 @@ VL53L0XActivity::VL53L0XActivity(VL53L0XRepository& vl53L0XRepository, I2COstacl
 	this->_listOfi2COstacleSensor = listOfi2COstacleSensor;
 	this->_i2COstacleSensorsNumber = i2COstacleSensorsNumber;
 	this->_vl53L0XRepository = &vl53L0XRepository;
+
 	for (int i = 0; i < this->_i2COstacleSensorsNumber; i++)
 	{
-		this->_vl53L0XRepository->init(this->_listOfi2COstacleSensor[i]->getAddress());
+		this->_vl53L0XRepository->initContinuos(this->_listOfi2COstacleSensor[i]->getAddress());
 	}
 }
 bool VL53L0XActivity::isObstacleDetected(char* uid)
 {
-	uint8_t deviceAddress = atoi(uid);
+	//uint8_t deviceAddress = atoi(uid);
 	for (int i = 0; i < this->_i2COstacleSensorsNumber; i++)
 	{
-		if (this->_listOfi2COstacleSensor[i]->getAddress(), deviceAddress)
+		if (strcmp(this->_listOfi2COstacleSensor[i]->getUid(), uid) == 0)
 		{
 			this->_vl53L0XRepository->setAddress(this->_listOfi2COstacleSensor[i]->getAddress());
 			

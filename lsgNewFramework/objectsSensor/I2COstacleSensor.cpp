@@ -1,9 +1,10 @@
 #include "I2COstacleSensor.h"
 
 
-I2COstacleSensor::I2COstacleSensor(uint8_t address, uint16_t minDistanceToObstacle, uint16_t maxDistanceToObstacle) {
+I2COstacleSensor::I2COstacleSensor(char* uid,uint8_t address, uint16_t minDistanceToObstacle, uint16_t maxDistanceToObstacle) {
 	this->_address = address;
 	this->_minDistanceToObstacle = minDistanceToObstacle;
+	this->_uid = uid;
 }
 
 char* I2COstacleSensor::getUid()
