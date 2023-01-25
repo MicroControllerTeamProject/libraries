@@ -36,61 +36,6 @@ uint8_t AvrMicroRepository::digitalReadm(uint8_t analogPin) {
 	return digitalRead(analogPin);
 }
 
-void AvrMicroRepository::print_m(const char* data,bool isNewLine = false)
-{
-	Serial.print(data);
-	if (isNewLine)Serial.println();
-	/*delay(100);*/
-}
-
-void AvrMicroRepository::print_m(float data, bool isNewLine = false)
-{
-	Serial.print(data);
-	if (isNewLine)Serial.println();
-	/*delay(100);*/
-}
-
-
-void AvrMicroRepository::print_m(int data, bool isNewLine = false)
-{
-	Serial.print(data);
-	if (isNewLine)Serial.println();
-	/*delay(100);*/
-}
-
-void AvrMicroRepository::print_m(uint8_t data, bool isNewLine)
-{
-	Serial.print(data);
-	if (isNewLine)Serial.println();
-	/*delay(100);*/
-}
-
-//void AvrMicroRepository::println(const char* data)
-//{
-//	Serial.println(data);
-//	delay(100);
-//}
-//
-//void AvrMicroRepository::println(float data)
-//{
-//	Serial.println(data);
-//	delay(100);
-//}
-
-bool AvrMicroRepository::serial_available()
-{
-	if (Serial.available() > 0) return true;
-	return false;
-}
-
-void AvrMicroRepository::begin_m(unsigned long baud)
-{
-	Serial.begin(baud);
-}
-
-int AvrMicroRepository::read() {
-	return Serial.read();
-}
 
 ////Send a char* empty by reference to fill with Serial.readstring() to avoid to declare a fix array.
 //int AvrMicroRepository::readString_m(char* &charsBufferByReference) {
@@ -104,21 +49,6 @@ int AvrMicroRepository::read() {
 //	return (int)charsBufferByReference;
 //}
 
-//return value need to free() memory.
-char* AvrMicroRepository::readString_m() {
-	String responseBufferString = Serial.readString();
-	char* charsBufferByReference;
-	charsBufferByReference = (char*)calloc(responseBufferString.length(), sizeof(char));
-	responseBufferString.toCharArray(charsBufferByReference, responseBufferString.length());
-	return charsBufferByReference;
-}
-
-void AvrMicroRepository::clearBuffer_m() {
-	delay(100);
-	while (Serial.available() > 0) {
-		Serial.readString();
-	}
-}
 
 void AvrMicroRepository::pinMode_m(uint8_t pin, uint8_t mode)
 {
@@ -149,6 +79,83 @@ void AvrMicroRepository::notone_m(uint8_t pin)
 {
 	noTone(pin);
 }
+
+#pragma region SERIALZONE -------------------------------------------
+
+
+void AvrMicroRepository::print_m(const char* data, bool isNewLine = false)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+
+}
+
+void AvrMicroRepository::print_m(float data, bool isNewLine = false)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+
+}
+
+
+void AvrMicroRepository::print_m(int data, bool isNewLine = false)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+}
+
+void AvrMicroRepository::print_m(uint8_t data, bool isNewLine)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+}
+
+//void AvrMicroRepository::println(const char* data)
+//{
+//	Serial.println(data);
+//	delay(100);
+//}
+//
+//void AvrMicroRepository::println(float data)
+//{
+//	Serial.println(data);
+//	delay(100);
+//}
+
+bool AvrMicroRepository::serial_available()
+{
+	if (Serial.available() > 0) return true;
+	return false;
+}
+
+void AvrMicroRepository::begin_m(unsigned long baud)
+{
+	Serial.begin(baud);
+}
+
+int AvrMicroRepository::read() {
+	return Serial.read();
+}
+
+void AvrMicroRepository::clearBuffer_m() {
+	delay(100);
+	while (Serial.available() > 0) {
+		Serial.readString();
+	}
+}
+
+//return value need to free() memory.
+char* AvrMicroRepository::readString_m() {
+	String responseBufferString = Serial.readString();
+	char* charsBufferByReference;
+	charsBufferByReference = (char*)calloc(responseBufferString.length(), sizeof(char));
+	responseBufferString.toCharArray(charsBufferByReference, responseBufferString.length());
+	return charsBufferByReference;
+}
+
+
+#pragma endregion serial -------------------------------------------------
+
 
 
 //void _sensor::setLastComunication(char* lastComunication)

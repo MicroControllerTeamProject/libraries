@@ -1,7 +1,9 @@
 #pragma once
 #include "stdint.h"
 
-class AvrMicroRepository
+
+
+class AvrMicroRepository 
 {
 public:
 
@@ -14,6 +16,7 @@ public:
 	virtual float analogVoltageRead_m(uint8_t analogPin, float _vref, uint8_t mode);
 
 	virtual uint8_t digitalReadm(uint8_t analogPin);
+#pragma region SERIALZONE -------------------------------------------
 
 	virtual void print_m(const char* data, bool isNewLine = false);
 
@@ -32,6 +35,7 @@ public:
 	virtual void begin_m(unsigned long baud);
 
 	virtual int read();
+#pragma endregion serial -------------------------------------------------
 
 	virtual void pinMode_m(uint8_t pin, uint8_t mode);
 
@@ -46,9 +50,8 @@ public:
 	virtual void notone_m(uint8_t pin);
 	
 private:
-
-protected:
 	
+protected:
 
 };
 
