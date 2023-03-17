@@ -1,0 +1,33 @@
+/*
+ Name:		test_lsgNewFramework.ino
+ Created:	1/19/2023 11:44:53 AM
+ Author:	luigi.santagada
+*/
+#include "c:\Repos\MicroControllerTeamProject\Libraries\lsgNewFramework\activity\VoltageActivity.h"
+#include "c:\Repos\MicroControllerTeamProject\Libraries\lsgNewFramework\activity\DeviceActivity.h"
+#include "c:\Repos\MicroControllerTeamProject\Libraries\lsgNewFramework\repository\AvrMicroRepository.h"
+#include "c:\Repos\MicroControllerTeamProject\Libraries\lsgNewFramework\objectsSensor\AnalogPortSensor.h"
+// the setup function runs once when you press reset or power the board
+AnalogPort* listOfBatteryAnalogPorts[1];
+AvrMicroRepository avrMicroRepository;
+AnalogPortSensor* listOfBatteriesAnalogSensor[1];
+VoltageActivity* batteryVoltageActivity;
+void setup() {
+
+	listOfBatteryAnalogPorts[0] = new AnalogPort("BA0", A0);
+	listOfBatteryAnalogPorts[0]->isEnable = true;
+	listOfBatteryAnalogPorts[0]->maxVoltageAlarmValueIn = 4.30f;
+	listOfBatteryAnalogPorts[0]->minVoltageAlarmValueIn = 3.25f;
+	listOfBatteriesAnalogSensor[0] = new AnalogPortSensor("SB01",listOfBatteryAnalogPorts, sizeof(listOfBatteryAnalogPorts) / sizeof(listOfBatteryAnalogPorts[0]));
+	batteryVoltageActivity = new VoltageActivity(avrMicroRepository, listOfBatteriesAnalogSensor, 4.80f, commonsLayer::DEFAULT_m, 1);
+}
+
+// the loop function runs over and over again until power down or reset
+void loop() {
+	Serial.print("voltage : "); Serial.println(batteryVoltageActivity->getVoltage("BA0"));
+	if (batteryVoltageActivity->isVoltageOutOfRange("BA0"))
+	{
+		Serial.println("problem");
+	}
+	delay(500);
+}

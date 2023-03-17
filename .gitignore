@@ -1,2 +1,10 @@
 .vs/
 ArduinoJson/out/build/
+ActivityFramework/Samples/SerialFrameworkSample/SerialFrameworkSample/__vm/
+ActivityFramework/Samples/voltageActivitySample/__vm/
+ActivityFramework/Samples/SerialFrameworkSample/SerialFrameworkSample_Test/x64/
+ActivityFramework/Samples/voltageActivitySample/obj/x64/
+ActivityFramework/Samples/SerialFrameworkSample/SerialFrameworkSample/obj/
+ActivityFramework/Samples/voltageActivitySample/obj/
+ActivityFramework/Samples/SerialFrameworkSample/SerialFrameworkSample_Test/Debug/
+ActivityFramework/Samples/SerialFrameworkSample/SerialFrameworkSample_Test/Release/

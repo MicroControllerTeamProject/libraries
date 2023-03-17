@@ -1,0 +1,237 @@
+#include "AvrMicroRepository.h"
+#include <Arduino.h>
+
+
+//for some MCUs (i.e. the ATmega2560) there's no definition for RAMSTART
+#ifndef RAMSTART
+extern int __data_start;
+#endif
+
+extern int __data_end;
+//extern int __bss_start;
+//extern int __bss_end;
+extern int __heap_start;
+extern int __brkval;
+int temp;
+
+
+AvrMicroRepository::AvrMicroRepository(unsigned long baud) {
+	this->begin_m(baud);
+}
+
+void AvrMicroRepository::analogReferencem(uint8_t mode)
+{
+	analogReference(mode);
+}
+
+uint16_t AvrMicroRepository::analogReadm(uint8_t analogPin) {
+	return analogRead(analogPin);
+}
+
+float AvrMicroRepository::analogVoltageRead_m(uint8_t analogPin, float _vref, uint8_t mode) {
+	analogReference(mode);
+	return (_vref / 1024.0f) * analogRead(analogPin);
+}
+
+uint8_t AvrMicroRepository::digitalReadm(uint8_t analogPin) {
+	return digitalRead(analogPin);
+}
+
+void AvrMicroRepository::digitalWrite_m(uint8_t analogPin, uint8_t value)
+{
+	 digitalWrite(analogPin,value);
+}
+
+void AvrMicroRepository::print_m(const char* data,bool isNewLine = false)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+
+}
+
+void AvrMicroRepository::print_m(float data, bool isNewLine = false)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+
+}
+
+
+void AvrMicroRepository::print_m(int data, bool isNewLine = false)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+
+}
+
+void AvrMicroRepository::print_m(uint8_t data, bool isNewLine)
+{
+	Serial.print(data);
+	if (isNewLine)Serial.println();
+
+}
+
+//void AvrMicroRepository::println(const char* data)
+//{
+//	Serial.println(data);
+//	delay(100);
+//}
+//
+//void AvrMicroRepository::println(float data)
+//{
+//	Serial.println(data);
+//	delay(100);
+//}
+
+int AvrMicroRepository::serial_available()
+{
+	return Serial.available();
+}
+
+void AvrMicroRepository::begin_m(unsigned long baud)
+{
+	Serial.begin(baud);
+}
+
+int AvrMicroRepository::read_m() {
+	return Serial.read();
+}
+
+////Send a char* empty by reference to fill with Serial.readstring() to avoid to declare a fix array.
+//int AvrMicroRepository::readString_m(char* &charsBufferByReference) {
+//	String responseBufferString = Serial.readString();
+//	/*if (responseBufferString.lastIndexOf("ERROR") != -1)
+//	{
+//		this->_lastErrorCode = 'E';
+//	}*/
+//	charsBufferByReference = (char*)calloc(responseBufferString.length(), sizeof(char));
+//	responseBufferString.toCharArray(charsBufferByReference, responseBufferString.length());
+//	return (int)charsBufferByReference;
+//}
+
+//return value need to free() memory.
+char* AvrMicroRepository::readString_m() {
+	String responseBufferString = "";// = Serial.readString();
+		while (Serial.available() > 0) {
+			responseBufferString.concat((char)Serial.read());
+		}
+	char* charsBufferByReference;
+	charsBufferByReference = (char*)calloc(responseBufferString.length(), sizeof(char));
+	if (charsBufferByReference == nullptr)
+	{
+#ifdef _DEBUG
+		Serial.println("nP");
+#endif
+		return '\0';
+	}
+	responseBufferString.toCharArray(charsBufferByReference, responseBufferString.length());
+	return charsBufferByReference;
+}
+
+
+//void AvrMicroRepository::clearBuffer_m() {
+//	delay(100);
+//	while (Serial.available() > 0) {
+//		Serial.readString();
+//	}
+//	Serial.readString();
+//}
+
+void AvrMicroRepository::pinMode_m(uint8_t pin, uint8_t mode)
+{
+	pinMode(pin, mode);
+}
+
+void AvrMicroRepository::delaym(unsigned long delayTime)
+{
+	delay(delayTime);
+}
+
+int AvrMicroRepository::getFreeRam() {
+	int v;
+	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
+}
+
+void  AvrMicroRepository::free_m(void* _ptr)
+{
+	free(_ptr);
+}
+
+void AvrMicroRepository::tone_m(unsigned int pin, unsigned int frequency, unsigned long duration)
+{
+	tone(pin, frequency, duration);
+}
+
+void AvrMicroRepository::notone_m(uint8_t pin)
+{
+	noTone(pin);
+}
+
+void AvrMicroRepository::clearBuffer_m()
+{
+	char buffer[SERIAL_RX_BUFFER_SIZE];
+	Serial.readBytes(buffer, SERIAL_RX_BUFFER_SIZE);
+	/*while () {
+		_softwareSerial->readString();
+	}
+	_softwareSerial->readString();*/
+	/*while (_softwareSerial->available() > 0) {
+		_softwareSerial->readString();
+	}
+	_softwareSerial->readString();*/
+}
+
+int AvrMicroRepository::get_SS_MAX_RX_BUFF()
+{
+	return SERIAL_RX_BUFFER_SIZE;
+}
+
+
+//void _sensor::setLastComunication(char* lastComunication)
+//{
+//	char message[100];   // array to hold the result.
+//	/*char* message2;*/
+//	strcpy(message, uid()); // copy string one into the result.
+//	strcat(message, " "); // append string two to the result.
+//	strcat(message, lastComunication);
+//	/*message2 = message;*/
+//	_lastComunication = message;
+//
+//
+//}
+//
+//char* _sensor::getLastComunication()
+//{
+//	return _lastComunication;
+//}
+
+//float _sensor::getSegnalValue()
+//{
+//	_sensorValue = analogicRead();
+//	return _sensorValue;
+//}
+
+//float _sensor::analogicRead()
+//{
+//	_sensorValue = (_vref / 1024) * analogRead(_analSignalPin);
+//	return _sensorValue;
+//}
+
+//bool _sensor::isAnalogicValueOutOfRange()
+//{
+//	if (analogicRead() >= _maxValue || analogicRead() <= _analogicAllarmMinValue)
+//	{
+//		setLastComunication("could be damaged");
+//		return true;
+//	}
+//	else
+//	{
+//		setLastComunication("seems ok");
+//		return false;
+//	}
+//}
+
+
+
+
+
