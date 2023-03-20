@@ -1,5 +1,5 @@
 #pragma once
-#include <arduino.h>
+#include <Arduino.h>
 #include <pins_arduino.h> 
 //In and Out specified on all pins are refered to Arduino and not to sensor. 
 

@@ -1,5 +1,5 @@
 #include "CurrentSensor.h"
-#include <arduino.h>
+#include <Arduino.h>
 #include <pins_arduino.h> 
 
 CurrentSensor::CurrentSensor(int analogicSegnalPinIn,

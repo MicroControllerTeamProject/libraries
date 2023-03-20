@@ -1,5 +1,5 @@
 #include "ReleSensor.h"
-#include <arduino.h>
+#include <Arduino.h>
 #include <pins_arduino.h> 
 
 
