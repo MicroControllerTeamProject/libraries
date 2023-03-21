@@ -24,7 +24,6 @@ SoftwareSerialRepository softwareSerialRepository(10, 9, 19200);
 //from lsgsoftware 3
 
 void setup() {
-
 	pinMode(13, OUTPUT);
 
 	Serial.println(F("RESTART---------------------------------------------"));

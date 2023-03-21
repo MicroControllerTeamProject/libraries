@@ -15,8 +15,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VoltageActivity", "VoltageA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{82ABE21C-AA9F-4BCA-B43F-6E8C1A158E0F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "externalLibraries", "externalLibraries", "{956E785E-543E-4BEB-9E13-EBA2E7CC8F68}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "externalLibraries", "externalLibraries", "{327A2D65-C9BE-4D06-804C-CCA11D6BA8D1}"
 	ProjectSection(SolutionItems) = preProject
+		..\AnalogPort.cpp = ..\AnalogPort.cpp
+		..\AnalogPort.h = ..\AnalogPort.h
+		..\AnalogPortSensor.cpp = ..\AnalogPortSensor.cpp
+		..\AnalogPortSensor.h = ..\AnalogPortSensor.h
+		..\AvrMicroRepository.cpp = ..\AvrMicroRepository.cpp
+		..\AvrMicroRepository.h = ..\AvrMicroRepository.h
+		..\commonsLayer.cpp = ..\commonsLayer.cpp
+		..\commonsLayer.h = ..\commonsLayer.h
+		..\DeviceActivity.cpp = ..\DeviceActivity.cpp
+		..\DeviceActivity.h = ..\DeviceActivity.h
+		..\DigitalPort.cpp = ..\DigitalPort.cpp
+		..\DigitalPort.h = ..\DigitalPort.h
+		..\DigitalPortSensor.cpp = ..\DigitalPortSensor.cpp
+		..\DigitalPortSensor.h = ..\DigitalPortSensor.h
+		..\InterfaceSerialRepository.h = ..\InterfaceSerialRepository.h
+		..\SimModuleActivity.cpp = ..\SimModuleActivity.cpp
+		..\SimModuleActivity.h = ..\SimModuleActivity.h
+		..\SimModuleDevice.cpp = ..\SimModuleDevice.cpp
+		..\SimModuleDevice.h = ..\SimModuleDevice.h
+		..\SimProgMemRepository.cpp = ..\SimProgMemRepository.cpp
+		..\SimProgMemRepository.h = ..\SimProgMemRepository.h
+		..\SIM_AT_COMMADS.h = ..\SIM_AT_COMMADS.h
+		..\SIM_RESPONSE_DATA.h = ..\SIM_RESPONSE_DATA.h
+		..\SoftwareSerialRepository.cpp = ..\SoftwareSerialRepository.cpp
+		..\SoftwareSerialRepository.h = ..\SoftwareSerialRepository.h
 		..\VoltageActivity.cpp = ..\VoltageActivity.cpp
 		..\VoltageActivity.h = ..\VoltageActivity.h
 	EndProjectSection

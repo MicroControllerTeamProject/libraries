@@ -19,9 +19,6 @@
     <Filter Include="service">
       <UniqueIdentifier>{846cd1fc-cbdb-456b-8cbd-2d8a960af6c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libraries">
-      <UniqueIdentifier>{5a2fdfec-2281-40f2-aadf-1eb7c08da99e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\arduino folders read me.txt">
