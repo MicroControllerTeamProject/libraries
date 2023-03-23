@@ -40,11 +40,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "externalLibraries", "extern
 		..\SimProgMemRepository.h = ..\SimProgMemRepository.h
 		..\SIM_AT_COMMADS.h = ..\SIM_AT_COMMADS.h
 		..\SIM_RESPONSE_DATA.h = ..\SIM_RESPONSE_DATA.h
+		..\SmokeActivity.cpp = ..\SmokeActivity.cpp
+		..\SmokeActivity.h = ..\SmokeActivity.h
 		..\SoftwareSerialRepository.cpp = ..\SoftwareSerialRepository.cpp
 		..\SoftwareSerialRepository.h = ..\SoftwareSerialRepository.h
 		..\VoltageActivity.cpp = ..\VoltageActivity.cpp
 		..\VoltageActivity.h = ..\VoltageActivity.h
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{91C8E443-8EC0-4C73-8A4E-1ECBBE230A3B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "voltageActivitySample_test", "voltageActivitySample_test\voltageActivitySample_test.vcxproj", "{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -122,6 +128,22 @@ Global
 		{3A0F2B7F-104F-414E-944F-61FC57166491}.Release|x64.Build.0 = Release|x64
 		{3A0F2B7F-104F-414E-944F-61FC57166491}.Release|x86.ActiveCfg = Release|Win32
 		{3A0F2B7F-104F-414E-944F-61FC57166491}.Release|x86.Build.0 = Release|Win32
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|ARM.ActiveCfg = Debug|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|ARM.Build.0 = Debug|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|ARM64.ActiveCfg = Debug|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|ARM64.Build.0 = Debug|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|x64.ActiveCfg = Debug|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|x64.Build.0 = Debug|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|x86.ActiveCfg = Debug|Win32
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Debug|x86.Build.0 = Debug|Win32
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|ARM.ActiveCfg = Release|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|ARM.Build.0 = Release|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|ARM64.ActiveCfg = Release|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|ARM64.Build.0 = Release|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|x64.ActiveCfg = Release|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|x64.Build.0 = Release|x64
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|x86.ActiveCfg = Release|Win32
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +153,8 @@ Global
 		{E62FB778-BFBC-441F-805A-CD4009BDC857} = {79028434-200F-498C-866A-41FAA7C7A16C}
 		{3A0F2B7F-104F-414E-944F-61FC57166491} = {82ABE21C-AA9F-4BCA-B43F-6E8C1A158E0F}
 		{82ABE21C-AA9F-4BCA-B43F-6E8C1A158E0F} = {79028434-200F-498C-866A-41FAA7C7A16C}
+		{91C8E443-8EC0-4C73-8A4E-1ECBBE230A3B} = {39B9EBDF-08BE-4AC3-A63F-0E153B077D37}
+		{77BC62DF-47D1-4A97-A565-C3D4AE8E4A67} = {91C8E443-8EC0-4C73-8A4E-1ECBBE230A3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD56013D-BC98-48FF-BF14-BA5F3F8833AF}

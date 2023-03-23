@@ -4,7 +4,7 @@
 class AnalogPort
 {
 public:
-	AnalogPort(const char uid[6], const uint8_t pin);
+	AnalogPort(char* uid, const uint8_t pin);
 	AnalogPort();
 	bool	isEnable = true;
 	bool	isOnError = false;
@@ -17,9 +17,9 @@ public:
 	float unitOfMisureFullScale = 0;
 	float maxUnitOfMisureAlarmValue = 0;
 	float minUnitOfMisureAlarmValue = 0;
-	const char* getUid();
+	char* getUid();
 	uint8_t getPin();
 private:
-	const char* _uid = {};
-	uint8_t _pin;
+	char* _uid = {};
+	uint8_t _pin= 0;
 };
