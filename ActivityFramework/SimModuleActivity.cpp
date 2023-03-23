@@ -20,7 +20,7 @@
 //	this->_simModuleDevicesNumber = simModuleDevicesNumber;
 //}
 
-SimModuleActivity::SimModuleActivity(InterfaceSerialRepository& simModuleRepository, SimProgMemRepository& simProgMemRepository, AvrMicroRepository& avrMicroRepository, SimModuleDevice& simModuleDevice) : DeviceActivity((AvrMicroRepository&)avrMicroRepository, (DigitalPortSensor)simModuleDevice)
+SimModuleActivity::SimModuleActivity(InterfaceSerialRepository& simModuleRepository, SimProgMemRepository& simProgMemRepository, AvrMicroRepository& avrMicroRepository, SimModuleDevice& simModuleDevice) : DeviceActivity((AvrMicroRepository&)avrMicroRepository, (DigitalPortSensor&)simModuleDevice)
 {
 	this->avrMicroRepository = &avrMicroRepository;
 	this->_simModuleRepository = &simModuleRepository;

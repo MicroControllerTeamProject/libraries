@@ -14,9 +14,9 @@ public:
 	/*DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor** listOfdigitalPortSensors,uint8_t digitalPortSensorsNumber);*/
 	//DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor* listOfAnalogPortSensor,float _vref ,commonsLayer::analogRefMode mode, uint8_t analogPortSensorsNumber);
 	
-	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor digitalPortSensor);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor& digitalPortSensor);
 
-	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor analogPortSensor, float _vref, commonsLayer::analogRefMode mode);
+	DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor& analogPortSensor, float _vref, commonsLayer::analogRefMode mode);
 	
 	DeviceActivity();
 

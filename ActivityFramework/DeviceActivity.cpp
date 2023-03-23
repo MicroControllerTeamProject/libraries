@@ -5,13 +5,13 @@
 #include <Arduino.h>
 #endif
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor digitalPortSensor){
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, DigitalPortSensor& digitalPortSensor){
 	this->avrMicroRepository = &avrMicroRepository;
 	this->_digitalPortSensor = &digitalPortSensor;
 	initializeDigitalPorts();
 }
 
-DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor analogPortSensor, float vref, commonsLayer::analogRefMode mode)
+DeviceActivity::DeviceActivity(AvrMicroRepository& avrMicroRepository, AnalogPortSensor& analogPortSensor, float vref, commonsLayer::analogRefMode mode)
 {
 	this->_analogPortSensor = &analogPortSensor;
 	this->_vref = vref;
@@ -182,7 +182,7 @@ bool DeviceActivity::isDigitalPortOnAlarm()
 bool DeviceActivity::isAnalogPortOnAlarm(char* analogPortUid)
 {
 		AnalogPortSensor* analogPortSensor = this->_analogPortSensor;
-
+	
 		if (analogPortSensor != nullptr)
 		{
 			for (int i = 0; i < analogPortSensor->getAnalogPortsNumber(); i++)
@@ -191,33 +191,36 @@ bool DeviceActivity::isAnalogPortOnAlarm(char* analogPortUid)
 	
 					if (analogPort.isEnable && analogPort.maxVoltageAlarmValueIn != 0 && (strcmp(analogPortUid, analogPort.getUid()) == 0))
 					{
-						if (this->avrMicroRepository->analogVoltageRead_m(analogPort.getPin(), this->getVref(), this->vrefMode) > analogPort.maxVoltageAlarmValueIn)
+						float analogReadVoltageValue = this->avrMicroRepository->analogVoltageRead_m(analogPort.getPin(), this->getVref(), this->vrefMode);
+						
+						if (analogReadVoltageValue > analogPort.maxVoltageAlarmValueIn)
 						{
 							analogPort.isOnError = true;
-							analogPort.analogVrefValue = this->avrMicroRepository->analogVoltageRead_m(analogPort.getPin(), this->getVref(), this->vrefMode);
+							analogPort.analogVrefValue = analogReadVoltageValue;
 							return true;
 						}
 
-						if (this->avrMicroRepository->analogVoltageRead_m(analogPort.getPin(), this->getVref(), this->vrefMode) < analogPort.minVoltageAlarmValueIn)
+						if (analogReadVoltageValue < analogPort.minVoltageAlarmValueIn)
 						{
 							analogPort.isOnError = true;
-							analogPort.analogVrefValue = this->avrMicroRepository->analogVoltageRead_m(analogPort.getPin(), this->getVref(), this->vrefMode);
+							analogPort.analogVrefValue = analogReadVoltageValue;
 							return true;
 						}
 					}
-
+					//cicle if you work with 0-1023 values.
 					if (analogPort.isEnable && analogPort.maxAlarmValueIn != 0 && (strcmp(analogPortUid, analogPort.getUid()) == 0))
 					{
-						if ((this->avrMicroRepository->analogReadm(analogPort.getPin())) > analogPort.maxAlarmValueIn)
+						uint16_t analogReadValue = this->avrMicroRepository->analogReadm(analogPort.getPin());
+						if (analogReadValue > analogPort.maxAlarmValueIn)
 						{
 							analogPort.isOnError = true;
-							analogPort.digitalValue = (this->avrMicroRepository->analogReadm(analogPort.getPin()));
+							analogPort.digitalValue = analogReadValue;
 							return true;
 						}
-						if ((this->avrMicroRepository->analogReadm(analogPort.getPin())) < analogPort.minAlarmValueIn)
+						if (analogReadValue < analogPort.minAlarmValueIn)
 						{
 							analogPort.isOnError = true;
-							analogPort.digitalValue = (this->avrMicroRepository->analogReadm(analogPort.getPin()));
+							analogPort.digitalValue = analogReadValue;
 							return true;
 						}
 					}
@@ -267,6 +270,7 @@ bool DeviceActivity::isAnalogPortOnAlarm(char* analogPortUid)
 
 float DeviceActivity::getAnalogPortVrefVoltage(char* analogPortUid) {
 		AnalogPortSensor* analogPortSensor = this->_analogPortSensor;
+
 		if (analogPortSensor != nullptr)
 		{
 			for (size_t i = 0; i < analogPortSensor->getAnalogPortsNumber(); i++)
