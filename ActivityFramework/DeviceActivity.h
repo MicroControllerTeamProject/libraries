@@ -21,6 +21,7 @@ public:
 	DeviceActivity();
 
 	void initializeDigitalPorts();
+	void initializeAnalogPorts();
 	float getVref();
 	commonsLayer::analogRefMode vrefMode = commonsLayer::analogRefMode::DEFAULT_m;
 	float _vref = 5;
