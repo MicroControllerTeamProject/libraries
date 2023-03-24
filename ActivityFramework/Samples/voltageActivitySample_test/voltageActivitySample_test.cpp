@@ -33,8 +33,8 @@ namespace voltageActivitySampletest
 
 			listOfBatteryAnalogPorts[0] = AnalogPort("BA0", 14);
 			listOfBatteryAnalogPorts[0].isEnable = true;
-			listOfBatteryAnalogPorts[0].maxVoltageAlarmValueIn = 4.30f;
-			listOfBatteryAnalogPorts[0].minVoltageAlarmValueIn = 3.25f;
+			listOfBatteryAnalogPorts[0].maxVoltageAlarmValueIn = 3.80f;
+			listOfBatteryAnalogPorts[0].minVoltageAlarmValueIn = 3.00f;
 			analogSensor = AnalogPortSensor("SB01", listOfBatteryAnalogPorts, sizeof(listOfBatteryAnalogPorts) / sizeof(listOfBatteryAnalogPorts[0]));
 			
 
@@ -42,15 +42,15 @@ namespace voltageActivitySampletest
 			
 			When(Method(mockedAvrMicroRepository, pinMode_m)).AlwaysReturn();
 
-			When(Method(mockedAvrMicroRepository, analogVoltageRead_m)).AlwaysReturn(3.50f);
+			When(Method(mockedAvrMicroRepository, analogReferencem)).AlwaysReturn();
 
-		
+			When(Method(mockedAvrMicroRepository, analogReadm)).AlwaysReturn(200);
 
 			batteryVoltageActivity = VoltageActivity(avrMicroRepository, analogSensor, 4.80f, commonsLayer::DEFAULT_m);
 
-			float a = batteryVoltageActivity.getVoltage("BA0");
+			char* a = batteryVoltageActivity.getGrafBarLevel("BA0",3.00f,3.80f,4.20f);
 
-			Assert::AreEqual(3.50f,a);
+			Assert::AreEqual("[||||  ]o", a);
 		}
 	};
 }

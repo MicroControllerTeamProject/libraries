@@ -5,8 +5,7 @@ VoltageActivity::VoltageActivity(AvrMicroRepository& avrMicroRepository,AnalogPo
 	: DeviceActivity(avrMicroRepository, analogPortSensor, vref,mode) {
 }
 
-VoltageActivity::VoltageActivity()
-{
+VoltageActivity::VoltageActivity(){
 }
 
 bool VoltageActivity::isVoltageOutOfRange(char* analogPortUid) {
