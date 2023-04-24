@@ -28,6 +28,8 @@ public:
 
 	String GetPassword();
 
+	String GetPasswordV3();
+
 	void SetPassword(String password);
 
 	int available();
@@ -42,9 +44,13 @@ public:
 
 	void turnOnBlueTooth();
 
+	void findModeV3();
+
 	void ReceveMode();
 
 	void  ProgramMode();
+
+	void reset();
 
 	void  Reset_To_Slave_Mode();
 
@@ -80,6 +86,7 @@ public:
 	
 	String SplitStringIndex(String data, char separator, int index);
 	String GetOldPassword();
+	String GetOldPasswordV3();
 
 };
 
