@@ -10,9 +10,6 @@
 #include "/Repos/MicroControllerTeamProject/Libraries/ActivityFramework/DigitalPortSensor.h"
 #include "/Repos/MicroControllerTeamProject/Libraries/ActivityFramework/DigitalPort.h"
 
-
-
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace voltageActivitySampletest
@@ -44,9 +41,9 @@ namespace voltageActivitySampletest
 
 			When(Method(mockedAvrMicroRepository, analogReferencem)).AlwaysReturn();
 
-			When(Method(mockedAvrMicroRepository, analogReadm)).AlwaysReturn(200);
+			When(Method(mockedAvrMicroRepository, analogReadm)).AlwaysReturn(620);
 
-			batteryVoltageActivity = VoltageActivity(avrMicroRepository, analogSensor, 4.80f, commonsLayer::DEFAULT_m);
+			batteryVoltageActivity = VoltageActivity(avrMicroRepository, analogSensor, 5.00f, commonsLayer::DEFAULT_m);
 
 			char* a = batteryVoltageActivity.getGrafBarLevel("BA0",3.00f,3.80f,4.20f);
 

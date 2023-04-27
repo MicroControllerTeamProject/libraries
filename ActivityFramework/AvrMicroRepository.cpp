@@ -44,31 +44,35 @@ void AvrMicroRepository::digitalWrite_m(uint8_t analogPin, uint8_t value)
 
 void AvrMicroRepository::print_m(const char* data,bool isNewLine = false)
 {
+#if defined(__AVR_ATmega328P__)
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-
+#endif
 }
 
 void AvrMicroRepository::print_m(float data, bool isNewLine = false)
 {
+#if defined(__AVR_ATmega328P__)
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-
+#endif
 }
 
 
 void AvrMicroRepository::print_m(int data, bool isNewLine = false)
 {
+#if defined(__AVR_ATmega328P__)
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-
+#endif
 }
 
 void AvrMicroRepository::print_m(uint8_t data, bool isNewLine)
 {
+#if defined(__AVR_ATmega328P__)
 	Serial.print(data);
 	if (isNewLine)Serial.println();
-
+#endif
 }
 
 //void AvrMicroRepository::println(const char* data)
@@ -85,32 +89,28 @@ void AvrMicroRepository::print_m(uint8_t data, bool isNewLine)
 
 int AvrMicroRepository::serial_available()
 {
+#if defined(__AVR_ATmega328P__)
 	return Serial.available();
+#endif
 }
 
 void AvrMicroRepository::begin_m(unsigned long baud)
 {
+#if defined(__AVR_ATmega328P__)
 	Serial.begin(baud);
+#endif
 }
 
 int AvrMicroRepository::read_m() {
+#if defined(__AVR_ATmega328P__)
 	return Serial.read();
-}
+#endif
 
-////Send a char* empty by reference to fill with Serial.readstring() to avoid to declare a fix array.
-//int AvrMicroRepository::readString_m(char* &charsBufferByReference) {
-//	String responseBufferString = Serial.readString();
-//	/*if (responseBufferString.lastIndexOf("ERROR") != -1)
-//	{
-//		this->_lastErrorCode = 'E';
-//	}*/
-//	charsBufferByReference = (char*)calloc(responseBufferString.length(), sizeof(char));
-//	responseBufferString.toCharArray(charsBufferByReference, responseBufferString.length());
-//	return (int)charsBufferByReference;
-//}
+}
 
 //return value need to free() memory.
 char* AvrMicroRepository::readString_m() {
+#if defined(__AVR_ATmega328P__)
 	String responseBufferString = "";// = Serial.readString();
 		while (Serial.available() > 0) {
 			responseBufferString.concat((char)Serial.read());
@@ -119,13 +119,16 @@ char* AvrMicroRepository::readString_m() {
 	charsBufferByReference = (char*)calloc(responseBufferString.length(), sizeof(char));
 	if (charsBufferByReference == nullptr)
 	{
+#if defined(__AVR_ATmega328P__)
 #ifdef _DEBUG
 		Serial.println("nP");
+#endif
 #endif
 		return '\0';
 	}
 	responseBufferString.toCharArray(charsBufferByReference, responseBufferString.length());
 	return charsBufferByReference;
+#endif
 }
 
 
@@ -169,8 +172,10 @@ void AvrMicroRepository::notone_m(uint8_t pin)
 
 void AvrMicroRepository::clearBuffer_m()
 {
+#if defined(__AVR_ATmega328P__)
 	char buffer[SERIAL_RX_BUFFER_SIZE];
 	Serial.readBytes(buffer, SERIAL_RX_BUFFER_SIZE);
+#endif
 	/*while () {
 		_softwareSerial->readString();
 	}
@@ -186,50 +191,6 @@ int AvrMicroRepository::get_SS_MAX_RX_BUFF()
 	return SERIAL_RX_BUFFER_SIZE;
 }
 
-
-//void _sensor::setLastComunication(char* lastComunication)
-//{
-//	char message[100];   // array to hold the result.
-//	/*char* message2;*/
-//	strcpy(message, uid()); // copy string one into the result.
-//	strcat(message, " "); // append string two to the result.
-//	strcat(message, lastComunication);
-//	/*message2 = message;*/
-//	_lastComunication = message;
-//
-//
-//}
-//
-//char* _sensor::getLastComunication()
-//{
-//	return _lastComunication;
-//}
-
-//float _sensor::getSegnalValue()
-//{
-//	_sensorValue = analogicRead();
-//	return _sensorValue;
-//}
-
-//float _sensor::analogicRead()
-//{
-//	_sensorValue = (_vref / 1024) * analogRead(_analSignalPin);
-//	return _sensorValue;
-//}
-
-//bool _sensor::isAnalogicValueOutOfRange()
-//{
-//	if (analogicRead() >= _maxValue || analogicRead() <= _analogicAllarmMinValue)
-//	{
-//		setLastComunication("could be damaged");
-//		return true;
-//	}
-//	else
-//	{
-//		setLastComunication("seems ok");
-//		return false;
-//	}
-//}
 
 
 

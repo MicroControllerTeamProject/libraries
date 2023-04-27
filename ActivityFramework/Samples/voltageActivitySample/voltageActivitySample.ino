@@ -9,12 +9,14 @@
 #include <AnalogPortSensor.h>
 #include <Arduino.h>
 
+
 AnalogPort listOfBatteryAnalogPorts[1];
 AvrMicroRepository avrMicroRepository(19200);
 AnalogPortSensor analogSensor;
 VoltageActivity batteryVoltageActivity;
 
 void setup() {
+	Serial.begin(9600);
 	listOfBatteryAnalogPorts[0] =  AnalogPort("BA0", A1);
 	listOfBatteryAnalogPorts[0].isEnable = true;
 	listOfBatteryAnalogPorts[0].maxVoltageAlarmValueIn = 4.30f;
@@ -25,7 +27,7 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-  Serial.begin(19200);
+ 
 	Serial.print("voltage : "); Serial.println(batteryVoltageActivity.getVoltage("BA0"));
 	Serial.print("graph : "); Serial.println(batteryVoltageActivity.getGrafBarLevel("BA0",3.30,3.80,4.30));
 	if (batteryVoltageActivity.isVoltageOutOfRange("BA0"))

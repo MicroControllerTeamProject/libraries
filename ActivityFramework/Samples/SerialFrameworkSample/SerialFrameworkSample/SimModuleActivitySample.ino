@@ -42,9 +42,7 @@ void setup() {
 }
 // the loop function runs over and over again until power down or reset
 void loop() {
-
 	Serial.print(F("start free ram : ")); Serial.println(avrMicroRepository.getFreeRam());
-
 	checkIncomingSms();
 }
 
