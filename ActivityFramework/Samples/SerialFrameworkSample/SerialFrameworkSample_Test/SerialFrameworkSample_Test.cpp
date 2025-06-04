@@ -56,7 +56,7 @@ namespace SerialFrameworkSampleTest
 
 			SimModuleActivity simModuleActivity = SimModuleActivity(softwareSerialRepository, simProgMemRepository, avrMicroRepository, simModuleDevice);
 
-			bool returnValue = simModuleActivity.isSmsOnBuffer("+CMGR:\"REC READ\",\"+316250122542345\",,\"07/07/05,09:56:03+08\" Md\r", 0, 5);
+			bool returnValue = simModuleActivity.isSmsOnBuffer("+CMGR:\"REC READ\",\"+393202445649\",,\"07/07/05,09:56:03+08\"Md\r", 0, 5);
 			
 			Assert::AreEqual(true, returnValue);
 		}

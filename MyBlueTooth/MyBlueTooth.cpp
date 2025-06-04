@@ -126,6 +126,8 @@ bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 
 		String phoneName = _hardwareSerial->readString();
 
+		Serial.println(phoneName);
+
 		String command = "+RNAME:" + deviceName;
 
 		if (phoneName.indexOf(command) > -1)
@@ -212,10 +214,10 @@ void  MyBlueTooth::findModeV3()
 {
 	digitalWrite(_baseTransistorPin, LOW);
 	delay(2000);
+	digitalWrite(_blueToothKeyPin, HIGH);
+	delay(4000);
 	digitalWrite(_baseTransistorPin, HIGH);
 	delay(3000);
-	digitalWrite(_blueToothKeyPin, HIGH);
-	delay(2000);
 	this->begin(_baudRateReceveMode);
 	delay(2000);
 }
@@ -317,8 +319,6 @@ void MyBlueTooth::clearBuffer()
 		}
 	}
 }
-
-
 
 void MyBlueTooth::turnOnBlueTooth()
 {

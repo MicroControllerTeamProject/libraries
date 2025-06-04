@@ -20,23 +20,19 @@ SimProgMemRepository::SimProgMemRepository(){
 //	serialRepository->print_m(buffer, true);
 //}
 
-void SimProgMemRepository::getAtCommand(uint16_t index, char* atCommandbuffer, uint8_t atCommandBufferLenght)
-{
+void SimProgMemRepository::getAtCommand(uint16_t index, char* atCommandbuffer, uint8_t atCommandBufferLenght){
 	fillStringBuffer(atCommandbuffer, atCommandBufferLenght, index, simCommands);
 }
 
-const uint16_t SimProgMemRepository::getAtCommandIndexLengthString(uint16_t stringIndex)
-{
+const uint16_t SimProgMemRepository::getAtCommandIndexLengthString(uint16_t stringIndex){
 	return getStringLength(simCommands, stringIndex);
 }
 
-const uint16_t SimProgMemRepository::getProgMemSmsToFindLenght(uint16_t stringIndex)
-{
+const uint16_t SimProgMemRepository::getProgMemSmsToFindLenght(uint16_t stringIndex){
 	return getStringLength(simResponseData, stringIndex);
 }
 
-char* SimProgMemRepository::getSmsToFind(uint16_t index, char* responseDatabuffer,uint8_t responseDatabufferLenght)
-{
+char* SimProgMemRepository::getSmsToFind(uint16_t index, char* responseDatabuffer,uint8_t responseDatabufferLenght){
 	return fillStringBuffer(responseDatabuffer, responseDatabufferLenght, index, simResponseData);
 }
 

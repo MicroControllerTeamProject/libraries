@@ -13,6 +13,7 @@
 #include <InterfaceSerialRepository.h>
 #include <SimProgMemRepository.h>
 
+//#define __DEBUG
 SimModuleDevice simModuleDevice;
 DigitalPort listOfPortsForSimModule[1];
 SimModuleActivity simModuleActivity;
@@ -81,7 +82,6 @@ void checkIncomingSms()
 			if (simModuleActivity.isCallerAuthorized(response, "+393202445649"))
 			{
 				Serial.println(F("caller is authorized"));
-
 				if (simModuleActivity.isSmsOnBuffer(response, 0,5))
 				{
 					Serial.println(F("do somethink for 0 command"));
