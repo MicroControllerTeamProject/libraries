@@ -1,5 +1,5 @@
 #######################################
-# Syntax Coloring Map For TinyWireM
+# Syntax Coloring Map For TinyWireS
 #######################################
 
 #######################################
@@ -11,18 +11,15 @@
 #######################################
 
 begin	KEYWORD2
-beginTransmission	KEYWORD2
-endTransmission	KEYWORD2
-requestFrom	KEYWORD2
-write	KEYWORD2
-read	KEYWORD2
-end KEYWORD2
+send	KEYWORD2
+available	KEYWORD2
+receive	KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)
 #######################################
 
-TinyWireM	KEYWORD2
+TinyWireS	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
