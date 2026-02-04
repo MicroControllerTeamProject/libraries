@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{81C37D40-C
 	ProjectSection(SolutionItems) = preProject
 		mf_repository_AvrMicroRepository.cpp = mf_repository_AvrMicroRepository.cpp
 		mf_repository_AvrMicroRepository.h = mf_repository_AvrMicroRepository.h
+		mf_repository_HardwareSerialAdapter.cpp = mf_repository_HardwareSerialAdapter.cpp
+		mf_repository_HardwareSerialAdapter.h = mf_repository_HardwareSerialAdapter.h
 		mf_repository_ISerial.cpp = mf_repository_ISerial.cpp
 		mf_repository_ISerial.h = mf_repository_ISerial.h
 	EndProjectSection
