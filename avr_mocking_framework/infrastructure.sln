@@ -24,6 +24,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{C0DCF878-D
 		mf_model_AnalogPortB.h = mf_model_AnalogPortB.h
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repository", "repository", "{9D377321-617F-4930-A0B0-A68608208643}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{81C37D40-C1C5-4484-AFEA-1E418E43D373}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_AvrMicroRepository.cpp = mf_repository_AvrMicroRepository.cpp
+		mf_repository_AvrMicroRepository.h = mf_repository_AvrMicroRepository.h
+		mf_repository_ISerial.cpp = mf_repository_ISerial.cpp
+		mf_repository_ISerial.h = mf_repository_ISerial.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -40,6 +50,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C0DCF878-DCAA-45BC-9DF6-C2ECF293DB8A} = {57780793-CE58-45E3-853D-ADADF0100E0F}
+		{81C37D40-C1C5-4484-AFEA-1E418E43D373} = {9D377321-617F-4930-A0B0-A68608208643}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}
