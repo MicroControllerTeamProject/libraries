@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "commons", "commons", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		mf_commons_commonsLayer.h = mf_commons_commonsLayer.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "model", "model", "{57780793-CE58-45E3-853D-ADADF0100E0F}"
+	ProjectSection(SolutionItems) = preProject
+		mf_model_AnalogPortC.cpp = mf_model_AnalogPortC.cpp
+		mf_model_AnalogPortC.h = mf_model_AnalogPortC.h
+		mf_model_AnalogPortD.cpp = mf_model_AnalogPortD.cpp
+		mf_model_AnalogPortD.h = mf_model_AnalogPortD.h
+		mf_model_DigitalPort.cpp = mf_model_DigitalPort.cpp
+		mf_model_DigitalPort.h = mf_model_DigitalPort.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{C0DCF878-DCAA-45BC-9DF6-C2ECF293DB8A}"
+	ProjectSection(SolutionItems) = preProject
+		mf_model_AnalogPortB.cpp = mf_model_AnalogPortB.cpp
+		mf_model_AnalogPortB.h = mf_model_AnalogPortB.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C0DCF878-DCAA-45BC-9DF6-C2ECF293DB8A} = {57780793-CE58-45E3-853D-ADADF0100E0F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}
+	EndGlobalSection
+EndGlobal
