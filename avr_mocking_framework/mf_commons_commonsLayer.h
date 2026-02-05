@@ -1,10 +1,10 @@
 // File: commonsLayer.h
 #pragma once
-#ifndef ON_MOCKING_TESTS 
-#define ON_MOCKING_TESTS 1
+#ifndef _ON_MOCKING_TESTS 
+#define _ON_MOCKING_TESTS 1
 #endif
-#ifndef DEBUG_FOR_SERIAL
-#define DEBUG_FOR_SERIAL 0
+#ifndef _DEBUG_FOR_SERIAL
+#define _DEBUG_FOR_SERIAL 0
 #endif
 namespace mf::commons::commonsLayer {
 	enum class ProcessStatus { blocked_level_too_high = 0, blocked_level_to_low = 1, blocked_level_missing = 2, stopped = 3, running = 4 };
