@@ -30,10 +30,66 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{81C37D40-C
 	ProjectSection(SolutionItems) = preProject
 		mf_repository_AvrMicroRepository.cpp = mf_repository_AvrMicroRepository.cpp
 		mf_repository_AvrMicroRepository.h = mf_repository_AvrMicroRepository.h
-		mf_repository_HardwareSerialAdapter.cpp = mf_repository_HardwareSerialAdapter.cpp
-		mf_repository_HardwareSerialAdapter.h = mf_repository_HardwareSerialAdapter.h
 		mf_repository_ISerial.cpp = mf_repository_ISerial.cpp
 		mf_repository_ISerial.h = mf_repository_ISerial.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlueToothRepository", "BlueToothRepository", "{1EA88311-B283-4A29-B143-9299FB75DD01}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_BlueToothRepository.cpp = mf_repository_BlueToothRepository.cpp
+		mf_repository_BlueToothRepository.h = mf_repository_BlueToothRepository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimRepository", "SimRepository", "{8E7293B6-A3AE-4626-B067-8159B7687522}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_SimRepository.cpp = mf_repository_SimRepository.cpp
+		mf_repository_SimRepository.h = mf_repository_SimRepository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adapters", "adapters", "{24D91AC7-BDBE-4AE3-A9E2-58F124C7FA31}"
+	ProjectSection(SolutionItems) = preProject
+		mf_adapter_SoftwareSerialAdapter.cpp = mf_adapter_SoftwareSerialAdapter.cpp
+		mf_adapter_SoftwareSerialAdapter.h = mf_adapter_SoftwareSerialAdapter.h
+		mf_repository_HardwareSerialAdapter.cpp = mf_repository_HardwareSerialAdapter.cpp
+		mf_repository_HardwareSerialAdapter.h = mf_repository_HardwareSerialAdapter.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IRRepository", "IRRepository", "{A988795F-E464-455B-9FD1-FE94BA7D8ADD}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_IR_ATMEGA_Repository.cpp = mf_repository_IR_ATMEGA_Repository.cpp
+		mf_repository_IR_ATMEGA_Repository.h = mf_repository_IR_ATMEGA_Repository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RFReveiverRepository", "RFReveiverRepository", "{E520D6E4-71B3-4E68-8C78-865299D51341}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_RFReceiverRepository.cpp = mf_repository_RFReceiverRepository.cpp
+		mf_repository_RFReceiverRepository.h = mf_repository_RFReceiverRepository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activity", "activity", "{9F8C56DD-C69C-4233-B10C-F44330B03D04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{2BAC941F-2257-4F33-9EAE-75166396551B}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_AnalogPortBActivity.cpp = mf_activity_AnalogPortBActivity.cpp
+		mf_activity_AnalogPortBActivity.h = mf_activity_AnalogPortBActivity.h
+		mf_activity_AnalogPortCActivity.cpp = mf_activity_AnalogPortCActivity.cpp
+		mf_activity_AnalogPortCActivity.h = mf_activity_AnalogPortCActivity.h
+		mf_activity_AnalogPortDActivity.cpp = mf_activity_AnalogPortDActivity.cpp
+		mf_activity_AnalogPortDActivity.h = mf_activity_AnalogPortDActivity.h
+		mf_activity_DigitalPortActivity.cpp = mf_activity_DigitalPortActivity.cpp
+		mf_activity_DigitalPortActivity.h = mf_activity_DigitalPortActivity.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NTC3950", "NTC3950", "{2E85C248-74AD-4BFA-B15A-7E39C2DD166D}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_NTC3950thermistorActivity.cpp = mf_activity_NTC3950thermistorActivity.cpp
+		mf_activity_NTC3950thermistorActivity.h = mf_activity_NTC3950thermistorActivity.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "multiPlexer", "multiPlexer", "{0FCE7C70-1FA2-4FA3-A5BF-E64EE9F53465}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_muxActivity.cpp = mf_activity_muxActivity.cpp
+		mf_activity_muxActivity.h = mf_activity_muxActivity.h
 	EndProjectSection
 EndProject
 Global
@@ -53,6 +109,14 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C0DCF878-DCAA-45BC-9DF6-C2ECF293DB8A} = {57780793-CE58-45E3-853D-ADADF0100E0F}
 		{81C37D40-C1C5-4484-AFEA-1E418E43D373} = {9D377321-617F-4930-A0B0-A68608208643}
+		{1EA88311-B283-4A29-B143-9299FB75DD01} = {9D377321-617F-4930-A0B0-A68608208643}
+		{8E7293B6-A3AE-4626-B067-8159B7687522} = {9D377321-617F-4930-A0B0-A68608208643}
+		{24D91AC7-BDBE-4AE3-A9E2-58F124C7FA31} = {9D377321-617F-4930-A0B0-A68608208643}
+		{A988795F-E464-455B-9FD1-FE94BA7D8ADD} = {9D377321-617F-4930-A0B0-A68608208643}
+		{E520D6E4-71B3-4E68-8C78-865299D51341} = {9D377321-617F-4930-A0B0-A68608208643}
+		{2BAC941F-2257-4F33-9EAE-75166396551B} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{2E85C248-74AD-4BFA-B15A-7E39C2DD166D} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{0FCE7C70-1FA2-4FA3-A5BF-E64EE9F53465} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}
