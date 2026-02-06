@@ -48,10 +48,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimRepository", "SimReposit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adapters", "adapters", "{24D91AC7-BDBE-4AE3-A9E2-58F124C7FA31}"
 	ProjectSection(SolutionItems) = preProject
+		mf_adapter_HardwareSerialAdapter.cpp = mf_adapter_HardwareSerialAdapter.cpp
+		mf_adapter_HardwareSerialAdapter.h = mf_adapter_HardwareSerialAdapter.h
 		mf_adapter_SoftwareSerialAdapter.cpp = mf_adapter_SoftwareSerialAdapter.cpp
 		mf_adapter_SoftwareSerialAdapter.h = mf_adapter_SoftwareSerialAdapter.h
-		mf_repository_HardwareSerialAdapter.cpp = mf_repository_HardwareSerialAdapter.cpp
-		mf_repository_HardwareSerialAdapter.h = mf_repository_HardwareSerialAdapter.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IRRepository", "IRRepository", "{A988795F-E464-455B-9FD1-FE94BA7D8ADD}"

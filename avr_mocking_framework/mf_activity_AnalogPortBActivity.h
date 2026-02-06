@@ -5,7 +5,6 @@
 #if _DEBUG_FOR_SERIAL
 #include <Arduino.h>
 #endif // _DEBUG_FOR_SERIAL
-
 class AnalogPortBActivity{
 public:
 	AnalogPortBActivity(AvrMicroRepository& avrMicroRepository, uint8_t analogPortsNumber,AnalogPortB** analogPortBase);
