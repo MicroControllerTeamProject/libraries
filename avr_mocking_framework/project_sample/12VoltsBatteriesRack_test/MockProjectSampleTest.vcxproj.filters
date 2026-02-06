@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="shared_with_microcontroller">
+      <UniqueIdentifier>{8086c7d2-c60f-475c-a614-3d2a00397ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shared_with_microcontroller\model">
+      <UniqueIdentifier>{e0a4a194-2d27-4229-b109-52a3d8b97e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shared_with_microcontroller\activity">
+      <UniqueIdentifier>{1f7a270a-78ff-4445-be76-69e24e096415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shared_with_microcontroller\common">
+      <UniqueIdentifier>{4a9a93d1-5c1d-4634-9c25-723ef0cc36e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shared_with_microcontroller\business_layer">
+      <UniqueIdentifier>{a1a53561-e84f-4dd2-adf1-139f2266f647}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12VoltsBatteriesRackTest.cpp" />
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortB.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortC.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_DigitalPort.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortD.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortBActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortCActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortDActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_DigitalPortActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_NTC3950thermistorActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Battery_Charge_Rack_Modular_Protection_Unit\src\business\ControlUnit_BL.cpp">
+      <Filter>shared_with_microcontroller\business_layer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\extend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fakeit.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\12VoltsBatteriesRack\src\model\DeMuxPlexerEntity.h">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\12VoltsBatteriesRack\src\model\AppConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf.commons.commonsLayer.h">
+      <Filter>shared_with_microcontroller\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
