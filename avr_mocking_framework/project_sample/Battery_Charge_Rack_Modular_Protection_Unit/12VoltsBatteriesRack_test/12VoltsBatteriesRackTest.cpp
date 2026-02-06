@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "src/extend.h"
 #include "CppUnitTest.h"
-#include "../Battery_Charge_Rack_Modular_Protection_Unit/src/model/DeMuxPlexerEntity.h"
-#include "../Battery_Charge_Rack_Modular_Protection_Unit/src/business/ControlUnit_BL.h"
+#include "../12VoltsBatteriesRack/src/model/DeMuxPlexerEntity.h"
+#include "../12VoltsBatteriesRack/src/business/ControlUnit_BL.h"
 #include <mf_repository_AvrMicroRepository.h>
 #include <mf_commons_commonsLayer.h>
 #include <mf_model_AnalogPortB.h>

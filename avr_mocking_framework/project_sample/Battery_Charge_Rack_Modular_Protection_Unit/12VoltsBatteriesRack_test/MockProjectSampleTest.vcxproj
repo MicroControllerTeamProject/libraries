@@ -162,16 +162,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortBActivity.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortCActivity.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortDActivity.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_DigitalPortActivity.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_NTC3950thermistorActivity.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortB.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortC.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortD.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_DigitalPort.cpp" />
-    <ClCompile Include="..\Battery_Charge_Rack_Modular_Protection_Unit\src\business\ControlUnit_BL.cpp" />
+    <ClCompile Include="..\..\..\mf_activity_AnalogPortBActivity.cpp" />
+    <ClCompile Include="..\..\..\mf_activity_AnalogPortCActivity.cpp" />
+    <ClCompile Include="..\..\..\mf_activity_AnalogPortDActivity.cpp" />
+    <ClCompile Include="..\..\..\mf_activity_DigitalPortActivity.cpp" />
+    <ClCompile Include="..\..\..\mf_activity_NTC3950thermistorActivity.cpp" />
+    <ClCompile Include="..\..\..\mf_model_AnalogPortB.cpp" />
+    <ClCompile Include="..\..\..\mf_model_AnalogPortC.cpp" />
+    <ClCompile Include="..\..\..\mf_model_AnalogPortD.cpp" />
+    <ClCompile Include="..\..\..\mf_model_DigitalPort.cpp" />
+    <ClCompile Include="..\12VoltsBatteriesRack\src\business\ControlUnit_BL.cpp" />
     <ClCompile Include="12VoltsBatteriesRackTest.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

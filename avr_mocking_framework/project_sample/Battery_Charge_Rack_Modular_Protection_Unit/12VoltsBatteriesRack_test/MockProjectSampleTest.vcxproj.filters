@@ -34,35 +34,35 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="12VoltsBatteriesRackTest.cpp" />
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortB.cpp">
-      <Filter>shared_with_microcontroller\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortC.cpp">
-      <Filter>shared_with_microcontroller\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_DigitalPort.cpp">
-      <Filter>shared_with_microcontroller\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_model_AnalogPortD.cpp">
-      <Filter>shared_with_microcontroller\model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortBActivity.cpp">
-      <Filter>shared_with_microcontroller\activity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortCActivity.cpp">
-      <Filter>shared_with_microcontroller\activity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_AnalogPortDActivity.cpp">
-      <Filter>shared_with_microcontroller\activity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_DigitalPortActivity.cpp">
-      <Filter>shared_with_microcontroller\activity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf_activity_NTC3950thermistorActivity.cpp">
-      <Filter>shared_with_microcontroller\activity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Battery_Charge_Rack_Modular_Protection_Unit\src\business\ControlUnit_BL.cpp">
+    <ClCompile Include="..\12VoltsBatteriesRack\src\business\ControlUnit_BL.cpp">
       <Filter>shared_with_microcontroller\business_layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_activity_AnalogPortBActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_activity_AnalogPortCActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_activity_AnalogPortDActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_activity_DigitalPortActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_activity_NTC3950thermistorActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_model_AnalogPortB.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_model_AnalogPortC.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_model_AnalogPortD.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_model_DigitalPort.cpp">
+      <Filter>shared_with_microcontroller\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
