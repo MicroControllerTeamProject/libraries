@@ -1,5 +1,5 @@
 {
-    "sketch": "ArduinoProjectSample.ino",
+    "sketch": "12VoltsBatteriesRack.ino",
     "configuration": "cpu=atmega328old",
     "board": "arduino:avr:nano",
     "port": "/dev/ttyUSB0",
