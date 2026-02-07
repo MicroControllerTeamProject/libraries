@@ -81,8 +81,8 @@ uint8_t AnalogPortBActivity::get_analog_ports_number() {
 AvrMicroRepository* AnalogPortBActivity::get_avr_micro_repository() { 
 	return this->avrMicroRepository; };
 void AnalogPortBActivity::set_process_status(mf::commons::commonsLayer::ProcessStatus status) {
-	this->processBlokedBy = status;
+	this->processBlockedBy = status;
 }
 mf::commons::commonsLayer::ProcessStatus AnalogPortBActivity::get_process_status() {
-	return this->processBlokedBy;
+	return this->processBlockedBy;
 }

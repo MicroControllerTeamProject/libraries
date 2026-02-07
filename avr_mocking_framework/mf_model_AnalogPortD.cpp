@@ -4,4 +4,4 @@ AnalogPortD::AnalogPortD(char group_id, const uint8_t pin, uint16_t max_digital_
 	this->min_digital_alarm_value_in = min_digital_alarm_value_in;
 }
 uint16_t AnalogPortD::getMaxDigitalAlarmValueIn() const { return this->max_digital_alarm_value_in;}
-uint16_t AnalogPortD::getMinDigitalAlarmValueIn	() const { return this->min_digital_alarm_value_in; }
+uint16_t AnalogPortD::getMinDigitalAlarmValueIn() const { return this->min_digital_alarm_value_in; }

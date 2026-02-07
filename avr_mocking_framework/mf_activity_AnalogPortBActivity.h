@@ -23,7 +23,7 @@ private:
 	uint8_t analog_port_number = 0;
 	AvrMicroRepository* avrMicroRepository = nullptr;
 	AnalogPortB** analogPortB = {};
-	mf::commons::commonsLayer::ProcessStatus processBlokedBy = mf::commons::commonsLayer::ProcessStatus::blocked_level_too_high;
+	mf::commons::commonsLayer::ProcessStatus processBlockedBy = mf::commons::commonsLayer::ProcessStatus::blocked_level_too_high;
 };
 inline AnalogPortBActivity::~AnalogPortBActivity() {}
 
