@@ -1,0 +1,170 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "commons", "commons", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		mf_commons_commonsLayer.h = mf_commons_commonsLayer.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "model", "model", "{57780793-CE58-45E3-853D-ADADF0100E0F}"
+	ProjectSection(SolutionItems) = preProject
+		mf_model_AnalogPortC.cpp = mf_model_AnalogPortC.cpp
+		mf_model_AnalogPortC.h = mf_model_AnalogPortC.h
+		mf_model_AnalogPortD.cpp = mf_model_AnalogPortD.cpp
+		mf_model_AnalogPortD.h = mf_model_AnalogPortD.h
+		mf_model_DigitalPort.cpp = mf_model_DigitalPort.cpp
+		mf_model_DigitalPort.h = mf_model_DigitalPort.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{C0DCF878-DCAA-45BC-9DF6-C2ECF293DB8A}"
+	ProjectSection(SolutionItems) = preProject
+		mf_model_AnalogPortB.cpp = mf_model_AnalogPortB.cpp
+		mf_model_AnalogPortB.h = mf_model_AnalogPortB.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repository", "repository", "{9D377321-617F-4930-A0B0-A68608208643}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{81C37D40-C1C5-4484-AFEA-1E418E43D373}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_AvrMicroRepository.cpp = mf_repository_AvrMicroRepository.cpp
+		mf_repository_AvrMicroRepository.h = mf_repository_AvrMicroRepository.h
+		mf_repository_ISerial.cpp = mf_repository_ISerial.cpp
+		mf_repository_ISerial.h = mf_repository_ISerial.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlueToothRepository", "BlueToothRepository", "{1EA88311-B283-4A29-B143-9299FB75DD01}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_BlueToothRepository.cpp = mf_repository_BlueToothRepository.cpp
+		mf_repository_BlueToothRepository.h = mf_repository_BlueToothRepository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimRepository", "SimRepository", "{8E7293B6-A3AE-4626-B067-8159B7687522}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_SimRepository.cpp = mf_repository_SimRepository.cpp
+		mf_repository_SimRepository.h = mf_repository_SimRepository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adapters", "adapters", "{24D91AC7-BDBE-4AE3-A9E2-58F124C7FA31}"
+	ProjectSection(SolutionItems) = preProject
+		mf_adapter_HardwareSerialAdapter.cpp = mf_adapter_HardwareSerialAdapter.cpp
+		mf_adapter_HardwareSerialAdapter.h = mf_adapter_HardwareSerialAdapter.h
+		mf_adapter_SoftwareSerialAdapter.cpp = mf_adapter_SoftwareSerialAdapter.cpp
+		mf_adapter_SoftwareSerialAdapter.h = mf_adapter_SoftwareSerialAdapter.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IRRepository", "IRRepository", "{A988795F-E464-455B-9FD1-FE94BA7D8ADD}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_IR_ATMEGA_Repository.cpp = mf_repository_IR_ATMEGA_Repository.cpp
+		mf_repository_IR_ATMEGA_Repository.h = mf_repository_IR_ATMEGA_Repository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RFReveiverRepository", "RFReveiverRepository", "{E520D6E4-71B3-4E68-8C78-865299D51341}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_RFReceiverRepository.cpp = mf_repository_RFReceiverRepository.cpp
+		mf_repository_RFReceiverRepository.h = mf_repository_RFReceiverRepository.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activity", "activity", "{9F8C56DD-C69C-4233-B10C-F44330B03D04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{2BAC941F-2257-4F33-9EAE-75166396551B}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_AnalogPortBActivity.cpp = mf_activity_AnalogPortBActivity.cpp
+		mf_activity_AnalogPortBActivity.h = mf_activity_AnalogPortBActivity.h
+		mf_activity_AnalogPortCActivity.cpp = mf_activity_AnalogPortCActivity.cpp
+		mf_activity_AnalogPortCActivity.h = mf_activity_AnalogPortCActivity.h
+		mf_activity_AnalogPortDActivity.cpp = mf_activity_AnalogPortDActivity.cpp
+		mf_activity_AnalogPortDActivity.h = mf_activity_AnalogPortDActivity.h
+		mf_activity_DigitalPortActivity.cpp = mf_activity_DigitalPortActivity.cpp
+		mf_activity_DigitalPortActivity.h = mf_activity_DigitalPortActivity.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NTC3950", "NTC3950", "{2E85C248-74AD-4BFA-B15A-7E39C2DD166D}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_NTC3950thermistorActivity.cpp = mf_activity_NTC3950thermistorActivity.cpp
+		mf_activity_NTC3950thermistorActivity.h = mf_activity_NTC3950thermistorActivity.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "multiPlexer", "multiPlexer", "{0FCE7C70-1FA2-4FA3-A5BF-E64EE9F53465}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_muxActivity.cpp = mf_activity_muxActivity.cpp
+		mf_activity_muxActivity.h = mf_activity_muxActivity.h
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12VoltsBatteriesRack", "project_sample\Battery_Charge_Rack_Modular_Protection_Unit\12VoltsBatteriesRack\12VoltsBatteriesRack.vcxproj", "{B41306A4-AF60-4867-8CF2-0F2FD5621610}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12VoltsBatteriesRack_test", "project_sample\Battery_Charge_Rack_Modular_Protection_Unit\12VoltsBatteriesRack_test\MockProjectSampleTest.vcxproj", "{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM.ActiveCfg = Debug|ARM
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM.Build.0 = Debug|ARM
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM.Deploy.0 = Debug|ARM
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM64.Build.0 = Debug|ARM64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x64.ActiveCfg = Debug|x64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x64.Build.0 = Debug|x64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x64.Deploy.0 = Debug|x64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x86.ActiveCfg = Debug|x86
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x86.Build.0 = Debug|x86
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x86.Deploy.0 = Debug|x86
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM.ActiveCfg = Release|ARM
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM.Build.0 = Release|ARM
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM.Deploy.0 = Release|ARM
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM64.ActiveCfg = Release|ARM64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM64.Build.0 = Release|ARM64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM64.Deploy.0 = Release|ARM64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x64.ActiveCfg = Release|x64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x64.Build.0 = Release|x64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x64.Deploy.0 = Release|x64
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.ActiveCfg = Release|x86
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.Build.0 = Release|x86
+		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.Deploy.0 = Release|x86
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM.ActiveCfg = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM.Build.0 = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM64.ActiveCfg = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM64.Build.0 = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x64.ActiveCfg = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x64.Build.0 = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x86.ActiveCfg = Debug|Win32
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x86.Build.0 = Debug|Win32
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM.ActiveCfg = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM.Build.0 = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM64.ActiveCfg = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM64.Build.0 = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x64.ActiveCfg = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x64.Build.0 = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x86.ActiveCfg = Release|Win32
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C0DCF878-DCAA-45BC-9DF6-C2ECF293DB8A} = {57780793-CE58-45E3-853D-ADADF0100E0F}
+		{81C37D40-C1C5-4484-AFEA-1E418E43D373} = {9D377321-617F-4930-A0B0-A68608208643}
+		{1EA88311-B283-4A29-B143-9299FB75DD01} = {9D377321-617F-4930-A0B0-A68608208643}
+		{8E7293B6-A3AE-4626-B067-8159B7687522} = {9D377321-617F-4930-A0B0-A68608208643}
+		{24D91AC7-BDBE-4AE3-A9E2-58F124C7FA31} = {9D377321-617F-4930-A0B0-A68608208643}
+		{A988795F-E464-455B-9FD1-FE94BA7D8ADD} = {9D377321-617F-4930-A0B0-A68608208643}
+		{E520D6E4-71B3-4E68-8C78-865299D51341} = {9D377321-617F-4930-A0B0-A68608208643}
+		{2BAC941F-2257-4F33-9EAE-75166396551B} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{2E85C248-74AD-4BFA-B15A-7E39C2DD166D} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{0FCE7C70-1FA2-4FA3-A5BF-E64EE9F53465} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,19 @@
+class DigitalPort
+!!!169258.cpp!!!	DigitalPort(in group_id : char, in pin : uint8_t, in portDirection : PortDirection = mf::commons::commonsLayer::PortDirection::noset, in alarmTriggerOn : AlarmTriggerOn = mf::commons::commonsLayer::AlarmTriggerOn::noset)
+
+	this->pin = pin;
+	this->group_id = group_id;
+	this->alarmTriggerOn = alarmTriggerOn;
+	this->portDirection = portDirection;
+!!!169386.cpp!!!	get_group_id() : char
+
+	return this->group_id;
+!!!169514.cpp!!!	get_pin() : uint8_t
+
+	return pin;
+!!!169642.cpp!!!	get_port_direction() : PortDirection
+
+	return this->portDirection;
+!!!169770.cpp!!!	get_alarm_trigger_on() : AlarmTriggerOn
+
+	return this->alarmTriggerOn;

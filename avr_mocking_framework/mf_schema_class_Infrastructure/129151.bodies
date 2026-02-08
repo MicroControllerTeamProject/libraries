@@ -1,0 +1,16 @@
+class DigitalPort
+!!!136447.cpp!!!	get_uid() : char
+
+	return uid;
+!!!136575.cpp!!!	get_group_id() : char
+
+	return this->group_id;
+!!!136703.cpp!!!	get_pin() : uint8_t
+
+	return pin;
+!!!136831.cpp!!!	get_port_direction() : commonsLayer::PortDirection
+
+	return this->portDirection;
+!!!136959.cpp!!!	get_alarm_trigger_on() : commonsLayer::AlarmTriggerOn
+
+	return this->alarmTriggerOn;

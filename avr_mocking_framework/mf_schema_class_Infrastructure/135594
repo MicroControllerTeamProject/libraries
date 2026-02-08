@@ -1,0 +1,98 @@
+format 224
+"12VoltsBatteriesRack_test" // avr_mocking_framework::project_sample::Battery_Charge_Rack_Modular_Protection_Unit::12VoltsBatteriesRack_test
+  revision 4
+  modified_by 42 "luigi"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "C:/Repo/MicroControllerTeamProject/libraries/avr_mocking_framework/project_sample/Battery_Charge_Rack_Modular_Protection_Unit/12VoltsBatteriesRack_test/"
+  cpp_src_dir "C:/Repo/MicroControllerTeamProject/libraries/avr_mocking_framework/project_sample/Battery_Charge_Rack_Modular_Protection_Unit/12VoltsBatteriesRack_test/"
+  classview 135082 "12VoltsBatteriesRack_test"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 148394 "GarageRepository"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+  end
+
+  deploymentview 128554 "12VoltsBatteriesRack_test"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 130858 "MockProjectSampleTest"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 148394 // GarageRepository
+      end
+    end
+  end
+end

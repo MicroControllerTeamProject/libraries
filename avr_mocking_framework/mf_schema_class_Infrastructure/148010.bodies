@@ -1,0 +1,133 @@
+class ControlUnit_BL
+!!!182826.cpp!!!	ControlUnit_BL(inout avrMicroRepository : AvrMicroRepository, inout app_config : AppConfig, inout thermistorActivity : NTC3950thermistorActivity, inout relayActivity : DigitalPortActivity, inout currentActivity : AnalogPortCActivity)
+
+	this->avrMicroRepository.pinMode(this->app_config.reset_counter_pin, (bool)mf::commons::commonsLayer::PortDirection::output);
+	this->avrMicroRepository.pinMode(this->app_config.ckl_counter_pin, (bool)mf::commons::commonsLayer::PortDirection::output);
+	this->avrMicroRepository.pinMode(this->app_config.enable_demux_relay_pin, (bool)mf::commons::commonsLayer::PortDirection::output);
+	this->avrMicroRepository.pinMode(this->app_config.demux_sensors_signal_pin, (bool)mf::commons::commonsLayer::PortDirection::output);
+!!!183082.cpp!!!	disable_relays_where_thermistor_is_on_alarm() : bool
+
+	bool return_value = false;
+	if (is_thermistor_port_values_out_of_range()) {
+		return_value = true;
+		for (uint8_t i = 0; i < this->thermistorActivity.get_analog_ports_number(); i++) {
+			if (this->thermistorActivity.get_analog_ports()[i]->is_onAlarm &&
+				this->thermistorActivity.get_analog_ports()[i]->is_time_above_threshold_elapsed ||
+					this->thermistorActivity.get_analog_ports()[i]->is_time_under_threshold_elapsed) {
+				turn_off_relay_by_group(this->thermistorActivity.get_analog_ports()[i]->get_group_id());
+				//used for avoid reading spikes
+				this->avrMicroRepository.delay(500);
+			}
+		}
+	}
+	return return_value;
+!!!183210.cpp!!!	disable_relays_where_current_is_on_alarm() : bool
+
+	bool return_value = false;
+	if (is_current_port_values_out_of_range()) {
+		return_value = true;
+		for (uint8_t i = 0; i < this->currentActivity.get_analog_ports_number(); i++) {
+			if (this->currentActivity.get_analog_ports()[i]->is_onAlarm &&
+				(this->currentActivity.get_analog_ports()[i]->is_time_above_threshold_elapsed ||
+					this->currentActivity.get_analog_ports()[i]->is_time_under_threshold_elapsed)) {
+				turn_off_relay_by_group(this->currentActivity.get_analog_ports()[i]->get_group_id());
+			}
+		}
+	}
+	return return_value;
+!!!183338.cpp!!!	turn_on_off_all_relays(in turn_on : bool) : void
+
+	uint8_t np = this->relayActivity.get_ports_number();
+	for (size_t i = 0; i < np; i++) {
+		this->avrMicroRepository.digitalWrite(this->relayActivity.get_digital_ports()[i]->get_pin(), turn_on);
+#ifdef _ON_MOCKING_TESTS
+		this->relayActivity.get_digital_ports()[i]->pin_value = turn_on;
+#endif // 
+	}
+!!!183466.cpp!!!	calculate_current_sensors_offset(in number_of_read : uint8_t) : void
+
+	uint8_t ports_number = this->currentActivity.get_analog_ports_number();
+	for (uint8_t i = 0; i < ports_number; i++) {
+		disable_demux_sensors();
+		reset_counter();
+		set_position_counter(this->currentActivity.get_analog_ports()[i]->get_pin());
+		enable_demux_sensors();
+		this->currentActivity.set_offset(app_config.demux_sensors_signal_pin, i, number_of_read);
+	}
+!!!183594.cpp!!!	reset_counter() : void
+
+	this->avrMicroRepository.digitalWrite(this->app_config.reset_counter_pin, HIGH); // Reset del contatore
+	this->avrMicroRepository.delay(10); // Attesa di 10 ms
+	this->avrMicroRepository.digitalWrite(this->app_config.reset_counter_pin, LOW); // Fine del reset
+#if _ON_MOCKING_TESTS
+	this->demux_plexer_entity.selected_chanell = 0; // Resetta il canale selezionato nel demux (solo per test)
+#endif // _on_mocking_tests
+!!!183722.cpp!!!	set_position_counter(in position : uint8_t) : void
+
+	for (uint8_t i = 0; i < position; i++) {
+		this->avrMicroRepository.digitalWrite(this->app_config.ckl_counter_pin, HIGH); // Imposta il pin del contatore a HIGH
+		this->avrMicroRepository.delay(10); // Attesa di 10 ms
+		this->avrMicroRepository.digitalWrite(this->app_config.ckl_counter_pin, LOW); // Imposta il pin del contatore a LOW
+		this->avrMicroRepository.delay(10); // Attesa di 10 ms
+#if _ON_MOCKING_TESTS
+		this->demux_plexer_entity.selected_chanell++;
+#endif // _on_mocking_tests
+	}
+!!!183850.cpp!!!	enable_demux_sensors() : void
+
+	this->avrMicroRepository.digitalWrite(this->app_config.enable_demux_relay_pin, LOW);
+#if _ON_MOCKING_TESTS
+	this->demux_plexer_entity.en_status = false;
+#endif // _on_mocking_tests
+!!!183978.cpp!!!	disable_demux_sensors() : void
+
+	this->avrMicroRepository.digitalWrite(this->app_config.enable_demux_relay_pin, HIGH);
+#if _ON_MOCKING_TESTS
+	this->demux_plexer_entity.en_status = true;
+#endif // _on_mocking_tests
+!!!184106.cpp!!!	is_thermistor_port_values_out_of_range() : bool
+
+	//bool is_first_read = true;
+	uint8_t ports_number = this->thermistorActivity.get_analog_ports_number();
+	for (uint8_t i = 0; i < ports_number; i++) {
+		disable_demux_sensors();
+		reset_counter();
+		set_position_counter(this->thermistorActivity.get_analog_ports()[i]->get_pin());
+		enable_demux_sensors();
+		/*if (is_first_read) {
+			enable_demux_sensors();
+			this->avrMicroRepository.delay(500);
+			is_first_read = false;
+		}*/
+		this->thermistorActivity.analog_read_average(app_config.demux_sensors_signal_pin, i, 10);
+	}
+	return this->thermistorActivity.is_any_port_out_of_range();
+!!!184234.cpp!!!	is_current_port_values_out_of_range() : bool
+
+	uint8_t ports_number = this->currentActivity.get_analog_ports_number();
+	for (uint8_t i = 0; i < ports_number; i++) {
+		disable_demux_sensors();
+		reset_counter();
+		set_position_counter(this->currentActivity.get_analog_ports()[i]->get_pin());
+		enable_demux_sensors();
+		this->currentActivity.analog_read_average(app_config.demux_sensors_signal_pin, i, 10);
+#if _DEBUG_FOR_SERIAL
+		Serial.print("Cur."); Serial.print(i); Serial.print(" : "); Serial.println(this->currentActivity.get_analog_ports()[i]->digital_value);
+#endif // 
+
+	}
+	return this->currentActivity.is_any_port_out_of_range();
+!!!184362.cpp!!!	turn_off_relay_by_group(in group_id : char) : bool
+
+	bool return_value = false;
+	uint8_t np = this->relayActivity.get_ports_number();
+	for (size_t i = 0; i < np; i++) {
+		if (this->relayActivity.get_digital_ports()[i]->get_group_id() == group_id && this->relayActivity.get_digital_ports()[i]->pin_value == true) {
+			this->avrMicroRepository.digitalWrite(this->relayActivity.get_digital_ports()[i]->get_pin(), false);
+#ifdef _ON_MOCKING_TESTS
+			this->relayActivity.get_digital_ports()[i]->pin_value = false;
+#endif // 
+			return_value = true;
+		}
+	}
+	return return_value;

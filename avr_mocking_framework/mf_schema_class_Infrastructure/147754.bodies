@@ -1,0 +1,26 @@
+class RFReceiverRepository
+!!!180394.cpp!!!	RFReceiverRepository(in rx_pin : uint8_t, in ptt_pin : uint8_t, in vw_speed : uint16_t, inout userBuf : uint8_t, in userBufLen : uint8_t)
+
+!!!180522.cpp!!!	begin() : bool
+
+    if (_buf == 0 || _bufLen == 0) return false;
+    vw_set_ptt_pin(_ptt_pin);
+    vw_set_ptt_inverted(false);
+    vw_set_rx_pin(_rx_pin);
+    vw_setup(_vw_speed);   // VirtualWire tipicamente è void
+    vw_rx_start();
+    return true;
+!!!180650.cpp!!!	stop() : void
+
+    vw_rx_stop();
+!!!180778.cpp!!!	read(inout out : uint8_t, inout inoutLen : uint8_t) : bool
+
+    if (!out || !inoutLen || *inoutLen == 0) return false;
+    uint8_t len = _bufLen;                 // cap interno
+    if (vw_get_message(_buf, &len)) {      // CRC ok
+        uint8_t n = (len <= *inoutLen) ? len : *inoutLen;
+        for (uint8_t i = 0; i < n; ++i) out[i] = _buf[i];
+        *inoutLen = n;
+        return true;
+    }
+    return false;

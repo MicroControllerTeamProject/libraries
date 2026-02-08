@@ -1,0 +1,88 @@
+class AnalogPortBActivity
+!!!158634.cpp!!!	AnalogPortBActivity(inout avrMicroRepository : AvrMicroRepository, in analogPortsNumber : uint8_t, inout analogPortBase : AnalogPortB)
+
+	this->avrMicroRepository = &avrMicroRepository; 
+	this->analog_port_number = analogPortsNumber;
+	this->analogPortB = analogPortBase;
+	this->reset_ports();
+!!!158890.cpp!!!	get_avr_micro_repository() : AvrMicroRepository
+ 
+	return this->avrMicroRepository;
+!!!159018.cpp!!!	is_delay_elapsed_for_ports_under_threshold(inout AnalogPortB : AnalogPortB) : bool
+
+	if (AnalogPortB->is_onAlarm && AnalogPortB->is_alarm_under_threshold) {
+		if (AnalogPortB->first_time_on_alarm == 0) {
+			AnalogPortB->first_time_on_alarm = this->avrMicroRepository->get_millis();
+		}else {
+			if ((this->avrMicroRepository->get_millis() - AnalogPortB->first_time_on_alarm) >= (AnalogPortB->set_alarm_if_under_threshold_for_seconds * 1000)) {
+				return true;
+			}
+		}
+	}else {
+		AnalogPortB->first_time_on_alarm = 0;
+	}
+	return false;
+!!!159146.cpp!!!	is_delay_elapsed_for_ports_above_threshold(inout AnalogPortB : AnalogPortB) : bool
+
+	if (AnalogPortB->is_onAlarm && AnalogPortB->is_alarm_above_threshold) {
+		if (AnalogPortB->first_time_on_alarm == 0) {
+			AnalogPortB->first_time_on_alarm = this->avrMicroRepository->get_millis();
+		}
+		else {
+			if ((this->avrMicroRepository->get_millis() - AnalogPortB->first_time_on_alarm) >= (AnalogPortB->set_alarm_if_above_threshold_for_seconds * 1000)) {
+				return true;
+			}
+		}
+	}
+	else {
+		AnalogPortB->first_time_on_alarm = 0;
+	}
+	return false;
+!!!159274.cpp!!!	analog_read_for_all_ports() : void
+
+	for (int i = 0; i < this->analog_port_number; i++) {
+		this->analogPortB[i]->is_onAlarm = false;
+		this->analogPortB[i]->is_alarm_above_threshold = false;
+		this->analogPortB[i]->is_alarm_under_threshold = false;
+		this->analogPortB[i]->digital_value = this->avrMicroRepository->analogRead(this->analogPortB[i]->get_pin());
+		}
+!!!159402.cpp!!!	analog_read_average(in pin : uint8_t, in index_port : uint8_t, in number_of_read : uint8_t) : uint16_t
+
+	//Remove first read spike
+	this->avrMicroRepository->analogRead(pin);
+	this->avrMicroRepository->delay(100);
+	uint16_t acc = 0;
+	for (uint8_t k = 0; k < number_of_read; k++) {
+		acc += this->avrMicroRepository->analogRead(pin);
+		this->avrMicroRepository->delay(50);
+	}
+	uint16_t digital_value = (acc / number_of_read) - this->analogPortB[index_port]->offset;
+	if (digital_value > 0 && digital_value < 1024) { 
+		this->analogPortB[index_port]->digital_value = digital_value; 
+	}
+	else{
+		this->analogPortB[index_port]->digital_value = 0;
+	}
+	return this->analogPortB[index_port]->digital_value;
+!!!159530.cpp!!!	set_offset(in pin : uint8_t, in index_port : uint8_t, in number_of_read : uint8_t) : void
+
+	this->analogPortB[index_port]->offset = analog_read_average(pin, index_port, number_of_read);
+!!!159658.cpp!!!	get_analog_ports_number() : uint8_t
+
+	return this->analog_port_number;
+!!!159786.cpp!!!	reset_ports() : void
+
+	for (int i = 0; i < this->analog_port_number; i++) {
+		this->analogPortB[i]->is_onAlarm = false;
+		this->analogPortB[i]->is_alarm_above_threshold = false;
+		this->analogPortB[i]->is_alarm_under_threshold = false;
+		this->analogPortB[i]->first_time_on_alarm = 0;
+		this->analogPortB[i]->is_time_under_threshold_elapsed = false;
+		this->analogPortB[i]->offset = 0;
+	}
+!!!159914.cpp!!!	set_process_status(in status : ProcessStatus) : void
+
+	this->processBlockedBy = status;
+!!!160042.cpp!!!	get_process_status() : ProcessStatus
+
+	return this->processBlockedBy;

@@ -1,0 +1,15 @@
+class AnalogPortDActivity
+!!!160682.cpp!!!	AnalogPortDActivity(inout avrMicroRepository : AvrMicroRepository, inout analogPortForDigitalMeasure : AnalogPortD, in analogPortsNumber : uint8_t)
+
+	this->analogPortForDigitalMeasure = analogPortForDigitalMeasure;
+	this->reset_ports();
+!!!160810.cpp!!!	get_analog_ports() : AnalogPortD
+
+	return this->analogPortForDigitalMeasure;
+!!!160938.cpp!!!	get_port_by_pin(in pin : uint8_t) : AnalogPortD
+
+	for (int i = 0; i < this->get_analog_ports_number(); i++) {
+		if (this->analogPortForDigitalMeasure[i]->get_pin() == pin) {
+			return this->analogPortForDigitalMeasure[i];
+		}
+	}

@@ -1,0 +1,15 @@
+class AnalogPortC
+!!!168106.cpp!!!	AnalogPortC(in group_id : char, in pin : uint8_t, in full_scale_unit_of_misure : float, in max_unit_of_misure_alarm_value : float, in min_unit_of_misure_alarm_value : float, in unit_of_misure_is_centered : bool = false)
+
+	this->max_unit_of_misure_alarm_value = max_unit_of_misure_alarm_value;
+	this->min_unit_of_misure_alarm_value = min_unit_of_misure_alarm_value;
+	this->full_scale_unit_of_misure = full_scale_unit_of_misure;
+	this->unit_of_misure_is_centered = unit_of_misure_is_centered;
+!!!168362.cpp!!!	getFullScaleUnitOfMisure() : float
+ return this->full_scale_unit_of_misure;
+!!!168490.cpp!!!	getIstUnitOfMisureCentered() : bool
+ return this->unit_of_misure_is_centered;
+!!!168618.cpp!!!	getMaxUnitOfMisureAlarmValue() : float
+ return this->max_unit_of_misure_alarm_value;
+!!!168746.cpp!!!	getMinUnitOfMisureAlarmValue() : float
+ return this->min_unit_of_misure_alarm_value;

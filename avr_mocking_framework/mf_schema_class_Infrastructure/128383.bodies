@@ -1,0 +1,125 @@
+class AnalogPortActivity
+!!!130943.cpp!!!	AnalogPortActivity(inout avrMicroRepository : AvrMicroRepository, inout analogPort : AnalogPort, in analogPortsNumber : uint8_t)
+
+	this->analogPort = analogPort;
+	this->analog_port_number = analogPortsNumber;
+	this->avrMicroRepository = &avrMicroRepository;
+	initialize_ports();
+!!!131071.cpp!!!	read_all_unit_of_misure_threshold() : bool
+
+	bool isOnAlarm = false;
+	read_all_ports_and_initialize();
+	for (int i = 0; i < this->analog_port_number; i++) {
+		if (this->analogPort[i]->analogPorttype == commonsLayer::custom_misure)
+		{
+			float unit_of_misure_value = 0.00f;
+			if (this->analogPort[i]->getFullScaleUnitOfMisure() != 0){
+				unit_of_misure_value = (this->analogPort[i]->getFullScaleUnitOfMisure() / (this->analogPort[i]->getIstUnitOfMisureCentered() ? 512 : 1023)) * (this->analogPort[i]->getIstUnitOfMisureCentered() ? this->analogPort[i]->digital_value - 512 : this->analogPort[i]->digital_value);
+			}
+			else {
+				unit_of_misure_value = this->avrMicroRepository->get_vref() * (this->analogPort[i]->digital_value / 1023.0f);
+			}
+			if (unit_of_misure_value > this->analogPort[i]->getMaxUnitOfMisureAlarmValue()) {
+				this->analogPort[i]->is_alarm_above_threshold = true;
+				this->analogPort[i]->is_onAlarm = true;
+				this->analogPort[i]->is_time_above_threshold_elapsed = is_delay_elapsed_for_ports_above_threshold(this->analogPort[i]);
+				isOnAlarm = true;
+			}
+			else if (unit_of_misure_value < this->analogPort[i]->getMinUnitOfMisureAlarmValue()) {
+				this->analogPort[i]->is_alarm_under_threshold = true;
+				this->analogPort[i]->is_onAlarm = true;
+				this->analogPort[i]->is_time_under_threshold_elapsed = is_delay_elapsed_for_ports_under_threshold(this->analogPort[i]);
+				isOnAlarm = true;
+			}
+			else {
+				this->analogPort[i]->first_time_on_alarm = 0;
+				this->analogPort[i]->is_time_under_threshold_elapsed = false;
+			}
+		}
+	}
+	return isOnAlarm;
+!!!131199.cpp!!!	read_all_ports_and_initialize() : void
+
+	for (int i = 0; i < this->analog_port_number; i++) {
+		this->analogPort[i]->is_onAlarm = false;
+		this->analogPort[i]->is_alarm_above_threshold = false;
+		this->analogPort[i]->is_alarm_under_threshold = false;
+		this->analogPort[i]->digital_value = avrMicroRepository->analogRead(this->analogPort[i]->get_pin());
+		}
+!!!131327.cpp!!!	read_all_digital_ports_threshold() : bool
+
+	bool isOnAlarm = false;
+	read_all_ports_and_initialize();
+	for (int i = 0; i < this->analog_port_number; i++) {
+		if (this->analogPort[i]->analogPorttype == commonsLayer::digital){
+			if (this->analogPort[i]->digital_value > this->analogPort[i]->getMaxDigitalAlarmValueIn()) {
+				this->analogPort[i]->is_alarm_above_threshold = true;
+				this->analogPort[i]->is_onAlarm = true;
+				this->analogPort[i]->is_time_above_threshold_elapsed = is_delay_elapsed_for_ports_above_threshold(this->analogPort[i]);
+				isOnAlarm = true;
+			}
+			else if (this->analogPort[i]->digital_value < this->analogPort[i]->getMaxDigitalAlarmValueIn()) {
+				this->analogPort[i]->is_alarm_under_threshold = true;
+				this->analogPort[i]->is_onAlarm = true;
+				this->analogPort[i]->is_time_under_threshold_elapsed = is_delay_elapsed_for_ports_under_threshold(this->analogPort[i]);
+				isOnAlarm = true;
+			}
+			else {
+				this->analogPort[i]->first_time_on_alarm = 0;
+				this->analogPort[i]->is_time_under_threshold_elapsed = false;
+			}
+		}
+	}
+	return isOnAlarm;
+!!!131455.cpp!!!	get_analog_port() : AnalogPort
+
+	return this->analogPort;
+!!!131583.cpp!!!	get_analog_ports_number() : uint8_t
+
+	return this->analog_port_number;
+!!!131711.cpp!!!	get_port_by_id(in id : char) : AnalogPort
+
+	for (int i = 0; i < this->analog_port_number; i++) {
+		if (strncmp(this->analogPort[i]->get_uid(), id, 3) == 0) {
+			return this->analogPort[i];
+		}
+	}
+!!!131967.cpp!!!	is_delay_elapsed_for_ports_under_threshold(inout analogPort : AnalogPort) : bool
+
+	if (analogPort->is_onAlarm && analogPort->is_alarm_under_threshold) {
+		if (analogPort->first_time_on_alarm == 0) {
+			analogPort->first_time_on_alarm = this->avrMicroRepository->get_millis();
+		}else {
+			if ((this->avrMicroRepository->get_millis() - analogPort->first_time_on_alarm) >= (analogPort->set_alarm_if_under_threshold_for_seconds * 1000)) {
+				return true;
+			}
+		}
+	}else {
+		analogPort->first_time_on_alarm = 0;
+	}
+	return false;
+!!!132095.cpp!!!	is_delay_elapsed_for_ports_above_threshold(inout analogPort : AnalogPort) : bool
+
+	if (analogPort->is_onAlarm && analogPort->is_alarm_above_threshold) {
+		if (analogPort->first_time_on_alarm == 0) {
+			analogPort->first_time_on_alarm = this->avrMicroRepository->get_millis();
+		}
+		else {
+			if ((this->avrMicroRepository->get_millis() - analogPort->first_time_on_alarm) >= (analogPort->set_alarm_if_above_threshold_for_seconds * 1000)) {
+				return true;
+			}
+		}
+	}
+	else {
+		analogPort->first_time_on_alarm = 0;
+	}
+	return false;
+!!!132223.cpp!!!	initialize_ports() : void
+
+	for (int i = 0; i < this->analog_port_number; i++) {
+		this->analogPort[i]->is_onAlarm = false;
+		this->analogPort[i]->is_alarm_above_threshold = false;
+		this->analogPort[i]->is_alarm_under_threshold = false;
+		this->analogPort[i]->first_time_on_alarm = 0;
+		this->analogPort[i]->is_time_under_threshold_elapsed = false;
+	}

@@ -1,0 +1,55 @@
+class DigitalPortActivity
+!!!161194.cpp!!!	DigitalPortActivity(inout avrMicroRepository : AvrMicroRepository, inout digitalPort : DigitalPort, in digitalPortsNumber : uint8_t)
+
+	this->avrMicroRepository = &avrMicroRepository;
+	this->digitalPort = digitalPort;
+	this->digital_port_number = digitalPortsNumber;
+	set_ports_direction();
+!!!161450.cpp!!!	is_any_port_triggered() : bool
+
+	bool isOnAlarm = false;
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::input) {
+			if ((this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::high && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == true)
+				||
+				(this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::low && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == false)) {
+#ifdef _ON_MOCKING_TESTS
+				this->digitalPort[i]->pin_value = (bool)this->digitalPort[i]->get_alarm_trigger_on();
+#endif // 
+				this->digitalPort[i]->is_onAlarm = true;
+				isOnAlarm = true;
+			}
+		}
+	}
+	return isOnAlarm;
+!!!161578.cpp!!!	turn_port_level(in pin : uint8_t, in level : bool) : void
+
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::output) {
+			if (this->digitalPort[i]->get_pin() == pin) {
+				this->avrMicroRepository->digitalWrite(digitalPort[i]->get_pin(), level);
+#ifdef _ON_MOCKING_TESTS
+				this->digitalPort[i]->pin_value = level;
+#endif // 
+				this->digitalPort[i]->pin_value = level;
+				return;
+			}
+		}
+	}
+!!!161706.cpp!!!	get_ports_number() : uint8_t
+
+	return this->digital_port_number;
+!!!161962.cpp!!!	get_port_by_pin(in pin : uint8_t) : DigitalPort
+
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (this->digitalPort[i]->get_pin() == pin) {
+			return this->digitalPort[i];
+		}
+	}
+!!!162090.cpp!!!	set_ports_direction() : void
+
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (this->digitalPort[i]->get_port_direction() != mf::commons::commonsLayer::PortDirection::noset) {
+			this->avrMicroRepository->pinMode(this->digitalPort[i]->get_pin(), (uint8_t)this->digitalPort[i]->get_port_direction());
+		}
+	}

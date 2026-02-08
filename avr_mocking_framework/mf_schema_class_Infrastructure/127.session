@@ -1,0 +1,20 @@
+window_sizes 1920 1009 450 1465 963 0
+
+diagrams
+  active  classdiagram_ref 128127 // Classis
+    1465 961 79 A3-Landscape 9 0
+end
+show_stereotypes
+selected class_ref 129407 // Charge_Battery_BL
+open
+  classview_ref 128127 // Infrastructure
+  classview_ref 128255 // ArduinoProjectSample
+  classview_ref 128383 // activity
+  classview_ref 128511 // repository
+  classview_ref 128639 // model
+  class_ref 128767 // commonsLayer
+  deploymentview_ref 128511 // commons
+  classview_ref 128895 // business
+  deploymentview_ref 128383 // business
+end
+end
