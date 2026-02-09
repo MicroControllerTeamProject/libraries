@@ -22,34 +22,22 @@
     <Filter Include="model">
       <UniqueIdentifier>{a7248c5f-312d-4118-aebe-f8b2bf18f278}</UniqueIdentifier>
     </Filter>
-    <Filter Include="model\application">
-      <UniqueIdentifier>{5504ee17-9e14-466e-8e9c-50e671866f7c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="model\application\for_test">
-      <UniqueIdentifier>{18cfbc1c-7638-4c32-9ebe-03ad5d894f44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="circuit">
-      <UniqueIdentifier>{6b9280c4-05d3-4a70-b1ad-06834d0d8535}</UniqueIdentifier>
-    </Filter>
     <Filter Include="repository">
       <UniqueIdentifier>{e67b78c4-930e-42e1-99c9-abd812ff3556}</UniqueIdentifier>
     </Filter>
     <Filter Include="commons">
       <UniqueIdentifier>{5ae29df7-35b2-4695-ab11-e9311a1c0c36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="model\for_test">
+      <UniqueIdentifier>{18cfbc1c-7638-4c32-9ebe-03ad5d894f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="configration">
+      <UniqueIdentifier>{d3997d9f-e5d0-4d21-a6cf-44e72c2f6fda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\arduino folders read me.txt">
       <Filter>Misc Files</Filter>
-    </None>
-    <None Include="..\circuit_study\12VMultipleBatteriesSystem\12VMultipleBatteriesSystem.brd">
-      <Filter>circuit</Filter>
-    </None>
-    <None Include="..\circuit_study\12VMultipleBatteriesSystem\Current-Temperature-MultiPlex.brd">
-      <Filter>circuit</Filter>
-    </None>
-    <None Include="..\circuit_study\12VMultipleBatteriesSystem\12V_current_temperature_board_02.brd">
-      <Filter>circuit</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -72,16 +60,19 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\model\DeMuxPlexerEntity.h">
-      <Filter>model\application\for_test</Filter>
-    </ClInclude>
-    <ClInclude Include="src\model\AppConfig.h">
-      <Filter>model\application\for_test</Filter>
+      <Filter>model\for_test</Filter>
     </ClInclude>
     <ClInclude Include="__vm\.project_sample.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="__vm\.Battery_Charge_Rack_Modular_Protection_Unit.vsarduino.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppConfig.h">
+      <Filter>configration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mf_commons_commonsLayer.h">
+      <Filter>commons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36915.13
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "commons", "commons", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -72,12 +72,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{2BAC941F-2
 	ProjectSection(SolutionItems) = preProject
 		mf_activity_AnalogPortBActivity.cpp = mf_activity_AnalogPortBActivity.cpp
 		mf_activity_AnalogPortBActivity.h = mf_activity_AnalogPortBActivity.h
-		mf_activity_AnalogPortCActivity.cpp = mf_activity_AnalogPortCActivity.cpp
-		mf_activity_AnalogPortCActivity.h = mf_activity_AnalogPortCActivity.h
-		mf_activity_AnalogPortDActivity.cpp = mf_activity_AnalogPortDActivity.cpp
-		mf_activity_AnalogPortDActivity.h = mf_activity_AnalogPortDActivity.h
-		mf_activity_DigitalPortActivity.cpp = mf_activity_DigitalPortActivity.cpp
-		mf_activity_DigitalPortActivity.h = mf_activity_DigitalPortActivity.h
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NTC3950", "NTC3950", "{2E85C248-74AD-4BFA-B15A-7E39C2DD166D}"
@@ -95,6 +89,20 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12VoltsBatteriesRack", "project_sample\Battery_Charge_Rack_Modular_Protection_Unit\12VoltsBatteriesRack\12VoltsBatteriesRack.vcxproj", "{B41306A4-AF60-4867-8CF2-0F2FD5621610}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12VoltsBatteriesRack_test", "project_sample\Battery_Charge_Rack_Modular_Protection_Unit\12VoltsBatteriesRack_test\MockProjectSampleTest.vcxproj", "{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "analogPorts", "analogPorts", "{84CDD484-8411-469E-BB9E-CD176DAA9063}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_AnalogPortCActivity.cpp = mf_activity_AnalogPortCActivity.cpp
+		mf_activity_AnalogPortCActivity.h = mf_activity_AnalogPortCActivity.h
+		mf_activity_AnalogPortDActivity.cpp = mf_activity_AnalogPortDActivity.cpp
+		mf_activity_AnalogPortDActivity.h = mf_activity_AnalogPortDActivity.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "digitalPorts", "digitalPorts", "{018AF0F2-CB99-44FE-9390-152EFF3E57DF}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_DigitalPortActivity.cpp = mf_activity_DigitalPortActivity.cpp
+		mf_activity_DigitalPortActivity.h = mf_activity_DigitalPortActivity.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -160,9 +168,11 @@ Global
 		{24D91AC7-BDBE-4AE3-A9E2-58F124C7FA31} = {9D377321-617F-4930-A0B0-A68608208643}
 		{A988795F-E464-455B-9FD1-FE94BA7D8ADD} = {9D377321-617F-4930-A0B0-A68608208643}
 		{E520D6E4-71B3-4E68-8C78-865299D51341} = {9D377321-617F-4930-A0B0-A68608208643}
-		{2BAC941F-2257-4F33-9EAE-75166396551B} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{2BAC941F-2257-4F33-9EAE-75166396551B} = {84CDD484-8411-469E-BB9E-CD176DAA9063}
 		{2E85C248-74AD-4BFA-B15A-7E39C2DD166D} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
 		{0FCE7C70-1FA2-4FA3-A5BF-E64EE9F53465} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{84CDD484-8411-469E-BB9E-CD176DAA9063} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{018AF0F2-CB99-44FE-9390-152EFF3E57DF} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}

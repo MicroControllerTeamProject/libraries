@@ -22,9 +22,6 @@
     <Filter Include="shared_with_microcontroller\activity">
       <UniqueIdentifier>{1f7a270a-78ff-4445-be76-69e24e096415}</UniqueIdentifier>
     </Filter>
-    <Filter Include="shared_with_microcontroller\common">
-      <UniqueIdentifier>{4a9a93d1-5c1d-4634-9c25-723ef0cc36e2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="shared_with_microcontroller\business_layer">
       <UniqueIdentifier>{a1a53561-e84f-4dd2-adf1-139f2266f647}</UniqueIdentifier>
     </Filter>
@@ -80,9 +77,6 @@
     </ClInclude>
     <ClInclude Include="..\12VoltsBatteriesRack\src\model\AppConfig.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf.commons.commonsLayer.h">
-      <Filter>shared_with_microcontroller\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,6 +13,7 @@ void AnalogPortBActivity::reset_ports() {
 		this->analogPortB[i]->is_alarm_under_threshold = false;
 		this->analogPortB[i]->first_time_on_alarm = 0;
 		this->analogPortB[i]->is_time_under_threshold_elapsed = false;
+		this->analogPortB[i]->is_time_above_threshold_elapsed = false;
 		this->analogPortB[i]->offset = 0;
 	}
 }

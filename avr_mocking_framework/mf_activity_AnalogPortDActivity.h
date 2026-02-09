@@ -2,7 +2,6 @@
 #include <mf_model_AnalogPortD.h>
 #include <mf_activity_AnalogPortBActivity.h>
 #include <mf_repository_AvrMicroRepository.h>
-#include <mf_commons_commonsLayer.h>
 class AnalogPortDActivity : public AnalogPortBActivity{
 public:
 	AnalogPortDActivity(AvrMicroRepository& avrMicroRepository,AnalogPortD** analogPortForDigitalMeasure,uint8_t analogPortsNumber);

@@ -2,14 +2,14 @@
 #include <mf_activity_DigitalPortActivity.h>
 #include <mf_activity_AnalogPortCActivity.h>
 #include <mf_activity_NTC3950thermistorActivity.h>
-#include "../model/AppConfig.h"
+#include "../../AppConfig.h"
 #include <stdint.h>
 #if _ON_MOCKING_TESTS
 #include "../model/DeMuxPlexerEntity.h"
 #endif // _on_mocking_tests
 class ControlUnit_BL {
 public:
-	ControlUnit_BL(AvrMicroRepository& avrMicroRepository, AppConfig& app_config, NTC3950thermistorActivity& thermistorActivity,DigitalPortActivity& relayActivity, AnalogPortCActivity& currentActivity);
+	ControlUnit_BL(AvrMicroRepository& avrMicroRepository, NTC3950thermistorActivity& thermistorActivity,DigitalPortActivity& relayActivity, AnalogPortCActivity& currentActivity);
 	~ControlUnit_BL();
 #if _ON_MOCKING_TESTS
 	DeMuxPlexerEntity demux_plexer_entity; // Entità del demultiplexer (solo per test)
@@ -28,7 +28,6 @@ private:
 	bool is_current_port_values_out_of_range();
 	bool turn_off_relay_by_group(char group_id);
 	AvrMicroRepository& avrMicroRepository; // Riferimento al repository AVR
-	AppConfig& app_config; // Oggetto di configurazione contenente i pin
 	NTC3950thermistorActivity& thermistorActivity;
 	DigitalPortActivity& relayActivity;
 	AnalogPortCActivity& currentActivity;

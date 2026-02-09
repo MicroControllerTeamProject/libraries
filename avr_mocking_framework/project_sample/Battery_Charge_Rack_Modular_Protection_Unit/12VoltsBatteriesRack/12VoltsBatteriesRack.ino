@@ -4,9 +4,6 @@
  Author:	luigi.santagada
 */
 #include <Arduino.h>
-#include "src/model/AppConfig.h"
-#include <mf_model_DigitalPort.h>
-#include <SoftwareSerial.h>
 #include <mf_adapter_SoftwareSerialAdapter.h>
 #include <mf_activity_DigitalPortActivity.h>
 #include <mf_activity_AnalogPortCActivity.h>
@@ -44,8 +41,7 @@ AnalogPortCActivity currentActivity(avrMicroRepository_SSerial, current_list, 6)
 DigitalPortActivity relayActivity(avrMicroRepository_SSerial, relay_list, 6);
 // NTC3950 thermistor activity : USED ONLY 4 THERMISTORS FOR CABLE LIMITATIONS
 NTC3950thermistorActivity ntc_3950thermistorActivity(avrMicroRepository_SSerial, thermistor_list, 4, 100000.00f);
-AppConfig appConfig;
-ControlUnit_BL controlUnit_BL(avrMicroRepository_SSerial, appConfig, ntc_3950thermistorActivity, relayActivity, currentActivity);
+ControlUnit_BL controlUnit_BL(avrMicroRepository_SSerial, ntc_3950thermistorActivity, relayActivity, currentActivity);
 void setup(){
 	Serial.begin(9600);
 	pinMode(A7, INPUT);

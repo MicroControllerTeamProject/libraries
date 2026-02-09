@@ -14,7 +14,7 @@ bool DigitalPortActivity::is_any_port_triggered() {
 				||
 				(this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::low && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == false)) {
 #ifdef _ON_MOCKING_TESTS
-				this->digitalPort[i]->pin_value = (bool)this->digitalPort[i]->get_alarm_trigger_on();
+				this->digitalPort[i]->pin_value_for_tdd = (bool)this->digitalPort[i]->get_alarm_trigger_on();
 #endif // 
 				this->digitalPort[i]->is_onAlarm = true;
 				isOnAlarm = true;
@@ -32,9 +32,9 @@ void DigitalPortActivity::turn_port_level(uint8_t pin, bool level) {
 			if (this->digitalPort[i]->get_pin() == pin) {
 				this->avrMicroRepository->digitalWrite(digitalPort[i]->get_pin(), level);
 #ifdef _ON_MOCKING_TESTS
-				this->digitalPort[i]->pin_value = level;
+				this->digitalPort[i]->pin_value_for_tdd = level;
 #endif // 
-				this->digitalPort[i]->pin_value = level;
+				this->digitalPort[i]->pin_value_for_tdd = level;
 				return;
 			}
 		}

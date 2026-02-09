@@ -1,6 +1,6 @@
 format 224
 "avr_mocking_framework" // avr_mocking_framework
-  revision 6
+  revision 7
   modified_by 42 "luigi"
   // class settings
   

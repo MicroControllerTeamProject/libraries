@@ -5,14 +5,10 @@
 #include "../12VoltsBatteriesRack/src/business/ControlUnit_BL.h"
 #include <mf_repository_AvrMicroRepository.h>
 #include <mf_commons_commonsLayer.h>
-#include <mf_model_AnalogPortB.h>
-#include <mf_model_AnalogPortD.h>
 #include <mf_activity_AnalogPortDActivity.h>
 #include <mf_activity_DigitalPortActivity.h>
 #include <mf_activity_NTC3950thermistorActivity.h>
 #include <mf_activity_AnalogPortCActivity.h>
-#include <mf_activity_AnalogPortBActivity.h>
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace MockProjectSampleTest {
 	TEST_CLASS(MockProjectSampleTest) {
@@ -101,7 +97,7 @@ public:
 		std::vector<int> current_values{ 640,600,600,600,600,800 };
 		size_t i = 0;
 		AppConfig appConfig;
-		ControlUnit_BL controlUnit_BL(avrMicroRepository, appConfig, ntc_3950thermistorActivity, relayActivity, currentActivity);
+		ControlUnit_BL controlUnit_BL(avrMicroRepository, ntc_3950thermistorActivity, relayActivity, currentActivity);
 		bool any_port_is_on_alarm = false;
 		controlUnit_BL.turn_on_off_all_relays(true);
 		When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return current_values[(i++) % current_values.size()]; });
@@ -114,7 +110,7 @@ public:
 			When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return current_values[(i++) % current_values.size()]; });
 			any_port_is_on_alarm = controlUnit_BL.disable_relays_where_current_is_on_alarm();
 		}
-		Assert::IsTrue(!relay_01.pin_value, L"Expected relay_01 to be disabled");
+		Assert::IsTrue(!relay_01.pin_value_for_tdd, L"Expected relay_01 to be disabled");
 		/*Assert::IsTrue(relay_02.pin_value, L"Expected relay_02 to be enabled");
 		Assert::IsTrue(relay_04.pin_value, L"Expected relay_04 to be enabled");
 		Assert::IsTrue(relay_05.pin_value, L"Expected relay_05 to be disabled");

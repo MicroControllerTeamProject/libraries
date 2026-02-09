@@ -181,7 +181,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\MicroControllerTeamProject\libraries\avr_mocking_framework\mf.commons.commonsLayer.h" />
     <ClInclude Include="..\12VoltsBatteriesRack\src\model\AppConfig.h" />
     <ClInclude Include="..\12VoltsBatteriesRack\src\model\DeMuxPlexerEntity.h" />
     <ClInclude Include="pch.h" />
