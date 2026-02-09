@@ -38,7 +38,7 @@
     <ProjectGuid>{b41306a4-af60-4867-8cf2-0f2fd5621610}</ProjectGuid>
     <Keyword>Linux</Keyword>
     <RootNamespace>GarageApplication</RootNamespace>
-    <ProjectName>12VoltsBatteriesRack</ProjectName>
+    <ProjectName>sample_prj_to_start</ProjectName>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
@@ -80,7 +80,7 @@
     <TargetOSAndVersion>Arduino</TargetOSAndVersion>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="12VoltsBatteriesRack.ino">
+    <ClCompile Include="sample_prj_to_start.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
@@ -103,12 +103,13 @@
     <ClInclude Include="__vm\.Battery_Charge_Rack_Modular_Protection_Unit.vsarduino.h" />
     <ClInclude Include="__vm\.MockProjectSample.vsarduino.h" />
     <ClInclude Include="__vm\.project_sample.vsarduino.h" />
+    <ClInclude Include="__vm\.sample_prj_to_start.vsarduino.h" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\12VoltsBatteriesRack;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework</IncludePath>
+    <IncludePath>$(ProjectDir)..\sample_prj_to_start;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire</IncludePath>
     <RemoteCCompileToolExe>$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-g++</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-g++</RemoteCppCompileToolExe>
     <ValidateArchitecture>false</ValidateArchitecture>
@@ -133,13 +134,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\12VoltsBatteriesRack;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\sample_prj_to_start;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <GccToolChain>$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-g++</GccToolChain>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <CLanguageStandard>gnu11</CLanguageStandard>
       <CAdditionalWarning />
       <CppAdditionalWarning />
-      <ForcedIncludeFiles>$(ProjectDir)..\..\..\..\..\..\..\program files\microsoft visual studio\18\community\common7\ide\extensions\2bqx1gfn.tss\Micro Platforms\default\vm-intelli-pre.h;$(ProjectDir)..\..\..\..\..\..\..\Users\luigi\AppData\Local\Temp\VMBuilds\12VoltsBatteriesRack\nano_atmega328\Debug\.vmintelli\1d821a9ca6db0b6e0284dc9cc88146f7\vm-intelli-gcc-defines.h;$(ProjectDir)..\..\..\..\..\..\..\program files\microsoft visual studio\18\community\common7\ide\extensions\2bqx1gfn.tss\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.12VoltsBatteriesRack.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(ProjectDir)..\..\..\..\..\..\..\program files\microsoft visual studio\18\community\common7\ide\extensions\2bqx1gfn.tss\Micro Platforms\default\vm-intelli-pre.h;$(ProjectDir)..\..\..\..\..\..\..\Users\luigi\AppData\Local\Temp\VMBuilds\sample_prj_to_start\nano_atmega328\Debug\.vmintelli\1d821a9ca6db0b6e0284dc9cc88146f7\vm-intelli-gcc-defines.h;$(ProjectDir)..\..\..\..\..\..\..\program files\microsoft visual studio\18\community\common7\ide\extensions\2bqx1gfn.tss\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.sample_prj_to_start.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>_VMICRO_INTELLISENSE;__AVR_atmega328p__;__AVR_ATmega328P__;__AVR_ATmega328p__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=108019;ARDUINO_AVR_NANO;ARDUINO_ARCH_AVR;%(PreprocessorDefinitions)</PreprocessorDefinitions>

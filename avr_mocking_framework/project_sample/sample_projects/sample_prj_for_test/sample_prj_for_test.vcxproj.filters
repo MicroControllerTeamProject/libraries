@@ -30,10 +30,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="12VoltsBatteriesRackTest.cpp" />
-    <ClCompile Include="..\12VoltsBatteriesRack\src\business\ControlUnit_BL.cpp">
-      <Filter>shared_with_microcontroller\business_layer</Filter>
-    </ClCompile>
+    <ClCompile Include="sample_prj_for_test.cpp" />
     <ClCompile Include="..\..\..\mf_activity_AnalogPortBActivity.cpp">
       <Filter>shared_with_microcontroller\activity</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\mf_model_DigitalPort.cpp">
       <Filter>shared_with_microcontroller\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\sample_prj_to_start\src\business\ControlUnit_BL.cpp">
+      <Filter>shared_with_microcontroller\business_layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

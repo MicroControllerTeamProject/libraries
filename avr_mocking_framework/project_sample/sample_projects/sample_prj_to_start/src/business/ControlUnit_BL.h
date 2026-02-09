@@ -18,7 +18,6 @@ public:
 	bool disable_relays_where_current_is_on_alarm();
 	void turn_on_off_all_relays(bool turn_on);
 	void calculate_current_sensors_offset(uint8_t number_of_read);
-	
 private:
 	void reset_counter();
 	void set_position_counter(uint8_t position);

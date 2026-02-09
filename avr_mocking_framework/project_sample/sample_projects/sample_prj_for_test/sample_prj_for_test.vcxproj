@@ -25,7 +25,7 @@
     <RootNamespace>GarageApplicationtest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
-    <ProjectName>12VoltsBatteriesRack_test</ProjectName>
+    <ProjectName>sample_prj_for_test</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -171,8 +171,8 @@
     <ClCompile Include="..\..\..\mf_model_AnalogPortC.cpp" />
     <ClCompile Include="..\..\..\mf_model_AnalogPortD.cpp" />
     <ClCompile Include="..\..\..\mf_model_DigitalPort.cpp" />
-    <ClCompile Include="..\12VoltsBatteriesRack\src\business\ControlUnit_BL.cpp" />
-    <ClCompile Include="12VoltsBatteriesRackTest.cpp" />
+    <ClCompile Include="..\sample_prj_to_start\src\business\ControlUnit_BL.cpp" />
+    <ClCompile Include="sample_prj_for_test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

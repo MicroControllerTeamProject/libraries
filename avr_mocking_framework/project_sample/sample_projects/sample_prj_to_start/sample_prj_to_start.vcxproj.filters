@@ -44,7 +44,7 @@
     <ClCompile Include="src\business\ControlUnit_BL.cpp">
       <Filter>business_layer</Filter>
     </ClCompile>
-    <ClCompile Include="12VoltsBatteriesRack.ino" />
+    <ClCompile Include="sample_prj_to_start.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.MockProjectSample.vsarduino.h">
@@ -73,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\mf_commons_commonsLayer.h">
       <Filter>commons</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.sample_prj_to_start.vsarduino.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

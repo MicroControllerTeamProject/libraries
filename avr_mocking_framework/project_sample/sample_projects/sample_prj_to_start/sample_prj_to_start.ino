@@ -7,6 +7,7 @@
 #include <mf_adapter_SoftwareSerialAdapter.h>
 #include <mf_activity_DigitalPortActivity.h>
 #include <mf_activity_AnalogPortCActivity.h>
+#include <mf_activity_NTC3950thermistorActivity.h>
 #include "src/business/ControlUnit_BL.h"
 SoftwareSerial softSerial(99, 99);					 // RX, TX (esempio, usa i pin 10 e 11 per SoftwareSerial)
 SoftwareSerialAdapter softSerialAdapter(softSerial); // Istanza SoftwareSerialAdapter
@@ -18,7 +19,6 @@ DigitalPort relay_03('C', 9, mf::commons::commonsLayer::PortDirection::output);
 DigitalPort relay_04('D', 8, mf::commons::commonsLayer::PortDirection::output);
 DigitalPort relay_05('E', A0, mf::commons::commonsLayer::PortDirection::output);
 DigitalPort relay_06('F', A1, mf::commons::commonsLayer::PortDirection::output);
-
 // THERMISTORS USE ANALOG MULTIPLEXER PINS, NOT REAL MICROCONTROLLER PINS.
 AnalogPortC thermistor1('A', 0, 40.00f, 1.00f);
 AnalogPortC thermistor2('B', 1, 40.00f, 1.00f);

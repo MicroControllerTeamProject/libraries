@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "src/extend.h"
 #include "CppUnitTest.h"
-#include "../12VoltsBatteriesRack/src/model/DeMuxPlexerEntity.h"
-#include "../12VoltsBatteriesRack/src/business/ControlUnit_BL.h"
+#include "../sample_prj_to_start/src/model/DeMuxPlexerEntity.h"
+#include "../sample_prj_to_start/src/business/ControlUnit_BL.h"
 #include <mf_repository_AvrMicroRepository.h>
 #include <mf_commons_commonsLayer.h>
 #include <mf_activity_AnalogPortDActivity.h>
@@ -15,30 +15,8 @@ namespace MockProjectSampleTest {
 		Mock<AvrMicroRepository> mockedAvrMicroRepository;
 		AvrMicroRepository& avrMicroRepository = mockedAvrMicroRepository.get();
 		long unsigned fake_get_mill = 0;
-		//uint8_t pin_temperature_battery_group_01 = 3;
-		//uint8_t pin_smoke_check_battery_group_01 = 9; 
-		//uint8_t pin_rele_group_01 = 10; // Example pin number for the relay
-		//uint8_t rele_pin_g2_1 = 11; // Example pin number for the relay
-		//uint8_t current_port_g1_pin = 1; // Example pin number for the relay
-		//uint8_t current_port_g2_pin = 2; // Example pin number for the relay
-		//AnalogPort temperature_port_01 = AnalogPort("T01", "G01", pin_temperature_battery_group_01, 60.00f,2.00f);
-		//AnalogPort smoke_port_01 = AnalogPort("S01","G01", pin_smoke_check_battery_group_01, (uint16_t)540, (uint16_t)50);
-		//DigitalPort rele_port_g1 = DigitalPort("R01","G01", pin_rele_group_01, commonsLayer::PortDirection::output);
-		//DigitalPort rele_port_g2 = DigitalPort("R02","G02", rele_pin_g2_1, commonsLayer::PortDirection::output);
-		//AnalogPort current_port_01 = AnalogPort("C01","G01", current_port_g1_pin, 20, 10, 2, true);
-		//AnalogPort current_port_02 = AnalogPort("C02", "G02", current_port_g2_pin, 20, 9, 2, true);
-		//long unsigned fake_get_mill = 0;
 public:
 	TEST_METHOD_INITIALIZE(Initialize) {
-		/*smoke_port_01.analogPorttype = commonsLayer::digital;
-		current_port_01.analogPorttype = commonsLayer::custom_misure;
-		current_port_02.analogPorttype = commonsLayer::custom_misure;
-		temperature_port_01.analogPorttype = commonsLayer::custom_misure;
-		temperature_port_01.set_alarm_if_above_threshold_for_seconds = 5;
-		current_port_01.set_alarm_if_above_threshold_for_seconds = 5;
-		current_port_02.set_alarm_if_above_threshold_for_seconds = 5;
-		current_port_01.set_alarm_if_under_threshold_for_seconds = 5;
-		current_port_02.set_alarm_if_under_threshold_for_seconds = 5;*/
 	}
 	TEST_METHOD_CLEANUP(Cleanup) {
 	}
