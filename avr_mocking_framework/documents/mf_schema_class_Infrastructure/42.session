@@ -2,11 +2,11 @@ window_sizes 1920 1009 434 1481 859 104
 
 diagrams
   active  classdiagram_ref 128042 // Classis
-    1481 859 110 A4 0 0
+    1481 859 110 A4 12 0
 end
 show_stereotypes
 selected 
-  package_ref 135466 // model
+package_ref 135466 // model
 open
   classview_ref 134570 // avr_mocking_framework
   deploymentview_ref 128042 // avr_mocking_framework

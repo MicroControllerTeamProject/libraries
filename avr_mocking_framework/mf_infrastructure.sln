@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "commons", "commons", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -86,10 +86,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "multiPlexer", "multiPlexer"
 		mf_activity_muxActivity.h = mf_activity_muxActivity.h
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12VoltsBatteriesRack", "project_sample\Battery_Charge_Rack_Modular_Protection_Unit\12VoltsBatteriesRack\12VoltsBatteriesRack.vcxproj", "{B41306A4-AF60-4867-8CF2-0F2FD5621610}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "12VoltsBatteriesRack_test", "project_sample\Battery_Charge_Rack_Modular_Protection_Unit\12VoltsBatteriesRack_test\MockProjectSampleTest.vcxproj", "{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "analogPorts", "analogPorts", "{84CDD484-8411-469E-BB9E-CD176DAA9063}"
 	ProjectSection(SolutionItems) = preProject
 		mf_activity_AnalogPortCActivity.cpp = mf_activity_AnalogPortCActivity.cpp
@@ -104,58 +100,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "digitalPorts", "digitalPort
 		mf_activity_DigitalPortActivity.h = mf_activity_DigitalPortActivity.h
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_prj_for_test", "project_sample\sample_projects\sample_prj_for_test\sample_prj_for_test.vcxproj", "{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_prj_to_start", "project_sample\sample_projects\sample_prj_to_start\sample_prj_to_start.vcxproj", "{B41306A4-AF60-4867-8CF2-0F2FD5621610}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|ARM = Debug|ARM
-		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|ARM = Release|ARM
-		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM.ActiveCfg = Debug|ARM
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM.Build.0 = Debug|ARM
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM.Deploy.0 = Debug|ARM
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM64.Build.0 = Debug|ARM64
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x64.ActiveCfg = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x64.Build.0 = Debug|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x86.ActiveCfg = Debug|Win32
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x86.Build.0 = Debug|Win32
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x64.ActiveCfg = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x64.Build.0 = Release|x64
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x86.ActiveCfg = Release|Win32
+		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x86.Build.0 = Release|Win32
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x64.ActiveCfg = Debug|x64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x64.Build.0 = Debug|x64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x64.Deploy.0 = Debug|x64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x86.ActiveCfg = Debug|x86
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x86.Build.0 = Debug|x86
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Debug|x86.Deploy.0 = Debug|x86
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM.ActiveCfg = Release|ARM
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM.Build.0 = Release|ARM
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM.Deploy.0 = Release|ARM
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM64.ActiveCfg = Release|ARM64
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM64.Build.0 = Release|ARM64
-		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|ARM64.Deploy.0 = Release|ARM64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x64.ActiveCfg = Release|x64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x64.Build.0 = Release|x64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x64.Deploy.0 = Release|x64
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.ActiveCfg = Release|x86
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.Build.0 = Release|x86
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.Deploy.0 = Release|x86
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM.ActiveCfg = Debug|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM.Build.0 = Debug|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM64.ActiveCfg = Debug|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|ARM64.Build.0 = Debug|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x64.ActiveCfg = Debug|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x64.Build.0 = Debug|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x86.ActiveCfg = Debug|Win32
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Debug|x86.Build.0 = Debug|Win32
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM.ActiveCfg = Release|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM.Build.0 = Release|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM64.ActiveCfg = Release|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|ARM64.Build.0 = Release|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x64.ActiveCfg = Release|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x64.Build.0 = Release|x64
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x86.ActiveCfg = Release|Win32
-		{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
