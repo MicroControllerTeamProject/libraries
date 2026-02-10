@@ -1,0 +1,103 @@
+class AvrMicroRepository
+!!!137215.cpp!!!	analogReference(in mode : uint8_t) : void
+
+	::analogReference(mode);
+!!!137343.cpp!!!	analogRead(in analogPin : uint8_t) : uint16_t
+
+	return ::analogRead(analogPin);
+!!!137471.cpp!!!	analogVoltageRead(in analogPin : uint8_t) : float
+
+	uint16_t raw = ::analogRead(analogPin);
+	return (this->vref / 1024.0f) * raw;
+!!!137599.cpp!!!	digitalRead(in pin : uint8_t) : uint8_t
+
+	return ::digitalRead(pin);
+!!!137727.cpp!!!	digitalWrite(in pin : uint8_t, in value : uint8_t) : void
+
+	::digitalWrite(pin, value);
+!!!137855.cpp!!!	pinMode(in pin : uint8_t, in mode : uint8_t) : void
+
+	::pinMode(pin, mode);
+!!!137983.cpp!!!	delay(in delayTime : ulong) : void
+
+	::delay(delayTime);
+!!!138111.cpp!!!	getFreeRam() : int
+
+	int v;
+	return (int)&v - (__brkval == 0 ? (int)&__heap_start : (int)__brkval);
+!!!138239.cpp!!!	free(inout ptr : void) : void
+
+	::free(ptr);
+!!!138367.cpp!!!	tone(in pin : uint, in frequency : uint, in duration : ulong = 0UL) : void
+
+	::tone(pin, frequency, duration);
+!!!138495.cpp!!!	noTone(in pin : uint8_t) : void
+
+	::noTone(pin);
+!!!138623.cpp!!!	print(in data : char) : void
+
+		serial_.print(data);
+!!!138751.cpp!!!	print(in data : float) : void
+
+	serial_.print(data);
+!!!138879.cpp!!!	print(in data : int32_t) : void
+
+	serial_.print(data);
+!!!139007.cpp!!!	print(in data : uint8_t) : void
+
+	serial_.print(data);
+!!!139135.cpp!!!	print(in data : char) : void
+
+	serial_.print(data);
+!!!139263.cpp!!!	println(in data : char) : void
+
+	serial_.println(data);
+!!!139391.cpp!!!	println(in data : float) : void
+
+	serial_.println(data);
+!!!139519.cpp!!!	println(in data : int32_t) : void
+
+	serial_.println(data);
+!!!139647.cpp!!!	println(in data : uint8_t) : void
+
+	serial_.println(data);
+!!!139775.cpp!!!	println(in data : char) : void
+
+	serial_.println(data);
+!!!139903.cpp!!!	available() : int
+
+	return serial_.available();
+!!!140031.cpp!!!	readString(inout buffer : char, in maxLen : size_t) : size_t
+
+	size_t i = 0;
+	while (serial_.available() && i + 1 < maxLen) {
+		buffer[i++] = (char)serial_.read();
+	}
+	buffer[i] = '\0';
+	return i;
+!!!140159.cpp!!!	clearBuffer() : void
+
+	unsigned long start = millis();
+	while (millis() - start < 100) {
+		while (serial_.available() > 0) {
+			serial_.read();
+			start = millis(); // resetta il timeout ogni volta che legge
+		}
+	}
+!!!140287.cpp!!!	getSerialBufferSize() : int
+
+	serial_.getRxBufferSize();
+!!!140415.cpp!!!	begin(in baud : ulong) : void
+
+		serial_.begin(baud);
+!!!140543.cpp!!!	read() : int
+
+		return serial_.read();
+!!!140671.cpp!!!	~AvrMicroRepository()
+
+!!!140799.cpp!!!	get_millis() : ulong
+
+	return millis();
+!!!140927.cpp!!!	get_vref() : float
+
+	return this->vref;

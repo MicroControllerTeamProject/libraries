@@ -1,0 +1,35 @@
+class Charge_Battery_BL
+!!!133503.cpp!!!	Charge_Battery_BL(inout currentActivity : AnalogPortActivity, inout releActivity : DigitalPortActivity)
+
+!!!133631.cpp!!!	~Charge_Battery_BL()
+
+!!!133759.cpp!!!	start_charging() : void
+
+		this->releActivity.turn_port_high("G01");
+		this->releActivity.turn_port_high("G02");
+!!!133887.cpp!!!	turn_off_rele_where_current_above_threshold() : bool
+
+		bool isAbove = false;
+		if (this->currentActivity.read_all_unit_of_misure_threshold()) {
+			for (int i = 0; i < this->currentActivity.get_analog_ports_number(); i++) {
+				AnalogPort* current_port = this->currentActivity.get_analog_port()[i];
+				if (current_port->is_onAlarm && current_port->is_alarm_above_threshold && current_port->is_time_above_threshold_elapsed) {
+					this->releActivity.turn_port_low(current_port->get_group_id());
+					isAbove = true;
+				}
+			}
+		}
+		return isAbove;
+!!!134015.cpp!!!	turn_off_rele_where_current_under_threshold() : bool
+
+		bool isUnder = false;
+		if (this->currentActivity.read_all_unit_of_misure_threshold()) {
+			for (int i = 0; i < this->currentActivity.get_analog_ports_number(); i++) {
+				AnalogPort* current_port = this->currentActivity.get_analog_port()[i];
+				if (current_port->is_onAlarm && current_port->is_alarm_under_threshold && current_port->is_time_under_threshold_elapsed) {
+					this->releActivity.turn_port_low(current_port->get_group_id());
+					isUnder = true;
+				}
+			}
+		}
+		return isUnder;

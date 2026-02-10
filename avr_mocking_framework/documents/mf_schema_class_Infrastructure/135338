@@ -1,0 +1,347 @@
+format 224
+"business" // avr_mocking_framework::project_sample::Battery_Charge_Rack_Modular_Protection_Unit::12VoltsBatteriesRack::src::business
+  revision 4
+  modified_by 42 "luigi"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "C:/Repo/MicroControllerTeamProject/libraries/avr_mocking_framework/project_sample/Battery_Charge_Rack_Modular_Protection_Unit/12VoltsBatteriesRack/src/business/"
+  cpp_src_dir "C:/Repo/MicroControllerTeamProject/libraries/avr_mocking_framework/project_sample/Battery_Charge_Rack_Modular_Protection_Unit/12VoltsBatteriesRack/src/business/"
+  classview 134826 "business"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 148010 "ControlUnit_BL"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 182826 "ControlUnit_BL"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 5
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param inout name "app_config" type class_ref 148138 // AppConfig
+	  param inout name "thermistorActivity" type class_ref 146474 // NTC3950thermistorActivity
+	  param inout name "relayActivity" type class_ref 146090 // DigitalPortActivity
+	  param inout name "currentActivity" type class_ref 145578 // AnalogPortCActivity
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} & ${p1}${v1}, ${t2} & ${p2}${v2}, ${t3} & ${p3}${v3}, ${t4} & ${p4}${v4}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} & ${p1}, ${t2} & ${p2}, ${t3} & ${p3}, ${t4} & ${p4}${)}
+	: avrMicroRepository(avrMicroRepository), app_config(app_config), thermistorActivity(thermistorActivity), 
+	relayActivity(relayActivity), currentActivity(currentActivity) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 182954 "~ControlUnit_BL"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 158378 // demux_plexer_entity (<directional composition>)
+	relation 158378 *-->
+	  a role_name "demux_plexer_entity" public
+	    comment " Entità del demultiplexer (solo per test)"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 158378 // demux_plexer_entity (<directional composition>)
+	  b parent class_ref 148266 // DeMuxPlexerEntity
+      end
+
+      operation 183082 "disable_relays_where_thermistor_is_on_alarm"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183210 "disable_relays_where_current_is_on_alarm"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183338 "turn_on_off_all_relays"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "turn_on" explicit_type "bool"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183466 "calculate_current_sensors_offset"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "number_of_read" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183594 "reset_counter"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183722 "set_position_counter"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "position" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183850 "enable_demux_sensors"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 183978 "disable_demux_sensors"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184106 "is_thermistor_port_values_out_of_range"
+	preserve_cpp_body_indent private explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184234 "is_current_port_values_out_of_range"
+	preserve_cpp_body_indent private explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 184362 "turn_off_relay_by_group"
+	preserve_cpp_body_indent private explicit_return_type "bool"
+	nparams 1
+	  param in name "group_id" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 158506 // avrMicroRepository (<unidirectional association>)
+	relation 158506 --->
+	  a role_name "avrMicroRepository" private
+	    comment " Riferimento al repository AVR"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	    classrelation_ref 158506 // avrMicroRepository (<unidirectional association>)
+	  b parent class_ref 145194 // AvrMicroRepository
+      end
+
+      classrelation 158634 // app_config (<unidirectional association>)
+	relation 158634 --->
+	  a role_name "app_config" private
+	    comment " Oggetto di configurazione contenente i pin"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	    classrelation_ref 158634 // app_config (<unidirectional association>)
+	  b parent class_ref 148138 // AppConfig
+      end
+
+      classrelation 158762 // thermistorActivity (<unidirectional association>)
+	relation 158762 --->
+	  a role_name "thermistorActivity" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	    classrelation_ref 158762 // thermistorActivity (<unidirectional association>)
+	  b parent class_ref 146474 // NTC3950thermistorActivity
+      end
+
+      classrelation 158890 // relayActivity (<unidirectional association>)
+	relation 158890 --->
+	  a role_name "relayActivity" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	    classrelation_ref 158890 // relayActivity (<unidirectional association>)
+	  b parent class_ref 146090 // DigitalPortActivity
+      end
+
+      classrelation 159018 // currentActivity (<unidirectional association>)
+	relation 159018 --->
+	  a role_name "currentActivity" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	    classrelation_ref 159018 // currentActivity (<unidirectional association>)
+	  b parent class_ref 145578 // AnalogPortCActivity
+      end
+    end
+  end
+
+  deploymentview 128298 "business"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 130474 "ControlUnit_BL"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 148010 // ControlUnit_BL
+      end
+    end
+  end
+end

@@ -1,0 +1,42 @@
+class NTC3950thermistorActivity
+!!!133119.cpp!!!	NTC3950thermistorActivity(inout avrMicroRepository : AvrMicroRepository, inout analogPort : AnalogPort, in analogPortsNumber : uint8_t, in r1_voltageResistor : float)
+
+	R1 = r1_voltageResistor;
+!!!133247.cpp!!!	adc_to_celsius(in digital_read : uint16_t, in max_adc_resolution : uint16_t, in Vref : float) : float
+
+	float V = Vref * (float)digital_read / (float)max_adc_resolution;
+	if (V <= 0.0f || V >= Vref) return NAN;               // fuori range
+	float R = R1 * V / (Vref - V);
+	float invT = (1.0f / T25) + (1.0f / Beta) * logf(R / R25);
+	return (1.0f / invT) - 273.15f;
+!!!133375.cpp!!!	read_all_unit_of_misure_threshold() : bool
+
+	this->read_all_ports_and_initialize();
+	for (int i = 0; i < this->get_analog_ports_number(); i++){
+		// loop over several values to lower noise
+		float T_sum = 0.0;
+		for (int ii = 0; ii < this->avg_size; ii++) {
+			uint16_t digital_read = this->get_analog_port()[i]->digital_value;
+			T_sum += adc_to_celsius(digital_read, 1023, this->get_avr_micro_repository()->get_vref());
+		}
+		// averaging values from loop
+		float T_approx = T_sum / float(avg_size);
+
+		if (T_approx > this->get_analog_port()[i]->getMaxUnitOfMisureAlarmValue()) {
+			this->get_analog_port()[i]->is_alarm_above_threshold = true;
+			this->get_analog_port()[i]->is_onAlarm = true;
+			this->get_analog_port()[i]->is_time_above_threshold_elapsed = this->is_delay_elapsed_for_ports_above_threshold(this->get_analog_port()[i]);
+			return true;
+		}
+		else if (T_approx < this->get_analog_port()[i]->getMaxUnitOfMisureAlarmValue()) {
+			this->get_analog_port()[i]->is_alarm_under_threshold = true;
+			this->get_analog_port()[i]->is_onAlarm = true;
+			this->get_analog_port()[i]->is_time_under_threshold_elapsed = this->is_delay_elapsed_for_ports_under_threshold(this->get_analog_port()[i]);
+			return true;
+		}
+		else {
+			this->get_analog_port()[i]->first_time_on_alarm = 0;
+			this->get_analog_port()[i]->is_time_under_threshold_elapsed = false;
+		}
+	}
+return false;

@@ -1,0 +1,9 @@
+class AnalogPortB
+!!!167594.cpp!!!	AnalogPortB(in group_id : char, in pin : uint8_t)
+
+	this->group_id = group_id;
+	this->pin = pin;
+!!!167850.cpp!!!	get_group_id() : char
+ return this->group_id;
+!!!167978.cpp!!!	get_pin() : uint8_t
+ return this->pin;

@@ -1,0 +1,4499 @@
+format 224
+"avr_mocking_framework" // avr_mocking_framework
+  revision 7
+  modified_by 42 "luigi"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "C:\\Repo\\MicroControllerTeamProject\\libraries\\avr_mocking_framework/"
+  cpp_src_dir "C:\\Repo\\MicroControllerTeamProject\\libraries\\avr_mocking_framework/"
+  classview 134570 "avr_mocking_framework"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 145066 "AnalogPortBActivity"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 158634 "AnalogPortBActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param in name "analogPortsNumber" explicit_type "uint8_t"
+	  param inout name "analogPortBase" type class_ref 145322 // AnalogPortB
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} * * ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} * * ${p2}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 158762 "~AnalogPortBActivity"
+	abstract preserve_cpp_body_indent cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 158890 "get_avr_micro_repository"
+	preserve_cpp_body_indent public return_type class_ref 145194 // AvrMicroRepository
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159018 "is_delay_elapsed_for_ports_under_threshold"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param inout name "AnalogPortB" type class_ref 145322 // AnalogPortB
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159146 "is_delay_elapsed_for_ports_above_threshold"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param inout name "AnalogPortB" type class_ref 145322 // AnalogPortB
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159274 "analog_read_for_all_ports"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159402 "analog_read_average"
+	preserve_cpp_body_indent public explicit_return_type "uint16_t"
+	nparams 3
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "index_port" explicit_type "uint8_t"
+	  param in name "number_of_read" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159530 "set_offset"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 3
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "index_port" explicit_type "uint8_t"
+	  param in name "number_of_read" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159658 "get_analog_ports_number"
+	preserve_cpp_body_indent public explicit_return_type "uint8_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159786 "reset_ports"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 159914 "set_process_status"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "status" type class_ref 145450 // ProcessStatus
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160042 "get_process_status"
+	preserve_cpp_body_indent public return_type class_ref 145450 // ProcessStatus
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 155690 "analog_port_number"
+	private explicit_type "uint8_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 165546 // avrMicroRepository (<unidirectional association>)
+	relation 165546 --->
+	  a role_name "avrMicroRepository" init_value "=  nullptr" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${h_value};
+"
+	    classrelation_ref 165546 // avrMicroRepository (<unidirectional association>)
+	  b parent class_ref 145194 // AvrMicroRepository
+      end
+
+      attribute 155818 "analogPortB"
+	private type class_ref 145322 // AnalogPortB
+	init_value "=  {}"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * * ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 165674 // processBlockedBy (<directional composition>)
+	relation 165674 *-->
+	  a role_name "processBlockedBy" init_value "=  mf::commons::commonsLayer::ProcessStatus::blocked_level_too_high" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	    classrelation_ref 165674 // processBlockedBy (<directional composition>)
+	  b parent class_ref 145450 // ProcessStatus
+      end
+    end
+
+    class 145194 "AvrMicroRepository"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 169898 "AvrMicroRepository"
+	public explicit_return_type ""
+	nparams 3
+	  param inout name "serial" type class_ref 146730 // ISerial
+	  param in name "vref_mode" type class_ref 147242 // AnalogRefMode
+	  param in name "vref" explicit_type "float"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 170026 "analogReference"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "mode" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " --- Funzioni analogiche ---"
+      end
+
+      operation 170154 "analogRead"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "uint16_t"
+	nparams 1
+	  param in name "analogPin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170282 "analogVoltageRead"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "float"
+	nparams 1
+	  param in name "analogPin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170410 "digitalRead"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "uint8_t"
+	nparams 1
+	  param in name "pin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " --- Funzioni digitali ---"
+      end
+
+      operation 170538 "digitalWrite"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 2
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "value" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170666 "pinMode"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 2
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "mode" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 170794 "delay"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "delayTime" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " --- Timing e memoria ---"
+      end
+
+      operation 170922 "getFreeRam"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171050 "free"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param inout name "ptr" explicit_type "void"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171178 "print"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// --- Suoni ---
+// #ifndef HAS_IRREMOTE
+// void AvrMicroRepository::tone(unsigned int pin, unsigned int frequency, unsigned long duration) {
+// 	::tone(pin, frequency, duration);
+// }
+// #endif
+// #ifndef HAS_IRREMOTE
+// void AvrMicroRepository::noTone(uint8_t pin) {
+// 	::noTone(pin);
+// }
+// #endif
+// --- Stampa seriale ---
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " --- Suoni ---
+virtual void tone(unsigned int pin, unsigned int frequency, unsigned long duration = 0UL);
+virtual void noTone(uint8_t pin);
+ --- Seriale: stampa e lettura ---"
+      end
+
+      operation 171306 "print"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "float"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171434 "print"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "int32_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171562 "print"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171690 "print"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171818 "println"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 171946 "println"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "float"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172074 "println"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "int32_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172202 "println"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172330 "println"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "data" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172458 "available"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// --- Lettura seriale ---
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment "virtual void print(int data, bool isNewLine = false);"
+      end
+
+      operation 172586 "readString"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "size_t"
+	nparams 2
+	  param inout name "buffer" explicit_type "char"
+	  param in name "maxLen" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172714 "clearBuffer"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172842 "getSerialBufferSize"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 172970 "begin"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "baud" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173098 "read"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173226 "~AvrMicroRepository"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment " --- Software Serial control (ma senza tipi Arduino visibili) ---"
+      end
+
+      operation 173354 "get_millis"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "ulong"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// --- SoftwareSerial control ---
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173482 "get_vref"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 166058 // serial_ (<unidirectional association>)
+	relation 166058 --->
+	  a role_name "serial_" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	    classrelation_ref 166058 // serial_ (<unidirectional association>)
+	  b parent class_ref 146730 // ISerial
+      end
+
+      classrelation 157994 // vref_mode (<directional composition>)
+	relation 157994 *-->
+	  a role_name "vref_mode" init_value "=  mf::commons::commonsLayer::AnalogRefMode::DEFAULT_m" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	    classrelation_ref 157994 // vref_mode (<directional composition>)
+	  b parent class_ref 147242 // AnalogRefMode
+      end
+
+      attribute 163626 "vref"
+	private explicit_type "float"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 145322 "AnalogPortB"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 167594 "AnalogPortB"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "group_id" explicit_type "char"
+	  param in name "pin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, const ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, const ${t1} ${p1}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167722 "~AnalogPortB"
+	abstract preserve_cpp_body_indent cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      attribute 160170 "digital_value"
+	public explicit_type "uint16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160298 "is_enabled"
+	public explicit_type "bool"
+	init_value "=  true"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160426 "is_on_error"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160554 "is_onAlarm"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160682 "is_alarm_above_threshold"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160810 "is_alarm_under_threshold"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160938 "set_alarm_if_under_threshold_for_seconds"
+	public explicit_type "uint16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 161066 "set_alarm_if_above_threshold_for_seconds"
+	public explicit_type "uint16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 161194 "first_time_on_alarm"
+	public explicit_type "ulong"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 161322 "is_time_under_threshold_elapsed"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 161450 "is_time_above_threshold_elapsed"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 161578 "offset"
+	public explicit_type "uint16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 167850 "get_group_id"
+	preserve_cpp_body_indent public explicit_return_type "char"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167978 "get_pin"
+	preserve_cpp_body_indent public explicit_return_type "uint8_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 161706 "group_id"
+	private explicit_type "char"
+	init_value "=  {}"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 161834 "pin"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 145578 "AnalogPortCActivity"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 156458 // <generalisation>
+	relation 156458 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 156458 // <generalisation>
+	  b parent class_ref 145066 // AnalogPortBActivity
+      end
+
+      operation 160170 "AnalogPortCActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param inout name "analogPortForCustomMisure" type class_ref 145706 // AnalogPortC
+	  param in name "analogPortsNumber" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} * * ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} * * ${p1}, ${t2} ${p2}${)} :AnalogPortBActivity(avrMicroRepository, analogPortsNumber, (AnalogPortB**)analogPortForCustomMisure) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160298 "is_any_port_out_of_range"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160426 "get_analog_ports"
+	preserve_cpp_body_indent public return_type class_ref 145706 // AnalogPortC
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160554 "get_port_by_pin"
+	preserve_cpp_body_indent public return_type class_ref 145706 // AnalogPortC
+	nparams 1
+	  param in name "pin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 155946 "analogPortForCustomMisure"
+	private type class_ref 145706 // AnalogPortC
+	init_value "=  {}"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * * ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 145706 "AnalogPortC"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 157354 // <generalisation>
+	relation 157354 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 157354 // <generalisation>
+	  b parent class_ref 145322 // AnalogPortB
+      end
+
+      operation 168106 "AnalogPortC"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 6
+	  param in name "group_id" explicit_type "char"
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "full_scale_unit_of_misure" explicit_type "float"
+	  param in name "max_unit_of_misure_alarm_value" explicit_type "float"
+	  param in name "min_unit_of_misure_alarm_value" explicit_type "float"
+	  param in name "unit_of_misure_is_centered" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, const ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}, ${t5} ${p5}${v5}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, const ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}${)}:AnalogPortB(group_id,pin) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168234 "AnalogPortC"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param in name "group_id" explicit_type "char"
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "max_unit_of_misure_alarm_value" explicit_type "float"
+	  param in name "min_unit_of_misure_alarm_value" explicit_type "float"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, const ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, const ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)} : AnalogPortC(group_id, pin, 0.00f, max_unit_of_misure_alarm_value, min_unit_of_misure_alarm_value, false) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168362 "getFullScaleUnitOfMisure"
+	preserve_cpp_body_indent const public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168490 "getIstUnitOfMisureCentered"
+	preserve_cpp_body_indent const public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168618 "getMaxUnitOfMisureAlarmValue"
+	preserve_cpp_body_indent const public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168746 "getMinUnitOfMisureAlarmValue"
+	preserve_cpp_body_indent const public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 161962 "full_scale_unit_of_misure"
+	private explicit_type "float"
+	init_value "=  0.00f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 162090 "unit_of_misure_is_centered"
+	private explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 162218 "max_unit_of_misure_alarm_value"
+	private explicit_type "float"
+	init_value "=  0.00f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 162346 "min_unit_of_misure_alarm_value"
+	private explicit_type "float"
+	init_value "=  0.00f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 145834 "AnalogPortDActivity"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 156586 // <generalisation>
+	relation 156586 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 156586 // <generalisation>
+	  b parent class_ref 145066 // AnalogPortBActivity
+      end
+
+      operation 160682 "AnalogPortDActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param inout name "analogPortForDigitalMeasure" type class_ref 145962 // AnalogPortD
+	  param in name "analogPortsNumber" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} * * ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} * * ${p1}, ${t2} ${p2}${)}:AnalogPortBActivity(avrMicroRepository, analogPortsNumber, (AnalogPortB**)analogPortForDigitalMeasure)${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160810 "get_analog_ports"
+	preserve_cpp_body_indent public return_type class_ref 145962 // AnalogPortD
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160938 "get_port_by_pin"
+	preserve_cpp_body_indent public return_type class_ref 145962 // AnalogPortD
+	nparams 1
+	  param in name "pin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161066 "AnalogPortDActivity::is_any_port_out_of_range"
+	cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      attribute 156074 "analogPortForDigitalMeasure"
+	private type class_ref 145962 // AnalogPortD
+	init_value "=  {}"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * * ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 145962 "AnalogPortD"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 157482 // <generalisation>
+	relation 157482 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 157482 // <generalisation>
+	  b parent class_ref 145322 // AnalogPortB
+      end
+
+      operation 168874 "AnalogPortD"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param in name "group_id" explicit_type "char"
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "max_digital_alarm_value_in" explicit_type "uint16_t"
+	  param in name "min_digital_alarm_value_in" explicit_type "uint16_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, const ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, const ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}:AnalogPortB(group_id, pin)${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 197546 "getMaxDigitalAlarmValueIn"
+	preserve_cpp_body_indent const public explicit_return_type "uint16_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169130 "getMinDigitalAlarmValueIn"
+	preserve_cpp_body_indent const public explicit_return_type "uint16_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 162474 "max_digital_alarm_value_in"
+	private explicit_type "uint16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 162602 "min_digital_alarm_value_in"
+	private explicit_type "uint16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146090 "DigitalPortActivity"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 161194 "DigitalPortActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param inout name "digitalPort" type class_ref 146218 // DigitalPort
+	  param in name "digitalPortsNumber" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} * * ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} * * ${p1}, ${t2} ${p2}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161322 "DigitalPortActivity::DigitalPortActivity"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 161450 "is_any_port_triggered"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161578 "turn_port_level"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "level" explicit_type "bool"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161706 "get_ports_number"
+	preserve_cpp_body_indent public explicit_return_type "uint8_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161834 "get_digital_ports"
+	cpp_inline public return_type class_ref 146218 // DigitalPort
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * * ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return this->digitalPort;
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 161962 "get_port_by_pin"
+	preserve_cpp_body_indent public return_type class_ref 146218 // DigitalPort
+	nparams 1
+	  param in name "pin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162090 "set_ports_direction"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 156202 "digital_port_number"
+	private explicit_type "uint8_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 156330 "digitalPort"
+	private type class_ref 146218 // DigitalPort
+	init_value "=  {}"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * * ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 165802 // avrMicroRepository (<unidirectional association>)
+	relation 165802 --->
+	  a role_name "avrMicroRepository" init_value "=  nullptr" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${h_value};
+"
+	    classrelation_ref 165802 // avrMicroRepository (<unidirectional association>)
+	  b parent class_ref 145194 // AvrMicroRepository
+      end
+    end
+
+    class 146218 "DigitalPort"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment " includi un header “pubblico” della libreria framework, non un path relativo"
+      operation 169258 "DigitalPort"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param in name "group_id" explicit_type "char"
+	  param in name "pin" explicit_type "uint8_t"
+	  param in name "portDirection" type class_ref 147114 // PortDirection
+	    defaultvalue "mf::commons::commonsLayer::PortDirection::noset"
+	  param in name "alarmTriggerOn" type class_ref 146986 // AlarmTriggerOn
+	    defaultvalue "mf::commons::commonsLayer::AlarmTriggerOn::noset"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 162730 "is_enabled"
+	public explicit_type "bool"
+	init_value "=  true"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 162858 "is_onAlarm"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 162986 "pin_value"
+	public explicit_type "bool"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 163114 "is_on_pull_up"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 169386 "get_group_id"
+	preserve_cpp_body_indent public explicit_return_type "char"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169514 "get_pin"
+	preserve_cpp_body_indent public explicit_return_type "uint8_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169642 "get_port_direction"
+	preserve_cpp_body_indent public return_type class_ref 147114 // PortDirection
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169770 "get_alarm_trigger_on"
+	preserve_cpp_body_indent public return_type class_ref 146986 // AlarmTriggerOn
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 157610 // portDirection (<directional composition>)
+	relation 157610 *-->
+	  a role_name "portDirection" init_value "=  mf::commons::commonsLayer::PortDirection::input" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	    classrelation_ref 157610 // portDirection (<directional composition>)
+	  b parent class_ref 147114 // PortDirection
+      end
+
+      classrelation 157738 // alarmTriggerOn (<directional composition>)
+	relation 157738 *-->
+	  a role_name "alarmTriggerOn" init_value "=  mf::commons::commonsLayer::AlarmTriggerOn::high" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	    classrelation_ref 157738 // alarmTriggerOn (<directional composition>)
+	  b parent class_ref 146986 // AlarmTriggerOn
+      end
+
+      attribute 163242 "group_id"
+	private explicit_type "char"
+	init_value "=  {}"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 163370 "pin"
+	private explicit_type "uint8_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 163498 "is_real_pin"
+	private explicit_type "bool"
+	init_value "=  true"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146346 "MultiplexerActivity"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 162218 "MultiplexerActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 5
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param in name "pin_mux_0" explicit_type "uint8_t"
+	  param in name "pin_mux_1" explicit_type "uint8_t"
+	  param in name "pin_mux_2" explicit_type "uint8_t"
+	  param in name "pin_mux_3" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162346 "~MultiplexerActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162474 "set_multiplexer"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "selected_channel" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 165930 // avrMicroRepository (<unidirectional association>)
+	relation 165930 --->
+	  a role_name "avrMicroRepository" init_value "=  nullptr" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${h_value};
+"
+	    classrelation_ref 165930 // avrMicroRepository (<unidirectional association>)
+	  b parent class_ref 145194 // AvrMicroRepository
+      end
+
+      attribute 156458 "pin_mux_0"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 156586 "pin_mux_1"
+	private explicit_type "uint8_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 156714 "pin_mux_2"
+	private explicit_type "uint8_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 156842 "pin_mux_3"
+	private explicit_type "uint8_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146474 "NTC3950thermistorActivity"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 156970 // <generalisation>
+	relation 156970 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 156970 // <generalisation>
+	  b parent class_ref 145578 // AnalogPortCActivity
+      end
+
+      operation 162602 "NTC3950thermistorActivity"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param inout name "analogPortForCustomMisure" type class_ref 145706 // AnalogPortC
+	  param in name "analogPortsNumber" explicit_type "uint8_t"
+	  param in name "r1_divider_resistor" explicit_type "float"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} * * ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} * * ${p1}, ${t2} ${p2}, ${t3} ${p3}${)} :AnalogPortCActivity(avrMicroRepository, analogPortForCustomMisure, analogPortsNumber) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162730 "adc_to_celsius"
+	preserve_cpp_body_indent public explicit_return_type "float"
+	nparams 3
+	  param in name "digital_read" explicit_type "uint16_t"
+	  param in name "max_adc_resolution" explicit_type "uint16_t"
+	  param in name "vref" explicit_type "float"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162858 "is_any_port_out_of_range"
+	preserve_cpp_body_indent cpp_override public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 156970 "divider_resistor"
+	private explicit_type "float"
+	init_value "=  0.00f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 157098 "ntc_r25C"
+	private explicit_type "float"
+	init_value "=  100000.00f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 157226 "ntc_beta"
+	private explicit_type "float"
+	init_value "=  3950.00f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 157354 "ntc_temp25C"
+	private explicit_type "float"
+	init_value "=  298.15f"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Kelvin"
+      end
+    end
+
+    class 146602 "HardwareSerialAdapter"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "/ HardwareSerialAdapter: adapter che fa da ponte tra HardwareSerial di Arduino e l'interfaccia eSerial"
+      classrelation 157098 // <generalisation>
+	relation 157098 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 157098 // <generalisation>
+	  b parent class_ref 146730 // ISerial
+      end
+
+      operation 162986 "HardwareSerialAdapter"
+	cpp_noexcept cpp_inline public explicit_return_type ""
+	nparams 1
+	  param inout name "hw" explicit_type "HardwareSerial"
+	    defaultvalue "Serial"
+	cpp_decl "    ${comment}${inline}explicit ${name}${(}${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract} : hw_(hw) {
+	};
+"
+	
+	
+	
+	
+	comment "/ Costruisce l'adapter su una porta HardwareSerial (es. Serial, Serial1, ...)"
+      end
+
+      operation 163114 "begin"
+	cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "baud" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		hw_.begin(baud);
+	};
+"
+	
+	
+	
+	
+	comment "/ Inizializza la seriale a baud"
+      end
+
+      operation 163242 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "byte" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.write(byte);
+	};
+"
+	
+	
+	
+	
+	comment "/ Write overloads"
+      end
+
+      operation 163370 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "buffer" explicit_type "uint8_t"
+	  param in name "size" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.write(buffer, size);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 163498 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "str" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.write(str);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 163626 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "buffer" explicit_type "char"
+	  param in name "size" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.write(buffer, size);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 163754 "available"
+	cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.available();
+	};
+"
+	
+	
+	
+	
+	comment "/ Lettura/controllo disponibilità"
+      end
+
+      operation 163882 "read"
+	cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.read();
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 164010 "peek"
+	cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.peek();
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 164138 "flush"
+	cpp_override cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		hw_.flush();
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 164266 "readBytes"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param inout name "buffer" explicit_type "char"
+	  param in name "length" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.readBytes(buffer, length);
+	};
+"
+	
+	
+	
+	
+	comment "/ Lettura con buffer"
+      end
+
+      operation 164394 "readBytesUntil"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 3
+	  param in name "terminator" explicit_type "char"
+	  param inout name "buffer" explicit_type "char"
+	  param in name "length" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} * ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.readBytesUntil(terminator, buffer, length);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 164522 "find"
+	cpp_override cpp_inline public explicit_return_type "bool"
+	nparams 1
+	  param in name "target" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.find(const_cast<char*>(target));
+	};
+"
+	
+	
+	
+	
+	comment "/ Ricerca e parsing
+/ Fix for the error: E0304  
+/ Update the `find` method in `HardwareSerialAdapter` to match the correct signature of `HardwareSerial::find`.  "
+      end
+
+      operation 164650 "findUntil"
+	cpp_override cpp_inline public explicit_return_type "bool"
+	nparams 2
+	  param in name "target" explicit_type "char"
+	  param in name "terminator" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		char termStr[2] = { terminator, '\\0' };
+		return hw_.findUntil(
+			const_cast<char*>(target),
+			termStr
+		);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 164778 "parseInt"
+	cpp_override cpp_inline public explicit_return_type "long"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.parseInt();
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 164906 "parseFloat"
+	cpp_override cpp_inline public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return hw_.parseFloat();
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 165034 "setTimeout"
+	cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "timeout" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		hw_.setTimeout(timeout);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 165162 "getRxBufferSize"
+	constvalue cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		return SERIAL_RX_BUFFER_SIZE;
+	};
+"
+	
+	
+	
+	
+	comment "/ Dimensione del buffer RX"
+      end
+
+      attribute 157482 "hw_"
+	private explicit_type "HardwareSerial"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146730 "ISerial"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "/ eSerial: interfaccia pura per I/O seriale, indipendente da Arduino"
+      operation 176810 "~ISerial"
+	cpp_virtual cpp_defaulted public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 176938 "begin"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "baud" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Avvia la seriale alla velocit� specificata"
+      end
+
+      operation 177066 "write"
+	abstract cpp_virtual public explicit_return_type "size_t"
+	nparams 1
+	  param in name "byte" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Scrive un singolo byte"
+      end
+
+      operation 177194 "write"
+	abstract cpp_virtual public explicit_return_type "size_t"
+	nparams 2
+	  param in name "buffer" explicit_type "uint8_t"
+	  param in name "size" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Scrive un buffer di byte"
+      end
+
+      operation 177322 "write"
+	abstract cpp_virtual public explicit_return_type "size_t"
+	nparams 1
+	  param in name "str" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Scrive una stringa C nul-terminata"
+      end
+
+      operation 177450 "write"
+	abstract cpp_virtual public explicit_return_type "size_t"
+	nparams 2
+	  param in name "buffer" explicit_type "char"
+	  param in name "size" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Scrive un buffer di caratteri"
+      end
+
+      operation 177578 "available"
+	abstract cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Quanti byte sono disponibili per la lettura?"
+      end
+
+      operation 177706 "read"
+	abstract cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Legge un byte (o -1 se nessun dato)"
+      end
+
+      operation 177834 "peek"
+	abstract cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Interroga il prossimo carattere senza consumarlo"
+      end
+
+      operation 177962 "flush"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Svuota i buffer di ricezione"
+      end
+
+      operation 178090 "readBytes"
+	abstract cpp_virtual public explicit_return_type "size_t"
+	nparams 2
+	  param inout name "buffer" explicit_type "char"
+	  param in name "length" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Legge fino a `length` byte o fino al timeout"
+      end
+
+      operation 178218 "readBytesUntil"
+	abstract cpp_virtual public explicit_return_type "size_t"
+	nparams 3
+	  param in name "terminator" explicit_type "char"
+	  param inout name "buffer" explicit_type "char"
+	  param in name "length" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} * ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Legge fino a `terminator` o a `length` byte"
+      end
+
+      operation 178346 "find"
+	abstract cpp_virtual public explicit_return_type "bool"
+	nparams 1
+	  param in name "target" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Cerca la sequenza `target` nei dati in arrivo"
+      end
+
+      operation 178474 "findUntil"
+	abstract cpp_virtual public explicit_return_type "bool"
+	nparams 2
+	  param in name "target" explicit_type "char"
+	  param in name "terminator" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Cerca `target` fino a `terminator`"
+      end
+
+      operation 178602 "parseInt"
+	abstract cpp_virtual public explicit_return_type "long"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Legge un intero (salta i non-numerici)"
+      end
+
+      operation 178730 "parseFloat"
+	abstract cpp_virtual public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Legge un float (salta i non-numerici)"
+      end
+
+      operation 178858 "setTimeout"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "timeout" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+	comment "/ Imposta il timeout per le operazioni di lettura"
+      end
+
+      operation 178986 "getRxBufferSize"
+	abstract constvalue cpp_virtual public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 179114 "print"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "s" explicit_type "char"
+	  param in name "nl" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		size_t n = write(reinterpret_cast<const uint8_t*>(s), strlen(s));
+		if (nl) {
+			n += write(reinterpret_cast<const uint8_t*>(\"\\r\\n\"), 2);
+		}
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment " --- print/println wrappers basati su write() ---
+/ Stampa una stringa, con newline opzionale"
+      end
+
+      operation 179242 "print"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "c" explicit_type "char"
+	  param in name "nl" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		// Scrivo direttamente il byte
+		size_t n = write(static_cast<uint8_t>(c));
+		if (nl) {
+			// Aggiungo CR+LF
+			n += write(reinterpret_cast<const uint8_t*>(\"\\r\\n\"), 2);
+		}
+		return n;
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 179370 "print"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "x" explicit_type "int32_t"
+	  param in name "nl" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		char buf[12];
+		int len = snprintf(buf, sizeof(buf), \"%ld\", (long)x);
+		size_t n = write((const uint8_t*)buf, len);
+		if (nl) {
+			n += write((const uint8_t*)\"\\r\\n\", 2);
+		}
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment "/ Stampa un intero 32-bit, con newline opzionale"
+      end
+
+      operation 179498 "print"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 3
+	  param in name "f" explicit_type "float"
+	  param in name "nl" explicit_type "bool"
+	    defaultvalue "false"
+	  param in name "precision" explicit_type "int"
+	    defaultvalue "2"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract} {
+		char buf[32];
+		int len = snprintf(buf, sizeof(buf), \"%.*f\", precision, f);
+		size_t n = write((const uint8_t*)buf, len);
+		if (nl) {
+			n += write((const uint8_t*)\"\\r\\n\", 2);
+		}
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment "/ Stampa un float, con newline opzionale e precisione personalizzabile"
+      end
+
+      operation 179626 "print"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "x" explicit_type "uint8_t"
+	  param in name "nl" explicit_type "bool"
+	    defaultvalue "false"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		return print((int32_t)x, nl);
+	};
+"
+	
+	
+	
+	
+	comment "/ Stampa un byte (uint8_t) come numero, con newline opzionale"
+      end
+
+      operation 179754 "println"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "s" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		// Scrivo prima la stringa
+		size_t n = write((const uint8_t*)s, strlen(s));
+		// Poi CR+LF
+		n += write((const uint8_t*)\"\\r\\n\", 2);
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment " Alias println per stringhe, ma senza delegare a print()"
+      end
+
+      operation 179882 "println"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "c" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		size_t n = write(static_cast<uint8_t>(c));
+		n += write((const uint8_t*)\"\\r\\n\", 2);
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment " Alias println per char"
+      end
+
+      operation 180010 "println"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "x" explicit_type "int32_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		char buf[12];
+		int len = snprintf(buf, sizeof(buf), \"%ld\", (long)x);
+		size_t n = write((const uint8_t*)buf, len);
+		n += write((const uint8_t*)\"\\r\\n\", 2);
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment " Alias println per int32_t"
+      end
+
+      operation 180138 "println"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "f" explicit_type "float"
+	  param in name "precision" explicit_type "int"
+	    defaultvalue "2"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+		char buf[32];
+		int len = snprintf(buf, sizeof(buf), \"%.*f\", precision, f);
+		size_t n = write((const uint8_t*)buf, len);
+		n += write((const uint8_t*)\"\\r\\n\", 2);
+		return n;
+	};
+"
+	
+	
+	
+	
+	comment " Alias println per float"
+      end
+
+      operation 180266 "println"
+	cpp_virtual cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "x" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		return println(static_cast<int32_t>(x));
+	};
+"
+	
+	
+	
+	
+	comment " Alias println per uint8_t"
+      end
+    end
+
+    class 146858 "SoftwareSerialAdapter"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "/ SoftwareSerialAdapter: adapter che fa da ponte tra SoftwareSerial di Arduino e l'interfaccia ISerial"
+      classrelation 157226 // <generalisation>
+	relation 157226 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 157226 // <generalisation>
+	  b parent class_ref 146730 // ISerial
+      end
+
+      operation 165290 "SoftwareSerialAdapter"
+	cpp_noexcept cpp_inline public explicit_return_type ""
+	nparams 1
+	  param inout name "sw" explicit_type "SoftwareSerial"
+	cpp_decl "    ${comment}${inline}explicit ${name}${(}${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract} : sw_(sw) {
+    };
+"
+	
+	
+	
+	
+	comment "/ Costruisce l'adapter su una porta SoftwareSerial"
+      end
+
+      operation 165418 "begin"
+	cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "baud" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+        sw_.begin(baud);
+    };
+"
+	
+	
+	
+	
+	comment "/ Inizializza la seriale a baud"
+      end
+
+      operation 165546 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "byte" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.write(byte);
+    };
+"
+	
+	
+	
+	
+	comment "/ Write overloads"
+      end
+
+      operation 165674 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "buffer" explicit_type "uint8_t"
+	  param in name "size" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.write(buffer, size);
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 165802 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 1
+	  param in name "str" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.write(str);
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 165930 "write"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param in name "buffer" explicit_type "char"
+	  param in name "size" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.write(buffer, size);
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 166058 "available"
+	cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.available();
+    };
+"
+	
+	
+	
+	
+	comment "/ Lettura/controllo disponibilità"
+      end
+
+      operation 166186 "read"
+	cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.read();
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 166314 "peek"
+	cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.peek();
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 166442 "flush"
+	cpp_override cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        sw_.flush();
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 166570 "readBytes"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 2
+	  param inout name "buffer" explicit_type "char"
+	  param in name "length" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.readBytes(buffer, length);
+    };
+"
+	
+	
+	
+	
+	comment "/ Lettura con buffer"
+      end
+
+      operation 166698 "readBytesUntil"
+	cpp_override cpp_inline public explicit_return_type "size_t"
+	nparams 3
+	  param in name "terminator" explicit_type "char"
+	  param inout name "buffer" explicit_type "char"
+	  param in name "length" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} * ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.readBytesUntil(terminator, buffer, length);
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 166826 "find"
+	cpp_override cpp_inline public explicit_return_type "bool"
+	nparams 1
+	  param in name "target" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.find(const_cast<char*>(target));
+    };
+"
+	
+	
+	
+	
+	comment "/ Ricerca e parsing"
+      end
+
+      operation 166954 "findUntil"
+	cpp_override cpp_inline public explicit_return_type "bool"
+	nparams 2
+	  param in name "target" explicit_type "char"
+	  param in name "terminator" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract} {
+        char termStr[2] = { terminator, '\\0' };
+        return sw_.findUntil(
+            const_cast<char*>(target),
+            termStr
+        );
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 167082 "parseInt"
+	cpp_override cpp_inline public explicit_return_type "long"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.parseInt();
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 167210 "parseFloat"
+	cpp_override cpp_inline public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        return sw_.parseFloat();
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 167338 "setTimeout"
+	cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "timeout" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+        sw_.setTimeout(timeout);
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 167466 "getRxBufferSize"
+	constvalue cpp_override cpp_inline public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        return _SS_MAX_RX_BUFF;
+    };
+"
+	
+	
+	
+	
+	comment "/ Dimensione del buffer RX (SoftwareSerial usa internamente ~64 byte)"
+      end
+
+      attribute 157610 "sw_"
+	private explicit_type "SoftwareSerial"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} & ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147498 "BlueToothRepository"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 173610 "BlueToothRepository"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param in name "blueToothKeyPin" explicit_type "uint8_t"
+	  param in name "baudRateProgramMode" explicit_type "ulong"
+	  param in name "baudRateReceveMode" explicit_type "ulong"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}
+	: BlueToothRepository(avrMicroRepository, blueToothKeyPin, 255, baudRateProgramMode, baudRateReceveMode)${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173738 "BlueToothRepository"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 5
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param in name "blueToothKeyPin" explicit_type "uint8_t"
+	  param in name "baseTransistorPin" explicit_type "uint8_t"
+	  param in name "baudRateProgramMode" explicit_type "ulong"
+	  param in name "baudRateReceveMode" explicit_type "ulong"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173866 "~BlueToothRepository"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 173994 "is_device_detected"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "bool"
+	nparams 2
+	  param inout name "bt_address" explicit_type "char"
+	  param inout name "device_name" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} * ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} * ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174122 "set_to_slave_mode"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment "virtual bool is_device_detected(const char* bt_address);"
+      end
+
+      operation 174250 "set_to_master_mode_v2"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174378 "set_to_master_mode_v3"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174506 "turnOffBlueTooth"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174634 "turnOnBlueTooth"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174762 "isBluetoothOn"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 174890 "set_to_program_mode"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 175018 "get_version"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param inout name "version" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 175146 "get_current_password"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param inout name "currentPassword" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 175274 "set_password"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "pw" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 175402 "set_name"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "name" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 175530 "get_name"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param inout name "name" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 166186 // avrMicroRepository (<unidirectional association>)
+	relation 166186 --->
+	  a role_name "avrMicroRepository" init_value "=  nullptr" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${h_value};
+"
+	    classrelation_ref 166186 // avrMicroRepository (<unidirectional association>)
+	  b parent class_ref 145194 // AvrMicroRepository
+      end
+
+      operation 175658 "set_to_receve_mode"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 163754 "is_master_mode"
+	private explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 163882 "blueToothKeyPin"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Pin per il tasto del Bluetooth"
+      end
+
+      attribute 164010 "baseTransistorPin"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Pin per il transistor di base"
+      end
+
+      attribute 164138 "baudRateProgramMode"
+	private explicit_type "ulong"
+	init_value "=  38400"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Baud rate per la modalità di programmazione"
+      end
+
+      attribute 164266 "baudRateReceveMode"
+	private explicit_type "ulong"
+	init_value "=  9600"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Baud rate per la modalità di ricezione"
+      end
+
+      attribute 164394 "is_bluetooth_on"
+	private explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Stato del Bluetooth (0 = spento, 1 = acceso)"
+      end
+    end
+
+    class 147626 "IR_ATMEGA_Repository"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 175786 "IR_ATMEGA_Repository"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "rx_pin" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 175914 "~IR_ATMEGA_Repository"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 176042 "init"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 176170 "is_available"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 176298 "check_received_code"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param in name "code_to_find" explicit_type "ulong"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 176426 "resume"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 176554 "send"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "code" explicit_type "ulong"
+	  param in name "nbits" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 176682 "enable_to_receive"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 164522 "pin_receiver"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147754 "RFReceiverRepository"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 180394 "RFReceiverRepository"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 5
+	  param in name "rx_pin" explicit_type "uint8_t"
+	  param in name "ptt_pin" explicit_type "uint8_t"
+	  param in name "vw_speed" explicit_type "uint16_t"
+	  param inout name "userBuf" explicit_type "uint8_t"
+	  param in name "userBufLen" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} * ${p3}${v3}, ${t4} ${p4}${v4}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} * ${p3}, ${t4} ${p4}${)}
+    : _rx_pin(rx_pin),
+    _ptt_pin(ptt_pin),
+    _vw_speed(vw_speed),
+    _buf(userBuf),
+    _bufLen(userBufLen)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 180522 "begin"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 180650 "stop"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 180778 "read"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 2
+	  param inout name "out" explicit_type "uint8_t"
+	  param inout name "inoutLen" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} * ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} * ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " In/Out: *inoutLen = cap in ingresso, lunghezza reale in uscita.
+ Ritorna true se messaggio ricevuto con CRC ok."
+      end
+
+      attribute 164650 "_rx_pin"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164778 "_ptt_pin"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164906 "_vw_speed"
+	private explicit_type "uint16_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165034 "_buf"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165162 "_bufLen"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147882 "SimRepository"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 180906 "SimRepository"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param inout name "avrMicroRepository" type class_ref 145194 // AvrMicroRepository
+	  param in name "powerPin" explicit_type "uint8_t"
+	  param in name "baudRate" explicit_type "ulong"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}
+    : avrMicroRepository(&avrMicroRepository), powerPin(powerPin), baudRate(baudRate) ${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Costruttore: injection del repository AVR, pin accensione modulo, baudrate seriale"
+      end
+
+      operation 181034 "call"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param in name "number" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Effettua una chiamata al numero GSM (es: \"+391234567890\")"
+      end
+
+      operation 181162 "hangUp"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " (Opzionale) termina la chiamata attiva"
+      end
+
+      operation 181290 "setSmsTextMode"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 181418 "setSmsPduMode"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 181546 "sendSms"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 2
+	  param in name "number" explicit_type "char"
+	  param in name "message" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, const ${t1} * ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}, const ${t1} * ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 181674 "initSmsReception"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 181802 "readSms"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 2
+	  param in name "index" explicit_type "uint8_t"
+	  param inout name "message" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} * ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} * ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 181930 "deleteAllSms"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 182058 "getSmsCount"
+	preserve_cpp_body_indent public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment "bool readFirstSms(char* message);"
+      end
+
+      operation 182186 "deleteSmsAt"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param in name "index" explicit_type "uint8_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 182314 "findSmsWithContent"
+	preserve_cpp_body_indent public explicit_return_type "uint8_t"
+	nparams 1
+	  param in name "pattern" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 182442 "isRegisteredToNetwork"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 182570 "getSignalStrength"
+	preserve_cpp_body_indent public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 182698 "isGprsAttached"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 166314 // avrMicroRepository (<unidirectional association>)
+	relation 166314 --->
+	  a role_name "avrMicroRepository" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 166314 // avrMicroRepository (<unidirectional association>)
+	  b parent class_ref 145194 // AvrMicroRepository
+      end
+
+      attribute 165290 "powerPin"
+	private explicit_type "uint8_t"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165418 "baudRate"
+	private explicit_type "ulong"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165546 "isSmsReceiveInitialized"
+	private explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    classdiagram 128042 "Classis"
+      classdiagramsettings hide_attributes yes hide_operations yes member_max_width 0 end
+      size A4
+    end
+  end
+
+  package_ref 134698 // mf commons commonsLayer
+
+  deploymentview 128042 "avr_mocking_framework"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128042 "mf_activity_AnalogPortBActivity"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145066 // AnalogPortBActivity
+      end
+    end
+
+    artifact 128170 "mf_activity_AnalogPortCActivity"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145578 // AnalogPortCActivity
+      end
+    end
+
+    artifact 128298 "mf_activity_AnalogPortDActivity"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145834 // AnalogPortDActivity
+      end
+    end
+
+    artifact 128426 "mf_activity_DigitalPortActivity"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146090 // DigitalPortActivity
+      end
+    end
+
+    artifact 128554 "mf_activity_muxActivity"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146346 // MultiplexerActivity
+      end
+    end
+
+    artifact 128682 "mf_activity_NTC3950thermistorActivity"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146474 // NTC3950thermistorActivity
+      end
+    end
+
+    artifact 128810 "mf_adapter_HardwareSerialAdapter"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146602 // HardwareSerialAdapter
+      end
+    end
+
+    artifact 128938 "mf_adapter_SoftwareSerialAdapter"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146858 // SoftwareSerialAdapter
+      end
+    end
+
+    artifact 129194 "mf_model_AnalogPortB"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145322 // AnalogPortB
+      end
+    end
+
+    artifact 129322 "mf_model_AnalogPortC"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145706 // AnalogPortC
+      end
+    end
+
+    artifact 129450 "mf_model_AnalogPortD"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145962 // AnalogPortD
+      end
+    end
+
+    artifact 129578 "mf_model_DigitalPort"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146218 // DigitalPort
+      end
+    end
+
+    artifact 129706 "mf_repository_AvrMicroRepository"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145194 // AvrMicroRepository
+      end
+    end
+
+    artifact 129834 "mf_repository_BlueToothRepository"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 147498 // BlueToothRepository
+      end
+    end
+
+    artifact 129962 "mf_repository_IR_ATMEGA_Repository"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 147626 // IR_ATMEGA_Repository
+      end
+    end
+
+    artifact 130090 "mf_repository_ISerial"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 146730 // ISerial
+      end
+    end
+
+    artifact 130218 "mf_repository_RFReceiverRepository"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 147754 // RFReceiverRepository
+      end
+    end
+
+    artifact 130346 "mf_repository_SimRepository"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 147882 // SimRepository
+      end
+    end
+  end
+
+  package_ref 134826 // project_sample
+end

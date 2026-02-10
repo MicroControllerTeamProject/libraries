@@ -1,13 +1,9 @@
 #pragma once
 
-namespace progmem
-{
-	namespace strings
-	{
-		namespace atCommands
-		{
-			namespace simModule
-			{
+namespace progmem{
+	namespace strings{
+		namespace atCommands{
+			namespace simModule{
 				PROGMEM const char simCommands[] =
 					//index 0
 					"AT+CPMS=\"SM\"\0"

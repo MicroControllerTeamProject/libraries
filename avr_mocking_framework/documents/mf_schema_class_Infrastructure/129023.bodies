@@ -1,0 +1,46 @@
+class DigitalPortActivity
+!!!132351.cpp!!!	DigitalPortActivity(inout avrMicroRepository : AvrMicroRepository, inout digitalPort : DigitalPort, in digitalPortsNumber : uint8_t)
+
+	this->avrMicroRepository = &avrMicroRepository;
+	this->digitalPort = digitalPort;
+	this->digital_port_number = digitalPortsNumber;
+!!!132479.cpp!!!	is_any_port_triggered() : bool
+
+	bool isOnAlarm = false;
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (this->digitalPort[i]->get_port_direction() == commonsLayer::PortDirection::input &&
+			(this->digitalPort[i]->get_alarm_trigger_on() == (bool)this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()))) {
+			this->digitalPort[i]->is_onAlarm = true;
+			isOnAlarm = true;
+		}
+	}
+	return isOnAlarm;
+!!!132607.cpp!!!	turn_port_high(in group_id : char) : void
+
+		for (int i = 0; i < this->digital_port_number; i++) {
+			if (this->digitalPort[i]->get_port_direction() == commonsLayer::output) {
+				if (strncmp(this->digitalPort[i]->get_group_id(), group_id,3) == 0) {
+					this->avrMicroRepository->digitalWrite(digitalPort[i]->get_pin(), commonsLayer::high);
+					this->digitalPort[i]->pin_value = commonsLayer::high;
+					return;
+				}
+			}
+		}
+!!!132735.cpp!!!	turn_port_low(in group_id : char) : void
+
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (this->digitalPort[i]->get_port_direction() == commonsLayer::output) {
+			if (strncmp(this->digitalPort[i]->get_group_id(), group_id,3) == 0) {
+				this->avrMicroRepository->digitalWrite(digitalPort[i]->get_pin(), commonsLayer::low);
+				this->digitalPort[i]->pin_value = commonsLayer::low;
+				return;
+			}
+		}
+	}
+!!!132991.cpp!!!	get_port_by_id(in id : char) : DigitalPort
+
+	for (int i = 0; i < this->digital_port_number; i++) {
+		if (strncmp(this->digitalPort[i]->get_uid(), id,3) == 0) {
+			return this->digitalPort[i];
+		}
+	}

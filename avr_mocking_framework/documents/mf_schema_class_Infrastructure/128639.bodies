@@ -1,0 +1,23 @@
+class AnalogPort
+!!!134783.cpp!!!	getMaxVoltageAlarmValueIn() : float
+ return this->max_voltage_alarm_value_in;
+!!!134911.cpp!!!	getMinVoltageAlarmValueIn() : float
+ return this->min_voltage_alarm_value_in;
+!!!135039.cpp!!!	getMaxDigitalAlarmValueIn() : uint16_t
+ return this->max_digital_alarm_value_in;
+!!!135167.cpp!!!	getMinDigitalAlarmValueIn() : uint16_t
+ return this->min_digital_alarm_value_in;
+!!!135295.cpp!!!	getFullScaleUnitOfMisure() : float
+ return this->full_scale_unit_of_misure;
+!!!135423.cpp!!!	getIstUnitOfMisureCentered() : bool
+ return this->unit_of_misure_is_centered;
+!!!135551.cpp!!!	getMaxUnitOfMisureAlarmValue() : float
+ return this->max_unit_of_misure_alarm_value;
+!!!135679.cpp!!!	getMinUnitOfMisureAlarmValue() : float
+ return this->min_unit_of_misure_alarm_value;
+!!!135807.cpp!!!	get_uid() : char
+return this->uid;
+!!!135935.cpp!!!	get_group_id() : char
+ return this->group_id;
+!!!136063.cpp!!!	get_pin() : uint8_t
+return this->pin;

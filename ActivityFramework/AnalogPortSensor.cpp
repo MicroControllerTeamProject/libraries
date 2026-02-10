@@ -1,6 +1,6 @@
 #include "AnalogPortSensor.h"
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 #include <Arduino.h>
 #endif
 

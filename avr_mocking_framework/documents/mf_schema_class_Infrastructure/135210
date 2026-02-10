@@ -1,0 +1,38 @@
+format 224
+"src" // mf_Infrastructure::avr_mocking_framework::project_sample::Battery_Charge_Rack_Modular_Protection_Unit::12VoltsBatteriesRack::src
+  revision 1
+  modified_by 42 "luigi"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "C:/Repo/MicroControllerTeamProject/libraries/avr_mocking_framework/project_sample/Battery_Charge_Rack_Modular_Protection_Unit/12VoltsBatteriesRack/src/"
+  cpp_src_dir "C:/Repo/MicroControllerTeamProject/libraries/avr_mocking_framework/project_sample/Battery_Charge_Rack_Modular_Protection_Unit/12VoltsBatteriesRack/src/"
+  package_ref 135338 // business
+
+  package_ref 135466 // model
+end

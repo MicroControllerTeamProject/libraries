@@ -1,0 +1,381 @@
+format 224
+"mf commons commonsLayer" // avr_mocking_framework::mf commons commonsLayer
+  revision 4
+  modified_by 42 "luigi"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "C:\\Repo\\MicroControllerTeamProject\\libraries\\avr_mocking_framework/"
+  cpp_src_dir "C:\\Repo\\MicroControllerTeamProject\\libraries\\avr_mocking_framework/"
+  cpp_namespace "mf::commons::commonsLayer"
+  classview 134698 "avr_mocking_framework"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 145450 "ProcessStatus"
+      visibility package stereotype "enum_class"
+      cpp_decl "${comment}enum class ${name} {
+${items}};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 157738 "blocked_level_too_high"
+	public type class_ref 145450 // ProcessStatus
+	init_value " 0"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 157866 "blocked_level_to_low"
+	public type class_ref 145450 // ProcessStatus
+	init_value " 1"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 157994 "blocked_level_missing"
+	public type class_ref 145450 // ProcessStatus
+	init_value " 2"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158122 "stopped"
+	public type class_ref 145450 // ProcessStatus
+	init_value " 3"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158250 "running"
+	public type class_ref 145450 // ProcessStatus
+	init_value " 4 "
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 146986 "AlarmTriggerOn"
+      visibility package stereotype "enum_class"
+      cpp_decl "${comment}enum class ${name} {
+${items}};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 158378 "noset"
+	public type class_ref 146986 // AlarmTriggerOn
+	init_value " -1"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158506 "low"
+	public type class_ref 146986 // AlarmTriggerOn
+	init_value " 0"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158634 "high"
+	public type class_ref 146986 // AlarmTriggerOn
+	init_value " 1 "
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147114 "PortDirection"
+      visibility package stereotype "enum_class"
+      cpp_decl "${comment}enum class ${name} {
+${items}};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 158762 "noset"
+	public type class_ref 147114 // PortDirection
+	init_value " -1"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 158890 "input"
+	public type class_ref 147114 // PortDirection
+	init_value " 0"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159018 "output"
+	public type class_ref 147114 // PortDirection
+	init_value " 1 "
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147242 "AnalogRefMode"
+      visibility package stereotype "enum_class"
+      cpp_decl "${comment}enum class ${name} {
+${items}};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 159146 "EXTERNAL_m"
+	public type class_ref 147242 // AnalogRefMode
+	init_value " 0"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159274 "DEFAULT_m"
+	public type class_ref 147242 // AnalogRefMode
+	init_value " 1"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159402 "INTERNAL_m"
+	public type class_ref 147242 // AnalogRefMode
+	init_value " 3"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159530 "INTERNAL1V1_m"
+	public type class_ref 147242 // AnalogRefMode
+	init_value " 4"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159658 "INTERNAL2V56_m"
+	public type class_ref 147242 // AnalogRefMode
+	init_value " 5 "
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 147370 "AnalogPortType"
+      visibility package stereotype "enum_class"
+      cpp_decl "${comment}enum class ${name} {
+${items}};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 159786 "custom_misure"
+	public type class_ref 147370 // AnalogPortType
+	init_value " 0"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159914 "digital"
+	public type class_ref 147370 // AnalogPortType
+	init_value " 1"
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 160042 "voltage"
+	public type class_ref 147370 // AnalogPortType
+	init_value " 2 "
+	cpp_decl "  ${name}${value},${comment}"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+  end
+
+  deploymentview 128170 "mf commons commonsLayer"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 129066 "mf_commons_commonsLayer"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 145450 // ProcessStatus
+	class_ref 146986 // AlarmTriggerOn
+	class_ref 147114 // PortDirection
+	class_ref 147242 // AnalogRefMode
+	class_ref 147370 // AnalogPortType
+      end
+    end
+  end
+end

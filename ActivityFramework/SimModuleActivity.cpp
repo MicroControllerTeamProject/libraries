@@ -1,7 +1,7 @@
 #include "SimModuleActivity.h"
 
 
-#ifdef _DEBUG
+#ifdef __DEBUG
 #include <Arduino.h>
 #endif
 /// <summary>
@@ -81,8 +81,8 @@ void SimModuleActivity::setIsInSleepMode(bool isInSleepMode)
 {
 }
 
-bool SimModuleActivity::getIsInSleepMode(bool isInSleepMode)
-{
+bool SimModuleActivity::getIsInSleepMode(bool isInSleepMode){
+	return this->_isInSleepMode;
 }
 
 bool SimModuleActivity::setIsDeviceTurnedOff(bool isTurnedOff, char* deviceUid)

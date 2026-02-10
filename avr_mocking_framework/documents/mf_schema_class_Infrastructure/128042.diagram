@@ -1,0 +1,212 @@
+format 224
+
+classcanvas 129578 class_ref 145066 // AnalogPortBActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 301.8 33.2 2000
+end
+classcanvas 129706 class_ref 145194 // AvrMicroRepository
+  classdiagramsettings member_max_width 0 end
+  xyz 293.2 128 3005
+end
+classcanvas 129962 class_ref 145322 // AnalogPortB
+  classdiagramsettings member_max_width 0 end
+  xyz 102.6 675.6 2000
+end
+classcanvas 130090 class_ref 145578 // AnalogPortCActivity
+  classdiagramsettings member_max_width 0 end
+  xyzwh 67.7 169 3010 127 41
+end
+classcanvas 130346 class_ref 145706 // AnalogPortC
+  classdiagramsettings member_max_width 0 end
+  xyz 102.6 608.2 3016
+end
+classcanvas 130602 class_ref 145834 // AnalogPortDActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 70.6 30.6 3021
+end
+classcanvas 130858 class_ref 145962 // AnalogPortD
+  classdiagramsettings member_max_width 0 end
+  xyz 249 678.2 2006
+end
+classcanvas 131114 class_ref 146090 // DigitalPortActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 419.2 255.7 3011
+end
+classcanvas 131370 class_ref 146218 // DigitalPort
+  classdiagramsettings member_max_width 0 end
+  xyz 509 488.2 3017
+end
+classcanvas 131498 class_ref 146346 // MultiplexerActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 600 299.7 3022
+end
+classcanvas 131754 class_ref 146474 // NTC3950thermistorActivity
+  classdiagramsettings member_max_width 0 end
+  xyz 51.1 284.5 3016
+end
+classcanvas 132010 class_ref 146602 // HardwareSerialAdapter
+  classdiagramsettings member_max_width 0 end
+  xyz 254.8 437 3022
+end
+classcanvas 132138 class_ref 146730 // ISerial
+  classdiagramsettings member_max_width 0 end
+  xyzwh 177.7 372.8 3028 69 37
+end
+classcanvas 132522 class_ref 146858 // SoftwareSerialAdapter
+  classdiagramsettings member_max_width 0 end
+  xyz 28.3 435.2 3034
+end
+classcanvas 132778 class_ref 147498 // BlueToothRepository
+  classdiagramsettings member_max_width 0 end
+  xyz 683.9 238.4 3011
+end
+classcanvas 133034 class_ref 147626 // IR_ATMEGA_Repository
+  classdiagramsettings member_max_width 0 end
+  xyz 670.8 80.6 2000
+end
+classcanvas 133162 class_ref 147754 // RFReceiverRepository
+  classdiagramsettings member_max_width 0 end
+  xyz 674.6 27 2000
+end
+classcanvas 133290 class_ref 147882 // SimRepository
+  classdiagramsettings member_max_width 0 end
+  xyz 301.8 256.7 3011
+end
+classcanvas 133802 class_ref 145450 // ProcessStatus
+  classdiagramsettings member_max_width 0 end
+  xyz 562.2 23.8 2006
+end
+classcanvas 134058 class_ref 146986 // AlarmTriggerOn
+  classdiagramsettings member_max_width 0 end
+  xyz 691.4 435.4 3023
+end
+classcanvas 134314 class_ref 147114 // PortDirection
+  classdiagramsettings member_max_width 0 end
+  xyz 702.2 541.6 3023
+end
+classcanvas 134570 class_ref 147242 // AnalogRefMode
+  classdiagramsettings member_max_width 0 end
+  xyz 700.4 156.2 3011
+end
+classcanvas 134826 class_ref 147370 // AnalogPortType
+  classdiagramsettings member_max_width 0 end
+  xyz 94.7 523.6 2000
+end
+classcanvas 136490 class_ref 145322 // AnalogPortB
+  classdiagramsettings member_max_width 0 end
+  xyz 518.8 623.2 2000
+end
+classcanvas 136618 class_ref 148010 // ControlUnit_BL
+  classdiagramsettings member_max_width 0 end
+  xyz 404.2 379.7 3022
+end
+relationcanvas 130218 relation_ref 156458 // <generalisation>
+  decenter_end 64
+  from ref 130090 z 3011 to ref 129578
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130474 relation_ref 157354 // <generalisation>
+  from ref 130346 z 3017 to ref 129962
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130730 relation_ref 156586 // <generalisation>
+  from ref 130602 z 3022 to ref 129578
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130986 relation_ref 157482 // <generalisation>
+  from ref 130858 z 2007 to ref 129962
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131882 relation_ref 156970 // <generalisation>
+  from ref 131754 z 3017 to ref 130090
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132394 relation_ref 157098 // <generalisation>
+  decenter_begin 250
+  from ref 132010 z 3029 to ref 132138
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132650 relation_ref 157226 // <generalisation>
+  from ref 132522 z 3035 to ref 132138
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134186 relation_ref 157738 // <directional composition>
+  from ref 131370 z 3024 to ref 134058
+  role_a_pos 607 453 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134442 relation_ref 157610 // <directional composition>
+  from ref 131370 z 3024 to ref 134314
+  role_a_pos 629 538 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134698 relation_ref 157994 // <directional composition>
+  from ref 129706 z 3012 to ref 134570
+  role_a_pos 638 160 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134954 relation_ref 165546 // <unidirectional association>
+  decenter_end 544
+  from ref 129578 z 3006 to ref 129706
+  role_a_pos 369 111 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135082 relation_ref 165674 // <directional composition>
+  from ref 129578 z 2007 to ref 133802
+  role_a_pos 464 33 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135210 relation_ref 165802 // <unidirectional association>
+  decenter_begin 71
+  from ref 131114 z 3012 to ref 129706
+  role_a_pos 379 169 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135338 relation_ref 165930 // <unidirectional association>
+  from ref 131498 z 3023 to ref 129706
+  role_a_pos 394 151 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135466 relation_ref 166058 // <unidirectional association>
+  from ref 129706 z 3029 to ref 132138
+  role_a_pos 232 354 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135594 relation_ref 166186 // <unidirectional association>
+  from ref 132778 z 3012 to ref 129706
+  role_a_pos 423 147 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 135722 relation_ref 166314 // <unidirectional association>
+  from ref 133290 z 3012 to ref 129706
+  role_a_pos 361 169 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136746 relation_ref 158506 // <unidirectional association>
+  from ref 136618 z 3023 to ref 129706
+  role_a_pos 370 169 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 136874 relation_ref 158762 // <unidirectional association>
+  from ref 136618 z 3023 to ref 131754
+  role_a_pos 207 305 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137002 relation_ref 158890 // <unidirectional association>
+  from ref 136618 z 3023 to ref 131114
+  role_a_pos 480 296 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 137130 relation_ref 159018 // <unidirectional association>
+  from ref 136618 z 3023 to ref 130090
+  role_a_pos 171 198 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

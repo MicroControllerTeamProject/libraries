@@ -1,0 +1,27 @@
+class IR_ATMEGA_Repository
+!!!175786.cpp!!!	IR_ATMEGA_Repository(in rx_pin : uint8_t)
+
+	this->pin_receiver = rx_pin;
+	init();
+!!!175914.cpp!!!	~IR_ATMEGA_Repository()
+
+!!!176042.cpp!!!	init() : bool
+
+	//IRrecv irrecv(this->pin_receiver); // create instance of 'irrecv'
+	irrecv.enableIRIn(); // Start the receiver
+!!!176170.cpp!!!	is_available() : bool
+
+	return irrecv.decode(&results);
+!!!176298.cpp!!!	check_received_code(in code_to_find : ulong) : bool
+
+	if (results.value == code_to_find) return true;
+	return false;
+!!!176426.cpp!!!	resume() : void
+
+	irrecv.resume();
+!!!176554.cpp!!!	send(in code : ulong, in nbits : int) : void
+
+	irsend.sendNEC(code, nbits);
+!!!176682.cpp!!!	enable_to_receive() : void
+
+	irrecv.enableIRIn(); // Start the receiver

@@ -1,0 +1,9 @@
+class AnalogPortD
+!!!168874.cpp!!!	AnalogPortD(in group_id : char, in pin : uint8_t, in max_digital_alarm_value_in : uint16_t, in min_digital_alarm_value_in : uint16_t)
+
+	this->max_digital_alarm_value_in = max_digital_alarm_value_in;
+	this->min_digital_alarm_value_in = min_digital_alarm_value_in;
+!!!197546.cpp!!!	getMaxDigitalAlarmValueIn() : uint16_t
+ return this->max_digital_alarm_value_in;
+!!!169130.cpp!!!	getMinDigitalAlarmValueIn() : uint16_t
+ return this->min_digital_alarm_value_in;
