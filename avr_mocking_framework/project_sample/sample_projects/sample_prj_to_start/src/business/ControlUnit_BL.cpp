@@ -55,7 +55,12 @@ bool ControlUnit_BL::is_current_port_values_out_of_range() {
 		reset_counter();
 		set_position_counter(this->currentActivity.get_analog_ports()[i]->get_pin());
 		enable_demux_sensors();
-		this->currentActivity.analog_read_average(AppConfig::demux_sensors_signal_pin, i, 10);
+#ifndef _ON_MOCKING_TESTS
+		uint8_t number_of_read = 10;
+#else
+		uint8_t number_of_read = 1;
+#endif // _ON_MOCKING_TESTS
+		this->currentActivity.analog_read_average(AppConfig::demux_sensors_signal_pin, i, number_of_read);
 #if _DEBUG_FOR_SERIAL
 		Serial.print("Cur."); Serial.print(i); Serial.print(" : "); Serial.println(this->currentActivity.get_analog_ports()[i]->digital_value);
 #endif // 

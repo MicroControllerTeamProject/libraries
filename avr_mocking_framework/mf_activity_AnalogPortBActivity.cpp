@@ -27,8 +27,10 @@ void AnalogPortBActivity::analog_read_for_all_ports(){
 }
 uint16_t  AnalogPortBActivity::analog_read_average(uint8_t pin, uint8_t index_port,uint8_t number_of_read) {
 	//Remove first read spike
+#ifndef _ON_MOCKING_TESTS 
 	this->avrMicroRepository->analogRead(pin);
 	this->avrMicroRepository->delay(100);
+#endif // _ON_MOCKING_TESTS
 	uint16_t acc = 0;
 	for (uint8_t k = 0; k < number_of_read; k++) {
 		acc += this->avrMicroRepository->analogRead(pin);

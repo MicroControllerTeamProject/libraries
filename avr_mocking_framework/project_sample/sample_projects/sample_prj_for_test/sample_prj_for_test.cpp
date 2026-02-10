@@ -51,45 +51,49 @@ public:
 		}
 		Assert::IsTrue(analogPortForDigitalMeasure1.is_enabled, L"Expected group A to disable");
 		Assert::IsFalse(analogPortForDigitalMeasure2.is_enabled, L"Expected group B to disable");
-
 		/*Assert::IsTrue(result == false, L"Expected the current to be above the threshold but time is under 5 seconds.");
 		Assert::IsTrue(rele_port_g1.pin_value == commonsLayer::high, L"Expected the relay g1 to be turned off (LOW).");*/
 	}
-	TEST_METHOD(calculate_offset) {
+	TEST_METHOD(test_calculate_contribution_given_offset) {
 		When(Method(mockedAvrMicroRepository, pinMode)).AlwaysReturn();
 		When(Method(mockedAvrMicroRepository, digitalWrite)).AlwaysReturn();
 		When(Method(mockedAvrMicroRepository, get_vref)).AlwaysReturn(4.70f);
 		When(Method(mockedAvrMicroRepository, get_millis)).AlwaysDo([&] { return fake_get_mill; });
 		When(Method(mockedAvrMicroRepository, delay)).AlwaysReturn();
+		AnalogPortC thermistor1('A', 0, 30.00f, 1.00f);
+		AnalogPortC thermistor2('B', 0, 20.00f, 1.00f);
 		DigitalPort relay_01('A', 11, mf::commons::commonsLayer::PortDirection::output);
-		AnalogPortC thermistor1('A', 0, 60.00f, 1.00f);
+		DigitalPort relay_02('B', 12, mf::commons::commonsLayer::PortDirection::output);
 		AnalogPortC current1('A', 10, 20.00f, 2.00f, 0.50f, true);
-		AnalogPortC current2('B', 11, 20.00f, 2.00f, 0.50f, true);
+		AnalogPortC current2('B', 13, 20.00f, 5.00f, 0.50f, true);
 		AnalogPortC* current_list[2] = { &current1,&current2 };
-		AnalogPortC* thermistor_list[1] = { &thermistor1 };
-		DigitalPort* relay_list[1] = { &relay_01 };
+		AnalogPortC* thermistor_list[2] = { &thermistor1 ,&thermistor2 };
+		DigitalPort* relay_list[2] = { &relay_01,&relay_02 };
 		AnalogPortCActivity currentActivity(avrMicroRepository, current_list, 2);
-		DigitalPortActivity relayActivity(avrMicroRepository, relay_list, 1);
-		NTC3950thermistorActivity ntc_3950thermistorActivity(avrMicroRepository, thermistor_list, 1, 100000.00f);
-		std::vector<int> thermistor_values{ 100 };
-		std::vector<int> current_values{ 0,300,0,250 };
+		DigitalPortActivity relayActivity(avrMicroRepository, relay_list, 2);
+		NTC3950thermistorActivity ntc_3950thermistorActivity(avrMicroRepository, thermistor_list, 2, 100000.00f);
+		std::vector<int> thermistor_values{512,512};
+		std::vector<int> start_current_values{ 300,250 };
 		size_t i = 0;
 		ControlUnit_BL controlUnit_BL(avrMicroRepository, ntc_3950thermistorActivity, relayActivity, currentActivity);
-		bool any_port_is_on_alarm = false;
 		controlUnit_BL.turn_on_off_all_relays(true);
-		When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return current_values[(i++) % current_values.size()]; });
+		When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return start_current_values[(i++) % start_current_values.size()]; });
 		controlUnit_BL.calculate_current_sensors_offset(1);
-		//while (fake_get_mill < 1000) {
-		i = 0;
-		std::vector<int> current_values2{ 0,300,300,300,300,300,300,300,300,300,300,0,250,250,250,250,250,250,250,250,250,250 };
-		//	fake_get_mill += 1000;
-			/*When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return thermistor_values[(i++) % thermistor_values.size()]; });
-			any_port_is_on_alarm = controlUnit_BL.disable_relays_where_thermistor_is_on_alarm();*/
-		When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return current_values2[(i++) % current_values2.size()]; });
-		any_port_is_on_alarm = controlUnit_BL.disable_relays_where_current_is_on_alarm();
-		//}
-		Assert::IsTrue(current1.digital_value == 0, L"Expected relay_01 to be disabled");
-		/*Assert::IsTrue(relay_02.pin_value, L"Expected relay_02 to be enabled");
+		while (fake_get_mill < 10000) {
+			i = 0;
+			std::vector<int> runtime_current_values{ 350,300 };
+			fake_get_mill += 1000;
+			When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return thermistor_values[(i++) % thermistor_values.size()]; });
+			controlUnit_BL.disable_relays_where_thermistor_is_on_alarm();
+			When(Method(mockedAvrMicroRepository, analogRead).Using(21)).AlwaysDo([&](int) { return runtime_current_values[(i++) % runtime_current_values.size()]; });
+			controlUnit_BL.disable_relays_where_current_is_on_alarm();
+		}
+		Assert::IsTrue(current1.digital_value == 50, L"Expected current1.digital_value = 50");
+		Assert::IsTrue(current2.digital_value == 50, L"Expected current2.digital_value = 50");
+
+		Assert::IsTrue(relay_01.pin_value_for_tdd, L"Expected relay_01 to be enabled");
+		Assert::IsFalse(relay_02.pin_value_for_tdd, L"Expected relay_02 to be disabled");
+		/*
 		Assert::IsTrue(relay_04.pin_value, L"Expected relay_04 to be enabled");
 		Assert::IsTrue(relay_05.pin_value, L"Expected relay_05 to be disabled");
 		Assert::IsTrue(!relay_06.pin_value, L"Expected relay_06 to be disabled");*/
