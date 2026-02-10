@@ -31,7 +31,6 @@ SimRepository::SimRepository(AvrMicroRepository& avrMicroRepository, uint8_t pow
 bool SimRepository::call(const char* number) {
     // Precondizione: modulo acceso e pronto, SIM inserita e unlockata
     avrMicroRepository->clearBuffer();
-
     avrMicroRepository->print(ATD_COMMAND);      // "ATD"
     avrMicroRepository->print(number);           // il numero
     avrMicroRepository->print(";");              // punto e virgola per chiamata vocale
@@ -141,12 +140,10 @@ bool SimRepository::readSms(uint8_t index, char* message) {
     avrMicroRepository->print(AT_READ_SMS_PREFIX);
     avrMicroRepository->print(index);
     avrMicroRepository->print(LITERAL_RETURN);
-
     bool foundHeader = false;
     bool foundMsg = false;
     int msgPos = 0;
     int crlfCount = 0;  // Conta i CR/LF per trovare inizio testo
-
     unsigned long start = avrMicroRepository->get_millis();
     while (avrMicroRepository->get_millis() - start < 2500 && msgPos < avrMicroRepository->getSerialBufferSize()) {
         if (avrMicroRepository->available()) {

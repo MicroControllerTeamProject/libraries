@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ext_lib", "ext_lib", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -13,6 +13,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_prj_to_start", "sample_projects\sample_prj_to_start\sample_prj_to_start.vcxproj", "{B41306A4-AF60-4867-8CF2-0F2FD5621610}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_prj_for_test", "sample_projects\sample_prj_for_test\sample_prj_for_test.vcxproj", "{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repository", "repository", "{0E0AE0BC-837E-459F-95D5-0ED99B0CA3B0}"
+	ProjectSection(SolutionItems) = preProject
+		..\mf_repository_SimRepository.cpp = ..\mf_repository_SimRepository.cpp
+		..\mf_repository_SimRepository.h = ..\mf_repository_SimRepository.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +78,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8644FF6A-3899-4F35-96E7-2910EB66DA5F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0E0AE0BC-837E-459F-95D5-0ED99B0CA3B0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}
