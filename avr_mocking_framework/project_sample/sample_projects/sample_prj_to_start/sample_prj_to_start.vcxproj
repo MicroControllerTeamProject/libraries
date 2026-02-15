@@ -95,11 +95,12 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\mf_activity_muxActivity.h" />
     <ClInclude Include="..\..\..\mf_commons_commonsLayer.h" />
     <ClInclude Include="AppConfig.h" />
     <ClInclude Include="HC_SR04_Repository.h" />
     <ClInclude Include="src\business\ControlUnit_BL.h" />
-    <ClInclude Include="src\model\DeMuxPlexerEntity.h" />
+    <ClInclude Include="src\model\DeMuxPlexerStatus.h" />
     <ClInclude Include="__vm\.12VoltsBatteriesRack.vsarduino.h" />
     <ClInclude Include="__vm\.ArduinoProjectSample.vsarduino.h" />
     <ClInclude Include="__vm\.Battery_Charge_Rack_Modular_Protection_Unit.vsarduino.h" />

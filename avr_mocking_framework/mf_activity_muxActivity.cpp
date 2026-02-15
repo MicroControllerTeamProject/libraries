@@ -1,10 +1,10 @@
 
 #include <mf_activity_muxActivity.h>
-MultiplexerActivity::MultiplexerActivity(AvrMicroRepository& avrMicroRepository,uint8_t pin_mux_0,uint8_t pin_mux_1,uint8_t pin_mux_2,uint8_t pin_mux_3){
-	this->pin_mux_0 = pin_mux_0;
-	this->pin_mux_1 = pin_mux_1;
-	this->pin_mux_2 = pin_mux_2;
-	this->pin_mux_3 = pin_mux_3;
+MultiplexerActivity::MultiplexerActivity(AvrMicroRepository& avrMicroRepository,DigitalPort** digitalPort, uint8_t digitalPortsNumber) : DigitalPortActivity(avrMicroRepository,digitalPort, digitalPortsNumber){
+	this->pin_mux_0 = digitalPort[0]->get_pin();
+	this->pin_mux_1 = digitalPort[1]->get_pin();
+	this->pin_mux_2 = digitalPort[2]->get_pin();
+	this->pin_mux_3 = digitalPort[3]->get_pin();
 	this->avrMicroRepository = &avrMicroRepository;
 }
 MultiplexerActivity::~MultiplexerActivity() {}
@@ -29,7 +29,7 @@ void MultiplexerActivity::set_multiplexer(int selected_channel) {
 		{1, 1, 1, 1}  // channel 15
 	};
 	for (int i = 4; i > 0; i--) {
-		this->avrMicroRepository->digitalWrite(controlPin[i - 1],muxChannel[selected_channel][i- 1]);
+		this->digital_write(controlPin[i - 1],muxChannel[selected_channel][i- 1]);
             // cout << "control pin : " << (int)controlPin[i - 1];
             // cout << " channel : " << (int)muxChannel[selected_channel][i- 1]  << "\n";
 	}

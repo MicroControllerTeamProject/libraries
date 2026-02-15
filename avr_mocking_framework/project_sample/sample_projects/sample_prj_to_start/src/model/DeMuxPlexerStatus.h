@@ -1,8 +1,8 @@
 #pragma once
 #include <stdint.h>
-class DeMuxPlexerEntity{
+class DeMuxPlexerStatus{
 public:
-	DeMuxPlexerEntity::DeMuxPlexerEntity() {}
+	DeMuxPlexerStatus::DeMuxPlexerStatus() {}
 	bool en_status = false;
 	uint8_t selected_chanell = 0;
 };

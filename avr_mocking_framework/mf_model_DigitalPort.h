@@ -19,7 +19,7 @@ public:
     mf::commons::commonsLayer::AlarmTriggerOn get_alarm_trigger_on();
 private:
     mf::commons::commonsLayer::PortDirection portDirection = mf::commons::commonsLayer::PortDirection::noset;
-    mf::commons::commonsLayer::AlarmTriggerOn alarmTriggerOn = mf::commons::commonsLayer::AlarmTriggerOn::high;
+    mf::commons::commonsLayer::AlarmTriggerOn alarmTriggerOn = mf::commons::commonsLayer::AlarmTriggerOn::noset;
     char group_id = {};
     uint8_t pin = 0;
 };

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "src/extend.h"
 #include "CppUnitTest.h"
-#include "../sample_prj_to_start/src/model/DeMuxPlexerEntity.h"
+#include "../sample_prj_to_start/src/model/DeMuxPlexerStatus.h"
 #include "../sample_prj_to_start/src/business/ControlUnit_BL.h"
 #include <mf_repository_AvrMicroRepository.h>
 #include <mf_commons_commonsLayer.h>

@@ -72,11 +72,11 @@
     <ClInclude Include="src\fakeit.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\12VoltsBatteriesRack\src\model\DeMuxPlexerEntity.h">
-      <Filter>shared_with_microcontroller\model</Filter>
-    </ClInclude>
     <ClInclude Include="..\12VoltsBatteriesRack\src\model\AppConfig.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\sample_prj_to_start\src\model\DeMuxPlexerStatus.h">
+      <Filter>shared_with_microcontroller\model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

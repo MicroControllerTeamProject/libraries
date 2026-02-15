@@ -9,7 +9,8 @@ DigitalPortActivity::DigitalPortActivity() {}
 bool DigitalPortActivity::is_any_port_triggered() {
 	bool isOnAlarm = false;
 	for (int i = 0; i < this->digital_port_number; i++) {
-		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::input) {
+		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::input ||  
+			this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::input_pullup) {
 			if ((this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::high && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == true)
 				||
 				(this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::low && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == false)) {
@@ -26,7 +27,7 @@ bool DigitalPortActivity::is_any_port_triggered() {
 uint8_t DigitalPortActivity::get_ports_number() {
 	return this->digital_port_number;
 }
-void DigitalPortActivity::turn_port_to_level(uint8_t pin, bool level) {
+void DigitalPortActivity::digital_write(uint8_t pin, bool level) {
 	for (int i = 0; i < this->digital_port_number; i++) {
 		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::output) {
 			if (this->digitalPort[i]->get_pin() == pin) {

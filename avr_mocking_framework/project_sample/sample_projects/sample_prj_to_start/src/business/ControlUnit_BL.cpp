@@ -22,7 +22,7 @@ void ControlUnit_BL::reset_counter() {
 	this->avrMicroRepository.delay(10); // Attesa di 10 ms
 	this->avrMicroRepository.digitalWrite(AppConfig::reset_counter_pin, LOW); // Fine del reset
 #if _ON_MOCKING_TESTS
-	this->demux_plexer_entity.selected_chanell = 0; // Resetta il canale selezionato nel demux (solo per test)
+	this->demux_plexer_status.selected_chanell = 0; // Resetta il canale selezionato nel demux (solo per test)
 #endif // _on_mocking_tests
 }
 void ControlUnit_BL::set_position_counter(uint8_t position) {
@@ -32,20 +32,20 @@ void ControlUnit_BL::set_position_counter(uint8_t position) {
 		this->avrMicroRepository.digitalWrite(AppConfig::ckl_counter_pin, LOW); // Imposta il pin del contatore a LOW
 		this->avrMicroRepository.delay(10); // Attesa di 10 ms
 #if _ON_MOCKING_TESTS
-		this->demux_plexer_entity.selected_chanell++;
+		this->demux_plexer_status.selected_chanell++;
 #endif // _on_mocking_tests
 	}
 }
 void ControlUnit_BL::enable_demux_sensors() {
 	this->avrMicroRepository.digitalWrite(AppConfig::enable_demux_relay_pin, LOW);
 #if _ON_MOCKING_TESTS
-	this->demux_plexer_entity.en_status = false;
+	this->demux_plexer_status.en_status = false;
 #endif // _on_mocking_tests
 }
 void ControlUnit_BL::disable_demux_sensors() {
 	this->avrMicroRepository.digitalWrite(AppConfig::enable_demux_relay_pin, HIGH);
 #if _ON_MOCKING_TESTS
-	this->demux_plexer_entity.en_status = true;
+	this->demux_plexer_status.en_status = true;
 #endif // _on_mocking_tests
 }
 bool ControlUnit_BL::is_current_port_values_out_of_range() {

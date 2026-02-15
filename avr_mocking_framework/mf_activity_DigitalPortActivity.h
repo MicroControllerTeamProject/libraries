@@ -7,7 +7,7 @@ public:
 	DigitalPortActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber);
 	DigitalPortActivity::DigitalPortActivity();
 	bool is_any_port_triggered();
-	void turn_port_to_level(uint8_t pin, bool level);
+	void digital_write(uint8_t pin, bool level);
 	uint8_t get_ports_number();
 	DigitalPort** get_digital_ports() {
 		return this->digitalPort;

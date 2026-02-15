@@ -62,7 +62,7 @@
     <ClInclude Include="__vm\.12VoltsBatteriesRack.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\DeMuxPlexerEntity.h">
+    <ClInclude Include="src\model\DeMuxPlexerStatus.h">
       <Filter>model\for_test</Filter>
     </ClInclude>
     <ClInclude Include="__vm\.project_sample.vsarduino.h">
@@ -82,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="HC_SR04_Repository.h">
       <Filter>repository</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mf_activity_muxActivity.h">
+      <Filter>activity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
