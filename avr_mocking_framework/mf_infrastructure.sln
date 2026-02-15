@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36915.13 d17.14
+VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "commons", "commons", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
@@ -103,6 +103,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_prj_for_test", "project_sample\sample_projects\sample_prj_for_test\sample_prj_for_test.vcxproj", "{4C7AF44E-D0D4-5537-286F-EC65F71AEAEC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_prj_to_start", "project_sample\sample_projects\sample_prj_to_start\sample_prj_to_start.vcxproj", "{B41306A4-AF60-4867-8CF2-0F2FD5621610}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_documents", "_documents", "{E7874EA9-5574-4CE6-AE52-349819631ABB}"
+	ProjectSection(SolutionItems) = preProject
+		documents\Activity analogiche del Mocking Framework.docx = documents\Activity analogiche del Mocking Framework.docx
+		documents\mf_schema_class_Infrastructure\mf_schema_class_Infrastructure.prj = documents\mf_schema_class_Infrastructure\mf_schema_class_Infrastructure.prj
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@
 // includi un header “pubblico” della libreria framework, non un path relativo
 class DigitalPort {
 public:
-    DigitalPort(char group_id, uint8_t pin,
+	DigitalPort(char group_id, uint8_t pin, 
         mf::commons::commonsLayer::PortDirection portDirection = mf::commons::commonsLayer::PortDirection::noset,
         mf::commons::commonsLayer::AlarmTriggerOn alarmTriggerOn = mf::commons::commonsLayer::AlarmTriggerOn::noset);
     bool is_enabled = true;
@@ -18,9 +18,8 @@ public:
     mf::commons::commonsLayer::PortDirection get_port_direction();
     mf::commons::commonsLayer::AlarmTriggerOn get_alarm_trigger_on();
 private:
-    mf::commons::commonsLayer::PortDirection portDirection = mf::commons::commonsLayer::PortDirection::input;
+    mf::commons::commonsLayer::PortDirection portDirection = mf::commons::commonsLayer::PortDirection::noset;
     mf::commons::commonsLayer::AlarmTriggerOn alarmTriggerOn = mf::commons::commonsLayer::AlarmTriggerOn::high;
     char group_id = {};
     uint8_t pin = 0;
-    bool is_real_pin = true;
 };

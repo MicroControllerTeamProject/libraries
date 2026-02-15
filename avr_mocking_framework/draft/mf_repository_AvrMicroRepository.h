@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <mf_repository_ISerial.h>
 #include <mf_commons_commonsLayer.h>
-
 class AvrMicroRepository {
 public:
     AvrMicroRepository(ISerial& serial, mf::commons::commonsLayer::AnalogRefMode vref_mode, float vref);
@@ -14,15 +13,14 @@ public:
     virtual uint8_t digitalRead(uint8_t pin);
     virtual void digitalWrite(uint8_t pin, uint8_t value);
     virtual void pinMode(uint8_t pin, uint8_t mode);
-    // --- Stato configurazione pin ---
-    virtual bool isPinOutput(uint8_t pin);
-    virtual bool isPinInput(uint8_t pin);
-    virtual bool isPinInputPullup(uint8_t pin);
     // --- Timing e memoria ---
     virtual void delay(unsigned long delayTime);
     virtual void delayMicroseconds(unsigned int micSec);
     virtual int getFreeRam();
     virtual void free(void* ptr);
+    // --- Suoni ---
+    //virtual void tone(unsigned int pin, unsigned int frequency, unsigned long duration = 0UL);
+    //virtual void noTone(uint8_t pin);
     // --- Seriale: stampa e lettura ---
     virtual void print(const char* data);
     virtual void print(float data);
@@ -34,15 +32,17 @@ public:
     virtual void println(int32_t data);
     virtual void println(uint8_t data);
     virtual void println(char data);
+    //virtual void print(int data, bool isNewLine = false);
     virtual int available();
     virtual size_t readString(char* buffer, size_t maxLen);
     virtual void clearBuffer();
     virtual int getSerialBufferSize();
     virtual void begin(unsigned long baud);
     virtual int read();
+    // --- Software Serial control (ma senza tipi Arduino visibili) ---
     virtual ~AvrMicroRepository();
-    virtual unsigned long get_millis();
-    virtual unsigned long pulseIn(uint8_t pin, uint8_t level, unsigned long time = 1000000UL);
+    virtual  unsigned long get_millis();
+    virtual unsigned long AvrMicroRepository::pulseIn(uint8_t pin, uint8_t level, unsigned long time = 1000000UL);
     virtual float get_vref();
 private:
     ISerial& serial_;

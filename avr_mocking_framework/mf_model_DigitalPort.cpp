@@ -1,8 +1,7 @@
 #pragma once
 #include <mf_model_DigitalPort.h>
 DigitalPort::DigitalPort(char group_id,
-	uint8_t pin, mf::commons::commonsLayer::PortDirection portDirection,
-	mf::commons::commonsLayer::AlarmTriggerOn alarmTriggerOn) {
+	uint8_t pin, mf::commons::commonsLayer::PortDirection portDirection,mf::commons::commonsLayer::AlarmTriggerOn alarmTriggerOn) {
 	this->pin = pin;
 	this->group_id = group_id;
 	this->alarmTriggerOn = alarmTriggerOn;

@@ -80,6 +80,7 @@
     <TargetOSAndVersion>Arduino</TargetOSAndVersion>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="HC_SR04_Repository.cpp" />
     <ClCompile Include="sample_prj_to_start.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
@@ -96,6 +97,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\mf_commons_commonsLayer.h" />
     <ClInclude Include="AppConfig.h" />
+    <ClInclude Include="HC_SR04_Repository.h" />
     <ClInclude Include="src\business\ControlUnit_BL.h" />
     <ClInclude Include="src\model\DeMuxPlexerEntity.h" />
     <ClInclude Include="__vm\.12VoltsBatteriesRack.vsarduino.h" />
@@ -109,7 +111,7 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework</IncludePath>
+    <IncludePath>$(ProjectDir)..\sample_prj_to_start;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework</IncludePath>
     <RemoteCCompileToolExe>$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-g++</RemoteCCompileToolExe>
     <RemoteCppCompileToolExe>$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-g++</RemoteCppCompileToolExe>
     <ValidateArchitecture>false</ValidateArchitecture>
@@ -134,7 +136,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\sample_prj_to_start;$(ProjectDir)..\..\..\..\avr_mocking_framework;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SoftwareSerial\src;$(ProjectDir)..\..\..\..\IRremote;$(ProjectDir)..\..\..\..\VirtualWire;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\..\program files (x86)\arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\avr_mocking_framework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <GccToolChain>$(ProjectDir)..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-g++</GccToolChain>
       <CppLanguageStandard>gnu++11</CppLanguageStandard>
       <CLanguageStandard>gnu11</CLanguageStandard>

@@ -32,7 +32,6 @@ void MultiplexerActivity::set_multiplexer(int selected_channel) {
 		this->avrMicroRepository->digitalWrite(controlPin[i - 1],muxChannel[selected_channel][i- 1]);
             // cout << "control pin : " << (int)controlPin[i - 1];
             // cout << " channel : " << (int)muxChannel[selected_channel][i- 1]  << "\n";
-
 	}
 }
 

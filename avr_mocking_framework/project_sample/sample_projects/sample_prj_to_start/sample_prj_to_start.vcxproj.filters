@@ -45,6 +45,9 @@
       <Filter>business_layer</Filter>
     </ClCompile>
     <ClCompile Include="sample_prj_to_start.ino" />
+    <ClCompile Include="HC_SR04_Repository.cpp">
+      <Filter>repository</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.MockProjectSample.vsarduino.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="__vm\.sample_prj_to_start.vsarduino.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HC_SR04_Repository.h">
+      <Filter>repository</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

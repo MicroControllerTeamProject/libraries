@@ -26,7 +26,7 @@ bool DigitalPortActivity::is_any_port_triggered() {
 uint8_t DigitalPortActivity::get_ports_number() {
 	return this->digital_port_number;
 }
-void DigitalPortActivity::turn_port_level(uint8_t pin, bool level) {
+void DigitalPortActivity::turn_port_to_level(uint8_t pin, bool level) {
 	for (int i = 0; i < this->digital_port_number; i++) {
 		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::output) {
 			if (this->digitalPort[i]->get_pin() == pin) {
@@ -34,7 +34,6 @@ void DigitalPortActivity::turn_port_level(uint8_t pin, bool level) {
 #ifdef _ON_MOCKING_TESTS
 				this->digitalPort[i]->pin_value_for_tdd = level;
 #endif // 
-				this->digitalPort[i]->pin_value_for_tdd = level;
 				return;
 			}
 		}
