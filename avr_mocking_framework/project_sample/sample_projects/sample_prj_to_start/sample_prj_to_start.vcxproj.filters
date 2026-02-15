@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -45,7 +41,7 @@
       <Filter>business_layer</Filter>
     </ClCompile>
     <ClCompile Include="sample_prj_to_start.ino" />
-    <ClCompile Include="HC_SR04_Repository.cpp">
+    <ClCompile Include="mf_repository_HCSR04Repository.cpp">
       <Filter>repository</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,11 +76,8 @@
     <ClInclude Include="__vm\.sample_prj_to_start.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HC_SR04_Repository.h">
+    <ClInclude Include="mf_repository_HCSR04Repository.h">
       <Filter>repository</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\mf_activity_muxActivity.h">
-      <Filter>activity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

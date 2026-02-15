@@ -9,6 +9,7 @@
 #include <mf_activity_AnalogPortCActivity.h>
 #include <mf_activity_NTC3950thermistorActivity.h>
 #include "src/business/ControlUnit_BL.h"
+#include "mf_repository_HCSR04Repository.h"
 SoftwareSerial softSerial(99, 99);					 // RX, TX (esempio, usa i pin 10 e 11 per SoftwareSerial)
 SoftwareSerialAdapter softSerialAdapter(softSerial); // Istanza SoftwareSerialAdapter
 AvrMicroRepository avrMicroRepository_SSerial = AvrMicroRepository(softSerialAdapter, mf::commons::commonsLayer::AnalogRefMode::DEFAULT_m, 5.0f);
@@ -42,8 +43,10 @@ DigitalPortActivity relayActivity(avrMicroRepository_SSerial, relay_list, 6);
 // NTC3950 thermistor activity : USED ONLY 4 THERMISTORS FOR CABLE LIMITATIONS
 NTC3950thermistorActivity ntc_3950thermistorActivity(avrMicroRepository_SSerial, thermistor_list, 4, 100000.00f);
 ControlUnit_BL controlUnit_BL(avrMicroRepository_SSerial, ntc_3950thermistorActivity, relayActivity, currentActivity);
+HC_SR04_Repository hc_sr04_repository(avrMicroRepository_SSerial, 7, 6);
 void setup(){
 	Serial.begin(9600);
+	return;
 	pinMode(A7, INPUT);
 	set_alarm_times_for_thermistor_sensors();
 	set_alarm_times_for_current_sensors();
@@ -54,6 +57,12 @@ void setup(){
 	controlUnit_BL.turn_on_off_all_relays(true);
 }
 void loop(){
+	float distance = hc_sr04_repository.measure_distance_cm(30000);
+	//Serial.print("Distance in cm: "); Serial.println();
+	if(distance < 10.00F){
+		Serial.println("Object detected within 10 cm!");
+	}
+	return;
 	// controlUnit_BL.disable_relays_where_thermistor_is_on_alarm();
 	controlUnit_BL.disable_relays_where_current_is_on_alarm();
 }
