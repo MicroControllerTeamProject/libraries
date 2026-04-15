@@ -1,14 +1,23 @@
-window_sizes 1920 1009 285 1630 859 104
+window_sizes 1920 1009 323 1592 859 104
 
 diagrams
   active  classdiagram_ref 128042 // Classis
-    987 859 110 A4 12 0
+    1592 859 100 A4 0 0
 end
 show_stereotypes
 selected 
-package_ref 134570 // avr_mocking_framework
+package_ref 134826 // project_sample
 open
+  classview_ref 134570 // avr_mocking_framework
+  classview_ref 134698 // avr_mocking_framework
+  deploymentview_ref 128170 // mf commons commonsLayer
   
-package_ref 134570 // avr_mocking_framework
+package_ref 142122 // project_sample
+  class_ref 148010 // ControlUnit_BL
+  deploymentview_ref 128298 // business
+  classview_ref 134954 // model
+  deploymentview_ref 128426 // model
+  classview_ref 135082 // 12VoltsBatteriesRack_test
+  deploymentview_ref 128554 // 12VoltsBatteriesRack_test
 end
 end

@@ -110,6 +110,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_documents", "_documents", 
 		documents\mf_schema_class_Infrastructure\mf_schema_class_Infrastructure.prj = documents\mf_schema_class_Infrastructure\mf_schema_class_Infrastructure.prj
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "from_scratch_prj", "project_sample\sample_projects\from_scratch\from_scratch.vcxproj", "{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "from_scratch_prj_tests", "project_sample\sample_projects\from_scratch_prj_tests\from_scratch_prj_tests.vcxproj", "{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HCSR04", "HCSR04", "{27F66231-32FF-4273-9D9D-F110FF7439A0}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_HCSR04.cpp = mf_activity_HCSR04.cpp
+		mf_activity_HCSR04.h = mf_activity_HCSR04.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HCSR04", "HCSR04", "{95FAB54D-2AB2-492D-964D-EBB7F1CE1BDA}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_HCSR04Repository.cpp = mf_repository_HCSR04Repository.cpp
+		mf_repository_HCSR04Repository.h = mf_repository_HCSR04Repository.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -138,6 +154,26 @@ Global
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.ActiveCfg = Release|x86
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.Build.0 = Release|x86
 		{B41306A4-AF60-4867-8CF2-0F2FD5621610}.Release|x86.Deploy.0 = Release|x86
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Debug|x64.ActiveCfg = Debug|x64
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Debug|x64.Build.0 = Debug|x64
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Debug|x64.Deploy.0 = Debug|x64
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Debug|x86.ActiveCfg = Debug|x86
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Debug|x86.Build.0 = Debug|x86
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Debug|x86.Deploy.0 = Debug|x86
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Release|x64.ActiveCfg = Release|x64
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Release|x64.Build.0 = Release|x64
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Release|x64.Deploy.0 = Release|x64
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Release|x86.ActiveCfg = Release|x86
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Release|x86.Build.0 = Release|x86
+		{12ADF6E6-4F55-42DD-ACF0-38AEC45A8493}.Release|x86.Deploy.0 = Release|x86
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Debug|x64.ActiveCfg = Debug|x64
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Debug|x64.Build.0 = Debug|x64
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Debug|x86.ActiveCfg = Debug|Win32
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Debug|x86.Build.0 = Debug|Win32
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Release|x64.ActiveCfg = Release|x64
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Release|x64.Build.0 = Release|x64
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Release|x86.ActiveCfg = Release|Win32
+		{CEA0C2A3-BC65-7C83-7847-DCE9DC6AC697}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +191,8 @@ Global
 		{0FCE7C70-1FA2-4FA3-A5BF-E64EE9F53465} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
 		{84CDD484-8411-469E-BB9E-CD176DAA9063} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
 		{018AF0F2-CB99-44FE-9390-152EFF3E57DF} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{27F66231-32FF-4273-9D9D-F110FF7439A0} = {9F8C56DD-C69C-4233-B10C-F44330B03D04}
+		{95FAB54D-2AB2-492D-964D-EBB7F1CE1BDA} = {9D377321-617F-4930-A0B0-A68608208643}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F66F9AF-AF5B-4733-9627-C94B5477F50D}

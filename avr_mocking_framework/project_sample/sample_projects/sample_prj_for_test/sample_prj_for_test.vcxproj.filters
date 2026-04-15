@@ -43,9 +43,6 @@
     <ClCompile Include="..\..\..\mf_activity_DigitalPortActivity.cpp">
       <Filter>shared_with_microcontroller\activity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\mf_activity_NTC3950thermistorActivity.cpp">
-      <Filter>shared_with_microcontroller\activity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\mf_model_AnalogPortB.cpp">
       <Filter>shared_with_microcontroller\model</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="..\sample_prj_to_start\src\business\ControlUnit_BL.cpp">
       <Filter>shared_with_microcontroller\business_layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mf_activity_NTC3950thermistorActivity.cpp">
+      <Filter>shared_with_microcontroller\activity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

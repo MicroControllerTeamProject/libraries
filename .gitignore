@@ -25,3 +25,6 @@ avr_mocking_framework/project_sample/sample_projects/sample_prj_for_test/x64/
 avr_mocking_framework/project_sample/sample_projects/sample_prj_to_start/__vm/
 avr_mocking_framework/project_sample/sample_projects/sample_prj_to_start/obj/
 avr_mocking_framework/project_sample/sample_projects/sample_prj_for_test/Debug/
+avr_mocking_framework/project_sample/sample_projects/from_scratch_prj_tests/x64/
+avr_mocking_framework/project_sample/sample_projects/from_scratch/obj/
+avr_mocking_framework/project_sample/sample_projects/from_scratch/__vm/

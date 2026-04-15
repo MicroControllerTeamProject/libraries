@@ -37,12 +37,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sample_prj_to_start.ino" />
     <ClCompile Include="src\business\ControlUnit_BL.cpp">
       <Filter>business_layer</Filter>
-    </ClCompile>
-    <ClCompile Include="sample_prj_to_start.ino" />
-    <ClCompile Include="mf_repository_HCSR04Repository.cpp">
-      <Filter>repository</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +48,6 @@
     </ClInclude>
     <ClInclude Include="__vm\.ArduinoProjectSample.vsarduino.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\business\ControlUnit_BL.h">
-      <Filter>business_layer</Filter>
     </ClInclude>
     <ClInclude Include="__vm\.12VoltsBatteriesRack.vsarduino.h">
       <Filter>Header Files</Filter>
@@ -76,8 +70,8 @@
     <ClInclude Include="__vm\.sample_prj_to_start.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mf_repository_HCSR04Repository.h">
-      <Filter>repository</Filter>
+    <ClInclude Include="src\business\ControlUnit_BL.h">
+      <Filter>business_layer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

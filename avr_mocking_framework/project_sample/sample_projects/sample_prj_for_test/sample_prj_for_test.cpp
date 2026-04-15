@@ -20,37 +20,29 @@ public:
 	}
 	TEST_METHOD_CLEANUP(Cleanup) {
 	}
-	TEST_METHOD(test_for_digital) {
+	TEST_METHOD(test_for_time_elapsed) {
 		When(Method(mockedAvrMicroRepository, pinMode)).AlwaysReturn();
 		When(Method(mockedAvrMicroRepository, digitalWrite)).AlwaysReturn();
 		AnalogPortD analogPortForDigitalMeasure1('A', 2, 400, 100);
 		AnalogPortD analogPortForDigitalMeasure2('B', 3, 400, 100);
 		AnalogPortD analogPortForDigitalMeasure3('C', 4, 700, 100);
-		analogPortForDigitalMeasure1.set_alarm_if_above_threshold_for_seconds = 50;
+		analogPortForDigitalMeasure1.set_alarm_if_above_threshold_for_seconds = 5;
+		analogPortForDigitalMeasure2.set_alarm_if_above_threshold_for_seconds = 1;
+		analogPortForDigitalMeasure3.set_alarm_if_above_threshold_for_seconds = 1;
 		AnalogPortD* analogPortForDigitalMeasureList[] = { &analogPortForDigitalMeasure1, &analogPortForDigitalMeasure2 , &analogPortForDigitalMeasure3 };
 		AnalogPortDActivity analogPortDigitalActivity(avrMicroRepository, analogPortForDigitalMeasureList, 3);
-		When(Method(mockedAvrMicroRepository, analogRead).Using(2)).AlwaysReturn(512);
-		When(Method(mockedAvrMicroRepository, analogRead).Using(3)).AlwaysReturn(512);
-		When(Method(mockedAvrMicroRepository, analogRead).Using(4)).AlwaysReturn(680);
+		When(Method(mockedAvrMicroRepository, analogRead).Using(2)).AlwaysReturn(200);
+		When(Method(mockedAvrMicroRepository, analogRead).Using(3)).AlwaysReturn(1000);
+		When(Method(mockedAvrMicroRepository, analogRead).Using(4)).AlwaysReturn(300);
 		When(Method(mockedAvrMicroRepository, get_millis)).AlwaysDo([&] { return fake_get_mill; });
-		bool any_port_is_on_alarm = false;
-		while (fake_get_mill < 7000) {
-			any_port_is_on_alarm = false;
+		while (fake_get_mill < 3000) {
 			fake_get_mill += 1000;
 			analogPortDigitalActivity.analog_read_for_all_ports();
-			any_port_is_on_alarm = analogPortDigitalActivity.is_any_port_out_of_range();
-			if (any_port_is_on_alarm) {
-				for each(AnalogPortD * analogPortD in analogPortForDigitalMeasureList) {
-					if (analogPortD->is_onAlarm && analogPortD->is_time_above_threshold_elapsed && analogPortD->is_enabled) {
-						analogPortD->is_enabled = false;
-						//group_to_disable = analogPortc->get_group_id();
-						//turn off rele where group = group
-					}
-				}
-			}
+			analogPortDigitalActivity.is_any_port_out_of_range();
 		}
-		Assert::IsTrue(analogPortForDigitalMeasure1.is_enabled, L"Expected group A to disable");
-		Assert::IsFalse(analogPortForDigitalMeasure2.is_enabled, L"Expected group B to disable");
+		Assert::IsTrue(analogPortForDigitalMeasure1.is_time_above_threshold_elapsed, L"Expected group A is on alarm");
+		Assert::IsTrue(analogPortForDigitalMeasure2.is_time_above_threshold_elapsed, L"Expected group B is on alarm");
+		Assert::IsTrue(analogPortForDigitalMeasure3.is_time_above_threshold_elapsed, L"Expected group C is on alarm");
 		/*Assert::IsTrue(result == false, L"Expected the current to be above the threshold but time is under 5 seconds.");
 		Assert::IsTrue(rele_port_g1.pin_value == commonsLayer::high, L"Expected the relay g1 to be turned off (LOW).");*/
 	}
@@ -169,6 +161,25 @@ public:
 		Assert::IsTrue(relay_01.pin_value_for_tdd, L"Expected relay_01 to be enabled");
 		Assert::IsTrue(relay_02.pin_value_for_tdd, L"Expected relay_02 to be enabled for time elapsed");
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
