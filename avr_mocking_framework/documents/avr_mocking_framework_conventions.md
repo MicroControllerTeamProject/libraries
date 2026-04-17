@@ -42,6 +42,22 @@ Test target:
 
 Use these flags to avoid carrying unnecessary code into the final embedded build.
 
+## Test Boundary For Arduino Dependencies
+Native test projects compile framework headers and selected framework `.cpp` files on the host side.
+Because of that, every file that may be included by test builds must avoid Arduino-only or third-party Arduino library includes in public headers.
+
+Rules:
+- keep Arduino and device-library includes out of headers used by tests
+- put `Arduino.h`, `Wire.h`, `LiquidCrystal_I2C.h` and similar includes in `.cpp` files whenever possible
+- if a repository is mocked in tests, its header must still remain host-compilable
+- activities may depend on repository headers, so repository headers must stay clean
+- adapters or Arduino-specific bridge code are allowed only when they are excluded from host-side test compilation
+
+Preferred pattern:
+- repository header exposes only plain C++ types and method signatures
+- repository `.cpp` contains the real Arduino/library calls
+- tests mock the repository type and never need the concrete Arduino library
+
 ### `_DEBUG_FOR_SERIAL`
 Use `_DEBUG_FOR_SERIAL` to guard:
 - `Serial.begin(...)`

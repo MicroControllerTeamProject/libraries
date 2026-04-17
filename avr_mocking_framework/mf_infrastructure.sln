@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{C0DCF878-D
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "repository", "repository", "{9D377321-617F-4930-A0B0-A68608208643}"
+	ProjectSection(SolutionItems) = preProject
+		mf_repository_LiquidCrystalRepository.cpp = mf_repository_LiquidCrystalRepository.cpp
+		mf_repository_LiquidCrystalRepository.h = mf_repository_LiquidCrystalRepository.h
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{81C37D40-C1C5-4484-AFEA-1E418E43D373}"
 	ProjectSection(SolutionItems) = preProject
@@ -67,6 +71,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RFReveiverRepository", "RFR
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activity", "activity", "{9F8C56DD-C69C-4233-B10C-F44330B03D04}"
+	ProjectSection(SolutionItems) = preProject
+		mf_activity_LiquidCrystalActivity.cpp = mf_activity_LiquidCrystalActivity.cpp
+		mf_activity_LiquidCrystalActivity.h = mf_activity_LiquidCrystalActivity.h
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "base", "base", "{2BAC941F-2257-4F33-9EAE-75166396551B}"
 	ProjectSection(SolutionItems) = preProject
