@@ -4,11 +4,19 @@ AnalogPortCActivity::AnalogPortCActivity(AvrMicroRepository& avrMicroRepository,
 	this->analogPortForCustomMisure = analogPortForCustomMisure;
 	this->reset_ports();
 }
+float AnalogPortCActivity::get_unit_of_misure_value_by_index(uint8_t index) {
+	if (index >= this->get_analog_ports_number()) {
+		return 0.00f;
+	}
+
+	AnalogPortC* analog_port = this->analogPortForCustomMisure[index];
+	float denominator = analog_port->getIstUnitOfMisureCentered() ? 512.00f : 1023.00f;
+	return (analog_port->getFullScaleUnitOfMisure() / denominator) * analog_port->digital_value;
+}
 bool  AnalogPortCActivity::is_any_port_out_of_range() {
 	bool isOnAlarm = false;
 	for (int i = 0; i < this->get_analog_ports_number(); i++) {
-		float unit_of_misure_value = 0.00f;
-		unit_of_misure_value = (this->analogPortForCustomMisure[i]->getFullScaleUnitOfMisure() / (this->analogPortForCustomMisure[i]->getIstUnitOfMisureCentered() ? 512.00f : 1023.00f)) * (this->analogPortForCustomMisure[i]->digital_value);
+		float unit_of_misure_value = this->get_unit_of_misure_value_by_index(i);
 #if _DEBUG_FOR_SERIAL
 		Serial.print("Cur."); Serial.print(i); Serial.print(" : "); Serial.println(unit_of_misure_value);
 #endif
@@ -41,5 +49,6 @@ AnalogPortC* AnalogPortCActivity::get_port_by_pin(uint8_t pin) {
 			return this->analogPortForCustomMisure[i];
 		}
 	}
+	return nullptr;
 }
 
