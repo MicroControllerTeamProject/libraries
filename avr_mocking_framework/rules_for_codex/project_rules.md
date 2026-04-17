@@ -24,6 +24,16 @@
 - In questi casi bisogna fermarsi, sollevare esplicitamente l'eccezione e dire che si tratta di una componente da aggiungere al framework.
 - Solo dopo la decisione esplicita dell'utente si puo' scegliere dove crearla.
 
+## Criterio Activity Vs Repository
+
+- Non introdurre una `activity` se il componente non aggiunge vera logica applicativa o di dominio sopra il repository.
+- Se una `activity`, in media, richiede piu' di 2 o 3 interazioni tecniche con il repository per metodo e resta comunque un semplice pass-through o un raggruppamento tecnico, allora va rivalutata.
+- In questi casi preferire un repository unico piu' completo invece di aggiungere un layer `activity` che aumenta solo il costo di mocking e manutenzione.
+- Una `activity` ha senso solo se introduce comportamento applicativo chiaro, riusabile e separabile dal repository.
+- Se il componente e' solo infrastrutturale o di output tecnico, come un display LCD, e non porta vera logica applicativa, preferire l'uso diretto del repository nella business logic o nel punto architetturalmente corretto.
+- Prima di introdurre una nuova `activity`, valutare sempre se nei test il layer aggiunge valore reale oppure solo dipendenze da moccare.
+- Se una `activity` esistente risulta troppo sottile o troppo tecnica, proporre esplicitamente la semplificazione verso un repository unico.
+
 ## Commons Layer
 
 - Usare `mf::commons::commonsLayer` dove serve davvero negli oggetti applicativi.
@@ -39,6 +49,27 @@
 - Per il debug seriale usare `AvrMicroRepository`, non `Serial` diretto.
 - Non inserire logging automatico nel file `.ino`, salvo richiesta esplicita.
 
+## Stringhe E Formattazione Testo
+
+- Non usare la classe `String` di Arduino.
+- Non introdurre nuove dipendenze o logiche basate su `String` negli oggetti applicativi, nelle activity o nei repository.
+- Preferire `const char*`, `char` e buffer `char[]` solo quando servono davvero.
+- Evitare `snprintf`, `sprintf` e funzioni simili di formattazione del testo, salvo richiesta esplicita.
+- Se serve stampare su LCD o su seriale, preferire chiamate dirette di `print(...)` tramite repository o activity invece di costruire stringhe intermedie.
+- Non creare buffer di testo temporanei se il risultato puo' essere stampato direttamente in modo sequenziale.
+- Se una parte del framework usa formattazione testuale non desiderata, fermarsi e segnalare esplicitamente che la modifica ricade sul framework.
+- Eventuali modifiche a repository o activity del framework per eliminare uso di `String` o formattazioni testuali vanno fatte solo in modo coerente con i ruoli architetturali gia' esistenti.
+
+## Repository LCD E Superficie Pubblica
+
+- Nel repository LCD preferire una superficie pubblica stretta, con pochi metodi ad alto livello e gia' orchestrati.
+- Evitare di esporre troppi micro-metodi pubblici se poi, nella business logic o nei test, andrebbero concatenati uno dopo l'altro.
+- Preferire metodi macro che eseguono da soli l'operazione completa, anche se internamente ripetono qualche chiamata in piu'.
+- Se una sequenza tipica richiede piu' chiamate consecutive per ottenere un risultato semplice, valutare di accorparla in un solo metodo pubblico del repository.
+- Le operazioni di dettaglio del repository LCD vanno tenute il piu' possibile private o protette internamente, salvo reale necessita' architetturale.
+- L'obiettivo e' ridurre il numero di chiamate da moccare nei test, non solo ridurre il numero di classi.
+- Nei componenti infrastrutturali di output, come LCD o display simili, preferire metodi pubblici orientati al risultato finale visibile piuttosto che primitive troppo atomiche.
+
 ## Naming
 
 - Variabili, parametri e funzioni nuove in `snake_case`.
@@ -50,9 +81,11 @@
 
 ## Formattazione
 
-- Evitare la formattazione a scala per costruttori, firme o chiamate con parametri uno sotto l'altro quando la riga ci sta comodamente.
-- Con monitor ampio, preferire tenere costruttori e chiamate multi-parametro su una sola riga, se resta leggibile.
+- Evitare la formattazione a scala per costruttori, firme di metodi o funzioni e chiamate con parametri uno sotto l'altro quando la riga ci sta comodamente.
+- Preferire che le firme dei metodi e delle funzioni abbiano i parametri su una sola riga, se la riga resta leggibile.
+- Con monitor ampio, preferire tenere costruttori, firme e chiamate multi-parametro su una sola riga.
 - Usare l'andata a capo solo quando serve davvero per chiarezza o limiti di spazio.
+- Non spezzare automaticamente i parametri su piu' righe per stile, se la firma puo' stare bene su una riga.
 
 ## Stile Operativo
 

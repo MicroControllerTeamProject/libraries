@@ -1,6 +1,7 @@
 #pragma once
 #include <mf_model_AnalogPortB.h>
 #include <mf_repository_AvrMicroRepository.h>
+#include <mf_commons_commonsLayer.h>
 #include <stdint.h>
 #if _DEBUG_FOR_SERIAL
 #include <Arduino.h>

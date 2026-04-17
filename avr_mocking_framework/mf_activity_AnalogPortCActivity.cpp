@@ -16,7 +16,7 @@ float AnalogPortCActivity::get_unit_of_misure_value_by_index(uint8_t index) {
 bool  AnalogPortCActivity::is_any_port_out_of_range() {
 	bool isOnAlarm = false;
 	for (int i = 0; i < this->get_analog_ports_number(); i++) {
-		float unit_of_misure_value = this->get_unit_of_misure_value_by_index(i);
+		float unit_of_misure_value = this->get_unit_of_misure_value_by_index(i); 
 #if _DEBUG_FOR_SERIAL
 		Serial.print("Cur."); Serial.print(i); Serial.print(" : "); Serial.println(unit_of_misure_value);
 #endif
