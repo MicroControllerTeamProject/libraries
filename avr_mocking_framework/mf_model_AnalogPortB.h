@@ -1,10 +1,14 @@
-#pragma once  
+// File: mf_model_AnalogPortB.h
+#pragma once
 #include <stdint.h>
+
 class AnalogPortB {
 public:
 	AnalogPortB(char group_id, const uint8_t pin);
-	virtual ~AnalogPortB() =0;
+	virtual ~AnalogPortB() = 0;
+
 	uint16_t digital_value = 0;
+	int16_t signed_digital_value = 0;
 	bool is_enabled = true;
 	bool is_on_error = false;
 	bool is_onAlarm = false;
@@ -16,11 +20,13 @@ public:
 	bool is_time_under_threshold_elapsed = false;
 	bool is_time_above_threshold_elapsed = false;
 	uint16_t offset = 0;
+
 	char get_group_id();
 	uint8_t get_pin();
+
 private:
 	char group_id = {};
 	uint8_t pin;
 };
-inline AnalogPortB::~AnalogPortB() {}
 
+inline AnalogPortB::~AnalogPortB() {}

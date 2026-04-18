@@ -9,6 +9,9 @@
 
 - Usare come riferimento il trunk principale di `avr_mocking_framework`.
 - Non usare come riferimento operativo i sample project o i progetti sottostanti, salvo richiesta esplicita.
+- Tutte le sottocartelle sotto `avr_mocking_framework` che contengono sample, progetti di esempio o materiale accessorio vanno escluse dal lavoro operativo normale.
+- Queste sottocartelle si possono consultare solo in sola lettura e solo per capire come il framework e' stato usato in precedenza, mai come base architetturale o implementativa del lavoro corrente.
+- Salvo indicazione esplicita dell'utente, considerare utile e autorevole solo il trunk principale del framework, con i suoi componenti reali come `objects`, `activity`, `repository` e le altre componenti del framework.
 - Non introdurre wrapper o oggetti personali se il trunk del framework ha gia' il tipo corretto.
 - Non creare nuove activity dentro il progetto applicativo se nel trunk di `avr_mocking_framework` esiste gia' una activity adatta.
 - Se una activity non esiste nel framework, chiedere sempre prima il permesso.
@@ -78,6 +81,10 @@
 - Se un metodo ritorna `bool`, il nome deve leggere come una domanda o un predicato coerente con il risultato restituito.
 - Evitare nomi come `read...` o `calculate...` quando il metodo ritorna in realta' un esito logico come `is_any_port_out_of_range()`.
 - Se un metodo esegue letture ma ritorna un booleano di stato finale, il nome deve riflettere quello stato finale, non l'azione intermedia.
+- L'utente puo' riferirsi ai file anche con nomi abbreviati o approssimati.
+- In ogni risposta, riportare sempre il nome completo esatto del file, cosi' da evitare ambiguita' e confermare che il riferimento sia stato capito correttamente.
+- Quando viene generato codice da copiare e incollare, inserire sempre in testa un commento con il nome completo esatto del file di destinazione, ad esempio `.h`, `.cpp` o altro file pertinente.
+- Il commento iniziale con il nome file deve servire come controllo visivo immediato, cosi' se il codice viene incollato nel file sbagliato l'errore si nota subito.
 
 ## Formattazione
 

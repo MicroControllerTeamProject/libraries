@@ -1,24 +1,45 @@
-
+// File: mf_activity_AnalogPortCActivity.cpp
 #include <mf_activity_AnalogPortCActivity.h>
-AnalogPortCActivity::AnalogPortCActivity(AvrMicroRepository& avrMicroRepository, AnalogPortC** analogPortForCustomMisure, uint8_t analogPortsNumber) :AnalogPortBActivity(avrMicroRepository, analogPortsNumber, (AnalogPortB**)analogPortForCustomMisure) {
+
+AnalogPortCActivity::AnalogPortCActivity(AvrMicroRepository& avrMicroRepository, AnalogPortC** analogPortForCustomMisure, uint8_t analogPortsNumber)
+	: AnalogPortBActivity(avrMicroRepository, analogPortsNumber, (AnalogPortB**)analogPortForCustomMisure) {
 	this->analogPortForCustomMisure = analogPortForCustomMisure;
 	this->reset_ports();
 }
+
 float AnalogPortCActivity::get_unit_of_misure_value_by_index(uint8_t index) {
 	if (index >= this->get_analog_ports_number()) {
 		return 0.00f;
 	}
 
 	AnalogPortC* analog_port = this->analogPortForCustomMisure[index];
-	float denominator = analog_port->getIstUnitOfMisureCentered() ? 512.00f : 1023.00f;
-	return (analog_port->getFullScaleUnitOfMisure() / denominator) * analog_port->digital_value;
+
+	if (analog_port->getIstUnitOfMisureCentered()) {
+		float sensitivity_volt = analog_port->getUnitOfMisureSensitivityVolt();
+
+		if (sensitivity_volt > 0.0f) {
+			float adc_step_volt = this->get_avr_micro_repository()->get_vref() / 1023.0f;
+			float delta_voltage = adc_step_volt * (float)analog_port->signed_digital_value;
+			return delta_voltage / sensitivity_volt;
+		}
+
+		return (analog_port->getFullScaleUnitOfMisure() / 512.00f) * (float)analog_port->signed_digital_value;
+	}
+
+	return (analog_port->getFullScaleUnitOfMisure() / 1023.00f) * (float)analog_port->digital_value;
 }
-bool  AnalogPortCActivity::is_any_port_out_of_range() {
+
+bool AnalogPortCActivity::is_any_port_out_of_range() {
 	bool isOnAlarm = false;
+
 	for (int i = 0; i < this->get_analog_ports_number(); i++) {
-		float unit_of_misure_value = this->get_unit_of_misure_value_by_index(i); 
+		float unit_of_misure_value = this->get_unit_of_misure_value_by_index(i);
+
 #if _DEBUG_FOR_SERIAL
-		Serial.print("Cur."); Serial.print(i); Serial.print(" : "); Serial.println(unit_of_misure_value);
+		Serial.print("Cur.");
+		Serial.print(i);
+		Serial.print(" : ");
+		Serial.println(unit_of_misure_value);
 #endif
 
 		if (unit_of_misure_value > this->analogPortForCustomMisure[i]->getMaxUnitOfMisureAlarmValue()) {
@@ -38,11 +59,14 @@ bool  AnalogPortCActivity::is_any_port_out_of_range() {
 			this->analogPortForCustomMisure[i]->is_time_under_threshold_elapsed = false;
 		}
 	}
+
 	return isOnAlarm;
 }
+
 AnalogPortC** AnalogPortCActivity::get_analog_ports() {
 	return this->analogPortForCustomMisure;
 }
+
 AnalogPortC* AnalogPortCActivity::get_port_by_pin(uint8_t pin) {
 	for (int i = 0; i < this->get_analog_ports_number(); i++) {
 		if (this->analogPortForCustomMisure[i]->get_pin() == pin) {
@@ -51,4 +75,3 @@ AnalogPortC* AnalogPortCActivity::get_port_by_pin(uint8_t pin) {
 	}
 	return nullptr;
 }
-
