@@ -73,6 +73,14 @@
 - L'obiettivo e' ridurre il numero di chiamate da moccare nei test, non solo ridurre il numero di classi.
 - Nei componenti infrastrutturali di output, come LCD o display simili, preferire metodi pubblici orientati al risultato finale visibile piuttosto che primitive troppo atomiche.
 
+## Testing E Mocking Repository
+
+- Nei repository, le librerie reali e le dipendenze concrete vanno incluse solo nei file `.cpp`.
+- I file `.h` devono restare puliti da include concreti legati all'hardware, alla board o a librerie esterne reali, per poter essere portati e mockati nei test.
+- Gli header dei repository devono esporre solo l'interfaccia necessaria, senza dipendere direttamente dalle librerie reali di produzione.
+- Le implementazioni reali nei file `.cpp` non fanno parte del materiale portato nei test di mocking.
+- Quando si progetta un repository, verificare sempre che il mocking possa avvenire portando solo il `.h`, senza richiedere dipendenze concrete del `.cpp`.
+
 ## Naming
 
 - Variabili, parametri e funzioni nuove in `snake_case`.
