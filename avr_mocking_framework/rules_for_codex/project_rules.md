@@ -36,6 +36,20 @@
 - Se il componente e' solo infrastrutturale o di output tecnico, come un display LCD, e non porta vera logica applicativa, preferire l'uso diretto del repository nella business logic o nel punto architetturalmente corretto.
 - Prima di introdurre una nuova `activity`, valutare sempre se nei test il layer aggiunge valore reale oppure solo dipendenze da moccare.
 - Se una `activity` esistente risulta troppo sottile o troppo tecnica, proporre esplicitamente la semplificazione verso un repository unico.
+- Il repository deve restare il livello infrastrutturale che comunica con il dispositivo e restituisce dati grezzi, piatti o comunque vicini al formato nativo del componente.
+- Una `activity` ha senso quando sopra quel dato esiste una trasformazione, interpretazione o normalizzazione ricorrente, tipica di quel dispositivo, che conviene non riscrivere ogni volta nella business logic.
+- La `activity` non deve esistere per semplice pass-through o per sola orchestrazione tecnica, ma per incapsulare un comportamento riusabile e ripetibile che prepara il dato per gli strati superiori.
+- La business logic resta uno strato superiore, variabile e dipendente dal caso d'uso applicativo; non va confusa con le trasformazioni ricorrenti che servono quasi sempre quando si usa uno specifico dispositivo.
+- Se il repository restituisce un dato in un formato troppo grezzo, tecnico o non direttamente utile agli strati superiori, e quel dato deve quasi sempre essere convertito, interpretato o adattato nello stesso modo, allora questa responsabilita' appartiene alla `activity`.
+- Se invece non esiste una trasformazione ricorrente e il dato del repository e' gia' direttamente utilizzabile, allora la `activity` non aggiunge valore e va evitata.
+- Nei test, una `activity` e' giustificata quando permette di verificare in modo isolato una trasformazione ricorrente del dato, una validazione, una normalizzazione, una conversione di formato o una interpretazione tipica del dispositivo.
+- La business logic orchestra piu' chiamate e piu' repository per realizzare il comportamento applicativo complessivo; non deve legarsi al formato nativo del dispositivo.
+- Il repository accede in modo grezzo/raw al dispositivo.
+- L'activity conosce il significato tecnico o ricorrente del dato di quel dispositivo, lo normalizza o interpreta quando serve e lo rende piu' riusabile agli strati superiori.
+- Se una trasformazione del dato e' ricorrente e tipica del dispositivo, appartiene alla `activity`.
+- Se invece una decisione dipende dal comportamento applicativo finale, dalla sequenza delle operazioni o dal coordinamento tra piu' componenti, allora appartiene alla business logic.
+- Il repository non deve contenere logica applicativa di orchestrazione.
+- L'activity non deve sostituire la business logic, ma alleggerirla dalle trasformazioni ripetitive e tipiche del dispositivo.
 
 ## Commons Layer
 
@@ -80,6 +94,21 @@
 - Gli header dei repository devono esporre solo l'interfaccia necessaria, senza dipendere direttamente dalle librerie reali di produzione.
 - Le implementazioni reali nei file `.cpp` non fanno parte del materiale portato nei test di mocking.
 - Quando si progetta un repository, verificare sempre che il mocking possa avvenire portando solo il `.h`, senza richiedere dipendenze concrete del `.cpp`.
+
+## Memoria E Ottimizzazione Risorse
+
+- In tutto il progetto, considerare sempre il risparmio di memoria come vincolo progettuale di base, sia su SRAM sia su flash.
+- Ogni nuova soluzione deve essere valutata anche in funzione del costo in memoria, non solo della comodita' implementativa o della velocita' di sviluppo.
+- Evitare strutture dati, buffer, tabelle, cache o copie temporanee quando non sono strettamente necessarie.
+- Preferire implementazioni piu' leggere in memoria anche se leggermente meno comode, pur mantenendo leggibilita', testabilita' e coerenza architetturale.
+- Nei repository, nelle activity e negli oggetti applicativi, evitare di mantenere in memoria dati duplicati se possono essere letti, elaborati o trasmessi in modo diretto.
+- Evitare buffer grandi o permanenti quando bastano buffer piccoli, locali o riusabili.
+- Evitare tabelle precalcolate, lookup table o altre ottimizzazioni orientate alla velocita' se il loro costo in memoria non e' giustificato dal caso reale.
+- Se una libreria, un adapter o una soluzione introduce un costo di memoria elevato, segnalarlo esplicitamente e valutare un'alternativa piu' leggera.
+- Preferire protocolli semplici, payload compatti e rappresentazioni numeriche leggere quando il progetto gira su microcontrollori con memoria limitata.
+- Evitare allocazioni dinamiche, oggetti inutilmente pesanti o superfici pubbliche che costringono a mantenere stato interno non necessario.
+- Prima di introdurre nuove dipendenze o nuove componenti, valutare sempre se il beneficio reale giustifica il costo in memoria e complessita'.
+- In caso di dubbio tra due implementazioni equivalenti dal punto di vista funzionale, preferire quella che consuma meno memoria e introduce meno overhead strutturale.
 
 ## Naming
 
