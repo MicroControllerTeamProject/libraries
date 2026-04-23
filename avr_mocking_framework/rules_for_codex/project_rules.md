@@ -1,5 +1,20 @@
 # Regole Progetto
 
+## Regola Fondamentale
+
+- ATTENZIONE: i repository non devono contenere in alcun modo logica di business o logica applicativa.
+- Questa regola e' prioritaria e va riletta per prima ogni volta che si usa questo file.
+- Il repository deve limitarsi a comunicare con il dispositivo, la libreria o il livello hardware nel modo piu' raw, diretto e vicino possibile al formato nativo del componente.
+- Il repository puo' contenere solo la logica tecnica minima indispensabile per parlare con il dispositivo, leggere o scrivere dati, gestire dettagli del protocollo, parametri tecnici, errori tecnici o adattamenti strettamente infrastrutturali.
+- Il repository non deve prendere decisioni applicative, non deve interpretare il significato finale del dato per il caso d'uso e non deve restituire esiti che rappresentano logica di business.
+- Non devono esistere nel repository metodi del tipo "le date sono differenti", "la condizione applicativa e' valida", "il comportamento finale deve essere si o no" o simili, quando quel booleano rappresenta una decisione di dominio, di business logic o di caso d'uso.
+- Se un metodo del repository ritorna un `bool`, quel `bool` deve rappresentare solo un esito tecnico o infrastrutturale coerente con il dispositivo o con l'operazione raw, non una decisione applicativa.
+- Se il codice sta confrontando valori per decidere un comportamento funzionale dell'applicazione, quella responsabilita' non appartiene al repository.
+- Se il dato va interpretato, normalizzato, convertito o validato in modo ricorrente e tipico del dispositivo, questa responsabilita' appartiene alla `activity`.
+- Se invece il comportamento dipende dal flusso applicativo finale, dal coordinamento tra componenti o da una regola di dominio, questa responsabilita' appartiene alla business logic.
+- Il repository non deve trasformarsi in una business logic mascherata, ne' in una `activity` mascherata.
+- In caso di dubbio, preferire repository piu' raw e spostare ogni interpretazione non strettamente tecnica verso `activity` o business logic.
+
 ## Ambito Modifiche
 
 - Modificare e creare file solo dentro il progetto corrente autorizzato.
@@ -30,26 +45,54 @@
 ## Criterio Activity Vs Repository
 
 - Non introdurre una `activity` se il componente non aggiunge vera logica applicativa o di dominio sopra il repository.
+- Una `activity` ha senso quando sopra il dato raw esiste una trasformazione, interpretazione o normalizzazione ricorrente, tipica del dispositivo, che conviene non riscrivere ogni volta nella business logic.
+- La `activity` non deve esistere per semplice pass-through o per sola orchestrazione tecnica.
 - Se una `activity`, in media, richiede piu' di 2 o 3 interazioni tecniche con il repository per metodo e resta comunque un semplice pass-through o un raggruppamento tecnico, allora va rivalutata.
-- In questi casi preferire un repository unico piu' completo invece di aggiungere un layer `activity` che aumenta solo il costo di mocking e manutenzione.
-- Una `activity` ha senso solo se introduce comportamento applicativo chiaro, riusabile e separabile dal repository.
-- Se il componente e' solo infrastrutturale o di output tecnico, come un display LCD, e non porta vera logica applicativa, preferire l'uso diretto del repository nella business logic o nel punto architetturalmente corretto.
-- Prima di introdurre una nuova `activity`, valutare sempre se nei test il layer aggiunge valore reale oppure solo dipendenze da moccare.
-- Se una `activity` esistente risulta troppo sottile o troppo tecnica, proporre esplicitamente la semplificazione verso un repository unico.
+- In questi casi preferire un repository dedicato piu' completo invece di aggiungere un layer `activity` che aumenta solo il costo di mocking e manutenzione.
+- Quindi il criterio non e' "seriale uguale activity" ne' "seriale uguale repository", ma: scegliere il layer che evita pass-through, evita troppe chiamate tecniche disperse e mantiene la logica di business fuori dal repository.
+
 - Il repository deve restare il livello infrastrutturale che comunica con il dispositivo e restituisce dati grezzi, piatti o comunque vicini al formato nativo del componente.
-- Una `activity` ha senso quando sopra quel dato esiste una trasformazione, interpretazione o normalizzazione ricorrente, tipica di quel dispositivo, che conviene non riscrivere ogni volta nella business logic.
-- La `activity` non deve esistere per semplice pass-through o per sola orchestrazione tecnica, ma per incapsulare un comportamento riusabile e ripetibile che prepara il dato per gli strati superiori.
-- La business logic resta uno strato superiore, variabile e dipendente dal caso d'uso applicativo; non va confusa con le trasformazioni ricorrenti che servono quasi sempre quando si usa uno specifico dispositivo.
-- Se il repository restituisce un dato in un formato troppo grezzo, tecnico o non direttamente utile agli strati superiori, e quel dato deve quasi sempre essere convertito, interpretato o adattato nello stesso modo, allora questa responsabilita' appartiene alla `activity`.
-- Se invece non esiste una trasformazione ricorrente e il dato del repository e' gia' direttamente utilizzabile, allora la `activity` non aggiunge valore e va evitata.
-- Nei test, una `activity` e' giustificata quando permette di verificare in modo isolato una trasformazione ricorrente del dato, una validazione, una normalizzazione, una conversione di formato o una interpretazione tipica del dispositivo.
-- La business logic orchestra piu' chiamate e piu' repository per realizzare il comportamento applicativo complessivo; non deve legarsi al formato nativo del dispositivo.
-- Il repository accede in modo grezzo/raw al dispositivo.
-- L'activity conosce il significato tecnico o ricorrente del dato di quel dispositivo, lo normalizza o interpreta quando serve e lo rende piu' riusabile agli strati superiori.
+- Il repository puo' contenere solo logica tecnica minima indispensabile: lettura, scrittura, framing, timeout, gestione buffer, dettagli di protocollo, errori tecnici, adattamenti strettamente infrastrutturali.
+- Il repository non deve contenere logica applicativa, significati di dominio, decisioni di business o convenzioni legate a uno specifico caso d'uso finale.
+
+- Una `activity` puo' diventare troppo chiacchierona rispetto a qualsiasi repository iniettato, non solo rispetto a `mf_repository_AvrMicroRepository`.
+- Se una `activity` continua a ripetere molte chiamate tecniche al repository senza introdurre una vera logica ricorrente, testabile e utile, allora quel raggruppamento non deve stare nella `activity`.
+- In questi casi il raggruppamento tecnico va riportato nel repository, pur mantenendolo raw e senza logica di business.
+- Se invece sopra il dato raw esiste una logica ricorrente e testabile, come validazione, normalizzazione, conversione di formato, interpretazione tecnica del dato o confronto semantico del contenuto, allora questa responsabilita' appartiene alla `activity`, perche' deve poter essere testata in modo isolato.
 - Se una trasformazione del dato e' ricorrente e tipica del dispositivo, appartiene alla `activity`.
 - Se invece una decisione dipende dal comportamento applicativo finale, dalla sequenza delle operazioni o dal coordinamento tra piu' componenti, allora appartiene alla business logic.
-- Il repository non deve contenere logica applicativa di orchestrazione.
-- L'activity non deve sostituire la business logic, ma alleggerirla dalle trasformazioni ripetitive e tipiche del dispositivo.
+
+- Se un componente comunica solo tramite seriale e `mf_repository_AvrMicroRepository` espone gia' le primitive raw necessarie come `begin(...)`, `available()`, `read()`, `print(...)`, `write(...)` o funzioni base di timing, non creare automaticamente un repository dedicato.
+- In questi casi, se bastano poche primitive raw ripetute in modo semplice, va preferita una `activity` che riceve `mf_repository_AvrMicroRepository` in iniezione e si occupa della trasformazione ricorrente del dato.
+- La semplice presenza di una comunicazione seriale non giustifica da sola la creazione di un nuovo repository.
+- Tuttavia, se per usare bene quel componente una `activity` sarebbe costretta a fare molte interazioni tecniche consecutive con il repository di base, ad esempio letture o scritture multiple, gestione del framing, timeout, parsing tecnico, pulizia buffer o altre operazioni seriali ripetitive, allora un repository dedicato puo' essere giustificato.
+- In questo caso il repository dedicato e' ammesso non perche' aggiunge logica di business, ma perche' accorpa in un unico punto una superficie infrastrutturale tecnica che altrimenti renderebbe la `activity` troppo chiacchierona, fragile e costosa da testare.
+- Anche in questo caso il repository dedicato deve restare generico e raw, non deve sposarsi con un payload applicativo specifico, con un caso d'uso del progetto o con decisioni di business.
+
+- Nei repository specializzati l'API pubblica non deve essere troppo atomica se questo costringerebbe business logic o activity a fare molte chiamate tecniche consecutive per comporre un'operazione semplice.
+- `mf_repository_AvrMicroRepository` puo' e deve restare molto atomico, perche' rappresenta il livello base e granulare del microcontrollore.
+- I repository specializzati di dispositivo, invece, non devono obbligare gli strati superiori a orchestrare decine di micro-passaggi tecnici per ottenere un risultato tecnico semplice e ricorrente del dispositivo.
+- Se una operazione semplice richiederebbe molte chiamate consecutive allo stesso repository specializzato, allora quella composizione tecnica deve essere accorpata nel repository stesso.
+- Nei repository specializzati, oltre a evitare logica di business, bisogna prevedere anche le operazioni normali e ricorrenti del dispositivo.
+- Se per utilizzare correttamente il dispositivo una operazione tipica richiede piu' iterazioni o combinazioni di metodi tecnici gia' esistenti, questa sequenza deve essere accorpata nel repository.
+- Questo accorpamento e' ammesso solo quando rappresenta una sequenza tecnica propria del dispositivo e non introduce logica di business.
+- L'obiettivo e' evitare che business logic o activity debbano orchestrare piu' chiamate tecniche diverse, diventando fragili, verbose e costose da testare o mockare.
+- Il problema non e' il numero di chiamate in assoluto, ma la presenza di sequenze tecniche eterogenee che devono essere coordinate dagli strati superiori.
+- Se una sequenza tecnica e' ricorrente nell'uso reale del dispositivo, deve essere incapsulata nel repository come metodo pubblico piu' completo.
+- Il repository deve quindi anticipare le azioni tipiche del dispositivo, non limitarsi a esporre primitive isolate quando queste non sono sufficienti per un uso pratico.
+- Il repository puo' e deve quindi offrire metodi pubblici piu' completi quando questi rappresentano una sequenza tecnica ricorrente del dispositivo, purche' resti privo di logica di business.
+- L'obiettivo e' ridurre pass-through, costo di mocking e numero di chiamate ripetitive negli strati superiori.
+- Quindi il repository specializzato non deve essere ne' troppo intelligente sul piano applicativo, ne' troppo stupido sul piano tecnico.
+- Deve restare raw nel significato del dato, ma sufficientemente macro nella superficie tecnica pubblica quando serve a incapsulare correttamente il comportamento ricorrente del dispositivo.
+
+- Nei dispositivi che espongono principalmente uno stream seriale testuale o quasi testuale, come un GPS NMEA, non creare automaticamente un repository dedicato solo per leggere e ricomporre i dati in arrivo.
+- Se il repository infrastrutturale gia' esistente, ad esempio `mf_repository_AvrMicroRepository`, espone gia' le primitive raw necessarie come `begin(...)`, `available()`, `read()` e funzioni base di timing, allora va preferita una `activity` che riceve quel repository in iniezione e si occupa della trasformazione ricorrente del dato.
+- In questi casi la `activity` puo' leggere i byte, ricostruire le righe o i frame, validare il contenuto, fare parsing, normalizzazione, conversione e interpretazione del protocollo, senza introdurre un nuovo repository del dispositivo.
+- Il numero elevato di iterazioni di lettura sul repository non giustifica da solo la creazione di un repository dedicato, se tali chiamate restano ripetizioni delle stesse poche primitive raw.
+- Un repository dedicato al dispositivo va rivalutato solo quando il protocollo richiede una vera superficie infrastrutturale propria, ad esempio invio comandi, configurazione attiva, gestione stati del dispositivo, ACK o NACK, retry, timeout specifici, piu' operazioni pubbliche di controllo o una API hardware autonoma.
+- Per un GPS usato come sorgente NMEA passiva, la forma preferita e': adapter seriale -> `mf_repository_AvrMicroRepository` -> `mf_activity_<nome>Activity`.
+- In questo scenario il repository resta raw e vicino all'hardware, mentre la `activity` incapsula il significato ricorrente delle stringhe del dispositivo, ad esempio parsing di frasi NMEA, validazione del fix, estrazione coordinate, velocita', altitudine, data e ora.
+- Evitare quindi di creare un repository dedicato se il componente aggiungerebbe solo un layer tecnico intermedio tra la seriale raw e una trasformazione che appartiene chiaramente alla `activity`.
 
 ## Commons Layer
 
@@ -94,6 +137,14 @@
 - Gli header dei repository devono esporre solo l'interfaccia necessaria, senza dipendere direttamente dalle librerie reali di produzione.
 - Le implementazioni reali nei file `.cpp` non fanno parte del materiale portato nei test di mocking.
 - Quando si progetta un repository, verificare sempre che il mocking possa avvenire portando solo il `.h`, senza richiedere dipendenze concrete del `.cpp`.
+- I repository che devono essere portati nei test o mockati dagli strati superiori devono essere progettati esplicitamente per il mocking.
+- Nei repository usati polimorficamente o sostituiti con mock nei test, i metodi pubblici esposti agli strati superiori devono essere dichiarati `virtual`.
+- Quando un repository viene usato come dipendenza polimorfica, anche il distruttore deve essere `virtual`.
+- Non rendere `virtual` metodi privati, protetti o dettagli interni che non servono al mocking o alla sostituzione del componente nei test.
+- Le parti interne del repository che rappresentano solo dettagli implementativi devono restare non virtuali, per evitare complessita' inutile e overhead non necessario.
+- Il repository deve essere testabile e mockabile gia' per progettazione, non adattato ai test solo in un secondo momento.
+- Quando si disegna la superficie pubblica del repository, considerare sempre anche il costo di mocking: pochi metodi, ben espressi, orientati al risultato.
+- Se un repository espone troppi micro-metodi `virtual`, bisogna rivalutare la sua superficie pubblica e semplificarla.
 
 ## Memoria E Ottimizzazione Risorse
 
@@ -118,6 +169,14 @@
 - Se un metodo ritorna `bool`, il nome deve leggere come una domanda o un predicato coerente con il risultato restituito.
 - Evitare nomi come `read...` o `calculate...` quando il metodo ritorna in realta' un esito logico come `is_any_port_out_of_range()`.
 - Se un metodo esegue letture ma ritorna un booleano di stato finale, il nome deve riflettere quello stato finale, non l'azione intermedia.
+- Le activity devono seguire la convenzione: `mf_activity_<nome>Activity`
+- I repository devono seguire la convenzione: `mf_repository_<nome>Repository`
+- Il nome deve quindi mantenere sia il prefisso del tipo componente sia il suffisso finale coerente con il ruolo.
+- Esempi corretti:
+  - `mf_activity_AnalogPortBActivity`
+  - `mf_repository_AvrMicroRepository`
+- Quando si crea un nuovo file o una nuova classe appartenente a questi ruoli, rispettare sempre questa convenzione completa.
+- Non usare naming alternativi semplificati o parziali se il componente appartiene al framework o ne segue le convenzioni.
 - L'utente puo' riferirsi ai file anche con nomi abbreviati o approssimati.
 - In ogni risposta, riportare sempre il nome completo esatto del file, cosi' da evitare ambiguita' e confermare che il riferimento sia stato capito correttamente.
 - Quando viene generato codice da copiare e incollare, inserire sempre in testa un commento con il nome completo esatto del file di destinazione, ad esempio `.h`, `.cpp` o altro file pertinente.
