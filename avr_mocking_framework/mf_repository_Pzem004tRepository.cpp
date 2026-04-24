@@ -21,27 +21,30 @@ constexpr uint8_t pzem_measures_response_length = 25;
 constexpr uint8_t pzem_cmd_8_length = 8;
 constexpr uint8_t pzem_reset_cmd_length = 4;
 constexpr uint8_t pzem_read_address_response_length = 7;
+
+uint16_t read_u16_be(const uint8_t* buffer, uint8_t index) {
+    return static_cast<uint16_t>((static_cast<uint16_t>(buffer[index]) << 8) | buffer[index + 1]);
 }
 
-Pzem004tRepository::Pzem004tRepository(ISerial& serial, uint8_t address)
+uint32_t read_u32_pzem(const uint8_t* buffer, uint8_t index) {
+    return (static_cast<uint32_t>(buffer[index + 2]) << 24) |
+           (static_cast<uint32_t>(buffer[index + 3]) << 16) |
+           (static_cast<uint32_t>(buffer[index]) << 8) |
+           static_cast<uint32_t>(buffer[index + 1]);
+}
+}
+
+mf_repository_Pzem004tRepository::mf_repository_Pzem004tRepository(ISerial& serial, uint8_t address)
     : serial_(serial),
       timeout_ms_(pzem_default_timeout_ms),
       update_interval_ms_(pzem_default_update_interval_ms),
       last_update_ms_(0UL),
       is_cache_valid_(false) {
-    cached_measures_.current_x1000 = 0UL;
-    cached_measures_.power_x10 = 0UL;
-    cached_measures_.energy_wh = 0UL;
-    cached_measures_.voltage_x10 = 0U;
-    cached_measures_.frequency_x10 = 0U;
-    cached_measures_.power_factor_x100 = 0U;
-    cached_measures_.alarms = 0U;
     cached_measures_.address = (address >= pzem_min_address && address <= pzem_default_address) ? address : pzem_default_address;
-    cached_measures_.is_connected = false;
-    cached_measures_.is_data_valid = false;
+    clear_cached_measures();
 }
 
-void Pzem004tRepository::begin() {
+void mf_repository_Pzem004tRepository::begin() {
     serial_.begin(pzem_baud_rate);
     serial_.setTimeout(timeout_ms_);
     clear_receive_buffer();
@@ -49,24 +52,24 @@ void Pzem004tRepository::begin() {
     last_update_ms_ = 0UL;
 }
 
-void Pzem004tRepository::set_timeout(unsigned long timeout_ms) {
+void mf_repository_Pzem004tRepository::set_timeout(unsigned long timeout_ms) {
     timeout_ms_ = timeout_ms;
     serial_.setTimeout(timeout_ms_);
 }
 
-unsigned long Pzem004tRepository::get_timeout() const {
+unsigned long mf_repository_Pzem004tRepository::get_timeout() const {
     return timeout_ms_;
 }
 
-void Pzem004tRepository::set_update_interval(unsigned long update_interval_ms) {
+void mf_repository_Pzem004tRepository::set_update_interval(unsigned long update_interval_ms) {
     update_interval_ms_ = update_interval_ms;
 }
 
-unsigned long Pzem004tRepository::get_update_interval() const {
+unsigned long mf_repository_Pzem004tRepository::get_update_interval() const {
     return update_interval_ms_;
 }
 
-bool Pzem004tRepository::read_measures(Pzem004tMeasures& out_measures) {
+bool mf_repository_Pzem004tRepository::read_measures(Pzem004tMeasures& out_measures) {
     if (!update_cache()) {
         return false;
     }
@@ -75,7 +78,7 @@ bool Pzem004tRepository::read_measures(Pzem004tMeasures& out_measures) {
     return true;
 }
 
-bool Pzem004tRepository::reset_energy() {
+bool mf_repository_Pzem004tRepository::reset_energy() {
     uint8_t send_buffer[pzem_reset_cmd_length] = { cached_measures_.address, pzem_reset_energy_command, 0x00, 0x00 };
 
     set_crc(send_buffer, pzem_reset_cmd_length);
@@ -86,7 +89,7 @@ bool Pzem004tRepository::reset_energy() {
     return true;
 }
 
-bool Pzem004tRepository::set_power_alarm(uint16_t watts) {
+bool mf_repository_Pzem004tRepository::set_power_alarm(uint16_t watts) {
     if (watts > pzem_max_power_alarm_watts) {
         watts = pzem_max_power_alarm_watts;
     }
@@ -94,7 +97,7 @@ bool Pzem004tRepository::set_power_alarm(uint16_t watts) {
     return send_cmd_8(pzem_write_single_register, pzem_register_alarm_threshold, watts, true);
 }
 
-bool Pzem004tRepository::set_address(uint8_t address) {
+bool mf_repository_Pzem004tRepository::set_address(uint8_t address) {
     if (address < pzem_min_address || address > pzem_max_address) {
         return false;
     }
@@ -108,7 +111,7 @@ bool Pzem004tRepository::set_address(uint8_t address) {
     return true;
 }
 
-uint8_t Pzem004tRepository::read_address(bool update_internal_address) {
+uint8_t mf_repository_Pzem004tRepository::read_address(bool update_internal_address) {
     uint8_t response[pzem_read_address_response_length];
 
     if (!send_cmd_8(pzem_read_holding_registers, pzem_register_address, 0x0001, false)) {
@@ -119,7 +122,12 @@ uint8_t Pzem004tRepository::read_address(bool update_internal_address) {
         return 0x00;
     }
 
-    uint8_t address = static_cast<uint8_t>((static_cast<uint16_t>(response[3]) << 8) | response[4]);
+    uint16_t raw_address = read_u16_be(response, 3);
+    if (raw_address < pzem_min_address || raw_address > pzem_max_address) {
+        return 0x00;
+    }
+
+    uint8_t address = static_cast<uint8_t>(raw_address);
     if (update_internal_address) {
         cached_measures_.address = address;
         invalidate_cache();
@@ -128,15 +136,11 @@ uint8_t Pzem004tRepository::read_address(bool update_internal_address) {
     return address;
 }
 
-uint8_t Pzem004tRepository::get_address() const {
+uint8_t mf_repository_Pzem004tRepository::get_address() const {
     return cached_measures_.address;
 }
 
-bool Pzem004tRepository::is_connected() const {
-    return cached_measures_.is_connected;
-}
-
-bool Pzem004tRepository::update_cache() {
+bool mf_repository_Pzem004tRepository::update_cache() {
     unsigned long now = get_millis();
     if (is_cache_valid_ && static_cast<unsigned long>(now - last_update_ms_) <= update_interval_ms_) {
         return true;
@@ -154,25 +158,20 @@ bool Pzem004tRepository::update_cache() {
         return false;
     }
 
-    cached_measures_.voltage_x10 = static_cast<uint16_t>((static_cast<uint16_t>(response[3]) << 8) | response[4]);
-    cached_measures_.current_x1000 = (static_cast<uint32_t>(response[5]) << 8) | static_cast<uint32_t>(response[6]) |
-        (static_cast<uint32_t>(response[7]) << 24) | (static_cast<uint32_t>(response[8]) << 16);
-    cached_measures_.power_x10 = (static_cast<uint32_t>(response[9]) << 8) | static_cast<uint32_t>(response[10]) |
-        (static_cast<uint32_t>(response[11]) << 24) | (static_cast<uint32_t>(response[12]) << 16);
-    cached_measures_.energy_wh = (static_cast<uint32_t>(response[13]) << 8) | static_cast<uint32_t>(response[14]) |
-        (static_cast<uint32_t>(response[15]) << 24) | (static_cast<uint32_t>(response[16]) << 16);
-    cached_measures_.frequency_x10 = static_cast<uint16_t>((static_cast<uint16_t>(response[17]) << 8) | response[18]);
-    cached_measures_.power_factor_x100 = static_cast<uint16_t>((static_cast<uint16_t>(response[19]) << 8) | response[20]);
-    cached_measures_.alarms = static_cast<uint16_t>((static_cast<uint16_t>(response[21]) << 8) | response[22]);
-    cached_measures_.is_connected = true;
-    cached_measures_.is_data_valid = true;
+    cached_measures_.voltage_x10 = read_u16_be(response, 3);
+    cached_measures_.current_x1000 = read_u32_pzem(response, 5);
+    cached_measures_.power_x10 = read_u32_pzem(response, 9);
+    cached_measures_.energy_wh = read_u32_pzem(response, 13);
+    cached_measures_.frequency_x10 = read_u16_be(response, 17);
+    cached_measures_.power_factor_x100 = read_u16_be(response, 19);
+    cached_measures_.alarms = read_u16_be(response, 21);
 
     is_cache_valid_ = true;
     last_update_ms_ = now;
     return true;
 }
 
-bool Pzem004tRepository::send_cmd_8(uint8_t command, uint16_t register_address, uint16_t value, bool check_response, uint16_t slave_address) {
+bool mf_repository_Pzem004tRepository::send_cmd_8(uint8_t command, uint16_t register_address, uint16_t value, bool check_response, uint16_t slave_address) {
     uint8_t send_buffer[pzem_cmd_8_length];
 
     if (slave_address == pzem_invalid_slave_address || slave_address < pzem_min_address || slave_address > pzem_max_address) {
@@ -210,7 +209,7 @@ bool Pzem004tRepository::send_cmd_8(uint8_t command, uint16_t register_address, 
     return true;
 }
 
-uint8_t Pzem004tRepository::receive_frame(uint8_t* response, uint8_t expected_length) {
+uint8_t mf_repository_Pzem004tRepository::receive_frame(uint8_t* response, uint8_t expected_length) {
     unsigned long start_ms = get_millis();
     uint8_t index = 0;
 
@@ -224,22 +223,19 @@ uint8_t Pzem004tRepository::receive_frame(uint8_t* response, uint8_t expected_le
     }
 
     if (!check_crc(response, index)) {
-        cached_measures_.is_connected = false;
-        cached_measures_.is_data_valid = false;
         return 0;
     }
 
-    cached_measures_.is_connected = true;
     return index;
 }
 
-void Pzem004tRepository::clear_receive_buffer() {
+void mf_repository_Pzem004tRepository::clear_receive_buffer() {
     while (serial_.available() > 0) {
         serial_.read();
     }
 }
 
-bool Pzem004tRepository::check_crc(const uint8_t* buffer, uint8_t length) const {
+bool mf_repository_Pzem004tRepository::check_crc(const uint8_t* buffer, uint8_t length) const {
     if (length <= 2) {
         return false;
     }
@@ -249,7 +245,7 @@ bool Pzem004tRepository::check_crc(const uint8_t* buffer, uint8_t length) const 
     return computed_crc == received_crc;
 }
 
-void Pzem004tRepository::set_crc(uint8_t* buffer, uint8_t length) const {
+void mf_repository_Pzem004tRepository::set_crc(uint8_t* buffer, uint8_t length) const {
     if (length <= 2) {
         return;
     }
@@ -259,7 +255,7 @@ void Pzem004tRepository::set_crc(uint8_t* buffer, uint8_t length) const {
     buffer[length - 1] = static_cast<uint8_t>((crc >> 8) & 0xFF);
 }
 
-uint16_t Pzem004tRepository::crc16(const uint8_t* data, uint8_t length) const {
+uint16_t mf_repository_Pzem004tRepository::crc16(const uint8_t* data, uint8_t length) const {
     uint16_t crc = 0xFFFF;
 
     while (length-- > 0) {
@@ -276,14 +272,12 @@ uint16_t Pzem004tRepository::crc16(const uint8_t* data, uint8_t length) const {
     return crc;
 }
 
-unsigned long Pzem004tRepository::get_millis() const {
+unsigned long mf_repository_Pzem004tRepository::get_millis() const {
     return millis();
 }
 
-void Pzem004tRepository::invalidate_cache() {
-    is_cache_valid_ = false;
-    cached_measures_.is_connected = false;
-    cached_measures_.is_data_valid = false;
+void mf_repository_Pzem004tRepository::clear_cached_measures() {
+    uint8_t address = cached_measures_.address;
     cached_measures_.current_x1000 = 0UL;
     cached_measures_.power_x10 = 0UL;
     cached_measures_.energy_wh = 0UL;
@@ -291,4 +285,10 @@ void Pzem004tRepository::invalidate_cache() {
     cached_measures_.frequency_x10 = 0U;
     cached_measures_.power_factor_x100 = 0U;
     cached_measures_.alarms = 0U;
+    cached_measures_.address = address;
+}
+
+void mf_repository_Pzem004tRepository::invalidate_cache() {
+    is_cache_valid_ = false;
+    clear_cached_measures();
 }

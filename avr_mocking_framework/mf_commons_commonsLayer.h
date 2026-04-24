@@ -4,7 +4,7 @@
 #define _ON_MOCKING_TESTS 0
 #endif
 #ifndef _DEBUG_FOR_SERIAL
-#define _DEBUG_FOR_SERIAL 1
+#define _DEBUG_FOR_SERIAL 0
 #endif
 namespace mf::commons::commonsLayer {
 	enum class ProcessStatus { blocked_level_too_high = 0, blocked_level_to_low = 1, blocked_level_missing = 2, stopped = 3, running = 4 };
