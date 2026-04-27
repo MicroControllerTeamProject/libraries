@@ -1,4 +1,4 @@
-# Regole Progetto
+﻿# Regole Progetto
 
 ## Regola Fondamentale
 
@@ -281,6 +281,9 @@
 
 - Il file `.ino` deve restare minimale: wiring, setup e loop.
 - Le logiche reali devono stare nella business logic, nelle activity o negli oggetti applicativi.
+- Nel file .ino non avviare o configurare componenti iniettati nei layer applicativi o infrastrutturali (ad esempio begin(...), listen(), setTimeout(...) e inizializzazioni operative analoghe).
+- Se un componente e' iniettato in repository, activity o business logic, la sua inizializzazione operativa deve avvenire nel componente proprietario, non nel file .ino.
+- Il file .ino deve limitarsi a creare i componenti, collegarli tra loro e chiamare i metodi pubblici di avvio/esecuzione ad alto livello.
 - Evitare costanti o variabili applicative aggiuntive solo per assegnare proprieta' agli oggetti, se i valori possono essere messi direttamente nella creazione o nell'assegnazione delle proprieta'.
 - Se i sensori o gli oggetti aumentano molto di numero, non duplicare variabili intermedie per ogni proprieta': preferire assegnazioni dirette sugli oggetti.
 - Le properties degli oggetti vanno messe direttamente sugli oggetti, quando vengono creati o configurati.

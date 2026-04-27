@@ -8,7 +8,7 @@
 class ISerial {
 public:
 	virtual ~ISerial() = default;
-	/// Avvia la seriale alla velocità specificata
+	/// Avvia la seriale alla velocitï¿½ specificata
 	virtual void begin(unsigned long baud) = 0;
 	/// Scrive un singolo byte
 	virtual size_t write(uint8_t byte) = 0;
@@ -40,6 +40,24 @@ public:
 	virtual float parseFloat() = 0;
 	/// Imposta il timeout per le operazioni di lettura
 	virtual void setTimeout(unsigned long timeout) = 0;
+
+	/// Attiva questa seriale, utile per implementazioni tipo SoftwareSerial.
+	/// Metodo puro: ogni adapter deve dichiarare esplicitamente cosa significa listen().
+	virtual bool listen() = 0;
+
+	/// Indica se questa seriale e' attualmente in ascolto.
+	/// Metodo puro: ogni adapter deve dichiarare esplicitamente cosa significa isListening().
+	virtual bool isListening() = 0;
+
+	/// Disattiva l'ascolto di questa seriale, utile per implementazioni tipo SoftwareSerial.
+	/// Metodo puro: ogni adapter deve dichiarare esplicitamente cosa significa stopListening().
+	virtual bool stopListening() = 0;
+
+	/// Alias in snake_case per mantenere naming coerente nel progetto.
+	virtual bool is_listening() = 0;
+
+	/// Alias in snake_case per mantenere naming coerente nel progetto.
+	virtual bool stop_listening() = 0;
 	virtual const int getRxBufferSize() = 0;
 	// --- print/println wrappers basati su write() ---
 	/// Stampa una stringa, con newline opzionale
