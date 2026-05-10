@@ -5,7 +5,7 @@
 class DigitalPortActivity{
 public:
 	DigitalPortActivity(AvrMicroRepository& avrMicroRepository, DigitalPort** digitalPort, uint8_t digitalPortsNumber);
-	DigitalPortActivity::DigitalPortActivity();
+	DigitalPortActivity();
 	bool is_any_port_triggered();
 	void digital_write(uint8_t pin, bool level);
 	uint8_t get_ports_number();
