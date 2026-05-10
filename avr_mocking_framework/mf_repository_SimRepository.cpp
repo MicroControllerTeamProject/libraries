@@ -149,8 +149,9 @@ void SimRepository::initSmsReception() {
 
 bool SimRepository::setNetlightEnabled(bool enabled) {
 	clear_receive_buffer();
+	delay(5000);
 	send_at_cmd(serial_, enabled ? AT_SET_NETLIGHT_ON : AT_SET_NETLIGHT_OFF);
-	return wait_for_pattern(LITERAL_OK, 5000UL);
+	return wait_for_pattern(LITERAL_OK, 35000UL);
 }
 
 bool SimRepository::readSms(uint8_t index, char* message) {
@@ -397,7 +398,7 @@ bool SimRepository::isGprsAttached() {
 bool SimRepository::enterSleepMode() {
 	serial_.listen();
 	digitalWrite(dtr_pin_, LOW);
-	delay(120UL);
+	delay(5000);
 	clear_receive_buffer();
 	send_at_cmd(serial_, AT_ENABLE_DTR_SLEEP);
 	if (!wait_for_pattern(LITERAL_OK, 3000UL)) {
