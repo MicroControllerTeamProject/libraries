@@ -20,7 +20,7 @@ void PrintSerialAndLCDFunctions::LCDBegin(uint8_t col, uint8_t row)
 
 void PrintSerialAndLCDFunctions::WriteSimpleMessage(uint8_t lcdcolumn, uint8_t lcdrow, char* message, bool isLcdClear,int delaySeconds)
 {
-	Serial.println(message);
+	// Serial.println(message);
 	if (lcdcolumn != 256)
 		_lcd2.setCursor(lcdcolumn, lcdrow);
 	if (isLcdClear)
@@ -44,7 +44,7 @@ void PrintSerialAndLCDFunctions::WriteComplexMessage(char* message, float misure
 
 void PrintSerialAndLCDFunctions::WriteComplexMessage(uint8_t lcdcolumn, uint8_t lcdrow, char* message, float misure, bool isLcdClear,int delaySeconds)
 {
-	Serial.print(message); Serial.print(":"); Serial.println(misure);
+	// Serial.print(message); Serial.print(":"); Serial.println(misure);
 
 	if (lcdcolumn != 256)
 	{

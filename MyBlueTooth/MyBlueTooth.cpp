@@ -126,7 +126,7 @@ bool  MyBlueTooth::IsDeviceDetected(String deviceAddress, String deviceName)
 
 		String phoneName = _hardwareSerial->readString();
 
-		Serial.println(phoneName);
+		// Serial.println(phoneName);
 
 		String command = "+RNAME:" + deviceName;
 
