@@ -7,7 +7,7 @@
 
 class SimRepository {
 public:
-    SimRepository(ISerial& serial, uint8_t power_pin, unsigned long baud_rate);
+    SimRepository(ISerial& serial, uint8_t sleep_pin, unsigned long baud_rate, uint8_t boot_pin = 255U);
 
 #if _ON_MOCKING_TESTS
     virtual ~SimRepository() = default;
@@ -28,6 +28,9 @@ public:
     virtual bool isGprsAttached();
     virtual bool enterSleepMode();
     virtual bool exitSleepMode();
+    virtual bool turn_on_module();
+    virtual bool turn_off_module();
+    virtual bool is_module_on();
     virtual bool listen();
     virtual bool is_listening();
     virtual bool stop_listening();
@@ -51,6 +54,9 @@ public:
     bool isGprsAttached();
     bool enterSleepMode();
     bool exitSleepMode();
+    bool turn_on_module();
+    bool turn_off_module();
+    bool is_module_on();
     bool listen();
     bool is_listening();
     bool stop_listening();
@@ -64,7 +70,8 @@ private:
 
 private:
     ISerial& serial_;
-    uint8_t dtr_pin_;
+    uint8_t sleep_pin_;
+    uint8_t boot_pin_;
     unsigned long baud_rate_;
     bool is_sms_receive_initialized_;
 };

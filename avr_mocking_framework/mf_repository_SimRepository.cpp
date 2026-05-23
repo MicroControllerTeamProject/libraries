@@ -41,6 +41,7 @@
 #define DEBUG_SMS_LABEL              "sms"
 
 namespace {
+	constexpr uint8_t sim_boot_pin_not_configured = 255U;
 	constexpr uint8_t sim_small_response_buffer_size = 20;
 	constexpr uint8_t sim_sms_message_buffer_size = 12;
 	constexpr unsigned long sim_read_sms_timeout_ms = 900UL;
@@ -69,12 +70,15 @@ namespace {
 	}
 }
 
-SimRepository::SimRepository(ISerial& serial, uint8_t dtr_pin, unsigned long baud_rate)
-	: serial_(serial), dtr_pin_(dtr_pin), baud_rate_(baud_rate), is_sms_receive_initialized_(false) {
+SimRepository::SimRepository(ISerial& serial, uint8_t sleep_pin, unsigned long baud_rate, uint8_t boot_pin)
+	: serial_(serial), sleep_pin_(sleep_pin), boot_pin_(boot_pin), baud_rate_(baud_rate), is_sms_receive_initialized_(false) {
 	serial_.begin(baud_rate_);
-	pinMode(dtr_pin_, OUTPUT);
-	digitalWrite(dtr_pin_, LOW);
-
+	pinMode(sleep_pin_, OUTPUT);
+	digitalWrite(sleep_pin_, LOW);
+	if (boot_pin_ != sim_boot_pin_not_configured) {
+		digitalWrite(boot_pin_, LOW);
+		pinMode(boot_pin_, INPUT);
+	}
 }
 
 void SimRepository::call(const char* number) {
@@ -397,24 +401,65 @@ bool SimRepository::isGprsAttached() {
 
 bool SimRepository::enterSleepMode() {
 	serial_.listen();
-	digitalWrite(dtr_pin_, LOW);
+	digitalWrite(sleep_pin_, LOW);
 	delay(5000);
 	clear_receive_buffer();
 	send_at_cmd(serial_, AT_ENABLE_DTR_SLEEP);
 	if (!wait_for_pattern(LITERAL_OK, 3000UL)) {
 		return false;
 	}
-	digitalWrite(dtr_pin_, HIGH);
+	digitalWrite(sleep_pin_, HIGH);
 	return true;
 }
 
 bool SimRepository::exitSleepMode() {
 	serial_.listen();
-	digitalWrite(dtr_pin_, LOW);
+	digitalWrite(sleep_pin_, LOW);
 	delay(200UL);
 	clear_receive_buffer();
 	send_at_cmd(serial_, AT_BASIC_COMMAND);
 	return wait_for_pattern(LITERAL_OK, 3000UL);
+}
+
+bool SimRepository::turn_on_module() {
+	if (boot_pin_ == sim_boot_pin_not_configured) {
+		return false;
+	}
+
+	if (is_module_on()) {
+		return true;
+	}
+
+	digitalWrite(boot_pin_, LOW);
+	pinMode(boot_pin_, OUTPUT);
+	delay(1100UL);
+	pinMode(boot_pin_, INPUT);
+	delay(5000UL);
+	return is_module_on();
+}
+
+bool SimRepository::turn_off_module() {
+	if (boot_pin_ == sim_boot_pin_not_configured) {
+		return false;
+	}
+
+	if (!is_module_on()) {
+		return true;
+	}
+
+	digitalWrite(boot_pin_, LOW);
+	pinMode(boot_pin_, OUTPUT);
+	delay(1600UL);
+	pinMode(boot_pin_, INPUT);
+	delay(3000UL);
+	return !is_module_on();
+}
+
+bool SimRepository::is_module_on() {
+	serial_.listen();
+	clear_receive_buffer();
+	send_at_cmd(serial_, AT_BASIC_COMMAND);
+	return wait_for_pattern(LITERAL_OK, 1500UL);
 }
 
 void SimRepository::clear_receive_buffer() {
