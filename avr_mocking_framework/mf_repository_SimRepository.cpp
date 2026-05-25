@@ -340,25 +340,66 @@ uint8_t SimRepository::findSmsWithContent(const char* pattern) {
 }
 
 bool SimRepository::isRegisteredToNetwork() {
+	serial_.listen();
 	clear_receive_buffer();
 	send_at_cmd(serial_, AT_NETWORK_REGISTRATION);
 
-	char buffer[sim_small_response_buffer_size];
-	read_response(buffer, sim_small_response_buffer_size, 2000UL);
+	const char* response_header = RESPONSE_NETWORK_REGISTRATION_HEADER;
+	uint8_t header_index = 0U;
+	bool is_header_found = false;
+	bool is_comma_found = false;
+	char registration_status = '\0';
+	unsigned long start = millis();
 
-	char* creg = strstr(buffer, RESPONSE_NETWORK_REGISTRATION_HEADER);
-	if (creg == nullptr) {
-		return false;
+	while (static_cast<unsigned long>(millis() - start) < 2000UL) {
+		if (serial_.available() <= 0) {
+			continue;
+		}
+
+		int read_value = serial_.read();
+		if (read_value < 0) {
+			continue;
+		}
+
+		char c = static_cast<char>(read_value);
+		if (!is_header_found) {
+			if (c == response_header[header_index]) {
+				++header_index;
+				if (response_header[header_index] == '\0') {
+					is_header_found = true;
+					is_comma_found = false;
+				}
+			}
+			else {
+				header_index = (c == response_header[0]) ? 1U : 0U;
+			}
+			continue;
+		}
+
+		if (!is_comma_found) {
+			if (c == ',') {
+				is_comma_found = true;
+			}
+			else if (c == '\r' || c == '\n') {
+				is_header_found = false;
+				header_index = 0U;
+			}
+			continue;
+		}
+
+		if (c >= '0' && c <= '9') {
+			registration_status = c;
+			break;
+		}
+
+		if (c == '\r' || c == '\n') {
+			is_header_found = false;
+			is_comma_found = false;
+			header_index = 0U;
+		}
 	}
 
-	char* comma = strchr(creg, ',');
-	if (comma == nullptr) {
-		return false;
-	}
-
-	int stat = atoi(comma + 1);
-
-	return stat == 1 || stat == 5;
+	return registration_status == '1' || registration_status == '5';
 }
 
 int SimRepository::getSignalStrength() {
