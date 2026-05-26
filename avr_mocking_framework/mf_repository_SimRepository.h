@@ -11,11 +11,11 @@ public:
 
 #if _ON_MOCKING_TESTS
     virtual ~SimRepository() = default;
-    virtual bool call(const char* number);
+    virtual void call(const char* number);
     virtual void hangUp();
     virtual void setSmsTextMode();
     virtual void setSmsPduMode();
-    virtual bool sendSms(const char* number, const char* message);
+    virtual void sendSms(const char* number, const char* message);
     virtual void initSmsReception();
     virtual bool setNetlightEnabled(bool enabled);
     virtual bool readSms(uint8_t index, char* message);
