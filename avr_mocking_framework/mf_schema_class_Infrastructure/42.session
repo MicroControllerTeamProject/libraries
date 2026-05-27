@@ -1,13 +1,13 @@
-window_sizes 1920 1009 562 1353 859 104
-
+window_sizes 1920 1011 438 1476 835 124
+cleanlooks_style
 diagrams
   active  classdiagram_ref 128042 // Classis
-    1353 859 110 A4 0 0
+    1476 835 100 A4-Landscape 0 0
 end
 show_stereotypes
-selected class_ref 145066 // AnalogPortBActivity
+selected class_ref 145194 // AvrMicroRepository
 open
-  classview_ref 134570 // avr_mocking_framework
+  class_ref 145194 // AvrMicroRepository
   deploymentview_ref 128042 // avr_mocking_framework
 end
 end

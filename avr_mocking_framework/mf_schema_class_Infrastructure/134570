@@ -1,6 +1,6 @@
 format 224
 "avr_mocking_framework" // avr_mocking_framework
-  revision 6
+  revision 7
   modified_by 42 "luigi"
   // class settings
   
@@ -4070,7 +4070,7 @@ ${body}}
 
     classdiagram 128042 "Classis"
       classdiagramsettings hide_attributes yes hide_operations yes member_max_width 0 end
-      size A4
+      size A4-Landscape
     end
   end
 
