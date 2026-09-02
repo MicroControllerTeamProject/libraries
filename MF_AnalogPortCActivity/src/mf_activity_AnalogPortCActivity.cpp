@@ -36,27 +36,57 @@ bool AnalogPortCActivity::is_any_port_out_of_range() {
 		float unit_of_misure_value = this->get_unit_of_misure_value_by_index(i);
 
 #if _DEBUG_FOR_SERIAL
-		Serial.print("Cur.");
+		Serial.print(F("Cur."));
 		Serial.print(i);
-		Serial.print(" : ");
+		Serial.print(F(" : "));
 		Serial.println(unit_of_misure_value);
 #endif
 
 		if (unit_of_misure_value > this->analogPortForCustomMisure[i]->getMaxUnitOfMisureAlarmValue()) {
+#if _DEBUG_FOR_SERIAL
+			bool was_elapsed = this->analogPortForCustomMisure[i]->is_time_above_threshold_elapsed;
+#endif
+			if (!this->analogPortForCustomMisure[i]->is_alarm_above_threshold) {
+				this->analogPortForCustomMisure[i]->first_time_on_alarm = 0;
+			}
 			this->analogPortForCustomMisure[i]->is_alarm_above_threshold = true;
+			this->analogPortForCustomMisure[i]->is_alarm_under_threshold = false;
 			this->analogPortForCustomMisure[i]->is_onAlarm = true;
+			this->analogPortForCustomMisure[i]->is_time_under_threshold_elapsed = false;
 			this->analogPortForCustomMisure[i]->is_time_above_threshold_elapsed = is_delay_elapsed_for_ports_above_threshold(this->analogPortForCustomMisure[i]);
+#if _DEBUG_FOR_SERIAL
+			if (!was_elapsed && this->analogPortForCustomMisure[i]->is_time_above_threshold_elapsed) {
+				Serial.print(F("ALM CUR HIGH ")); Serial.println(this->analogPortForCustomMisure[i]->get_group_id());
+			}
+#endif
 			isOnAlarm = true;
 		}
 		else if (unit_of_misure_value < this->analogPortForCustomMisure[i]->getMinUnitOfMisureAlarmValue()) {
+#if _DEBUG_FOR_SERIAL
+			bool was_elapsed = this->analogPortForCustomMisure[i]->is_time_under_threshold_elapsed;
+#endif
+			if (!this->analogPortForCustomMisure[i]->is_alarm_under_threshold) {
+				this->analogPortForCustomMisure[i]->first_time_on_alarm = 0;
+			}
+			this->analogPortForCustomMisure[i]->is_alarm_above_threshold = false;
 			this->analogPortForCustomMisure[i]->is_alarm_under_threshold = true;
 			this->analogPortForCustomMisure[i]->is_onAlarm = true;
+			this->analogPortForCustomMisure[i]->is_time_above_threshold_elapsed = false;
 			this->analogPortForCustomMisure[i]->is_time_under_threshold_elapsed = is_delay_elapsed_for_ports_under_threshold(this->analogPortForCustomMisure[i]);
+#if _DEBUG_FOR_SERIAL
+			if (!was_elapsed && this->analogPortForCustomMisure[i]->is_time_under_threshold_elapsed) {
+				Serial.print(F("ALM CUR LOW ")); Serial.println(this->analogPortForCustomMisure[i]->get_group_id());
+			}
+#endif
 			isOnAlarm = true;
 		}
 		else {
+			this->analogPortForCustomMisure[i]->is_onAlarm = false;
+			this->analogPortForCustomMisure[i]->is_alarm_above_threshold = false;
+			this->analogPortForCustomMisure[i]->is_alarm_under_threshold = false;
 			this->analogPortForCustomMisure[i]->first_time_on_alarm = 0;
 			this->analogPortForCustomMisure[i]->is_time_under_threshold_elapsed = false;
+			this->analogPortForCustomMisure[i]->is_time_above_threshold_elapsed = false;
 		}
 	}
 

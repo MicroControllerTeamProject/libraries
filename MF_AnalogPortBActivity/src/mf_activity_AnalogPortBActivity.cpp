@@ -44,12 +44,15 @@ void AnalogPortBActivity::analog_read_for_all_ports() {
 }
 
 uint16_t AnalogPortBActivity::analog_read_raw_average(uint8_t pin, uint16_t number_of_read) {
-#ifndef _ON_MOCKING_TESTS
+#if !_ON_MOCKING_TESTS
 	this->avrMicroRepository->analogRead(pin);
 	this->avrMicroRepository->delay(100);
 #endif // _ON_MOCKING_TESTS
 
 	if (number_of_read == 0) {
+#if _DEBUG_FOR_SERIAL
+		Serial.println(F("ERR READ COUNT 0"));
+#endif
 		return 0;
 	}
 

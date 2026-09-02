@@ -14,7 +14,7 @@ bool DigitalPortActivity::is_any_port_triggered() {
 			if ((this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::high && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == true)
 				||
 				(this->digitalPort[i]->get_alarm_trigger_on() == mf::commons::commonsLayer::AlarmTriggerOn::low && this->avrMicroRepository->digitalRead(this->digitalPort[i]->get_pin()) == false)) {
-#ifdef _ON_MOCKING_TESTS
+#if _ON_MOCKING_TESTS
 				this->digitalPort[i]->pin_value_for_tdd = (bool)this->digitalPort[i]->get_alarm_trigger_on();
 #endif // 
 				this->digitalPort[i]->is_onAlarm = true;
@@ -32,7 +32,7 @@ void DigitalPortActivity::digital_write(uint8_t pin, bool level) {
 		if (this->digitalPort[i]->get_port_direction() == mf::commons::commonsLayer::PortDirection::output) {
 			if (this->digitalPort[i]->get_pin() == pin) {
 				this->avrMicroRepository->digitalWrite(digitalPort[i]->get_pin(), level);
-#ifdef _ON_MOCKING_TESTS
+#if _ON_MOCKING_TESTS
 				this->digitalPort[i]->pin_value_for_tdd = level;
 #endif // 
 				return;
@@ -46,6 +46,7 @@ DigitalPort* DigitalPortActivity::get_port_by_pin(uint8_t pin) {
 			return this->digitalPort[i];
 		}
 	}
+	return nullptr;
 }
 void DigitalPortActivity::set_ports_direction() {
 	for (int i = 0; i < this->digital_port_number; i++) {

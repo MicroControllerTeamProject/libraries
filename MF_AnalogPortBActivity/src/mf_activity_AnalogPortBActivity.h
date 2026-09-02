@@ -11,7 +11,11 @@
 class AnalogPortBActivity {
 public:
 	AnalogPortBActivity(AvrMicroRepository& avrMicroRepository, uint8_t analogPortsNumber, AnalogPortB** analogPortBase);
+#if _ON_MOCKING_TESTS
 	virtual ~AnalogPortBActivity() = 0;
+#else
+	~AnalogPortBActivity();
+#endif
 	AvrMicroRepository* get_avr_micro_repository();
 
 	bool is_delay_elapsed_for_ports_under_threshold(AnalogPortB* AnalogPortB);

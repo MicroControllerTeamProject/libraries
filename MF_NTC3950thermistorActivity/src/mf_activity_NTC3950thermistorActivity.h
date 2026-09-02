@@ -6,7 +6,11 @@
 class NTC3950thermistorActivity : public AnalogPortCActivity {
 public:
 	NTC3950thermistorActivity(AvrMicroRepository& avrMicroRepository, AnalogPortC** analogPortForCustomMisure, uint8_t analogPortsNumber, float r1_divider_resistor);
-	bool  is_any_port_out_of_range() override;
+#if _ON_MOCKING_TESTS
+	bool is_any_port_out_of_range() override;
+#else
+	bool is_any_port_out_of_range();
+#endif
 private:
 	float adc_to_celsius(uint16_t digital_read, uint16_t max_adc_resolution, float Vref);
 	float divider_resistor = 0.00f;

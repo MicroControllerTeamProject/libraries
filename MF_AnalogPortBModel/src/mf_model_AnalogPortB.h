@@ -5,7 +5,11 @@
 class AnalogPortB {
 public:
 	AnalogPortB(char group_id, const uint8_t pin);
+#if _ON_MOCKING_TESTS
 	virtual ~AnalogPortB() = 0;
+#else
+	~AnalogPortB();
+#endif
 
 	uint16_t digital_value = 0;
 	int16_t signed_digital_value = 0;

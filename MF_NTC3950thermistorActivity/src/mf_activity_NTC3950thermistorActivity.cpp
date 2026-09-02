@@ -15,33 +15,65 @@ bool NTC3950thermistorActivity::is_any_port_out_of_range() {
 		T_sum = adc_to_celsius(digital_read, 1023, this->get_avr_micro_repository()->get_vref());
 		//}
 		float T_approx = T_sum;/* / float(avg_size);*/
+		if (isnan(T_approx)) {
 #if _DEBUG_FOR_SERIAL
-		Serial.print("tmp.");Serial.print(i); Serial.print(" : "); Serial.println(T_approx);
+			if (!this->get_analog_ports()[i]->is_on_error) {
+				Serial.print(F("ERR TEMP ")); Serial.print(this->get_analog_ports()[i]->get_group_id()); Serial.print(F(" ADC ")); Serial.println(digital_read);
+			}
+#endif
+			this->get_analog_ports()[i]->is_on_error = true;
+			return_value = true;
+			continue;
+		}
+		this->get_analog_ports()[i]->is_on_error = false;
+#if _DEBUG_FOR_SERIAL
+		Serial.print(F("tmp."));Serial.print(i); Serial.print(F(" : ")); Serial.println(T_approx);
 #endif
 		if (T_approx > this->get_analog_ports()[i]->getMaxUnitOfMisureAlarmValue()) {
 #if _DEBUG_FOR_SERIAL
-			Serial.print("getMaxUnit:"); Serial.println(this->get_analog_ports()[i]->getMaxUnitOfMisureAlarmValue());
+			bool was_elapsed = this->get_analog_ports()[i]->is_time_above_threshold_elapsed;
 #endif
-#if _DEBUG_FOR_SERIAL
-			Serial.print("temp above:"); Serial.println(T_approx);
-#endif
+			if (!this->get_analog_ports()[i]->is_alarm_above_threshold) {
+				this->get_analog_ports()[i]->first_time_on_alarm = 0;
+			}
 			this->get_analog_ports()[i]->is_alarm_above_threshold = true;
+			this->get_analog_ports()[i]->is_alarm_under_threshold = false;
 			this->get_analog_ports()[i]->is_onAlarm = true;
+			this->get_analog_ports()[i]->is_time_under_threshold_elapsed = false;
 			this->get_analog_ports()[i]->is_time_above_threshold_elapsed = this->is_delay_elapsed_for_ports_above_threshold(this->get_analog_ports()[i]);
+#if _DEBUG_FOR_SERIAL
+			if (!was_elapsed && this->get_analog_ports()[i]->is_time_above_threshold_elapsed) {
+				Serial.print(F("ALM TEMP HIGH ")); Serial.println(this->get_analog_ports()[i]->get_group_id());
+			}
+#endif
 			return_value = true;
 		}
 		else if (T_approx < this->get_analog_ports()[i]->getMinUnitOfMisureAlarmValue()) {
 #if _DEBUG_FOR_SERIAL
-			Serial.print("temp under:"); Serial.println(T_approx);
+			bool was_elapsed = this->get_analog_ports()[i]->is_time_under_threshold_elapsed;
 #endif
+			if (!this->get_analog_ports()[i]->is_alarm_under_threshold) {
+				this->get_analog_ports()[i]->first_time_on_alarm = 0;
+			}
+			this->get_analog_ports()[i]->is_alarm_above_threshold = false;
 			this->get_analog_ports()[i]->is_alarm_under_threshold = true;
 			this->get_analog_ports()[i]->is_onAlarm = true;
+			this->get_analog_ports()[i]->is_time_above_threshold_elapsed = false;
 			this->get_analog_ports()[i]->is_time_under_threshold_elapsed = this->is_delay_elapsed_for_ports_under_threshold(this->get_analog_ports()[i]);
+#if _DEBUG_FOR_SERIAL
+			if (!was_elapsed && this->get_analog_ports()[i]->is_time_under_threshold_elapsed) {
+				Serial.print(F("ALM TEMP LOW ")); Serial.println(this->get_analog_ports()[i]->get_group_id());
+			}
+#endif
 			return_value = true;
 		}
 		else {
+			this->get_analog_ports()[i]->is_onAlarm = false;
+			this->get_analog_ports()[i]->is_alarm_above_threshold = false;
+			this->get_analog_ports()[i]->is_alarm_under_threshold = false;
 			this->get_analog_ports()[i]->first_time_on_alarm = 0;
 			this->get_analog_ports()[i]->is_time_under_threshold_elapsed = false;
+			this->get_analog_ports()[i]->is_time_above_threshold_elapsed = false;
 		}
 	}
 	return return_value;

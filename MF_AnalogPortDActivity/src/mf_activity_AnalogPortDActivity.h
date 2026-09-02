@@ -8,7 +8,11 @@ public:
 	AnalogPortDActivity(AvrMicroRepository& avrMicroRepository, AnalogPortD** analogPortForDigitalMeasure, uint8_t analogPortsNumber);
 	AnalogPortD** get_analog_ports();
 	AnalogPortD* get_port_by_pin(uint8_t pin);
+#if _ON_MOCKING_TESTS
 	virtual bool is_any_port_out_of_range();
+#else
+	bool is_any_port_out_of_range();
+#endif
 
 private:
 	AnalogPortD** analogPortForDigitalMeasure = {};
