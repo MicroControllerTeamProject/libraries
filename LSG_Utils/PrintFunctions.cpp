@@ -18,14 +18,16 @@ void PrintSerialAndLCDFunctions::LCDBegin(uint8_t col, uint8_t row)
 	_lcd2.begin(col, row);
 }
 
-void PrintSerialAndLCDFunctions::WriteSimpleMessage(uint8_t lcdcolumn, uint8_t lcdrow, char* message, bool isLcdClear,int delaySeconds)
+void PrintSerialAndLCDFunctions::WriteSimpleMessage(uint16_t lcdcolumn, uint16_t lcdrow, char* message, bool isLcdClear,int delaySeconds)
 {
-	// Serial.println(message);
-	if (lcdcolumn != 256)
-		_lcd2.setCursor(lcdcolumn, lcdrow);
 	if (isLcdClear)
 	{
 		_lcd2.clear();
+	}
+	// 256 indica che il chiamante non richiede un cambio di cursore.
+	if (lcdcolumn < 256 && lcdrow < 256)
+	{
+		_lcd2.setCursor((uint8_t)lcdcolumn, (uint8_t)lcdrow);
 	}
 	_lcd2.print(message);
 	delay(delaySeconds * 1000);
@@ -42,18 +44,18 @@ void PrintSerialAndLCDFunctions::WriteComplexMessage(char* message, float misure
 	WriteComplexMessage(256, 256, message, misure, isLcdClear, delaySeconds);
 }
 
-void PrintSerialAndLCDFunctions::WriteComplexMessage(uint8_t lcdcolumn, uint8_t lcdrow, char* message, float misure, bool isLcdClear,int delaySeconds)
+void PrintSerialAndLCDFunctions::WriteComplexMessage(uint16_t lcdcolumn, uint16_t lcdrow, char* message, float misure, bool isLcdClear,int delaySeconds)
 {
-	// Serial.print(message); Serial.print(":"); Serial.println(misure);
 
-	if (lcdcolumn != 256)
-	{
-		_lcd2.setCursor(lcdcolumn, lcdrow);
-	}
 	
 	if (isLcdClear)
 	{
 		_lcd2.clear();
+	}
+	// 256 indica che il chiamante non richiede un cambio di cursore.
+	if (lcdcolumn < 256 && lcdrow < 256)
+	{
+		_lcd2.setCursor((uint8_t)lcdcolumn, (uint8_t)lcdrow);
 	}
 	_lcd2.print(message); _lcd2.print(":"); _lcd2.print(misure);
 

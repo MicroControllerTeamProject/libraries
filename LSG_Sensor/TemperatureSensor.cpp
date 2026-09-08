@@ -35,7 +35,7 @@ float TemperatureSensor::GetSegnalValue(DeviceAddress probe, uint8_t resolution)
 	sensor.begin();
 	sensor.requestTemperatures();
 	_tempC = sensor.getTempC(probe);
-	AnalogicSensor::GetSegnalValue();
+	return AnalogicSensor::GetSegnalValue();
 }
 
 

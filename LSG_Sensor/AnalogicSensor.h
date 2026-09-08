@@ -35,7 +35,7 @@ public:
 protected : 
 	virtual bool IsDownValue();
 	virtual float AnalogicRead();
-	void SetLastComunication(char* lastComunication);
+	void SetLastComunication(const char* lastComunication);
 	uint8_t GetAnalogicSignalPin();
 	
 
@@ -46,7 +46,7 @@ private :
 	uint8_t _digitalSignalPin;
 	int _alarmPin;
 	float _sensorValue;
-	char* _lastComunication;
+	char _lastComunication[100] = {};
 	char* _uid;
 };
 
