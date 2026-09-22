@@ -1,5 +1,7 @@
 // File: commonsLayer.h
 #pragma once
+#include <stdint.h>
+
 #ifndef _ON_MOCKING_TESTS 
 #define _ON_MOCKING_TESTS 0
 #endif
