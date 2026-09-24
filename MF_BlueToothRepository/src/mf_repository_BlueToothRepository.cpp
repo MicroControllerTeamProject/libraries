@@ -20,7 +20,6 @@
 #define OUTPUT 1
 #define INPUT 0
 
-
 BlueToothRepository::BlueToothRepository(
 	AvrMicroRepository& avrMicroRepository,
 	uint8_t blueToothKeyPin,
@@ -33,7 +32,6 @@ BlueToothRepository::BlueToothRepository(
 		baudRateProgramMode,
 		baudRateReceveMode) {
 }
-
 
 BlueToothRepository::BlueToothRepository(
 	AvrMicroRepository& avrMicroRepository,
@@ -59,69 +57,67 @@ BlueToothRepository::BlueToothRepository(
 	}
 }
 
-
 BlueToothRepository::~BlueToothRepository() {
 }
-
-
-bool BlueToothRepository::is_device_detected(
-	const char* bt_address,
-	const char* device_name) {
-
+bool BlueToothRepository::is_device_detected(const char* bt_address, const char* device_name) {
 	this->avrMicroRepository->clearBuffer();
-
-	this->avrMicroRepository->print(ATRNAME_Q);
-	this->avrMicroRepository->print(bt_address);
-	this->avrMicroRepository->print(LITERAL_RETURN);
-
-	char phone_name[32];
-
-	uint16_t index = 0;
-
-	unsigned long start =
-		this->avrMicroRepository->get_millis();
-
-	while (
-		index < sizeof(phone_name) - 1 &&
-		(this->avrMicroRepository->get_millis() - start < 5000)) {
-
-		if (this->avrMicroRepository->available()) {
-
-			char c =
-				this->avrMicroRepository->read();
-
-			if (c == '\n' || c == '\r') {
-				break;
+	const char* response_prefix = "+RNAME:";
+	const char* expected_name = device_name != nullptr ? device_name : "";
+	const char* next_expected_char = response_prefix;
+	bool is_matching_name = false;
+	unsigned long start_time = this->avrMicroRepository->get_millis();
+	unsigned long last_query_time = start_time;
+	bool is_first_query = true;
+	while (true) {
+		unsigned long current_time = this->avrMicroRepository->get_millis();
+		if (current_time - start_time >= 30000UL) {
+			break;
+		}
+		if (!this->avrMicroRepository->available()) {
+			if (is_first_query || current_time - last_query_time >= 5000UL) {
+				this->avrMicroRepository->print(ATRNAME_Q);
+				this->avrMicroRepository->print(bt_address);
+				this->avrMicroRepository->print(LITERAL_RETURN);
+				last_query_time = current_time;
+				is_first_query = false;
+				next_expected_char = response_prefix;
+				is_matching_name = false;
 			}
-
-			phone_name[index++] = c;
+			continue;
+		}
+		const char current_char = this->avrMicroRepository->read();
+		if (current_char == '\r' || current_char == '\n') {
+			if (is_matching_name && expected_name[0] != '\0' && next_expected_char != nullptr && *next_expected_char == '\0') {
+#if _DEBUG_FOR_SERIAL && !_ON_MOCKING_TESTS
+				Serial.print(F("BT detected: +RNAME:"));
+				Serial.println(device_name);
+#endif
+				return true;
+			}
+			next_expected_char = response_prefix;
+			is_matching_name = false;
+			continue;
+		}
+		if (next_expected_char == nullptr) {
+			continue;
+		}
+		if (*next_expected_char == '\0' || current_char != *next_expected_char) {
+			next_expected_char = nullptr;
+			continue;
+		}
+		++next_expected_char;
+		if (!is_matching_name && *next_expected_char == '\0') {
+			next_expected_char = expected_name;
+			is_matching_name = true;
 		}
 	}
-
-	phone_name[index] = '\0';
-
-	bool is_detected =
-		strstr(phone_name, device_name) != nullptr;
-
-#if _DEBUG_FOR_SERIAL && !_ON_MOCKING_TESTS
-	if (is_detected) {
-		Serial.print(F("BT detected: "));
-		Serial.println(phone_name);
-	}
-#endif
-
-	return is_detected;
+	return false;
 }
-
-
-void BlueToothRepository::set_to_master_mode_v2() {
-
+void BlueToothRepository::set_to_master_mode() {
 	if (!is_in_program_mode) {
 		set_to_program_mode();
 	}
-
 	this->avrMicroRepository->println(ATROLE1);
-
 	SerialUtils::wait_for_pattern(
 		*this->avrMicroRepository,
 		LITERAL_OK,
@@ -143,94 +139,82 @@ void BlueToothRepository::set_to_master_mode_v2() {
 	Serial.println(F("BT master mode"));
 #endif
 }
-
-
-void BlueToothRepository::set_to_master_mode_v3() {
-
+void BlueToothRepository::find_mode_v3() {
 	if (baseTransistorPin == 255) {
 		return;
 	}
-
-	this->avrMicroRepository->digitalWrite(
-		this->baseTransistorPin,
-		LOW);
-
+	this->avrMicroRepository->digitalWrite(this->baseTransistorPin, LOW);
 	this->avrMicroRepository->delay(2000);
-
-	this->avrMicroRepository->digitalWrite(
-		this->blueToothKeyPin,
-		HIGH);
-
-	this->avrMicroRepository->delay(4000);
-
-	this->avrMicroRepository->digitalWrite(
-		this->baseTransistorPin,
-		HIGH);
-
+	this->avrMicroRepository->digitalWrite(this->baseTransistorPin, HIGH);
 	this->avrMicroRepository->delay(3000);
-
-	this->avrMicroRepository->begin(
-		this->baudRateReceveMode);
-
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		2000);
-
-	is_in_master_mode = true;
-	is_in_slave_mode = false;
-	is_in_program_mode = false;
+	this->avrMicroRepository->digitalWrite(this->blueToothKeyPin, HIGH);
+	this->avrMicroRepository->begin(this->baudRateReceveMode);
+	SerialUtils::wait_for_pattern(*this->avrMicroRepository, LITERAL_OK, 2000);
 	is_in_receive_mode = true;
 }
-
-
 void BlueToothRepository::set_to_program_mode() {
-
 	if (is_in_program_mode) {
 		return;
 	}
-
-	this->avrMicroRepository->digitalWrite(
-		this->blueToothKeyPin,
-		HIGH);
-
+	this->avrMicroRepository->digitalWrite(this->blueToothKeyPin, HIGH);
 	if (baseTransistorPin != 255) {
-
-		this->avrMicroRepository->digitalWrite(
-			this->baseTransistorPin,
-			LOW);
+		this->avrMicroRepository->digitalWrite(this->baseTransistorPin, LOW);
 	}
-
 	this->avrMicroRepository->delay(100);
-
 	if (baseTransistorPin != 255) {
-
-		this->avrMicroRepository->digitalWrite(
-			this->baseTransistorPin,
-			HIGH);
+		this->avrMicroRepository->digitalWrite(this->baseTransistorPin, HIGH);
 	}
-
 	this->avrMicroRepository->delay(200);
-
 	this->avrMicroRepository->begin(
 		this->baudRateProgramMode);
-
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		2000);
-
+	SerialUtils::wait_for_pattern(*this->avrMicroRepository, LITERAL_OK, 2000);
 	is_in_program_mode = true;
 	is_in_slave_mode = false;
-
 #if _DEBUG_FOR_SERIAL && !_ON_MOCKING_TESTS
 	Serial.println(F("BT program mode"));
 #endif
 }
-
-
+void BlueToothRepository::set_to_receive_mode() {
+	if (!is_in_slave_mode) {
+		return;
+	}
+	this->avrMicroRepository->digitalWrite(this->blueToothKeyPin, LOW);
+	if (baseTransistorPin != 255) {
+		this->avrMicroRepository->digitalWrite(this->baseTransistorPin, LOW);
+	}
+	this->avrMicroRepository->delay(100);
+	if (baseTransistorPin != 255) {
+		this->avrMicroRepository->digitalWrite(this->baseTransistorPin, HIGH);
+	}
+	this->avrMicroRepository->delay(200);
+	this->avrMicroRepository->begin(this->baudRateReceveMode);
+	SerialUtils::wait_for_pattern(*this->avrMicroRepository, LITERAL_OK, 2000);
+	is_in_receive_mode = true;
+	is_in_program_mode = false;
+}
+void BlueToothRepository::set_to_slave_mode() {
+	if (is_in_slave_mode) {
+		return;
+	}
+	if (!is_in_program_mode) {
+		this->set_to_program_mode();
+	}
+	this->avrMicroRepository->println(ATROLE0);
+	SerialUtils::wait_for_pattern(
+		*this->avrMicroRepository,
+		LITERAL_OK,
+		1500);
+	this->avrMicroRepository->println(ATUART9600);
+	SerialUtils::wait_for_pattern(*this->avrMicroRepository, LITERAL_OK, 1500);
+	is_in_slave_mode = true;
+	is_in_master_mode = false;
+	is_in_program_mode = false;
+#if _DEBUG_FOR_SERIAL && !_ON_MOCKING_TESTS
+	Serial.println(F("BT slave mode"));
+#endif
+	this->set_to_receive_mode();
+}
 void BlueToothRepository::turnOffBlueTooth() {
-
 	if (baseTransistorPin == 255) {
 		return;
 	}
@@ -241,8 +225,6 @@ void BlueToothRepository::turnOffBlueTooth() {
 
 	this->is_bluetooth_on = false;
 }
-
-
 void BlueToothRepository::turnOnBlueTooth() {
 
 	if (baseTransistorPin == 255) {
@@ -255,108 +237,19 @@ void BlueToothRepository::turnOnBlueTooth() {
 
 	this->is_bluetooth_on = true;
 }
-
-
 bool BlueToothRepository::isBluetoothOn() {
 
 	return this->is_bluetooth_on;
 }
-
-
-void BlueToothRepository::set_to_receve_mode() {
-
-	if (!is_in_slave_mode) {
-		return;
-	}
-
-	this->avrMicroRepository->digitalWrite(
-		this->blueToothKeyPin,
-		LOW);
-
-	if (baseTransistorPin != 255) {
-
-		this->avrMicroRepository->digitalWrite(
-			this->baseTransistorPin,
-			LOW);
-	}
-
-	this->avrMicroRepository->delay(100);
-
-	if (baseTransistorPin != 255) {
-
-		this->avrMicroRepository->digitalWrite(
-			this->baseTransistorPin,
-			HIGH);
-	}
-
-	this->avrMicroRepository->delay(200);
-
-	this->avrMicroRepository->begin(
-		this->baudRateReceveMode);
-
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		2000);
-
-	is_in_receive_mode = true;
-	is_in_program_mode = false;
-}
-
-
-void BlueToothRepository::set_to_slave_mode() {
-
-	if (is_in_slave_mode) {
-		return;
-	}
-
-	if (!is_in_program_mode) {
-		this->set_to_program_mode();
-	}
-
-	this->avrMicroRepository->println(ATROLE0);
-
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		1500);
-
-	this->avrMicroRepository->println(ATUART9600);
-
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		1500);
-
-	is_in_slave_mode = true;
-	is_in_master_mode = false;
-	is_in_program_mode = false;
-
-#if _DEBUG_FOR_SERIAL && !_ON_MOCKING_TESTS
-	Serial.println(F("BT slave mode"));
-#endif
-
-	this->set_to_receve_mode();
-}
-
-
-void BlueToothRepository::get_version(
-	char* version,
-	uint8_t maxLength) {
-
+void BlueToothRepository::get_version(char* version, uint8_t maxLength) {
 	if (version == nullptr || maxLength == 0) {
 		return;
 	}
-
 	if (!is_in_program_mode) {
 		this->set_to_program_mode();
 	}
-
 	this->avrMicroRepository->clearBuffer();
-
-	this->avrMicroRepository->println(
-		ATVERSION_Q);
-
+	this->avrMicroRepository->println(ATVERSION_Q);
 	uint8_t i = 0;
 
 	unsigned long start =
@@ -380,22 +273,14 @@ void BlueToothRepository::get_version(
 
 	version[i] = '\0';
 }
-
-
-void BlueToothRepository::get_current_password(
-	char* currentPassword,
-	uint8_t maxLength) {
-
+void BlueToothRepository::get_current_password(char* currentPassword, uint8_t maxLength) {
 	if (currentPassword == nullptr || maxLength == 0) {
 		return;
 	}
-
 	if (!is_in_program_mode) {
 		this->set_to_program_mode();
 	}
-
 	this->avrMicroRepository->clearBuffer();
-
 	this->avrMicroRepository->print(ATPASSW_Q);
 	this->avrMicroRepository->print(LITERAL_RETURN);
 
@@ -437,70 +322,43 @@ void BlueToothRepository::get_current_password(
 
 	currentPassword[i] = '\0';
 }
-
-
-void BlueToothRepository::set_password(
-	const char* pw) {
-
+void BlueToothRepository::set_password(const char* pw) {
 	if (!is_in_program_mode) {
 		set_to_program_mode();
 	}
-
 	avrMicroRepository->clearBuffer();
-
 	avrMicroRepository->print(ATPASSW_R);
 	avrMicroRepository->print(pw);
 	avrMicroRepository->print(LITERAL_RETURN);
-
-	unsigned long start =
-		avrMicroRepository->get_millis();
-
+	unsigned long start = avrMicroRepository->get_millis();
 	bool ok = false;
-
 	uint8_t state = 0;
-
 	while (
-		(avrMicroRepository->get_millis() - start) < 1000 &&
-		!ok) {
-
+		(avrMicroRepository->get_millis() - start) < 1000 && !ok) {
 		if (avrMicroRepository->available()) {
-
-			char c =
-				avrMicroRepository->read();
-
+			char c = avrMicroRepository->read();
 			if (state == 0) {
-
 				state = (c == 'O');
 			}
 			else {
-
 				if (c == 'K') {
-
 					ok = true;
 				}
 				else {
-
 					state = (c == 'O');
 				}
 			}
 		}
 	}
-
 	if (!ok) {
 		// Timeout.
 	}
 }
-
-
-void BlueToothRepository::set_name(
-	const char* name) {
-
+void BlueToothRepository::set_name(const char* name) {
 	if (!is_in_program_mode) {
 		set_to_program_mode();
 	}
-
 	avrMicroRepository->clearBuffer();
-
 	avrMicroRepository->print(ATNAME_R);
 	avrMicroRepository->print(name);
 	avrMicroRepository->print(LITERAL_RETURN);

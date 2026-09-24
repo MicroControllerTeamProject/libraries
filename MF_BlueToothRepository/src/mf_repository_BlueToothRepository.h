@@ -32,9 +32,9 @@ public:
 
 	virtual void set_to_slave_mode();
 
-	virtual void set_to_master_mode_v2();
+	virtual void find_mode_v3();
 
-	virtual void set_to_master_mode_v3();
+	virtual void set_to_master_mode();
 
 	virtual void turnOffBlueTooth();
 
@@ -84,9 +84,9 @@ public:
 
 	void set_to_slave_mode();
 
-	void set_to_master_mode_v2();
+	void set_to_master_mode();
 
-	void set_to_master_mode_v3();
+	void find_mode_v3();
 
 	void turnOffBlueTooth();
 
@@ -124,7 +124,7 @@ private:
 
 	AvrMicroRepository* avrMicroRepository = nullptr;
 
-	void set_to_receve_mode();
+	void set_to_receive_mode();
 
 	bool is_in_program_mode = false;
 
