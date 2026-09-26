@@ -70,7 +70,7 @@ bool BlueToothRepository::is_device_detected(const char* bt_address, const char*
 	bool is_first_query = true;
 	while (true) {
 		unsigned long current_time = this->avrMicroRepository->get_millis();
-		if (current_time - start_time >= 30000UL) {
+		if (current_time - start_time >= 10000UL) {
 			break;
 		}
 		if (!this->avrMicroRepository->available()) {
