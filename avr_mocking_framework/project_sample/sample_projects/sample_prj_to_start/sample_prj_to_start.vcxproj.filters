@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -41,10 +37,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sample_prj_to_start.ino" />
     <ClCompile Include="src\business\ControlUnit_BL.cpp">
       <Filter>business_layer</Filter>
     </ClCompile>
-    <ClCompile Include="sample_prj_to_start.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.MockProjectSample.vsarduino.h">
@@ -53,13 +49,10 @@
     <ClInclude Include="__vm\.ArduinoProjectSample.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\business\ControlUnit_BL.h">
-      <Filter>business_layer</Filter>
-    </ClInclude>
     <ClInclude Include="__vm\.12VoltsBatteriesRack.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\DeMuxPlexerEntity.h">
+    <ClInclude Include="src\model\DeMuxPlexerStatus.h">
       <Filter>model\for_test</Filter>
     </ClInclude>
     <ClInclude Include="__vm\.project_sample.vsarduino.h">
@@ -76,6 +69,9 @@
     </ClInclude>
     <ClInclude Include="__vm\.sample_prj_to_start.vsarduino.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\business\ControlUnit_BL.h">
+      <Filter>business_layer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

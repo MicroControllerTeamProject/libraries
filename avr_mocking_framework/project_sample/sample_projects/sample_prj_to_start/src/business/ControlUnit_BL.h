@@ -5,14 +5,14 @@
 #include "../../AppConfig.h"
 #include <stdint.h>
 #if _ON_MOCKING_TESTS
-#include "../model/DeMuxPlexerEntity.h"
+#include "../model/DeMuxPlexerStatus.h"
 #endif // _on_mocking_tests
 class ControlUnit_BL {
 public:
 	ControlUnit_BL(AvrMicroRepository& avrMicroRepository, NTC3950thermistorActivity& thermistorActivity,DigitalPortActivity& relayActivity, AnalogPortCActivity& currentActivity);
 	~ControlUnit_BL();
 #if _ON_MOCKING_TESTS
-	DeMuxPlexerEntity demux_plexer_entity; // Entità del demultiplexer (solo per test)
+	DeMuxPlexerStatus demux_plexer_status; // Entità del demultiplexer (solo per test)
 #endif // _on_mocking_tests
 	bool disable_relays_where_thermistor_is_on_alarm();
 	bool disable_relays_where_current_is_on_alarm();

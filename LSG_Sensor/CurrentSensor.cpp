@@ -46,37 +46,24 @@ bool  CurrentSensor::IsSensorWorking()
 
 bool CurrentSensor::IsCurrentTooHigh()
 {
-	if (GetSegnalValue() > GetMaxValue())
-	{
-		SetLastComunication("is too high");
-		return true;
-	}
-	else
-	{
-		SetLastComunication("seems ok");
-		return true;
-	}
+	return IsCurrentTooHigh(GetSegnalValue());
+}
+
+bool CurrentSensor::IsCurrentTooHigh(float currentValue)
+{
+	const bool isTooHigh = currentValue >= GetMaxValue();
+	SetLastComunication(isTooHigh ? "is too high" : "seems ok");
+	return isTooHigh;
 }
 
 bool CurrentSensor::IsCurrentTooLow()
 {
-	if (GetSegnalValue() > GetMaxValue())
-	{
-		SetLastComunication("is too Low");
-		return true;
-	}
-	else
-	{
-		SetLastComunication("seems ok");
-		return false;
-	}
+	return IsCurrentTooLow(GetSegnalValue());
 }
 
-
-
-
-
-
-
-
-
+bool CurrentSensor::IsCurrentTooLow(float currentValue)
+{
+	const bool isTooLow = currentValue <= GetMinValue();
+	SetLastComunication(isTooLow ? "is too low" : "seems ok");
+	return isTooLow;
+}

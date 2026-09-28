@@ -16,6 +16,8 @@ public:
 	bool  IsSensorWorking();
 	float AnalogicRead();
 	bool IsCurrentTooHigh();
+	bool IsCurrentTooHigh(float currentValue);
 	bool IsCurrentTooLow();
+	bool IsCurrentTooLow(float currentValue);
 };
 

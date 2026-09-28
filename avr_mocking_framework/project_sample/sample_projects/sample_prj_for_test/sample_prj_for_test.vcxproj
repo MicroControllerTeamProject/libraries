@@ -183,7 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\12VoltsBatteriesRack\src\model\AppConfig.h" />
-    <ClInclude Include="..\12VoltsBatteriesRack\src\model\DeMuxPlexerEntity.h" />
+    <ClInclude Include="..\sample_prj_to_start\src\model\DeMuxPlexerStatus.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="src\extend.h" />
     <ClInclude Include="src\fakeit.hpp" />

@@ -13,12 +13,15 @@ StringFunctions::~StringFunctions()
 }
 
 
-char* StringFunctions::ConcatString(char* fisrtString, char* secondString)
+char* StringFunctions::ConcatString(const char* fisrtString, const char* secondString)
 {
-	char result[100];   // array to hold the result.
-	strcpy(result, fisrtString); // copy string one into the result.
-	strcat(result, secondString); // append string two to the result.
-	return result;
+	if (fisrtString != _concatResult)
+	{
+		strncpy(_concatResult, fisrtString, sizeof(_concatResult) - 1);
+		_concatResult[sizeof(_concatResult) - 1] = '\0';
+	}
+	strncat(_concatResult, secondString, sizeof(_concatResult) - strlen(_concatResult) - 1);
+	return _concatResult;
 }
 
 String StringFunctions::SplitStringIndex(String data, char separator, int index)

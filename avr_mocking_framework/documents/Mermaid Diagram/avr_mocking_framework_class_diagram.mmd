@@ -1,0 +1,210 @@
+classDiagram
+direction LR
+
+namespace Commons {
+    class commonsLayer {
+        <<namespace>>
+    }
+
+    class ProcessStatus {
+        <<enumeration>>
+        blocked_level_too_high
+        blocked_level_to_low
+        blocked_level_missing
+        stopped
+        running
+    }
+
+    class AlarmTriggerOn {
+        <<enumeration>>
+        noset
+        low
+        high
+    }
+
+    class PortDirection {
+        <<enumeration>>
+        noset
+        input
+        output
+        input_pullup
+    }
+
+    class AnalogRefMode {
+        <<enumeration>>
+        EXTERNAL_m
+        DEFAULT_m
+        INTERNAL_m
+        INTERNAL1V1_m
+        INTERNAL2V56_m
+    }
+
+    class AnalogPortType {
+        <<enumeration>>
+        custom_misure
+        digital
+        voltage
+    }
+}
+
+namespace Repository {
+    class ISerial {
+        <<interface>>
+        +begin(baud)
+        +write(byte)
+        +write(buffer, size)
+        +available()
+        +read()
+        +peek()
+        +flush()
+        +readBytes(buffer, length)
+        +readBytesUntil(terminator, buffer, length)
+        +find(target)
+        +findUntil(target, terminator)
+        +parseInt()
+        +parseFloat()
+        +setTimeout(timeout)
+        +getRxBufferSize()
+        +print(...)
+        +println(...)
+    }
+
+    class AvrMicroRepository {
+        -ISerial& serial_
+        -AnalogRefMode vref_mode
+        -float vref
+        +analogReference(mode)
+        +analogRead(analogPin)
+        +analogVoltageRead(analogPin)
+        +digitalRead(pin)
+        +digitalWrite(pin, value)
+        +pinMode(pin, mode)
+        +isPinOutput(pin)
+        +isPinInput(pin)
+        +isPinInputPullup(pin)
+        +delay(delayTime)
+        +delayMicroseconds(micSec)
+        +getFreeRam()
+        +free(ptr)
+        +print(...)
+        +println(...)
+        +available()
+        +readString(buffer, maxLen)
+        +clearBuffer()
+        +getSerialBufferSize()
+        +begin(baud)
+        +read()
+        +get_millis()
+        +pulseIn(pin, level, time)
+        +get_vref()
+    }
+
+    class HC_SR04_Repository {
+        -uint8_t triggerPin
+        -uint8_t echoPin
+        +measure_distance_cm(time_out)
+    }
+}
+
+namespace Model {
+    class DigitalPort {
+        -char group_id
+        -uint8_t pin
+        -PortDirection portDirection
+        -AlarmTriggerOn alarmTriggerOn
+        +bool is_enabled
+        +bool is_onAlarm
+        +bool pin_value_for_tdd
+        +bool is_on_pull_up
+        +get_group_id()
+        +get_pin()
+        +get_port_direction()
+        +get_alarm_trigger_on()
+    }
+
+    class AnalogPortB {
+        -char group_id
+        -uint8_t pin
+        +uint16_t digital_value
+        +bool is_enabled
+        +bool is_on_error
+        +bool is_onAlarm
+        +bool is_alarm_above_threshold
+        +bool is_alarm_under_threshold
+        +uint16_t set_alarm_if_under_threshold_for_seconds
+        +uint16_t set_alarm_if_above_threshold_for_seconds
+        +unsigned long first_time_on_alarm
+        +bool is_time_under_threshold_elapsed
+        +bool is_time_above_threshold_elapsed
+        +uint16_t offset
+        +get_group_id()
+        +get_pin()
+    }
+}
+
+namespace Activity {
+    class DigitalPortActivity {
+        -uint8_t digital_port_number
+        -DigitalPort** digitalPort
+        -AvrMicroRepository* avrMicroRepository
+        +DigitalPortActivity(avrMicroRepository, digitalPort, digitalPortsNumber)
+        +is_any_port_triggered()
+        +digital_write(pin, level)
+        +get_ports_number()
+        +get_digital_ports()
+        +get_port_by_pin(pin)
+        -set_ports_direction()
+    }
+
+    class AnalogPortBActivity {
+        -uint8_t analog_port_number
+        -AvrMicroRepository* avrMicroRepository
+        -AnalogPortB** analogPortB
+        -ProcessStatus processBlockedBy
+        +AnalogPortBActivity(avrMicroRepository, analogPortsNumber, analogPortBase)
+        +get_avr_micro_repository()
+        +is_delay_elapsed_for_ports_under_threshold(port)
+        +is_delay_elapsed_for_ports_above_threshold(port)
+        +analog_read_for_all_ports()
+        +analog_read_average(pin, index_port, number_of_read)
+        +set_offset(pin, index_port, number_of_read)
+        +get_analog_ports_number()
+        +reset_ports()
+        +set_process_status(status)
+        +get_process_status()
+    }
+
+    class HCSR04Activity {
+        -HC_SR04_Repository& hc_sr04_Repository
+        -AvrMicroRepository& avrMicroRepository
+        -uint16_t min_dist_alarm_cm
+        -uint16_t max_dist_alarm_cm
+        -unsigned long out_of_range_hold_ms
+        -bool out_pending
+        -unsigned long out_start_ms
+        -bool in_pending
+        -unsigned long in_start_ms
+        +is_distance_out_of_range_now(...)
+        +is_distance_out_of_range_for_ms(...)
+        +is_distance_in_range_now(...)
+        +is_distance_in_range_for_ms(...)
+        -read_distance_cm_avg(...)
+        -get_range_state(...)
+    }
+}
+
+AvrMicroRepository --> ISerial : uses
+AvrMicroRepository --> AnalogRefMode : config
+
+DigitalPort --> PortDirection : uses
+DigitalPort --> AlarmTriggerOn : uses
+
+DigitalPortActivity --> DigitalPort : manages
+DigitalPortActivity --> AvrMicroRepository : uses
+
+AnalogPortBActivity --> AnalogPortB : manages
+AnalogPortBActivity --> AvrMicroRepository : uses
+AnalogPortBActivity --> ProcessStatus : uses
+
+HCSR04Activity --> HC_SR04_Repository : uses
+HCSR04Activity --> AvrMicroRepository : uses

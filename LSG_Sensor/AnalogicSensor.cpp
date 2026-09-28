@@ -144,17 +144,13 @@ char* AnalogicSensor::UID()
 	return _uid;
 }
 
-void AnalogicSensor::SetLastComunication(char* lastComunication)
+void AnalogicSensor::SetLastComunication(const char* lastComunication)
 {
-	char message[100];   // array to hold the result.
-	/*char* message2;*/
-	strcpy(message, UID()); // copy string one into the result.
-	strcat(message, " "); // append string two to the result.
-	strcat(message, lastComunication);
-	/*message2 = message;*/
-	_lastComunication = message;
-	
-
+	// Memoria posseduta dal sensore, valida fino al prossimo aggiornamento.
+	strncpy(_lastComunication, UID(), sizeof(_lastComunication) - 1);
+	_lastComunication[sizeof(_lastComunication) - 1] = '\0';
+	strncat(_lastComunication, " ", sizeof(_lastComunication) - strlen(_lastComunication) - 1);
+	strncat(_lastComunication, lastComunication, sizeof(_lastComunication) - strlen(_lastComunication) - 1);
 }
 
 char* AnalogicSensor::GetLastComunication()
