@@ -4,12 +4,18 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifndef _DEBUG_FOR_SERIAL
+#define _DEBUG_FOR_SERIAL 0U
+#endif
+
 #define AT_SMS_HEADER                "+CMGR:"
 #define AT_SET_SMS_TEXT_MODE         "AT+CMGF=1"
 #define AT_SET_SMS_PDU_MODE          "AT+CMGF=0"
 #define AT_SET_SMS_CHARSET           "AT+CSCS=\"GSM\""
 #define ATD_COMMAND                  "ATD"
 #define HANGUP_COMMAND               "ATH"
+#define AT_LIST_CURRENT_CALLS         "AT+CLCC"
+#define AT_AUTO_ANSWER_PREFIX         "ATS0="
 #define AT_SEND_SMS_PREFIX           "AT+CMGS=\""
 #define AT_SEND_SMS_HEADER           "+CMGS:"
 #define LITERAL_OK                   "OK"
@@ -41,7 +47,7 @@
 #define DEBUG_SMS_LABEL              "sms"
 
 namespace {
-	constexpr uint8_t sim_boot_pin_not_configured = 255U;
+	constexpr uint8_t sim_pin_not_configured = 255U;
 	constexpr uint8_t sim_small_response_buffer_size = 20;
 	constexpr uint8_t sim_sms_message_buffer_size = 12;
 	constexpr unsigned long sim_read_sms_timeout_ms = 900UL;
@@ -70,29 +76,96 @@ namespace {
 	}
 }
 
+SimRepository::SimRepository(ISerial& serial)
+	: serial_(serial), sleep_pin_(sim_pin_not_configured), boot_pin_(sim_pin_not_configured), is_sms_receive_initialized_(false), is_call_disabled_(false) {
+}
+
+SimRepository::SimRepository(ISerial& serial, unsigned long baud_rate)
+	: SimRepository(serial) {
+	begin(baud_rate);
+}
+
 SimRepository::SimRepository(ISerial& serial, uint8_t sleep_pin, unsigned long baud_rate, uint8_t boot_pin)
-	: serial_(serial), sleep_pin_(sleep_pin), boot_pin_(boot_pin), baud_rate_(baud_rate), is_sms_receive_initialized_(false) {
-	serial_.begin(baud_rate_);
-	pinMode(sleep_pin_, OUTPUT);
-	digitalWrite(sleep_pin_, LOW);
-	if (boot_pin_ != sim_boot_pin_not_configured) {
+	: serial_(serial), sleep_pin_(sleep_pin), boot_pin_(boot_pin), is_sms_receive_initialized_(false), is_call_disabled_(false) {
+	begin(baud_rate);
+	if (sleep_pin_ != sim_pin_not_configured) {
+		pinMode(sleep_pin_, OUTPUT);
+		digitalWrite(sleep_pin_, LOW);
+	}
+	if (boot_pin_ != sim_pin_not_configured) {
 		digitalWrite(boot_pin_, LOW);
 		pinMode(boot_pin_, INPUT);
 	}
 }
 
+void SimRepository::begin(unsigned long baud_rate) {
+	serial_.begin(baud_rate);
+}
+
 void SimRepository::call(const char* number) {
+	if (is_call_disabled_) {
+		return;
+	}
 	clear_receive_buffer();
 	serial_.print(ATD_COMMAND);
 	serial_.print(number);
 	serial_.write((uint8_t)';');
 	serial_.write((uint8_t)'\r');
+	wait_for_pattern(LITERAL_OK, 2000UL);
 }
 
 void SimRepository::hangUp() {
 	clear_receive_buffer();
 	send_at_cmd(serial_, HANGUP_COMMAND);
 	wait_for_pattern(LITERAL_OK, 2000UL);
+}
+
+bool SimRepository::isCallActive() {
+	clear_receive_buffer();
+	send_at_cmd(serial_, AT_LIST_CURRENT_CALLS);
+	const char* call_header = "+CLCC:";
+	uint8_t call_header_pos = 0U;
+	uint8_t ok_pos = 0U;
+	unsigned long start = millis();
+	while (static_cast<unsigned long>(millis() - start) < 2000UL) {
+		if (serial_.available() <= 0) { continue; }
+		int read_value = serial_.read();
+		if (read_value < 0) { continue; }
+		char c = static_cast<char>(read_value);
+		if (c == call_header[call_header_pos]) {
+			++call_header_pos;
+			if (call_header[call_header_pos] == '\0') { return true; }
+		}
+		else {
+			call_header_pos = (c == call_header[0]) ? 1U : 0U;
+		}
+		if (c == LITERAL_OK[ok_pos]) {
+			++ok_pos;
+			if (LITERAL_OK[ok_pos] == '\0') { return false; }
+		}
+		else {
+			ok_pos = (c == LITERAL_OK[0]) ? 1U : 0U;
+		}
+	}
+	return false;
+}
+
+void SimRepository::enableIncomingCall(uint8_t number_of_rings) {
+	is_call_disabled_ = true;
+	clear_receive_buffer();
+	serial_.print(AT_AUTO_ANSWER_PREFIX);
+	write_uint8(serial_, number_of_rings);
+	serial_.write((uint8_t)'\r');
+}
+
+void SimRepository::disableIncomingCall() {
+	clear_receive_buffer();
+	serial_.print(AT_AUTO_ANSWER_PREFIX);
+	serial_.write((uint8_t)'0');
+	serial_.write((uint8_t)'\r');
+	delay(100UL);
+	send_at_cmd(serial_, HANGUP_COMMAND);
+	is_call_disabled_ = false;
 }
 
 void SimRepository::setSmsTextMode() {
@@ -159,7 +232,19 @@ bool SimRepository::setNetlightEnabled(bool enabled) {
 }
 
 bool SimRepository::readSms(uint8_t index, char* message) {
+	return readSms(index, nullptr, 0U, message, sim_sms_message_buffer_size);
+}
+
+bool SimRepository::readSms(uint8_t index, char* sender, uint8_t sender_capacity, char* message, uint8_t message_capacity) {
+	if (message == nullptr || message_capacity == 0U) {
+		return false;
+	}
+
 	message[0] = '\0';
+	if (sender != nullptr && sender_capacity > 0U) {
+		sender[0] = '\0';
+	}
+
 	if (!is_sms_receive_initialized_) {
 		initSmsReception();
 	}
@@ -172,13 +257,15 @@ bool SimRepository::readSms(uint8_t index, char* message) {
 
 	uint8_t state = 0U;
 	uint8_t header_pos = 0U;
+	uint8_t sender_pos = 0U;
+	uint8_t quote_count = 0U;
 	uint8_t message_pos = 0U;
 	unsigned long start = millis();
 
 	char trailer[8] = {};
 	uint8_t trailer_pos = 0U;
 
-	while (static_cast<unsigned long>(millis() - start) < sim_read_sms_timeout_ms && message_pos < static_cast<uint8_t>(sim_sms_message_buffer_size - 1U)) {
+	while (static_cast<unsigned long>(millis() - start) < sim_read_sms_timeout_ms && message_pos < static_cast<uint8_t>(message_capacity - 1U)) {
 		if (serial_.available() <= 0) {
 			continue;
 		}
@@ -226,7 +313,20 @@ bool SimRepository::readSms(uint8_t index, char* message) {
 
 		if (state == 1U) {
 			if (c == '\n') {
+				if (sender != nullptr && sender_capacity > 0U) {
+					sender[sender_pos] = '\0';
+				}
 				state = 2U;
+				continue;
+			}
+
+			if (c == '"') {
+				++quote_count;
+				continue;
+			}
+
+			if (quote_count == 3U && sender != nullptr && sender_capacity > 0U && sender_pos < static_cast<uint8_t>(sender_capacity - 1U)) {
+				sender[sender_pos++] = c;
 			}
 
 			continue;
@@ -250,6 +350,9 @@ bool SimRepository::readSms(uint8_t index, char* message) {
 	}
 
 	message[message_pos] = '\0';
+	if (sender != nullptr && sender_capacity > 0U) {
+		sender[sender_pos] = '\0';
+	}
 
 	return message_pos > 0U;
 }
@@ -441,6 +544,9 @@ bool SimRepository::isGprsAttached() {
 }
 
 bool SimRepository::enterSleepMode() {
+	if (sleep_pin_ == sim_pin_not_configured) {
+		return false;
+	}
 	serial_.listen();
 	digitalWrite(sleep_pin_, LOW);
 	delay(5000);
@@ -454,6 +560,9 @@ bool SimRepository::enterSleepMode() {
 }
 
 bool SimRepository::exitSleepMode() {
+	if (sleep_pin_ == sim_pin_not_configured) {
+		return false;
+	}
 	serial_.listen();
 	digitalWrite(sleep_pin_, LOW);
 	delay(200UL);
@@ -463,7 +572,7 @@ bool SimRepository::exitSleepMode() {
 }
 
 bool SimRepository::turn_on_module() {
-	if (boot_pin_ == sim_boot_pin_not_configured) {
+	if (boot_pin_ == sim_pin_not_configured) {
 		return false;
 	}
 
@@ -480,7 +589,7 @@ bool SimRepository::turn_on_module() {
 }
 
 bool SimRepository::turn_off_module() {
-	if (boot_pin_ == sim_boot_pin_not_configured) {
+	if (boot_pin_ == sim_pin_not_configured) {
 		return false;
 	}
 
@@ -600,4 +709,3 @@ bool SimRepository::stop_listening() {
 void SimRepository::delay(unsigned long ms) {
 	::delay(ms);
 }
-

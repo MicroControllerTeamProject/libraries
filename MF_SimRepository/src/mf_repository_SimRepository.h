@@ -3,22 +3,32 @@
 
 #include <stdint.h>
 #include <mf_repository_ISerial.h>
-#include <mf_commons_commonsLayer.h>
+
+#ifndef _ON_MOCKING_TESTS
+#define _ON_MOCKING_TESTS 0U
+#endif
 
 class SimRepository {
 public:
+    explicit SimRepository(ISerial& serial);
+    SimRepository(ISerial& serial, unsigned long baud_rate);
     SimRepository(ISerial& serial, uint8_t sleep_pin, unsigned long baud_rate, uint8_t boot_pin = 255U);
 
 #if _ON_MOCKING_TESTS
     virtual ~SimRepository() = default;
+    virtual void begin(unsigned long baud_rate);
     virtual void call(const char* number);
     virtual void hangUp();
+    virtual bool isCallActive();
+    virtual void enableIncomingCall(uint8_t number_of_rings);
+    virtual void disableIncomingCall();
     virtual void setSmsTextMode();
     virtual void setSmsPduMode();
     virtual void sendSms(const char* number, const char* message);
     virtual void initSmsReception();
     virtual bool setNetlightEnabled(bool enabled);
     virtual bool readSms(uint8_t index, char* message);
+    virtual bool readSms(uint8_t index, char* sender, uint8_t sender_capacity, char* message, uint8_t message_capacity);
     virtual void deleteAllSms();
     virtual int getSmsCount();
     virtual bool deleteSmsAt(uint8_t index);
@@ -37,14 +47,19 @@ public:
     virtual void delay(unsigned long ms);
 #else
     ~SimRepository() = default;
+    void begin(unsigned long baud_rate);
     void call(const char* number);
     void hangUp();
+    bool isCallActive();
+    void enableIncomingCall(uint8_t number_of_rings);
+    void disableIncomingCall();
     void setSmsTextMode();
     void setSmsPduMode();
     void sendSms(const char* number, const char* message);
     void initSmsReception();
     bool setNetlightEnabled(bool enabled);
     bool readSms(uint8_t index, char* message);
+    bool readSms(uint8_t index, char* sender, uint8_t sender_capacity, char* message, uint8_t message_capacity);
     void deleteAllSms();
     int getSmsCount();
     bool deleteSmsAt(uint8_t index);
@@ -72,6 +87,6 @@ private:
     ISerial& serial_;
     uint8_t sleep_pin_;
     uint8_t boot_pin_;
-    unsigned long baud_rate_;
     bool is_sms_receive_initialized_;
+    bool is_call_disabled_;
 };
