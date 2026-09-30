@@ -4070,7 +4070,7 @@ ${body}}
 
     classdiagram 128042 "Classis"
       classdiagramsettings hide_attributes yes hide_operations yes member_max_width 0 end
-      size A4
+      size A4-Landscape
     end
   end
 
