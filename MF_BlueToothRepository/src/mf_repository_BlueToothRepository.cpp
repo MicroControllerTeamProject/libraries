@@ -118,23 +118,13 @@ void BlueToothRepository::set_to_master_mode() {
 		set_to_program_mode();
 	}
 	this->avrMicroRepository->println(ATROLE1);
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		2000);
-
+	SerialUtils::wait_for_pattern(*this->avrMicroRepository,LITERAL_OK,2000);
 	this->avrMicroRepository->println(ATCMODE0);
-
-	SerialUtils::wait_for_pattern(
-		*this->avrMicroRepository,
-		LITERAL_OK,
-		2000);
-
+	SerialUtils::wait_for_pattern(*this->avrMicroRepository,LITERAL_OK,2000);
 	is_in_master_mode = true;
 	is_in_slave_mode = false;
 	is_in_program_mode = true;
 	is_in_receive_mode = false;
-
 #if _DEBUG_FOR_SERIAL && !_ON_MOCKING_TESTS
 	Serial.println(F("BT master mode"));
 #endif
@@ -165,8 +155,7 @@ void BlueToothRepository::set_to_program_mode() {
 		this->avrMicroRepository->digitalWrite(this->baseTransistorPin, HIGH);
 	}
 	this->avrMicroRepository->delay(200);
-	this->avrMicroRepository->begin(
-		this->baudRateProgramMode);
+	this->avrMicroRepository->begin(this->baudRateProgramMode);
 	SerialUtils::wait_for_pattern(*this->avrMicroRepository, LITERAL_OK, 2000);
 	is_in_program_mode = true;
 	is_in_slave_mode = false;
